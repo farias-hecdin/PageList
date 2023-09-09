@@ -1,0 +1,95 @@
+/* Typography -------------------------------------------------------------- */
+
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap");
+
+/* Font variables  --------------------------------------------------------- */
+
+:root {
+  /* Font-family */
+
+  --fo-base: "Titillium Web", sans-serif;
+  --fo-primary: var(--base);
+
+  /* Weight */
+
+  --fo-black: 900;
+  --fo-extrabold: 800;
+  --fo-bold: 700;
+  --fo-semibold: 600;
+  --fo-medium: 500;
+  --fo-regular: 400;
+  --fo-light: 300;
+  --fo-extralight: 200;
+  --fo-thin: 100;
+
+  --co-yellow: #ffff00;
+}
+
+/* General ---------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--fo-base);
+}
+
+body {
+  min-height: 100dvh;
+  background-color: #222222;
+  font-size: 16px;
+}
+
+ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+button,
+summary {
+  outline: none;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--fo-primary);
+}
+
+/* Special classes --------------------------------------------------------- */
+
+.material-symbols-outlined {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  font-family: "Material Symbols Outlined";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1;
+  text-transform: none;
+  word-wrap: normal;
+  direction: ltr;
+  letter-spacing: normal;
+  white-space: nowrap;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga";
+}
+
+.no--select {
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}

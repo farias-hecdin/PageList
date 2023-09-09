@@ -1,0 +1,22 @@
+.Container {
+  width: 100%;
+  background-color: var(--background);
+  color: var(--co-cold-morning);
+}
+
+.Header {
+  margin-bottom: 1rem;
+  &_title {
+    margin-bottom: 0.25rem;
+    font-weight: var(--fo-medium);
+    font-size: 1.5rem;
+  }
+  &_text {
+    color: var(--co-carbon-footprint);
+    font-size: 0.9rem;
+  }
+}
+
+.List {
+  overflow: auto;
+}

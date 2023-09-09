@@ -1,0 +1,57 @@
+.Card {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--co-diamond-black);
+  &_header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  &_title {
+    width: 100%;
+  }
+  &_num {
+    width: 3rem;
+    padding: 0.25rem 0;
+    border: 1px solid var(--co-carbon-footprint);
+    border-radius: 0.3rem;
+    color: var(--co-carbon-footprint);
+    text-align: center;
+  }
+  &:hover &_list {
+    display: flex;
+  }
+  &_list {
+    display: none;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 1rem;
+    padding: 0.3rem;
+    border-radius: 0.8rem;
+    background-color: var(--co-black-pearl);
+  }
+}
+
+.CardItem {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  padding: 0.5rem 1rem;
+  &:hover {
+    border-radius: 0.4rem;
+    width: 100%;
+    transition: .2s;
+  }
+  &:hover &_icon {
+    opacity: 1;
+  }
+  &_title {
+  width: 100%;
+  }
+  &_icon {
+    opacity: 0;
+    margin: 0;
+    line-height: 0;
+  }
+}

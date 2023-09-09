@@ -1,0 +1,48 @@
+@import "./ButtonBase_shared.module.css";
+
+.Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  background-color: var(--co-mountain-fig);
+  color: var(--co-carbon-footprint);
+  &_text {
+    font-size: 1rem;
+  }
+  &_icon {
+    margin: 0;
+    line-height: 0;
+  }
+  &_icon > i {
+    filter: var(--fi-carbon-footprint);
+    font-size: 1.5rem;
+    pointer-events: none;
+    user-select: none;
+  }
+  &:hover {
+    background-color: var(--co-zucchini);
+    color: var(--co-greenish);
+    border-color: var(--co-greenish);
+  }
+  &:hover &_icon > i {
+    filter: var(--fi-greenish);
+  }
+}
+
+/* State ------------------------------------------------------------------- */
+
+/* Active */
+
+.Button {
+  &:global(.--active) {
+    background-color: var(--co-zucchini);
+    color: var(--co-greenish);
+    \&_icon > i {
+      filter: var(--fi-greenish);
+    }
+  }
+}

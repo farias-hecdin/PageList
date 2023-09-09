@@ -1,0 +1,14 @@
+.Button {
+  &:global(.TheHeaderNavbarButton) {
+    width: 9rem;
+    \&_text {
+      font-weight: var(--fo-bold);
+    }
+  }
+}
+
+.Button {
+  &:global(.ToolbarWrapButton) {
+    width: 100%;
+  }
+}
