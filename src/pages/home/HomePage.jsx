@@ -11,10 +11,7 @@ const HomePage = () => {
 
   return (
     <section className={css.Container}>
-      <SectionPane
-        pData={data_bookmarks}
-        pTotal={total.current}
-      />
+      <SectionPane pData={data_bookmarks} pTotal={total.current} />
       <FavoritePane />
     </section>
   );

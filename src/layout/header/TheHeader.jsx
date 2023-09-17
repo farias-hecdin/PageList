@@ -6,8 +6,8 @@ const TheHeader = () => {
   return (
     <header className={css.Container}>
       <div className={css.Logo}>
-        <img src={logo_website} alt="pagelist" />
-        <span>Pagelist</span>
+        <img className={css.Logo_image} src={logo_website} alt="pagelist" />
+        <span className={css.Logo_title}>Pagelist</span>
       </div>
       <nav className={css.Navbar}>
         <WrapBase>
@@ -22,12 +22,12 @@ const TheHeader = () => {
             pText="Stats"
           />
           <ButtonBase
-            styled="TheHeaderNavbarButton --inverse"
+            styled="TheHeaderNavbarButton"
             pIcon="save"
             pText="Save"
           />
         </WrapBase>
-        <div>
+        <div className={css.Navbar_box}>
           <ButtonBase pIcon="Search" />
           <ButtonBase pIcon="settings" />
         </div>

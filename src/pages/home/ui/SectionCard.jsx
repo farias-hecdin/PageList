@@ -1,5 +1,6 @@
 import css from "./SectionCard.module.css";
 import { ButtonBase } from "../../../components/Index.jsx";
+import FavoriteCard from "./FavoriteCard";
 
 const SectionCard = ({ children, pSectionName, pSectionNameTotal }) => {
   return (
@@ -9,9 +10,7 @@ const SectionCard = ({ children, pSectionName, pSectionNameTotal }) => {
         <span className={css.Card_title}>{pSectionName}</span>
         <ButtonBase pIcon="edit" />
       </div>
-      <div className={css.Card_list}>
-        {children}
-      </div>
+      <div className={css.Card_list}>{children}</div>
     </div>
   );
 };
@@ -24,7 +23,25 @@ const SectionCardItem = ({ pListName }) => {
         <i className="material-symbols-outlined">chevron_right</i>
       </span>
     </div>
-  )
-}
+  );
+};
 
-export { SectionCard, SectionCardItem };
+const SectionModal = ({ children, pShowModal }) => {
+  return (
+    <>
+      {pShowModal ? (
+        <aside className={css.Modal}>
+          <div className={css.Modal_box}>
+            <p className={css.Modal_text}>Choose a vault</p>
+            <FavoriteCard pSectionName={"Learning"} pSectionNameTotal={5} />
+            <footer className={css.Modal_footer}>
+              <ButtonBase pIcon="edit" pText="Cancel" />
+            </footer>
+          </div>
+        </aside>
+      ) : null}
+    </>
+  );
+};
+
+export { SectionCard, SectionCardItem, SectionModal };
