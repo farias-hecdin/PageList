@@ -7,14 +7,12 @@ const FavoriteCard = () => {
 
   return (
     <article className={css.Card}>
-      <div className={css.Container}>
-        <i className="material-symbols-outlined">article</i>
-        <p className={css.Container_content}>
-          <span className={css.Container_title}>{pTitle}</span>
-          <span className={css.Container_text}>{pUrl}</span>
-        </p>
-        <ButtonBase pIcon="edit" />
-      </div>
+      <i className="material-symbols-outlined">article</i>
+      <p className={css.Card_content}>
+        <span className={css.Card_title}>{pTitle}</span>
+        <span className={css.Card_text}>{pUrl}</span>
+      </p>
+      <ButtonBase pIcon="edit" />
     </article>
   );
 };

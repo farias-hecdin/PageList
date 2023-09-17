@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div className={css.Container}>
       <TheHeader />
-      <main>
+      <main className={css.Container_box}>
         <HomePage />
       </main>
     </div>

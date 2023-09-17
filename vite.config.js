@@ -8,7 +8,7 @@ export default defineConfig(({ command }) => {
     css: {
       modules: {
         generateScopedName:
-          command === "build" ? "_[hash:base64:6]" : "[local]_[hash:base64:3]",
+          command === "build" ? "[hash:base64:6]" : "[local]_[hash:base64:3]",
       },
     },
   };

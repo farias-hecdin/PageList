@@ -1,5 +1,6 @@
 :root {
-  /* colors */
+  /* Colors */
+
   --co-black-pearl: #1e242e;
   --co-carbon-footprint: #7d818a;
   --co-cold-morning: #e5e5e5;
@@ -9,7 +10,8 @@
   --co-neverything: #111a1c;
   --co-zucchini: #154533;
 
-  /* filter */
+  /* Filter */
+
   --fi-carbon-footprint: invert(53%) sepia(6%) saturate(489%) hue-rotate(184deg)
     brightness(95%) contrast(93%);
   --fi-cold-morning: invert(98%) sepia(2%) saturate(486%) hue-rotate(56deg)
@@ -22,7 +24,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--co-diamond-black);
-  > main {
+  &_box {
     display: flex;
     min-height: 100vh;
     margin: 0 2rem 1rem;

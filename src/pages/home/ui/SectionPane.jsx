@@ -1,6 +1,6 @@
 import css from "./SectionPane.module.css";
 import { ButtonBase, WrapBase } from "../../../components/Index.jsx";
-import { SectionCard, SectionCardItem } from "./SectionCard";
+import { SectionCard, SectionCardItem, SectionModal } from "./SectionCard";
 
 // BaseBox
 const SectionPane = ({ pData, pTotal }) => {
@@ -8,6 +8,7 @@ const SectionPane = ({ pData, pTotal }) => {
 
   return (
     <section className={css.Container}>
+      <SectionModal pShowModal={false} />
       <header className={css.Header}>
         <h2>Collections</h2>
         <div>
@@ -17,47 +18,37 @@ const SectionPane = ({ pData, pTotal }) => {
               pIcon="expand_circle_down"
               styled="ToolbarWrapButton"
             />
-            <ButtonBase
-              pIcon="edit"
-            />
+            <ButtonBase pIcon="edit" />
           </WrapBase>
           <ButtonBase pIcon="add" pText="New" />
         </div>
       </header>
       <div className={css.List}>
         <div className={css.List_header}>
-          <p>{ data.vault[0].vault_name }</p>
+          <p>{data.vault[0].vault_name}</p>
           <span>{pTotal} lists</span>
         </div>
         <ul className={css.List_items}>
-          {
-            data.vault[0].section.map((elem) => (
-              <li key={elem.id}>
-                <SectionCard
-                  pSectionName={elem.section_name}
-                  pSectionNameTotal={elem.id}
-                >
-                  <ul className={css.List_subItems}>
-                    <li>
-                      <SectionCardItem
-                        pListName={elem.section_name}
-                      />
-                    </li>
-                    <li>
-                      <SectionCardItem
-                        pListName={elem.section_name}
-                      />
-                    </li>
-                    <li>
-                      <SectionCardItem
-                        pListName={elem.section_name}
-                      />
-                    </li>
-                  </ul>
-                </SectionCard>
-              </li>
-            ))
-          }
+          {data.vault[0].section.map((elem) => (
+            <li key={elem.id}>
+              <SectionCard
+                pSectionName={elem.section_name}
+                pSectionNameTotal={elem.id}
+              >
+                <ul className={css.List_subItems}>
+                  <li>
+                    <SectionCardItem pListName={elem.section_name} />
+                  </li>
+                  <li>
+                    <SectionCardItem pListName={elem.section_name} />
+                  </li>
+                  <li>
+                    <SectionCardItem pListName={elem.section_name} />
+                  </li>
+                </ul>
+              </SectionCard>
+            </li>
+          ))}
         </ul>
       </div>
     </section>

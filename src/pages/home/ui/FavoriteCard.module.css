@@ -1,5 +1,7 @@
 .Card {
-  margin-bottom: 0.8rem;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.6rem 1.3rem;
   border-radius: 0.4rem;
   border: 1px solid transparent;
   background-color: var(--co-diamond-black);
@@ -7,12 +9,6 @@
   &:hover {
     border-color: var(--co-carbon-footprint);
   }
-}
-
-.Container {
-  display: flex;
-  gap: 1.5rem;
-  padding: 0.8rem 2rem;
   &_content {
     display: flex;
     flex-direction: column;
