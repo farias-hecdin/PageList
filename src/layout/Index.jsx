@@ -1,3 +1,3 @@
-import TheHeader from "./header/TheHeader.jsx";
+import { HeaderMain } from "./header/HeaderMain.jsx";
 
-export { TheHeader };
+export { HeaderMain };

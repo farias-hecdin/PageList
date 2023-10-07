@@ -1,16 +1,17 @@
 import css from "./App.module.css";
-import { TheHeader } from "../layout/Index.jsx";
-import HomePage from "./home/HomePage.jsx";
+import { AppProvider } from "../context/app/AppProvider";
+import { HeaderMain } from "../layout/Index.jsx";
+import { HomePage } from "./home-page/HomePage.jsx";
 
-const App = () => {
+export const App = () => {
   return (
-    <div className={css.Container}>
-      <TheHeader />
-      <main className={css.Container_box}>
-        <HomePage />
-      </main>
-    </div>
+    <AppProvider>
+      <div className={css.App}>
+        <HeaderMain />
+        <main className={css.App_frame}>
+          <HomePage />
+        </main>
+      </div>
+    </AppProvider>
   );
 };
-
-export default App;

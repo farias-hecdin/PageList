@@ -6,22 +6,25 @@
 }
 
 .Header {
-  margin-bottom: 2rem;
-  > h2 {
-    margin-bottom: 1rem;
-    font-weight: var(--fo-bold);
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  & > div {
+    width: 100%;
+  }
+  &_title {
+    margin-bottom: 0.25rem;
+    font-weight: var(--fo-medium);
     font-size: 1.5rem;
   }
-  > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
+  &_text {
+    color: var(--co-carbon-footprint);
+    font-size: 0.9rem;
   }
 }
 
 .List {
+  margin-top: 2rem;
   &_header {
     display: flex;
     justify-content: space-between;

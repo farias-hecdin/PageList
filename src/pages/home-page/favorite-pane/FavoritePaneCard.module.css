@@ -2,8 +2,8 @@
   display: flex;
   gap: 1.5rem;
   padding: 0.6rem 1.3rem;
-  border-radius: 0.4rem;
   border: 1px solid transparent;
+  border-radius: 0.4rem;
   background-color: var(--co-diamond-black);
   color: var(--co-cold-morning);
   &:hover {
@@ -24,8 +24,7 @@
     font-size: 0.9rem;
   }
   > i {
-    filter: invert(30%) sepia(16%) saturate(294%) hue-rotate(178deg)
-      brightness(98%) contrast(87%);
+    filter: invert(30%) sepia(16%) saturate(294%) hue-rotate(178deg) brightness(98%) contrast(87%);
     font-size: 3rem;
     pointer-events: none;
     user-select: none;

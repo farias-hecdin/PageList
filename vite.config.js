@@ -7,8 +7,7 @@ export default defineConfig(({ command }) => {
     plugins: [react()],
     css: {
       modules: {
-        generateScopedName:
-          command === "build" ? "[hash:base64:6]" : "[local]_[hash:base64:3]",
+        generateScopedName: command === "build" ? "[hash:base64:6]" : "[local]_[hash:base64:3]",
       },
     },
   };

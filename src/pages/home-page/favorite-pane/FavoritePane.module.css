@@ -5,7 +5,12 @@
 }
 
 .Header {
+  display: flex;
+  align-items: center;
   margin-bottom: 1rem;
+  & > div {
+    width: 100%;
+  }
   &_title {
     margin-bottom: 0.25rem;
     font-weight: var(--fo-medium);
@@ -22,4 +27,5 @@
   flex-direction: column;
   gap: 1rem;
   overflow: auto;
+  margin-top: 2rem;
 }

@@ -1,7 +1,6 @@
-import css from "./FavoriteCard.module.css";
-import { ButtonBase } from "../../../components/Index.jsx";
+import css from "./FavoritePaneCard.module.css";
 
-const FavoriteCard = () => {
+const FavoritePaneCard = () => {
   let pTitle = "Lorem ipsum";
   let pUrl = "https://www.loremipsum.com";
 
@@ -12,9 +11,8 @@ const FavoriteCard = () => {
         <span className={css.Card_title}>{pTitle}</span>
         <span className={css.Card_text}>{pUrl}</span>
       </p>
-      <ButtonBase pIcon="edit" />
     </article>
   );
 };
 
-export default FavoriteCard;
+export default FavoritePaneCard;
