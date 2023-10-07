@@ -1,9 +1,7 @@
-@import "./ButtonBase_shared.module.css";
-
 .Button {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.4rem 1rem;
   border: 1px solid transparent;
@@ -24,9 +22,9 @@
     user-select: none;
   }
   &:hover {
+    border-color: var(--co-greenish);
     background-color: var(--co-zucchini);
     color: var(--co-greenish);
-    border-color: var(--co-greenish);
   }
   &:hover &_icon > i {
     filter: var(--fi-greenish);
@@ -35,8 +33,6 @@
 
 /* State ------------------------------------------------------------------- */
 
-/* Active */
-
 .Button {
   &:global(.--active) {
     background-color: var(--co-zucchini);
@@ -44,5 +40,28 @@
     \&_icon > i {
       filter: var(--fi-greenish);
     }
+  }
+}
+
+.Button {
+  &:global(.--full) {
+    width: 100%;
+  }
+}
+
+/* Compose ----------------------------------------------------------------- */
+
+.Button {
+  &:global(.HeaderMainNavbarButton) {
+    width: 9rem;
+    \&_text {
+      font-weight: var(--fo-bold);
+    }
+  }
+}
+
+.Button {
+  &:global(.ToolbarWrapButton) {
+    width: 100%;
   }
 }

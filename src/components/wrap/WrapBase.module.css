@@ -7,6 +7,12 @@
   background-color: var(--co-black-pearl);
 }
 
+/* Compose ----------------------------------------------------------------- */
+
 .Container:global(.--fullWidth) {
   width: 100%;
+}
+
+.Container:global(.HomePageTopbarNavbarWrap) {
+  align-items: center;
 }

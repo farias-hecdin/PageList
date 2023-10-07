@@ -1,7 +1,8 @@
-import FavoriteCard from "./FavoriteCard.jsx";
+import FavoritePaneCard from "./FavoritePaneCard.jsx";
 import css from "./FavoritePane.module.css";
+import { ButtonBase } from "../../../components/Index.jsx";
 
-const FavoritePane = () => {
+export const FavoritePane = () => {
   const list_favorite = [
     {
       id: 1,
@@ -18,18 +19,19 @@ const FavoritePane = () => {
   return (
     <section className={css.Container}>
       <header className={css.Header}>
-        <h2 className={css.Header_title}>Javascript</h2>
-        <p className={css.Header_text}>35 bookmarks</p>
+        <div>
+          <h2 className={css.Header_title}>Javascript</h2>
+          <p className={css.Header_text}>35 bookmarks</p>
+        </div>
+        <ButtonBase pIcon="edit" />
       </header>
       <ul className={css.List}>
         {list_favorite.map((elem) => (
           <li key={elem.id}>
-            <FavoriteCard pTitle={elem.title} pUrl={elem.url} />
+            <FavoritePaneCard pTitle={elem.title} pUrl={elem.url} />
           </li>
         ))}
       </ul>
     </section>
   );
 };
-
-export default FavoritePane;
