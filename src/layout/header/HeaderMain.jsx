@@ -11,9 +11,9 @@ export const HeaderMain = () => {
       </div>
       <nav className={css.Navbar}>
         <WrapBase>
-          <ButtonBase styled="HeaderMainNavbarButton --active" pIcon="folder" pText="Collections" />
-          <ButtonBase styled="HeaderMainNavbarButton" pIcon="finance" pText="Stats" />
-          <ButtonBase styled="HeaderMainNavbarButton" pIcon="save" pText="Save" />
+          <ButtonBase pStyled="HeaderMain_UlICn --active" pIcon="folder" pText="Collections" />
+          <ButtonBase pStyled="HeaderMain_UlICn" pIcon="finance" pText="Stats" />
+          <ButtonBase pStyled="HeaderMain_UlICn" pIcon="save" pText="Save" />
         </WrapBase>
         <div className={css.Navbar_box}>
           <ButtonBase pIcon="settings" />

@@ -12,9 +12,5 @@ export const StateProvider = ({ children }) => {
     showCollectionModal,
     setShowCollectionModal,
   };
-  return (
-    <StateContext.Provider value={value}>
-      {children}
-    </StateContext.Provider>
-  );
+  return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };

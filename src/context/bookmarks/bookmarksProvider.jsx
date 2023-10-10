@@ -1,27 +1,22 @@
-import { createContext } from "react";
-import { useState } from "react";
-import { collection } from "../../data/level-one-data-collection.js";
-import { section } from "../../data/level-two-data-section.js";
-import { list } from "../../data/level-three-data-list.js";
-import { item } from "../../data/level-four-data-item.js";
+import { useState, createContext } from "react";
+import dataJSON from "../../data/bookmarks.json";
 
-// Creando un Context y Provider
+const dataBookmarks = dataJSON;
+
+// Crear un Context y un Provider
 export const BookmarksContext = createContext();
 
 export const BookmarksProvider = ({ children }) => {
-  const [selectedCollection, setSelectedCollection] = useState([]);
-  const [idSelectedCollection, setIdSelectedCollection] = useState([]);
+  const [selectedCollection, setSelectedCollection] = useState(null);
+  const [cantidadDeTemas, setCantidadDeTemas] = useState(0);
 
-  // Exportando datos
+  // Exportar datos
   const value = {
+    dataBookmarks,
     selectedCollection,
     setSelectedCollection,
-    idSelectedCollection,
-    setIdSelectedCollection,
-    dataCollection: collection,
-    dataSection: section,
-    dataList: list,
-    dataItem: item,
+    cantidadDeTemas,
+    setCantidadDeTemas,
   };
   return <BookmarksContext.Provider value={value}>{children}</BookmarksContext.Provider>;
 };

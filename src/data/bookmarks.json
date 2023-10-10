@@ -1,0 +1,104 @@
+{
+  "collections": [
+    {
+      "id": "2",
+      "name": "Personal",
+      "topics": [
+        {
+          "id": "1",
+          "name": "General",
+          "lists": [
+            {
+              "id": "1",
+              "name": "Redes sociales",
+              "links": [
+                {
+                  "id": "1",
+                  "title": "Página de inicio de Facebook",
+                  "url": "https://www.lorem-ipsum.com/"
+                },
+                {
+                  "id": "2",
+                  "title": "Página de inicio de Instagram",
+                  "url": "https://www.lorem-ipsum.com/"
+                }
+              ]
+            },
+            {
+              "id": "2",
+              "name": "Finanza",
+              "links": [
+                {
+                  "id": "1",
+                  "title": "Página de inicio de BDV",
+                  "url": "https://www.lorem-ipsum.com/"
+                },
+                {
+                  "id": "2",
+                  "title": "Página de inicio de Metamask",
+                  "url": "https://www.lorem-ipsum.com/"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Aprendizaje",
+      "topics": [
+        {
+          "id": "1",
+          "name": "Programacion",
+          "lists": [
+            {
+              "id": "1",
+              "name": "Javascript",
+              "links": [
+                {
+                  "id": "1",
+                  "title": "Página de inicio de Javascript.info",
+                  "url": "https://www.lorem-ipsum.com/"
+                },
+                {
+                  "id": "2",
+                  "title": "Página de inicio de Mdn",
+                  "url": "https://www.lorem-ipsum.com/"
+                }
+              ]
+            }            
+          ]
+        },
+        {
+          "id": "1",
+          "name": "Idioma",
+          "lists": [
+            {
+              "id": "1",
+              "name": "Ingles",
+              "links": [
+                {
+                  "id": "1",
+                  "title": "Página de inicio de Duolingo",
+                  "url": "https://www.lorem-ipsum.com/"
+                }
+              ]
+            },
+            {
+              "id": "2",
+              "name": "Aleman",
+              "links": [
+                {
+                  "id": "1",
+                  "title": "Página de inicio de Deutch",
+                  "url": "https://www.lorem-ipsum.com/"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
