@@ -1,14 +1,16 @@
 import css from "./HomePage.module.css";
 import { BookmarksContext, StateContext } from "../../context/Index.jsx";
 import { FavoritePane } from "./favorite-pane/FavoritePane.jsx";
-import { HomePageTopbar } from "./HomePageTopbar";
 import { SectionPane } from "./section-pane/SectionPane.jsx";
 import { useContext } from "react";
+import { ButtonBase, WrapBase } from "../../components/Index";
+import { SectionModal } from "./section-modal/SectionModal";
 
 export const HomePage = () => {
-  const { idSelectedCollection, selectedCollection, dataSection } = useContext(BookmarksContext);
+  // Importar datos -----------------------------------------------------------
+  const { dataBookmarks, selectedCollection, cantidadDeTemas } = useContext(BookmarksContext);
 
-  // Mostrar ventana modal----------------------------------------------------
+  // Mostrar ventana modal ----------------------------------------------------
   const { showCollectionModal, setShowCollectionModal } = useContext(StateContext);
 
   const fnToggleModal = () => {
@@ -16,12 +18,37 @@ export const HomePage = () => {
   };
 
   return (
-    <section className={css.HomePage}>
-      <HomePageTopbar pSelectedCollection={selectedCollection} pToggleModal={fnToggleModal} />
-      <div className={css.HomePage_frame}>
-        <SectionPane pDataSection={dataSection} pSelectedCollection={[selectedCollection, idSelectedCollection]} />
-        <FavoritePane />
-      </div>
-    </section>
+    <>
+      <SectionModal />
+      <section className={css.HomePage}>
+        <header className={css.Header}>
+          <h2>Collections {cantidadDeTemas}</h2>
+          <div className={css.Header_navbar}>
+            <div className={css.Header_navbar_frame}>
+              <ButtonBase pText="New" pIcon="add" />
+              <ButtonBase pText="Search" pIcon="search" />
+            </div>
+            <WrapBase pStyled="HomePage_JhI8l">
+              <ButtonBase pIcon="update" pHandleClick={fnToggleModal} />
+              <p className={css.Header_navbar_text}>{selectedCollection}</p>
+            </WrapBase>
+          </div>
+        </header>
+        {selectedCollection === null ? (
+          <div className={css.Info}>
+            <span className={css.Info_icon}>
+              <i className="material-symbols-outlined">info</i>
+            </span>
+            <p className={css.Info_title}>Nothing here</p>
+            <p className={css.Info_text}>Choose a collection to access your favorite links.</p>
+          </div>
+        ) : (
+          <div className={css.HomePage_frame}>
+            <SectionPane pSelectedCollection={[selectedCollection, dataBookmarks]} />
+            <FavoritePane />
+          </div>
+        )}
+      </section>
+    </>
   );
 };
