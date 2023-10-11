@@ -1,22 +1,38 @@
 import { useState, createContext } from "react";
 import dataJSON from "../../data/bookmarks.json";
 
-const dataBookmarks = dataJSON;
+const BookmarksList = dataJSON;
 
 // Crear un Context y un Provider
 export const BookmarksContext = createContext();
 
 export const BookmarksProvider = ({ children }) => {
   const [selectedCollection, setSelectedCollection] = useState(null);
-  const [cantidadDeTemas, setCantidadDeTemas] = useState(0);
 
-  // Exportar datos
+  // Almacenar la cantidad de elementos
+  const [numberOfCollections, setNumberOfCollections] = useState(0);
+  const [numberOfTopics, setNumberOfTopics] = useState(0);
+  const [numberOfLinks, setNumberOfLinks] = useState(0);
+
+  // Exportar datos al Provider
+  const [arrayLinks, setArrayLinks] = useState([]);
+  const [titleLists, setTitleLists] = useState("");
+
   const value = {
-    dataBookmarks,
+    BookmarksList,
+    arrayLinks,
+    setArrayLinks,
     selectedCollection,
     setSelectedCollection,
-    cantidadDeTemas,
-    setCantidadDeTemas,
+    titleLists,
+    setTitleLists,
+    // Para contador de elementos
+    numberOfCollections,
+    setNumberOfCollections,
+    numberOfTopics,
+    setNumberOfTopics,
+    numberOfLinks,
+    setNumberOfLinks,
   };
   return <BookmarksContext.Provider value={value}>{children}</BookmarksContext.Provider>;
 };

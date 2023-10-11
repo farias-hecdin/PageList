@@ -2,37 +2,38 @@ import css from "./SectionModal.module.css";
 import { BookmarksContext, StateContext } from "../../../context/Index.jsx";
 import { ButtonBase } from "../../../components/Index.jsx";
 import { useContext } from "react";
-import { useState } from "react";
 
 export const SectionModal = () => {
-  // Mostrar ventana modal ----------------------------------------------------
+  // Mostrar ventana de la lista de colecciones -------------------------
   const { showCollectionModal, setShowCollectionModal } = useContext(StateContext);
 
-  // Selecionar una colecion --------------------------------------------------
-  const { dataBookmarks, selectedCollection, setSelectedCollection, setCantidadDeTemas } = useContext(BookmarksContext);
+  const funcToggleModal = () => setShowCollectionModal(!showCollectionModal);
 
-  const fnSelectCollection = (event, name) => {
+  // Selecionar una coleccion de marcadores -----------------------------------
+  const { BookmarksList, selectedCollection, setSelectedCollection, setNumberOfTopics } = useContext(BookmarksContext);
+
+  const funcSelectCollection = (event, name) => {
+    let currentQuantity = funcGetTotalAmountOfTopics(event);
+
     setSelectedCollection(() => name);
-    let cantidad = obtenerCantidadTotalTemas(event)
-
-    setCantidadDeTemas(cantidad)
+    setNumberOfTopics(() => currentQuantity);
+    funcToggleModal();
   };
 
-  // Contador del total --------------------------------------------------
-  const [contadorTemas, setContadorTemas] = useState()
+  // Calcular la cantidad total de elementos
 
-  const obtenerCantidadTotalTemas = (event) => {
-    let idElementoSeleccionado = event.currentTarget.dataset.id
-    let datosColeccion = dataBookmarks.collections
-    let numeroDeTemas = 0
+  const funcGetTotalAmountOfTopics = (event) => {
+    let selectedElementId = event.currentTarget.dataset.id;
+    let data = BookmarksList.collections;
+    let currentQuantity = 0;
 
-    for (let i = 0; i < datosColeccion.length; i++) {
-      if (datosColeccion[i].name === idElementoSeleccionado) {
-        numeroDeTemas = datosColeccion[i].topics.length
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name === selectedElementId) {
+        currentQuantity = data[i].topics.length;
       }
     }
-    return numeroDeTemas
-  }
+    return currentQuantity;
+  };
 
   return (
     <>
@@ -42,24 +43,25 @@ export const SectionModal = () => {
             <p className={css.Container_text}>Choose a collection</p>
             <ul className={css.Container_list}>
               <li key={crypto.randomUUID()}>
-                <SectionModalCard pText={"Empty"}
-                  pStyled={null === selectedCollection && "--active"}
-                  pHandleClick={() => fnSelectCollection(null)} />
+                <SectionModalCard
+                  pText={"Empty"}
+                  pStyled={selectedCollection === null && "--active"}
+                  pHandleClick={(event) => funcSelectCollection(event, null)}
+                />
               </li>
-              {dataBookmarks.collections.map((collections) => (
+              {BookmarksList.collections.map((collections) => (
                 <li key={crypto.randomUUID()}>
-                  <SectionModalCard pText={collections.name}
+                  <SectionModalCard
+                    pText={collections.name}
                     pId={collections.name}
-                    pStyled={collections.name === selectedCollection && "--active"}
-                    pHandleClick={(e) => fnSelectCollection(e, collections.name)}
+                    pStyled={selectedCollection === collections.name && "--active"}
+                    pHandleClick={(event) => funcSelectCollection(event, collections.name)}
                   />
                 </li>
               ))}
             </ul>
             <footer className={css.Container_footer}>
-              <ButtonBase pText="Cancel"
-                pHandleClick={() => setShowCollectionModal(!showCollectionModal)}
-              />
+              <ButtonBase pText="Cancel" pHandleClick={funcToggleModal} />
             </footer>
           </div>
         </aside>
@@ -73,5 +75,5 @@ export const SectionModalCard = ({ pHandleClick, pText, pStyled, pId }) => {
     <div className={`${css.Card} ${pStyled || null}`} onClick={pHandleClick} data-id={pId}>
       <p className={css.Card_text}>{pText}</p>
     </div>
-  )
-}
+  );
+};

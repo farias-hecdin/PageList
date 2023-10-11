@@ -1,7 +1,7 @@
 {
   "collections": [
     {
-      "id": "2",
+      "id": "1",
       "name": "Personal",
       "topics": [
         {
@@ -14,12 +14,12 @@
               "links": [
                 {
                   "id": "1",
-                  "title": "Página de inicio de Facebook",
+                  "title": "Facebook",
                   "url": "https://www.lorem-ipsum.com/"
                 },
                 {
                   "id": "2",
-                  "title": "Página de inicio de Instagram",
+                  "title": "Instagram",
                   "url": "https://www.lorem-ipsum.com/"
                 }
               ]
@@ -30,12 +30,12 @@
               "links": [
                 {
                   "id": "1",
-                  "title": "Página de inicio de BDV",
+                  "title": "BDV",
                   "url": "https://www.lorem-ipsum.com/"
                 },
                 {
                   "id": "2",
-                  "title": "Página de inicio de Metamask",
+                  "title": "Metamask",
                   "url": "https://www.lorem-ipsum.com/"
                 }
               ]
@@ -58,12 +58,12 @@
               "links": [
                 {
                   "id": "1",
-                  "title": "Página de inicio de Javascript.info",
+                  "title": "Javascript.info",
                   "url": "https://www.lorem-ipsum.com/"
                 },
                 {
                   "id": "2",
-                  "title": "Página de inicio de Mdn",
+                  "title": "Mdn",
                   "url": "https://www.lorem-ipsum.com/"
                 }
               ]
@@ -80,7 +80,7 @@
               "links": [
                 {
                   "id": "1",
-                  "title": "Página de inicio de Duolingo",
+                  "title": "Duolingo",
                   "url": "https://www.lorem-ipsum.com/"
                 }
               ]
@@ -91,7 +91,7 @@
               "links": [
                 {
                   "id": "1",
-                  "title": "Página de inicio de Deutch",
+                  "title": "Deutch",
                   "url": "https://www.lorem-ipsum.com/"
                 }
               ]
