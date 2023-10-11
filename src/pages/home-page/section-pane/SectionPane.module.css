@@ -25,27 +25,17 @@
 
 .List {
   margin-top: 2rem;
-  &_header {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  &_items,
-  &_subItems {
+  &_items {
     gap: 0.5rem;
     list-style: none;
-  }
-  &_subItems > li:not(:last-child) {
-    border-bottom: 1px solid var(--co-mountain-fig);
   }
 }
 
 .Tree {
-  margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   background-color: var(--co-diamond-black);
+  margin-bottom: 1rem;
   &_header {
     display: flex;
     align-items: center;
@@ -58,34 +48,30 @@
   &_number {
     width: 3rem;
     padding: 0.25rem 0;
-    border-radius: 0.3rem;
+    border-radius: 0.4rem;
     background: var(--co-mountain-fig);
     color: var(--co-carbon-footprint);
     text-align: center;
   }
   &_list {
-    /* display: none; */
+    display: none;
     list-style: none;
-    margin: 0.5rem 0 0;
+    margin: 0.8rem 0 .4rem;
   }
-  &:hover &_list {
+  &_list:global(.--isOpen) {
     display: block;
   }
   &_item {
     display: flex;
     align-items: center;
-    margin-left: .6rem;
-    padding: 0.3rem 0 .3rem .5rem;
+    gap: 1rem;
+    padding: 0.4rem 1rem;
     border-radius: 0.4rem;
     &_text {
       width: 100%;
     }
     &_icon {
-      opacity: 0;
       line-height: 0;
-    }
-    &:hover &_icon {
-      opacity: 1;
     }
     &:hover {
       background: var(--co-mountain-fig);

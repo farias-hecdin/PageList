@@ -1,36 +1,34 @@
 import css from "./HomePage.module.css";
 import { BookmarksContext, StateContext } from "../../context/Index.jsx";
+import { ButtonBase, WrapBase } from "../../components/Index";
 import { FavoritePane } from "./favorite-pane/FavoritePane.jsx";
+import { SectionModal } from "./section-modal/SectionModal";
 import { SectionPane } from "./section-pane/SectionPane.jsx";
 import { useContext } from "react";
-import { ButtonBase, WrapBase } from "../../components/Index";
-import { SectionModal } from "./section-modal/SectionModal";
 
 export const HomePage = () => {
   // Importar datos -----------------------------------------------------------
-  const { dataBookmarks, selectedCollection, cantidadDeTemas } = useContext(BookmarksContext);
+  const { selectedCollection } = useContext(BookmarksContext);
 
-  // Mostrar ventana modal ----------------------------------------------------
+  // Mostrar ventana de la lista de colecciones -------------------------------
   const { showCollectionModal, setShowCollectionModal } = useContext(StateContext);
 
-  const fnToggleModal = () => {
-    setShowCollectionModal(!showCollectionModal);
-  };
+  const funcToggleModal = () => setShowCollectionModal(!showCollectionModal);
 
   return (
     <>
       <SectionModal />
       <section className={css.HomePage}>
-        <header className={css.Header}>
-          <h2>Collections {cantidadDeTemas}</h2>
-          <div className={css.Header_navbar}>
-            <div className={css.Header_navbar_frame}>
+        <header className={css.HomePage_header}>
+          <h2>Collections</h2>
+          <div className={css.Navbar}>
+            <div className={css.Navbar_frame}>
               <ButtonBase pText="New" pIcon="add" />
               <ButtonBase pText="Search" pIcon="search" />
             </div>
             <WrapBase pStyled="HomePage_JhI8l">
-              <ButtonBase pIcon="update" pHandleClick={fnToggleModal} />
-              <p className={css.Header_navbar_text}>{selectedCollection}</p>
+              <ButtonBase pIcon="update" pHandleClick={funcToggleModal} />
+              <p className={css.Navbar_text}>{selectedCollection}</p>
             </WrapBase>
           </div>
         </header>
@@ -44,7 +42,7 @@ export const HomePage = () => {
           </div>
         ) : (
           <div className={css.HomePage_frame}>
-            <SectionPane pSelectedCollection={[selectedCollection, dataBookmarks]} />
+            <SectionPane />
             <FavoritePane />
           </div>
         )}
