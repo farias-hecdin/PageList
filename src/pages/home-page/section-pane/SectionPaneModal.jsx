@@ -11,14 +11,16 @@ export const SectionPaneModal = () => {
   const funcToggleModal = () => setShowCollectionModal(!showCollectionModal);
 
   // Selecionar una coleccion de marcadores -----------------------------------
-  const { BookmarksList, selectedCollection, setSelectedCollection, setNumberOfTopics, setNumberOfLinks } = useContext(BookmarksContext);
+  const { BookmarksList, selectedCollection, setSelectedCollection, setNumberOfTopics, setNumberOfLinks } =
+    useContext(BookmarksContext);
 
-  const funcSelectCollection = (event, name) => {
+  const funcSaveDataFromCollection = (event, name) => {
     let currentQuantity = funcGetTotalAmountOfTopics(event);
 
     setSelectedCollection(() => name);
-    setNumberOfTopics(() => currentQuantity);
-    setNumberOfLinks(() => 0)
+    setNumberOfTopics(currentQuantity);
+    setNumberOfLinks(0);
+    // Cerrar ventana
     funcToggleModal();
   };
 
@@ -48,7 +50,7 @@ export const SectionPaneModal = () => {
                 <SectionPaneModalTile
                   pText={"Empty"}
                   pStyled={selectedCollection === null && "--active"}
-                  pHandleClick={(event) => funcSelectCollection(event, null)}
+                  pHandleClick={(event) => funcSaveDataFromCollection(event, null)}
                 />
               </li>
               {BookmarksList.collections.map((collections) => (
@@ -57,7 +59,7 @@ export const SectionPaneModal = () => {
                     pText={collections.name}
                     pId={collections.name}
                     pStyled={selectedCollection === collections.name && "--active"}
-                    pHandleClick={(event) => funcSelectCollection(event, collections.name)}
+                    pHandleClick={(event) => funcSaveDataFromCollection(event, collections.name)}
                   />
                 </li>
               ))}

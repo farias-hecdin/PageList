@@ -1,4 +1,4 @@
-import css from "./EmptyState.module.css"
+import css from "./EmptyState.module.css";
 
 export const EmptyState = ({ pIcon, pTitle, pText }) => {
   return (
@@ -9,5 +9,5 @@ export const EmptyState = ({ pIcon, pTitle, pText }) => {
       <p className={css.Container_title}>{pTitle}</p>
       <p className={css.Container_text}>{pText}</p>
     </div>
-  )
-}
+  );
+};

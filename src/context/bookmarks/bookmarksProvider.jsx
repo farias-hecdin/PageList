@@ -1,12 +1,16 @@
 import { useState, createContext } from "react";
 import dataJSON from "../../data/bookmarks.json";
 
-const BookmarksList = dataJSON;
+const TheBookmarks = dataJSON;
 
 // Crear un Context y un Provider
 export const BookmarksContext = createContext();
 
 export const BookmarksProvider = ({ children }) => {
+  // Data de entradas (lista de marcadores)
+  const [BookmarksList, setBookmarksList] = useState(TheBookmarks);
+
+  // Acciones
   const [selectedCollection, setSelectedCollection] = useState(null);
 
   // Almacenar la cantidad de elementos
@@ -20,6 +24,7 @@ export const BookmarksProvider = ({ children }) => {
 
   const value = {
     BookmarksList,
+    setBookmarksList,
     arrayLinks,
     setArrayLinks,
     selectedCollection,

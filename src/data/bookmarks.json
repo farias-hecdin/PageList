@@ -2,97 +2,53 @@
   "collections": [
     {
       "id": "1",
-      "name": "Personal",
+      "name": "Learning",
       "topics": [
         {
           "id": "1",
-          "name": "General",
+          "name": "Programming",
           "lists": [
             {
               "id": "1",
-              "name": "Redes sociales",
+              "name": "JavaScript",
               "links": [
                 {
                   "id": "1",
-                  "title": "Facebook",
-                  "url": "https://www.lorem-ipsum.com/"
+                  "title": "JavaScript Tutorial",
+                  "url": "https://www.w3schools.com/js/"
                 },
                 {
                   "id": "2",
-                  "title": "Instagram",
-                  "url": "https://www.lorem-ipsum.com/"
-                }
-              ]
-            },
-            {
-              "id": "2",
-              "name": "Finanza",
-              "links": [
-                {
-                  "id": "1",
-                  "title": "BDV",
-                  "url": "https://www.lorem-ipsum.com/"
-                },
-                {
-                  "id": "2",
-                  "title": "Metamask",
-                  "url": "https://www.lorem-ipsum.com/"
+                  "title": "Mozilla Developer Network - JavaScript",
+                  "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Aprendizaje",
-      "topics": [
-        {
-          "id": "1",
-          "name": "Programacion",
-          "lists": [
-            {
-              "id": "1",
-              "name": "Javascript",
-              "links": [
-                {
-                  "id": "1",
-                  "title": "Javascript.info",
-                  "url": "https://www.lorem-ipsum.com/"
-                },
-                {
-                  "id": "2",
-                  "title": "Mdn",
-                  "url": "https://www.lorem-ipsum.com/"
-                }
-              ]
-            }            
-          ]
         },
         {
           "id": "1",
-          "name": "Idioma",
+          "name": "Language",
           "lists": [
             {
               "id": "1",
-              "name": "Ingles",
+              "name": "English",
               "links": [
                 {
                   "id": "1",
                   "title": "Duolingo",
-                  "url": "https://www.lorem-ipsum.com/"
+                  "url": "https://www.duolingo.com/learn/en"
                 }
               ]
             },
             {
               "id": "2",
-              "name": "Aleman",
+              "name": "German",
               "links": [
                 {
                   "id": "1",
-                  "title": "Deutch",
-                  "url": "https://www.lorem-ipsum.com/"
+                  "title": "LEO dictornary",
+                  "url": "https://dict.leo.org/englisch-deutsch/?side=right"
                 }
               ]
             }
