@@ -41,6 +41,9 @@
     align-items: center;
     gap: 1rem;
   }
+  &_header:global(.--expand) + &_list {
+    display: none;
+  }
   &_title {
     width: 100%;
     font-size: 1.1rem;
@@ -54,12 +57,9 @@
     text-align: center;
   }
   &_list {
-    display: none;
+    display: block;
     list-style: none;
     margin: 0.8rem 0 .4rem;
-  }
-  &_list:global(.--isOpen) {
-    display: block;
   }
   &_item {
     display: flex;

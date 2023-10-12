@@ -1,22 +1,24 @@
-import css from "./SectionModal.module.css";
+import css from "./SectionPaneModal.module.css";
 import { BookmarksContext, StateContext } from "../../../context/Index.jsx";
 import { ButtonBase } from "../../../components/Index.jsx";
+import { SectionPaneModalTile } from "./SectionPaneModalTile";
 import { useContext } from "react";
 
-export const SectionModal = () => {
+export const SectionPaneModal = () => {
   // Mostrar ventana de la lista de colecciones -------------------------
   const { showCollectionModal, setShowCollectionModal } = useContext(StateContext);
 
   const funcToggleModal = () => setShowCollectionModal(!showCollectionModal);
 
   // Selecionar una coleccion de marcadores -----------------------------------
-  const { BookmarksList, selectedCollection, setSelectedCollection, setNumberOfTopics } = useContext(BookmarksContext);
+  const { BookmarksList, selectedCollection, setSelectedCollection, setNumberOfTopics, setNumberOfLinks } = useContext(BookmarksContext);
 
   const funcSelectCollection = (event, name) => {
     let currentQuantity = funcGetTotalAmountOfTopics(event);
 
     setSelectedCollection(() => name);
     setNumberOfTopics(() => currentQuantity);
+    setNumberOfLinks(() => 0)
     funcToggleModal();
   };
 
@@ -43,7 +45,7 @@ export const SectionModal = () => {
             <p className={css.Container_text}>Choose a collection</p>
             <ul className={css.Container_list}>
               <li key={crypto.randomUUID()}>
-                <SectionModalCard
+                <SectionPaneModalTile
                   pText={"Empty"}
                   pStyled={selectedCollection === null && "--active"}
                   pHandleClick={(event) => funcSelectCollection(event, null)}
@@ -51,7 +53,7 @@ export const SectionModal = () => {
               </li>
               {BookmarksList.collections.map((collections) => (
                 <li key={crypto.randomUUID()}>
-                  <SectionModalCard
+                  <SectionPaneModalTile
                     pText={collections.name}
                     pId={collections.name}
                     pStyled={selectedCollection === collections.name && "--active"}
@@ -67,13 +69,5 @@ export const SectionModal = () => {
         </aside>
       )}
     </>
-  );
-};
-
-export const SectionModalCard = ({ pHandleClick, pText, pStyled, pId }) => {
-  return (
-    <div className={`${css.Card} ${pStyled || null}`} onClick={pHandleClick} data-id={pId}>
-      <p className={css.Card_text}>{pText}</p>
-    </div>
   );
 };

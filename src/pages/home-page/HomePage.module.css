@@ -8,7 +8,7 @@
   &_header {
     display: flex;
     align-items: center;
-    padding: 1.8rem 0;
+    height: 8rem;
     border-bottom: 1px solid #2f3847;
     color: var(--co-cold-morning);
   }
@@ -16,12 +16,12 @@
     display: flex;
     gap: 2rem;
     margin-top: 2rem;
-    animation-name: fade_I5dO;
+    animation-name: fade_CcYFdd7Pp36XTihAOg-xm;
     animation-duration: 0.5s;
   }
 }
 
-@keyframes fade_I5dO {
+@keyframes fade_CcYFdd7Pp36XTihAOg-xm {
   0% {
     opacity: 0;
   }
@@ -45,34 +45,5 @@
   &_text {
     width: 9rem;
     padding: 0 1rem;
-  }
-}
-
-.Info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  padding: 4rem 0 0;
-  color: var(--co-carbon-footprint);
-  animation-name: fade_D75mM;
-  animation-duration: 0.5s;
-  &_icon i {
-    font-weight: 200;
-    font-size: 9rem;
-  }
-  &_title {
-    margin-bottom: 0.8rem;
-    font-weight: var(--fo-bold);
-    font-size: 2rem;
-  }
-}
-
-@keyframes fade_D75mM {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
