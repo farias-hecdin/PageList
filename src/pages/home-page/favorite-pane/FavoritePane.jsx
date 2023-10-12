@@ -11,29 +11,26 @@ export const FavoritePane = () => {
 
   return (
     <section className={css.Container}>
-      { numberOfLinks == 0 ? (
-        <EmptyState pIcon="info"
-          pTitle="Nothing here"
-          pText="Choose a list to access your favorite links."
-        />
+      {numberOfLinks == 0 ? (
+        <EmptyState pIcon="info" pTitle="Nothing here" pText="Choose a list to access your favorite links." />
       ) : (
-          <>
-            <header className={css.Header}>
-              <div>
-                <h2 className={css.Header_title}>{titleLists}</h2>
-                <p className={css.Header_text}>{numberOfLinks} bookmarks</p>
-              </div>
-              <ButtonBase pIcon="edit" />
-            </header>
-            <ul className={css.List}>
-              {arrayLinks.map((links) => (
-                <li key={crypto.randomUUID()}>
-                  <FavoritePaneCard pTitle={links.title} pUrl={links.url} />
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+        <>
+          <header className={css.Header}>
+            <div>
+              <h2 className={css.Header_title}>{titleLists}</h2>
+              <p className={css.Header_text}>{numberOfLinks} bookmarks</p>
+            </div>
+            <ButtonBase pIcon="edit" />
+          </header>
+          <ul className={css.List}>
+            {arrayLinks.map((links) => (
+              <li key={crypto.randomUUID()}>
+                <FavoritePaneCard pTitle={links.title} pUrl={links.url} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   );
 };

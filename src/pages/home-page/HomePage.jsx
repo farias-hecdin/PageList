@@ -36,11 +36,11 @@ export const HomePage = () => {
         {selectedCollection === null ? (
           <EmptyState pIcon="info" pTitle="Nothing here" pText="Choose a collection to access your favorite links" />
         ) : (
-            <div className={css.HomePage_frame}>
-              <SectionPane />
-              <FavoritePane />
-            </div>
-          )}
+          <div className={css.HomePage_frame}>
+            <SectionPane />
+            <FavoritePane />
+          </div>
+        )}
       </section>
     </>
   );

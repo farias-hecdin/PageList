@@ -12,19 +12,19 @@ export const SectionPane = () => {
   const funcGetListLinks = (data, name, amount) => {
     setArrayLinks(data);
     setTitleLists(name);
-    setNumberOfLinks(amount)
+    setNumberOfLinks(amount);
   };
 
   // Expandir lista de marcadores ---------------------------------------------
   const funcExpandList = (event) => {
-    let $node = event.currentTarget
+    let $node = event.currentTarget;
 
     if ($node.classList.contains("--expand")) {
-      $node.classList.remove("--expand")
+      $node.classList.remove("--expand");
     } else {
-      $node.classList.add("--expand")
+      $node.classList.add("--expand");
     }
-  }
+  };
 
   return (
     <section className={css.Container}>
@@ -44,7 +44,7 @@ export const SectionPane = () => {
                 // data.collections[i].topics[i]
                 <li key={crypto.randomUUID()}>
                   <div className={css.Tree}>
-                    <div className={css.Tree_header} onClick={(e) => funcExpandList(e)}>
+                    <div className={css.Tree_header} onClick={(event) => funcExpandList(event)}>
                       <p className={css.Tree_title}>{topics.name}</p>
                       <p className={css.Tree_number}>{topics.lists.length}</p>
                     </div>
@@ -52,7 +52,10 @@ export const SectionPane = () => {
                       {topics.lists.map((lists) => (
                         // data.collections[i].topics[i].lists[i]
                         <li key={crypto.randomUUID()}>
-                          <div className={css.Tree_item} onClick={() => funcGetListLinks(lists.links, lists.name, lists.links.length)}>
+                          <div
+                            className={css.Tree_item}
+                            onClick={() => funcGetListLinks(lists.links, lists.name, lists.links.length)}
+                          >
                             <span className={css.Tree_item_icon}>
                               <i className="material-symbols-outlined">folder</i>
                             </span>

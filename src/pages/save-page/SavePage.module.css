@@ -25,12 +25,12 @@
 .Textarea {
   width: 100%;
   min-height: 20rem;
-  resize: vertical;
-  border-radius: .4rem;
+  padding: 1rem;
   border: 2px solid var(--co-mountain-fig);
+  border-radius: 0.4rem;
   background-color: var(--co-black-pearl);
   color: var(--co-carbon-footprint);
-  padding:  1rem;
+  resize: vertical;
   &:focus {
     border-color: var(--co-carbon-footprint);
     outline: none;
@@ -43,8 +43,8 @@
 }
 
 .AnNotification {
-  background-color: #FEE4CB;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  background-color: #fee4cb;
   color: #000;
-  padding: .5rem 1rem;
-  border-radius: .4rem;
 }

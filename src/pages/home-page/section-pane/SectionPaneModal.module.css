@@ -20,10 +20,10 @@
   border-radius: 0.4rem;
   background-color: #232a36;
   &_text {
-    font-size: 1.2rem;
-    font-weight: var(--fo-bold);
     margin-bottom: 1rem;
     color: var(--co-cold-morning);
+    font-weight: var(--fo-bold);
+    font-size: 1.2rem;
   }
   &_list {
     display: grid;
