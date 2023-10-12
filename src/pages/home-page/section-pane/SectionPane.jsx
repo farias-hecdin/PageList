@@ -1,20 +1,30 @@
 import css from "./SectionPane.module.css";
 import { ButtonBase } from "../../../components/Index.jsx";
 import { useContext } from "react";
-import { BookmarksContext, StateContext } from "../../../context/Index";
-import { useState } from "react";
+import { BookmarksContext } from "../../../context/Index";
 
 export const SectionPane = () => {
   // Importar datos -----------------------------------------------------------
   const { BookmarksList, selectedCollection, numberOfTopics, setNumberOfLinks, setArrayLinks, setTitleLists } =
     useContext(BookmarksContext);
 
-  // Hacer click en el elemento
+  // Obtener datos al hacer clic a un item de la lista
   const funcGetListLinks = (data, name, amount) => {
     setArrayLinks(data);
     setTitleLists(name);
     setNumberOfLinks(amount)
   };
+
+  // Expandir lista de marcadores ---------------------------------------------
+  const funcExpandList = (event) => {
+    let $node = event.currentTarget
+
+    if ($node.classList.contains("--expand")) {
+      $node.classList.remove("--expand")
+    } else {
+      $node.classList.add("--expand")
+    }
+  }
 
   return (
     <section className={css.Container}>
@@ -34,7 +44,7 @@ export const SectionPane = () => {
                 // data.collections[i].topics[i]
                 <li key={crypto.randomUUID()}>
                   <div className={css.Tree}>
-                    <div className={css.Tree_header}>
+                    <div className={css.Tree_header} onClick={(e) => funcExpandList(e)}>
                       <p className={css.Tree_title}>{topics.name}</p>
                       <p className={css.Tree_number}>{topics.lists.length}</p>
                     </div>

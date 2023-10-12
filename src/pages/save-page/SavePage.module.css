@@ -1,0 +1,50 @@
+.SavePage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0rem 2rem;
+  border-radius: 0.8rem;
+  background-color: #232a36;
+  &_header {
+    display: flex;
+    align-items: center;
+    height: 6.7rem;
+    border-bottom: 1px solid #2f3847;
+    color: var(--co-cold-morning);
+  }
+  &_frame {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    animation-name: fade_CcYFdd7Pp36XTihAOg-xm;
+    animation-duration: 0.5s;
+  }
+}
+
+.Textarea {
+  width: 100%;
+  min-height: 20rem;
+  resize: vertical;
+  border-radius: .4rem;
+  border: 2px solid var(--co-mountain-fig);
+  background-color: var(--co-black-pearl);
+  color: var(--co-carbon-footprint);
+  padding:  1rem;
+  &:focus {
+    border-color: var(--co-carbon-footprint);
+    outline: none;
+  }
+  &_footer {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0 0;
+  }
+}
+
+.AnNotification {
+  background-color: #FEE4CB;
+  color: #000;
+  padding: .5rem 1rem;
+  border-radius: .4rem;
+}

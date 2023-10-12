@@ -2,7 +2,10 @@ import css from "./HeaderMain.module.css";
 import website_logo from "../../assets/brand/fake-logo.svg";
 import { ButtonBase, WrapBase } from "../../components/Index.jsx";
 
-export const HeaderMain = () => {
+export const HeaderMain = ({pViewPage, pView}) => {
+  const funcViewPage = (path) => {
+    pViewPage(path)
+  }
   return (
     <header className={css.HeaderMain}>
       <div className={css.Logo}>
@@ -11,9 +14,8 @@ export const HeaderMain = () => {
       </div>
       <nav className={css.Navbar}>
         <WrapBase>
-          <ButtonBase pStyled="HeaderMain_UlICn --active" pIcon="folder" pText="Collections" />
-          <ButtonBase pStyled="HeaderMain_UlICn" pIcon="finance" pText="Stats" />
-          <ButtonBase pStyled="HeaderMain_UlICn" pIcon="save" pText="Save" />
+          <ButtonBase pStyled={`HeaderMain_UlICn ${pView == "home" && "--active"}`} pIcon="folder" pText="Collections" pHandleClick={() => funcViewPage("home")} />
+          <ButtonBase pStyled={`HeaderMain_UlICn ${pView == "save" && "--active"}`} pIcon="save" pText="Save" pHandleClick={() => funcViewPage("save")} />
         </WrapBase>
         <div className={css.Navbar_box}>
           <ButtonBase pIcon="settings" />

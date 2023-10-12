@@ -1,5 +1,6 @@
 .Card {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
   padding: 0.6rem 1.3rem;
   border: 1px solid transparent;
@@ -12,26 +13,28 @@
   &_content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
   }
   &_title {
     margin: 0 0 0.25rem;
+    color: var(--co-cold-morning);
     font-weight: var(--fo-medium);
     font-size: 1.2rem;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   &_text {
     color: var(--co-carbon-footprint);
     font-size: 0.9rem;
   }
-  > i {
-    filter: invert(30%) sepia(16%) saturate(294%) hue-rotate(178deg) brightness(98%) contrast(87%);
-    font-size: 3rem;
-    pointer-events: none;
-    user-select: none;
-    font-variation-settings:
-      "FILL" 0,
-      "wght" 200,
-      "GRAD" 0,
-      "opsz" 48;
+  &_thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    height: 2.8rem;
+    width: 3rem;
   }
 }

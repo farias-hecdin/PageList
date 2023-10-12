@@ -1,23 +1,22 @@
 import css from "./FavoritePaneCard.module.css";
 
-const FavoritePaneCard = ({ pTitle, pUrl }) => {
-  // Obtener las primeras dos letras del titulo de un link en mayuscula -------
-  const funcGetFirstTwoLettersTheTitle = () => {
-    let title = pTitle;
-    let firstTwoLetters = title.slice(0, 2);
+export const FavoritePaneCard = ({ pTitle, pUrl }) => {
+  let title = pTitle
 
-    return firstTwoLetters.toUpperCase();
-  };
+  // Obtener las primeras dos letras del titulo de un link en mayuscula -------
+  const funcGetFirstTwoLettersText= (text) => (text.slice(0, 2));
+  const funcToUppperCase = (text) => (text.toUpperCase());
+
+  title = funcGetFirstTwoLettersText(title)
+  title = funcToUppperCase(title)
 
   return (
     <article className={css.Card}>
-      <p className={css.Card}>{funcGetFirstTwoLettersTheTitle()}</p>
+      <p className={css.Card_thumb}>{title}</p>
       <p className={css.Card_content}>
-        <span className={css.Card_title}>{pTitle}</span>
+        <a className={css.Card_title} href={pUrl} target="_blank" rel="noopener">{pTitle}</a>
         <span className={css.Card_text}>{pUrl}</span>
       </p>
     </article>
   );
 };
-
-export default FavoritePaneCard;

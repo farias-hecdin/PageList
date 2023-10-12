@@ -1,9 +1,10 @@
 import css from "./HomePage.module.css";
 import { BookmarksContext, StateContext } from "../../context/Index.jsx";
 import { ButtonBase, WrapBase } from "../../components/Index";
+import { EmptyState } from "../../layout/Index";
 import { FavoritePane } from "./favorite-pane/FavoritePane.jsx";
-import { SectionModal } from "./section-modal/SectionModal";
 import { SectionPane } from "./section-pane/SectionPane.jsx";
+import { SectionPaneModal } from "./section-pane/SectionPaneModal.jsx";
 import { useContext } from "react";
 
 export const HomePage = () => {
@@ -17,7 +18,7 @@ export const HomePage = () => {
 
   return (
     <>
-      <SectionModal />
+      <SectionPaneModal />
       <section className={css.HomePage}>
         <header className={css.HomePage_header}>
           <h2>Collections</h2>
@@ -33,19 +34,13 @@ export const HomePage = () => {
           </div>
         </header>
         {selectedCollection === null ? (
-          <div className={css.Info}>
-            <span className={css.Info_icon}>
-              <i className="material-symbols-outlined">info</i>
-            </span>
-            <p className={css.Info_title}>Nothing here</p>
-            <p className={css.Info_text}>Choose a collection to access your favorite links.</p>
-          </div>
+          <EmptyState pIcon="info" pTitle="Nothing here" pText="Choose a collection to access your favorite links" />
         ) : (
-          <div className={css.HomePage_frame}>
-            <SectionPane />
-            <FavoritePane />
-          </div>
-        )}
+            <div className={css.HomePage_frame}>
+              <SectionPane />
+              <FavoritePane />
+            </div>
+          )}
       </section>
     </>
   );
