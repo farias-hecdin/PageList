@@ -12,9 +12,9 @@ export const HomePage = () => {
   const { selectedCollection } = useContext(BookmarksContext);
 
   // Mostrar ventana de la lista de colecciones -------------------------------
-  const { showCollectionModal, setShowCollectionModal } = useContext(StateContext);
+  const { showCollectionModal } = useContext(StateContext);
 
-  const funcToggleModal = () => setShowCollectionModal(!showCollectionModal);
+  const funcToggleModal = () => showCollectionModal.set(!showCollectionModal.state);
 
   return (
     <>
@@ -29,11 +29,11 @@ export const HomePage = () => {
             </div>
             <WrapBase pStyled="HomePage_JhI8l">
               <ButtonBase pIcon="update" pHandleClick={funcToggleModal} />
-              <p className={css.Navbar_text}>{selectedCollection}</p>
+              <p className={css.Navbar_text}>{selectedCollection.state || "None"}</p>
             </WrapBase>
           </div>
         </header>
-        {selectedCollection === null ? (
+        {selectedCollection.state === "" ? (
           <EmptyState pIcon="info" pTitle="Nothing here" pText="Choose a collection to access your favorite links" />
         ) : (
           <div className={css.HomePage_frame}>

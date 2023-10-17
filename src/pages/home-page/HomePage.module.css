@@ -13,20 +13,11 @@
     color: var(--co-cold-morning);
   }
   &_frame {
-    display: flex;
+    display: grid;
     gap: 2rem;
-    margin-top: 2rem;
-    animation-name: fade_CcYFdd7Pp36XTihAOg-xm;
-    animation-duration: 0.5s;
-  }
-}
-
-@keyframes fade_CcYFdd7Pp36XTihAOg-xm {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
+    grid-template-columns: 1fr 1.5fr;
+    height: 100%;
+    margin: 2rem 0;
   }
 }
 

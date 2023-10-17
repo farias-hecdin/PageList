@@ -1,8 +1,7 @@
 .Container {
-  width: 40rem;
   padding-right: 2rem;
   border-right: 1px solid #2f3847;
-  color: #e5e5e5;
+  color: var(--co-cold-morning);
 }
 
 .Header {

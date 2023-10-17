@@ -10,7 +10,7 @@ export const App = () => {
 
   return (
     <div className={css.App}>
-      <HeaderMain pPage={activePage} pUpdatePage={setActivePage} />
+      <HeaderMain pPageName={activePage} pUpdatePage={setActivePage} />
       <main className={css.App_frame}>
         {activePage === "home" && <HomePage />}
         {activePage === "save" && <SavePage />}

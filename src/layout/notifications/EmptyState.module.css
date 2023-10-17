@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
-  padding: 4rem 0 0;
+  padding: 5rem 0 0;
   color: var(--co-carbon-footprint);
   &_icon > i {
     font-weight: 200;

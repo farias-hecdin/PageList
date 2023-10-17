@@ -1,16 +1,15 @@
 import { createContext, useState } from "react";
 
-// Creando un Context y Provider
+// Crear un Context y Provider
 export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   // Mostrar ventana modal
   const [showCollectionModal, setShowCollectionModal] = useState(false);
 
-  // Exportando datos
+  // Exportar datos
   const value = {
-    showCollectionModal,
-    setShowCollectionModal,
+    showCollectionModal: { state: showCollectionModal, set: setShowCollectionModal },
   };
   return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };

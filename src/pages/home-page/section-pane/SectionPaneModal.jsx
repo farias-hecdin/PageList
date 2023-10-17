@@ -3,66 +3,75 @@ import { BookmarksContext, StateContext } from "../../../context/Index.jsx";
 import { ButtonBase } from "../../../components/Index.jsx";
 import { SectionPaneModalTile } from "./SectionPaneModalTile";
 import { useContext } from "react";
+import { logC } from "../../../console";
 
 export const SectionPaneModal = () => {
-  // Mostrar ventana de la lista de colecciones -------------------------
-  const { showCollectionModal, setShowCollectionModal } = useContext(StateContext);
+  // Mostrar ventana de la lista de colecciones -------------------------------
+  const { showCollectionModal } = useContext(StateContext);
 
-  const funcToggleModal = () => setShowCollectionModal(!showCollectionModal);
+  const funcToggleModal = () => showCollectionModal.set(!showCollectionModal.state);
 
   // Selecionar una coleccion de marcadores -----------------------------------
-  const { BookmarksList, selectedCollection, setSelectedCollection, setNumberOfTopics, setNumberOfLinks } =
-    useContext(BookmarksContext);
+  const { savedBookmarks, selectedCollection, numberTopics, numberLinks } = useContext(BookmarksContext);
 
-  const funcSaveDataFromCollection = (event, name) => {
-    let currentQuantity = funcGetTotalAmountOfTopics(event);
+  // Extraer datos de la coleccion
+  const funcSaveDataFromCollection = (e, name) => {
+    if (typeof name !== "string") {
+      return logC(name, "SectionPaneModal (funcSaveDataFromCollection)");
+    }
 
-    setSelectedCollection(() => name);
-    setNumberOfTopics(currentQuantity);
-    setNumberOfLinks(0);
+    let currentNumberTopics = funcGetTotalNumberTopics(e);
+    let collectionName = name;
+    let resetNumberLinks = 0;
+    // Actualizar estados
+    selectedCollection.set(collectionName);
+    numberTopics.set(currentNumberTopics);
+    numberLinks.set(resetNumberLinks);
     // Cerrar ventana
     funcToggleModal();
   };
 
   // Calcular la cantidad total de elementos
+  const funcGetTotalNumberTopics = (e) => {
+    let $selectedElementId = e.currentTarget.dataset.id;
+    let dataList = savedBookmarks.state.collections;
+    let currentNumberTopics = 0;
 
-  const funcGetTotalAmountOfTopics = (event) => {
-    let selectedElementId = event.currentTarget.dataset.id;
-    let data = BookmarksList.collections;
-    let currentQuantity = 0;
-
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].name === selectedElementId) {
-        currentQuantity = data[i].topics.length;
+    for (let elem of dataList) {
+      if (elem.name === $selectedElementId) {
+        currentNumberTopics = elem.topics.length;
       }
     }
-    return currentQuantity;
+    return currentNumberTopics;
   };
 
   return (
     <>
-      {showCollectionModal && (
+      {showCollectionModal.state && (
         <aside className={css.Modal}>
           <div className={css.Container}>
             <p className={css.Container_text}>Choose a collection</p>
             <ul className={css.Container_list}>
               <li key={crypto.randomUUID()}>
                 <SectionPaneModalTile
-                  pText={"Empty"}
-                  pStyled={selectedCollection === null && "--active"}
-                  pHandleClick={(event) => funcSaveDataFromCollection(event, null)}
+                  pText={"None"}
+                  pStyled={selectedCollection.state === "" && "--active"}
+                  pHandleClick={(e) => funcSaveDataFromCollection(e, "")}
                 />
               </li>
-              {BookmarksList.collections.map((collections) => (
-                <li key={crypto.randomUUID()}>
-                  <SectionPaneModalTile
-                    pText={collections.name}
-                    pId={collections.name}
-                    pStyled={selectedCollection === collections.name && "--active"}
-                    pHandleClick={(event) => funcSaveDataFromCollection(event, collections.name)}
-                  />
-                </li>
-              ))}
+              {typeof savedBookmarks.state === "object"
+                ? savedBookmarks.state.collections.map((collections) => (
+                    <li key={crypto.randomUUID()}>
+                      <SectionPaneModalTile
+                        pText={collections.name}
+                        pDataId={collections.name}
+                        pStyled={selectedCollection.state === collections.name && "--active"}
+                        pNumber={collections.topics.length}
+                        pHandleClick={(e) => funcSaveDataFromCollection(e, collections.name)}
+                      />
+                    </li>
+                  ))
+                : logC(savedBookmarks.state, "SectionPaneModal (savedBookmarks)")}
             </ul>
             <footer className={css.Container_footer}>
               <ButtonBase pText="Cancel" pHandleClick={funcToggleModal} />
