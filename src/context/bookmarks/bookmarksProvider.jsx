@@ -1,43 +1,36 @@
 import { useState, createContext } from "react";
 import dataJSON from "../../data/bookmarks.json";
 
-const TheBookmarks = dataJSON;
+let bookmarksList = dataJSON;
 
 // Crear un Context y un Provider
-export const BookmarksContext = createContext();
+export const BookmarksContext = createContext(null);
 
 export const BookmarksProvider = ({ children }) => {
-  // Data de entradas (lista de marcadores)
-  const [BookmarksList, setBookmarksList] = useState(TheBookmarks);
+  // Datos de entradas
+  const [savedBookmarks, setSavedBookmarks] = useState(bookmarksList);
 
-  // Acciones
-  const [selectedCollection, setSelectedCollection] = useState(null);
+  // Acciones y referencia
+  const [selectedCollection, setSelectedCollection] = useState("");
 
   // Almacenar la cantidad de elementos
-  const [numberOfCollections, setNumberOfCollections] = useState(0);
-  const [numberOfTopics, setNumberOfTopics] = useState(0);
-  const [numberOfLinks, setNumberOfLinks] = useState(0);
+  const [numberCollections, setNumberCollections] = useState(0);
+  const [numberTopics, setNumberTopics] = useState(0);
+  const [numberLinks, setNumberLinks] = useState(0);
 
   // Exportar datos al Provider
-  const [arrayLinks, setArrayLinks] = useState([]);
+  const [dataLinks, setDataLinks] = useState([]);
   const [titleLists, setTitleLists] = useState("");
 
   const value = {
-    BookmarksList,
-    setBookmarksList,
-    arrayLinks,
-    setArrayLinks,
-    selectedCollection,
-    setSelectedCollection,
-    titleLists,
-    setTitleLists,
-    // Para contador de elementos
-    numberOfCollections,
-    setNumberOfCollections,
-    numberOfTopics,
-    setNumberOfTopics,
-    numberOfLinks,
-    setNumberOfLinks,
+    bookmarksList,
+    dataLinks: { state: dataLinks, set: setDataLinks },
+    numberCollections: { state: numberCollections, set: setNumberCollections },
+    numberLinks: { state: numberLinks, set: setNumberLinks },
+    numberTopics: { state: numberTopics, set: setNumberTopics },
+    savedBookmarks: { state: savedBookmarks, set: setSavedBookmarks },
+    selectedCollection: { state: selectedCollection, set: setSelectedCollection },
+    titleLists: { state: titleLists, set: setTitleLists },
   };
   return <BookmarksContext.Provider value={value}>{children}</BookmarksContext.Provider>;
 };

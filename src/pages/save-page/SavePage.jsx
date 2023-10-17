@@ -1,70 +1,90 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ButtonBase } from "../../components/Index";
 import { BookmarksContext } from "../../context/bookmarks/bookmarksProvider";
 import css from "./SavePage.module.css";
 
 export const SavePage = () => {
-  const { setBookmarksList, BookmarksList, setSelectedCollection, selectedCollection } = useContext(BookmarksContext);
+  const { savedBookmarks, selectedCollection, bookmarksList } = useContext(BookmarksContext);
 
-  // Importar datos -----------------------------------------------------------
-  const funcImportBookmarksData = () => {
-    let $fieldText = document.getElementById("textarea_dPGOLAD_13JMFLvIAC5FN");
-    let importData = BookmarksList;
+  // Exportar datos al exterior -----------------------------------------------
+  const funcExportBookmarksData = () => {
+    let $imputText = document.getElementById("textarea_dPGOL");
+    let dataToExport = savedBookmarks.state;
 
-    if (importData !== String) {
-      importData = JSON.stringify(BookmarksList);
+    if (typeof dataToExport !== "string") {
+      dataToExport = JSON.stringify(dataToExport);
     }
-    $fieldText.value = importData;
+    $imputText.value = dataToExport;
   };
 
-  // Exportar datos y validar propiedades -------------------------------------
-  const [showNotification, setShowNotification] = useState();
-  const [showJsonError, setShowJsonError] = useState("");
+  // Importar datos y validar propiedades -------------------------------------
+  const funcImportBookmarksData = () => {
+    let $imputText = document.getElementById("textarea_dPGOL");
+    let dataToImport = $imputText.value;
+    const regex = /^[\{|\[\s+\}]/;
 
-  const funcExportBookmarksData = () => {
-    let $fieldText = document.getElementById("textarea_dPGOLAD_13JMFLvIAC5FN");
-    let exportData = $fieldText.value;
+    if (dataToImport === "") {
+      return alert("Datas not found");
+    }
+    if (!regex.test(dataToImport)) {
+      throw alert("El valor ingresado no es un objeto JSON válido");
+    }
+    dataToImport = JSON.parse(dataToImport);
 
-    // Validacion
-    if (exportData === "") {
-      setShowNotification(() => "error");
-      setShowJsonError(() => "field empty");
-    } else {
-      let checkObject = JSON.parse(exportData);
-      let exportObject = checkObject;
+    // Validar datos
+    if (dataToImport.collections === undefined) {
+      return alert("Collections not found");
+    }
+    let dataArray = dataToImport.collections;
 
-      if (checkObject.collections === undefined) {
-        setShowNotification(() => "error");
-        setShowJsonError(() => "collections not found");
-      } else {
-        checkObject = checkObject.collections;
-        for (let i = 0; i < checkObject.length; i++) {
-          if (checkObject[i].topics === undefined) {
-            setShowNotification(() => "error");
-            setShowJsonError(() => "topics not found");
-            for (let i = 0; i < checkObject.length; i++) {}
-          } else {
-            setShowNotification(() => "ok");
-            setShowJsonError(() => "all is right");
-            // Guardar los datos nuevos
-            // funcIntegreDataToApp(exportObject)
-            funcSaveDataInLocalStorage(exportData);
+    for (let collections of dataArray) {
+      if (collections.topics === undefined) {
+        return alert("Topics not found");
+      }
+      dataArray = collections.topics;
+
+      for (let topics of dataArray) {
+        if (topics.lists === undefined) {
+          return alert("Lists not found");
+        }
+        dataArray = topics.lists;
+
+        for (let lists of dataArray) {
+          if (lists.links === undefined) {
+            return alert("Links not found");
           }
         }
       }
     }
-  };
-  const funcSaveDataInLocalStorage = (data) => {
-    localStorage.setItem("pagelist__latestSection", data);
+    return dataToImport;
   };
 
-  const funcIntegreDataToApp = (data) => {
-    const newData = data;
-    setSelectedCollection(null);
-    setBookmarksList(newData);
+  // Guardar datos en LocalStorage
+  const funcSaveDataInLocalStorage = (dataToLocalStorage) => {
+    let question = confirm("Do you want to save this section?");
+    if (question === true) {
+      localStorage.setItem("pagelist__latestSection", JSON.stringify(dataToLocalStorage));
+    }
   };
-  const funcDeleteSection = () => {
-    localStorage.setItem("pagelist__latestSection", "");
+
+  const funcIntegreDataToApp = () => {
+    let newBookmarksList = funcImportBookmarksData();
+    let resetSelectedCollection = "";
+
+    if (typeof newBookmarksList === "object") {
+      funcSaveDataInLocalStorage(newBookmarksList);
+      savedBookmarks.set(newBookmarksList);
+      selectedCollection.set(resetSelectedCollection);
+    }
+  };
+
+  // Limpiar la seccion almacenada --------------------------------------------
+  const funcDeleteDataInLocalStorage = () => {
+    let question = confirm("Do you want to delete the saved section?");
+    if (question === true) {
+      localStorage.setItem("pagelist__latestSection", "");
+      savedBookmarks.set(bookmarksList);
+    }
   };
 
   return (
@@ -74,21 +94,12 @@ export const SavePage = () => {
       </header>
       <div className={css.SavePage_frame}>
         <div className={css.Textarea_footer}>
-          <ButtonBase pText="Export" pIcon="download" pHandleClick={() => funcImportBookmarksData()} />
-          <ButtonBase pText="Import" pIcon="upload" pHandleClick={() => funcExportBookmarksData()} />
-          <ButtonBase pText="Delete section" pIcon="delete" pHandleClick={() => funcDeleteSection()} />
+          <ButtonBase pText="Export" pIcon="download" pHandleClick={funcExportBookmarksData} />
+          <ButtonBase pText="Import" pIcon="upload" pHandleClick={funcIntegreDataToApp} />
+          <ButtonBase pText="Delete section" pIcon="delete" pHandleClick={funcDeleteDataInLocalStorage} />
         </div>
-        {showNotification === "error" ? (
-          <AnNotification pText={`ERROR - ${showJsonError}`} />
-        ) : showNotification === "ok" ? (
-          <AnNotification pText={`Message - ${showJsonError}`} />
-        ) : null}
-        <textarea className={css.Textarea} id="textarea_dPGOLAD_13JMFLvIAC5FN"></textarea>
+        <textarea className={css.Textarea} id="textarea_dPGOL"></textarea>
       </div>
     </section>
   );
-};
-
-export const AnNotification = ({ pText }) => {
-  return <p className={css.AnNotification}>{pText}</p>;
 };

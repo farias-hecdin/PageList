@@ -1,3 +1,3 @@
-# PageList
+# Pagelist
 
 🚧 "Under construction"

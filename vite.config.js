@@ -5,9 +5,10 @@ import react from "@vitejs/plugin-react";
 export default defineConfig(({ command }) => {
   return {
     plugins: [react()],
+    base: command === "build" ? "https://farias-hecdin.github.io/Pagelist/" : "/",
     css: {
       modules: {
-        generateScopedName: command === "build" ? "[hash:base64:6]" : "[local]_[hash:base64:3]",
+        generateScopedName: command === "build" ? "[hash:base64:9]" : "[local]_[hash:base64:5]",
       },
     },
   };
