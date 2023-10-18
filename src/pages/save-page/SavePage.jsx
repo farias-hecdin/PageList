@@ -7,6 +7,40 @@ export const SavePage = () => {
   const { savedBookmarks, selectedCollection, bookmarksList } = useContext(BookmarksContext);
 
   // Exportar datos al exterior -----------------------------------------------
+  const funcClickButtonExport = () => {
+    let dataInString = funcExportBookmarksData();
+
+    // Extraer al fecha actual y anexarla al nombre de archivo
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = d.getMonth();
+    let day = d.getDay();
+
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    if (day < 10) {
+      day = `0${day}`;
+    }
+    let currentDate = `PagelistBackup_${year}${month}${day}`
+
+    funcMakeHTMLnodeAndFile(currentDate, dataInString)
+  };
+
+  // Crear un nodo HTML y crear un fichero
+  const funcMakeHTMLnodeAndFile = (name, data) => {
+    let link = document.createElement("a");
+    link.download = name + ".txt";
+
+    let blob = new Blob([data], { type: "text/plain" });
+
+    link.href = URL.createObjectURL(blob);
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+  };
+
+  // Convertir los datos a String e enviarlos al textarea
   const funcExportBookmarksData = () => {
     let $imputText = document.getElementById("textarea_dPGOL");
     let dataToExport = savedBookmarks.state;
@@ -15,6 +49,8 @@ export const SavePage = () => {
       dataToExport = JSON.stringify(dataToExport);
     }
     $imputText.value = dataToExport;
+
+    return dataToExport;
   };
 
   // Importar datos y validar propiedades -------------------------------------
@@ -94,7 +130,7 @@ export const SavePage = () => {
       </header>
       <div className={css.SavePage_frame}>
         <div className={css.Textarea_footer}>
-          <ButtonBase pText="Export" pIcon="download" pHandleClick={funcExportBookmarksData} />
+          <ButtonBase pText="Export" pIcon="download" pHandleClick={funcClickButtonExport} />
           <ButtonBase pText="Import" pIcon="upload" pHandleClick={funcIntegreDataToApp} />
           <ButtonBase pText="Delete section" pIcon="delete" pHandleClick={funcDeleteDataInLocalStorage} />
         </div>
