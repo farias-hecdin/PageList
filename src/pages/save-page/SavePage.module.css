@@ -2,49 +2,40 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0rem 2rem;
+  padding: 0rem 3rem;
   border-radius: 0.8rem;
   background-color: #232a36;
-  &_header {
-    display: flex;
-    align-items: center;
-    height: 6.7rem;
-    border-bottom: 1px solid #2f3847;
-    color: var(--co-cold-morning);
-  }
   &_frame {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    height: 100%;
     margin-top: 2rem;
-    animation-name: fade_CcYFdd7Pp36XTihAOg-xm;
-    animation-duration: 0.5s;
   }
 }
 
 .Textarea {
-  width: 100%;
-  min-height: 20rem;
-  padding: 1rem;
-  border: 2px solid var(--co-mountain-fig);
-  border-radius: 0.4rem;
-  background-color: var(--co-black-pearl);
-  color: var(--co-carbon-footprint);
-  resize: vertical;
-  &:focus {
-    border-color: var(--co-carbon-footprint);
-    outline: none;
-  }
-  &_footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem 0 0;
+  &_toolbar {
     display: flex;
     gap: 1rem;
-    margin: 1rem 0 0;
   }
-}
-
-.AnNotification {
-  padding: 0.5rem 1rem;
-  border-radius: 0.4rem;
-  background-color: #fee4cb;
-  color: #000;
+  &_input {
+    width: 100%;
+    min-height: 20rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border: 0.125rem solid var(--co-mountain-fig);
+    border-radius: 0.4rem;
+    background-color: var(--co-black-pearl);
+    color: var(--co-carbon-footprint);
+    resize: vertical;
+    &:focus {
+      border-color: var(--co-carbon-footprint);
+      outline: none;
+    }
+  }
 }

@@ -1,10 +1,10 @@
 import css from "./SectionPaneModalTile.module.css";
 
-export const SectionPaneModalTile = ({ pHandleClick, pText, pStyled, pDataId, pNumber }) => {
+export const SectionPaneModalTile = ({ pHandleClick, pIcon, pText, pStyled, pDataId }) => {
   return (
-    <div className={`${css.Tile} ${pStyled || null}`} onClick={pHandleClick} data-id={pDataId}>
+    <div className={`${css.Tile} ${pStyled || ""}`} onClick={pHandleClick} data-id={pDataId}>
+      <iconify-icon icon={`material-symbols:${pIcon}`}></iconify-icon>
       <p className={css.Tile_text}>{pText}</p>
-      <p>{pNumber || 0}</p>
     </div>
   );
 };

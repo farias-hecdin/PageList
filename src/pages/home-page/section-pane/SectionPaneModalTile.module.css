@@ -1,16 +1,29 @@
 .Tile {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
   width: 13rem;
   overflow: hidden;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
+  border: 1px solid transparent;
   border-radius: 0.4rem;
   background-color: var(--co-mountain-fig);
   color: var(--co-carbon-footprint);
-  &:hover,
   &:global(.--active) {
-    background-color: var(--co-zucchini);
     color: var(--co-greenish);
+  }
+  &:hover {
+    background-color: var(--co-zucchini);
+    border-color: var(--co-greenish);
+    color: var(--co-greenish);
+  }
+  &_text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  & > iconify-icon {
+    font-size: 2rem;
   }
 }

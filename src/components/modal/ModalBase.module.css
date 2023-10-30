@@ -1,0 +1,28 @@
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100dvh;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  &_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 30rem;
+    min-height: 9rem;
+    padding: 1.2rem;
+    border-radius: 0.8rem;
+    background-color: #232a36;
+  }
+  &_footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -4,19 +4,21 @@ import { BookmarksContext } from "../../context/Index";
 import { ButtonBase, WrapBase } from "../../components/Index.jsx";
 import { useContext } from "react";
 import { useState } from "react";
-import { logC } from "../../console.js";
 
-export const HeaderMain = ({ pUpdatePage, pPageName }) => {
-  // Mostrar la pagina activa -------------------------------------------------
-  const funcShowActivePage = (selectedPage) => {
-    if (selectedPage === "string") {
-      return logC(selectedPage, "HeaderMain (funcShowActivePage)");
-    }
-    pUpdatePage(selectedPage);
+/**
+ * @param {Object} prop
+ * @param {function} prop.pChangePage
+ * @param {string} prop.pPageName
+ */
+export const HeaderMain = ({ pChangePage, pPageName }) => {
+  /** Mostar la pagina selecionada
+   * @param {string} _selectedPage
+   */
+  const showActivePage = (_selectedPage) => {
+    pChangePage(_selectedPage);
   };
 
   // Revisar la ultima seccion ------------------------------------------------
-
   const { savedBookmarks } = useContext(BookmarksContext);
   const [indicatorLoadSection, setIndicatorLoadSection] = useState(false);
 
@@ -40,25 +42,22 @@ export const HeaderMain = ({ pUpdatePage, pPageName }) => {
       <nav className={css.Navbar}>
         <WrapBase>
           <ButtonBase
-            pStyled={`HeaderMain_UlICn ${pPageName === "home" && "--active"}`}
-            pIcon="bookmarks"
+            pStyled={`HeaderMain_UlICn ${pPageName === "home" ? "--active" : ""}`}
+            pIcon="bookmarks-outline"
             pText="Bookmarks"
-            pHandleClick={() => funcShowActivePage("home")}
+            pHandleClick={() => showActivePage("home")}
           />
           <ButtonBase
-            pStyled={`HeaderMain_UlICn ${pPageName === "save" && "--active"}`}
-            pIcon="folder"
+            pStyled={`HeaderMain_UlICn ${pPageName === "manage" ? "--active" : ""}`}
+            pIcon="folder-outline"
             pText="Manage"
-            pHandleClick={() => funcShowActivePage("save")}
+            pHandleClick={() => showActivePage("manage")}
           />
         </WrapBase>
         <div className={css.Navbar_box}>
-          <ButtonBase
-            pText={`Load ${indicatorLoadSection ? "[on]" : "[off]"}`}
-            pIcon="update"
-            pHandleClick={funcCheckLatestSection}
-          />
-          <ButtonBase pText="Config" pIcon="settings" />
+          <ButtonBase pText="Save" pIcon="save-outline" />
+          <ButtonBase pText="Load" pIcon="update" pHandleClick={funcCheckLatestSection} />
+          <ButtonBase pText="Config app" pIcon="settings-outline" />
         </div>
       </nav>
     </header>

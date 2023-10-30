@@ -7,10 +7,10 @@ export const ButtonBase = ({ pIcon, pText, pHandleClick, pStyled }) => {
   };
 
   return (
-    <button className={`${css.Button} ${pStyled || null}`} onClick={pHandleClick || funcAlert}>
+    <button className={`${css.Button} ${pStyled || ""}`} onClick={pHandleClick || funcAlert}>
       {pIcon && (
         <span className={css.Button_icon}>
-          <i className="material-symbols-outlined">{pIcon}</i>
+          <iconify-icon icon={`material-symbols:${pIcon}`}></iconify-icon>
         </span>
       )}
       {pText && <span className={css.Button_text}>{pText}</span>}
