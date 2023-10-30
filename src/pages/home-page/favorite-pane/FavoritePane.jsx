@@ -4,7 +4,7 @@ import { ButtonBase } from "../../../components/Index.jsx";
 import { EmptyState } from "../../../layout/Index";
 import { FavoritePaneCard } from "./FavoritePaneCard.jsx";
 import { useContext } from "react";
-import { logC } from "../../../console";
+import { logConsole } from "../../../logger";
 
 export const FavoritePane = () => {
   // Importar datos -----------------------------------------------------------
@@ -30,7 +30,7 @@ export const FavoritePane = () => {
                     <FavoritePaneCard pTitle={links.title} pUrl={links.url} />
                   </li>
                 ))
-              : logC(dataLinks.state, "FavoritePane (dataLinks)")}
+              : logConsole(dataLinks.state, "FavoritePane (dataLinks)")}
           </ul>
         </>
       )}

@@ -14,16 +14,14 @@
 }
 
 .Container {
-  min-width: 20vw;
-  min-height: 20dvh;
-  padding: 2rem;
-  border-radius: 0.4rem;
-  background-color: #232a36;
-  &_text {
-    margin-bottom: 1rem;
+  &_title {
     color: var(--co-cold-morning);
     font-weight: var(--fo-bold);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+  }
+  &_text {
+    color: var(--co-cold-morning);
   }
   &_list {
     display: grid;

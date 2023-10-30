@@ -1,84 +1,86 @@
 import css from "./SectionPaneModal.module.css";
-import { BookmarksContext, StateContext } from "../../../context/Index.jsx";
-import { ButtonBase } from "../../../components/Index.jsx";
+import { DataContext, StateContext } from "../../../context/Index.jsx";
+import { ButtonBase, ModalBase } from "../../../components/Index.jsx";
 import { SectionPaneModalTile } from "./SectionPaneModalTile";
 import { useContext } from "react";
-import { logC } from "../../../console";
 
-export const SectionPaneModal = () => {
+export const SectionPaneModal = ({ pShowModal }) => {
   // Mostrar ventana de la lista de colecciones -------------------------------
+
   const { showCollectionModal } = useContext(StateContext);
 
-  const funcToggleModal = () => showCollectionModal.set(!showCollectionModal.state);
+  /** Cierra la ventana modal */
+  const toggleModal = () => showCollectionModal.set(!showCollectionModal.state);
 
   // Selecionar una coleccion de marcadores -----------------------------------
-  const { savedBookmarks, selectedCollection, numberTopics, numberLinks } = useContext(BookmarksContext);
 
-  // Extraer datos de la coleccion
-  const funcSaveDataFromCollection = (e, name) => {
-    if (typeof name !== "string") {
-      return logC(name, "SectionPaneModal (funcSaveDataFromCollection)");
-    }
+  const { drawerCollections, drawerTopics, selectedCollectionX } = useContext(DataContext);
 
-    let currentNumberTopics = funcGetTotalNumberTopics(e);
-    let collectionName = name;
-    let resetNumberLinks = 0;
-    // Actualizar estados
-    selectedCollection.set(collectionName);
-    numberTopics.set(currentNumberTopics);
-    numberLinks.set(resetNumberLinks);
-    // Cerrar ventana
-    funcToggleModal();
-  };
-
-  // Calcular la cantidad total de elementos
-  const funcGetTotalNumberTopics = (e) => {
-    let $selectedElementId = e.currentTarget.dataset.id;
-    let dataList = savedBookmarks.state.collections;
-    let currentNumberTopics = 0;
-
-    for (let elem of dataList) {
-      if (elem.name === $selectedElementId) {
-        currentNumberTopics = elem.topics.length;
+  /** Compara `descendent.originId` con `parent.id` y retorna el numero de coincidencias.
+   * @param {Array.<Object.<string, ?>>} _arrayDescendent
+   * @param {String} _parentId
+   */
+  const compareIdAndReturnNumberMatches = (_arrayDescendent, _parentId) => {
+    let numberCoincidence = 0;
+    for (const item of _arrayDescendent) {
+      if (item.originId === _parentId) {
+        numberCoincidence++;
       }
     }
-    return currentNumberTopics;
+    return numberCoincidence;
+  };
+
+  /** Actualiza el estado `selectedCollection()` de acuerdo la coleccion selecionada.
+   * @param {Array|string} _oneCollection
+   */
+  const selectCollection = (_oneCollection) => {
+    try {
+      // Actualizar el estado
+      let elementNumbers = _oneCollection ? compareIdAndReturnNumberMatches(drawerTopics.state, _oneCollection.id) : 0;
+      let elementId = _oneCollection?.id || "None";
+      let elementName = _oneCollection?.name || "None";
+
+      selectedCollectionX.set(() => ({
+        id: elementId,
+        number: elementNumbers,
+        name: elementName,
+      }));
+
+      // Cerrar la ventana modal
+      toggleModal();
+    } catch (error) {
+      console.warn("SectionPaneModal > selectCollection:" + error.message);
+    }
   };
 
   return (
-    <>
-      {showCollectionModal.state && (
-        <aside className={css.Modal}>
-          <div className={css.Container}>
-            <p className={css.Container_text}>Choose a collection</p>
-            <ul className={css.Container_list}>
-              <li key={crypto.randomUUID()}>
+    <ModalBase pId="modal_pVWgBDgt4eY" pIsOpen={pShowModal}>
+      <div className={css.Container_header}>
+        <p className={css.Container_title}>Collections</p>
+        <p className={css.Container_text}>Choose a collection boorkmarks</p>
+      </div>
+      <ul className={css.Container_list}>
+        <li>
+          <SectionPaneModalTile
+            pIcon="note-stack-outline"
+            pText={"None"}
+            pStyled={selectedCollectionX.state.id === "None" && "--active"}
+            pHandleClick={() => selectCollection("None")}
+          />
+        </li>
+        {Array.isArray(drawerCollections.state)
+          ? drawerCollections.state.map((collection) => (
+              <li key={collection.id}>
                 <SectionPaneModalTile
-                  pText={"None"}
-                  pStyled={selectedCollection.state === "" && "--active"}
-                  pHandleClick={(e) => funcSaveDataFromCollection(e, "")}
+                  pIcon="note-stack-outline"
+                  pText={collection.name}
+                  pStyled={selectedCollectionX.state.id === collection.id && "--active"}
+                  pHandleClick={() => selectCollection(collection)}
                 />
               </li>
-              {typeof savedBookmarks.state === "object"
-                ? savedBookmarks.state.collections.map((collections) => (
-                    <li key={crypto.randomUUID()}>
-                      <SectionPaneModalTile
-                        pText={collections.name}
-                        pDataId={collections.name}
-                        pStyled={selectedCollection.state === collections.name && "--active"}
-                        pNumber={collections.topics.length}
-                        pHandleClick={(e) => funcSaveDataFromCollection(e, collections.name)}
-                      />
-                    </li>
-                  ))
-                : logC(savedBookmarks.state, "SectionPaneModal (savedBookmarks)")}
-            </ul>
-            <footer className={css.Container_footer}>
-              <ButtonBase pText="Cancel" pHandleClick={funcToggleModal} />
-            </footer>
-          </div>
-        </aside>
-      )}
-    </>
+            ))
+          : console.warn("SectionPaneModal > rendering list")}
+      </ul>
+    </ModalBase>
   );
 };

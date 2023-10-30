@@ -57,23 +57,30 @@
   }
   &_list {
     display: block;
-    margin: 0.8rem 0 0.4rem;
     list-style: none;
   }
   &_item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.4rem 1rem;
-    border-radius: 0.4rem;
-    &_text {
-      width: 100%;
+    &:first-child {
+      margin-top: 0.8rem;
     }
-    &_icon {
-      line-height: 0;
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.4rem;
     }
-    &:hover {
+    & > div:hover {
       background: var(--co-mountain-fig);
+    }
+  }
+  &_itemText {
+    width: 100%;
+  }
+  &_itemIcon {
+    line-height: 0;
+    & > iconify-icon {
+      font-size: 1.1rem;
     }
   }
 }

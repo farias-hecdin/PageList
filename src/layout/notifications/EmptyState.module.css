@@ -5,7 +5,7 @@
   height: 100%;
   padding: 5rem 0 0;
   color: var(--co-carbon-footprint);
-  &_icon > i {
+  &_icon > iconify-icon {
     font-weight: 200;
     font-size: 9rem;
   }

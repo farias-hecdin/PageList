@@ -1,5 +1,7 @@
 import { useState, createContext } from "react";
 import dataJSON from "../../data/bookmarks.json";
+import COLLECTIONS from "../../data/collections.json";
+import TOPICS from "../../data/topics.json";
 
 let bookmarksList = dataJSON;
 
@@ -7,8 +9,13 @@ let bookmarksList = dataJSON;
 export const BookmarksContext = createContext(null);
 
 export const BookmarksProvider = ({ children }) => {
+  const [fooCollections, setFooCollections] = useState(COLLECTIONS);
+  const [idCollections, setIdCollections] = useState("");
+  const [fooTopics, setFooTopics] = useState(TOPICS);
+  const [idTopics, setIdTopics] = useState("");
+
   // Datos de entradas
-  const [savedBookmarks, setSavedBookmarks] = useState(bookmarksList);
+  const [savedBookmarks, setSavedBookmarks] = useState(bookmarksList.collections);
 
   // Acciones y referencia
   const [selectedCollection, setSelectedCollection] = useState("");
@@ -31,6 +38,11 @@ export const BookmarksProvider = ({ children }) => {
     savedBookmarks: { state: savedBookmarks, set: setSavedBookmarks },
     selectedCollection: { state: selectedCollection, set: setSelectedCollection },
     titleLists: { state: titleLists, set: setTitleLists },
+    // New datas
+    fooCollections: { state: fooCollections, set: setFooCollections },
+    fooTopics: { state: fooTopics, set: setFooTopics },
+    idCollections: { state: idCollections, set: setIdCollections },
+    idTopics: { state: idTopics, set: setIdTopics },
   };
   return <BookmarksContext.Provider value={value}>{children}</BookmarksContext.Provider>;
 };

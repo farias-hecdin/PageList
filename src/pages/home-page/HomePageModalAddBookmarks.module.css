@@ -1,0 +1,13 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  &_text {
+    color: var(--co-carbon-footprint);
+  }
+  &_input {
+    padding: 0.25rem;
+  }
+}
+

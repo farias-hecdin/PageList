@@ -3,7 +3,7 @@
   gap: 0.5rem;
   padding: 0.3rem;
   border: 2px solid var(--co-mountain-fig);
-  border-radius: 0.8rem;
+  border-radius: calc(0.3rem + 0.5rem);
   background-color: var(--co-black-pearl);
 }
 

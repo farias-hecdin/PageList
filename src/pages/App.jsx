@@ -7,13 +7,12 @@ import { useState } from "react";
 export const App = () => {
   // Mostrar la pagina activa
   const [activePage, setActivePage] = useState("home");
-
   return (
     <div className={css.App}>
-      <HeaderMain pPageName={activePage} pUpdatePage={setActivePage} />
+      <HeaderMain pPageName={activePage} pChangePage={setActivePage} />
       <main className={css.App_frame}>
         {activePage === "home" && <HomePage />}
-        {activePage === "save" && <SavePage />}
+        {activePage === "manage" && <SavePage />}
       </main>
     </div>
   );
