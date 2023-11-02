@@ -1,8 +1,8 @@
-.HeaderMain {
+.Container {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0.8rem 2rem;
+  padding: 0.75rem 2rem;
 }
 
 .Logo {

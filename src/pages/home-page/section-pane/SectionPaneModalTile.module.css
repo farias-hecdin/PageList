@@ -10,20 +10,20 @@
   border-radius: 0.4rem;
   background-color: var(--co-mountain-fig);
   color: var(--co-carbon-footprint);
-  &:global(.--active) {
+}
+  .Tile:global(.--active) {
     color: var(--co-greenish);
   }
-  &:hover {
-    background-color: var(--co-zucchini);
+  .Tile:hover {
     border-color: var(--co-greenish);
+    background-color: var(--co-zucchini);
     color: var(--co-greenish);
   }
-  &_text {
-    white-space: nowrap;
+  .Tile_text {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  & > iconify-icon {
+  .Tile > iconify-icon {
     font-size: 2rem;
   }
-}

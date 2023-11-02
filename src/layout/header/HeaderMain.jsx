@@ -34,7 +34,7 @@ export const HeaderMain = ({ pChangePage, pPageName }) => {
   };
 
   return (
-    <header className={css.HeaderMain}>
+    <header className={css.Container}>
       <div className={css.Logo}>
         <img className={css.Logo_image} src={website_logo} alt="pagelist" />
         <span className={css.Logo_title}>Pagelist</span>
@@ -57,7 +57,7 @@ export const HeaderMain = ({ pChangePage, pPageName }) => {
         <div className={css.Navbar_box}>
           <ButtonBase pText="Save" pIcon="save-outline" />
           <ButtonBase pText="Load" pIcon="update" pHandleClick={funcCheckLatestSection} />
-          <ButtonBase pText="Config app" pIcon="settings-outline" />
+          <ButtonBase pText="Config" pIcon="settings-outline" />
         </div>
       </nav>
     </header>

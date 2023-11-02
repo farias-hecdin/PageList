@@ -7,6 +7,8 @@
   background-color: var(--co-black-pearl);
 }
 
+/* States ------------------------------------------------------------------ */
+
 .Container:global(.--full) {
   width: 100%;
 }
@@ -15,4 +17,8 @@
 
 .Container:global(.HomePage_JhI8l) {
   align-items: center;
+}
+
+.Container:global(.HomePageModalAddBookmarks_AW5eY) {
+  width: 25rem;
 }

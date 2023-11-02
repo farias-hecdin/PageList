@@ -13,7 +13,7 @@ export const ModalBase = ({ children, pIsOpen, pId }) => {
     <>
       {pIsOpen === isCloseModal && pId && (
         <aside className={css.Modal}>
-          <div className={css.Modal_container}>
+          <div className={css.Modal_box}>
             {children}
             <footer className={css.Modal_footer}>
               <ButtonBase pText="Cancel" pStyled="--outline" pHandleClick={() => setIsCloseModal(!isCloseModal)} />

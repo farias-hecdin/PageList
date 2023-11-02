@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding: 0 0.9rem;
   height: 2.25rem;
+  padding: 0 0.6rem;
   border: 1px solid transparent;
   border-radius: 0.5rem;
   background-color: var(--co-mountain-fig);
@@ -20,15 +20,14 @@
     color: var(--fi-carbon-footprint);
     font-size: 1.3rem;
     pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     user-select: none;
   }
   &:hover {
     border-color: var(--co-greenish);
     background-color: var(--co-zucchini);
     color: var(--co-greenish);
-  }
-  &:hover &_icon > i {
-    filter: var(--fi-greenish);
   }
 }
 
@@ -38,7 +37,7 @@
   &:global(.--active) {
     background-color: var(--co-zucchini);
     color: var(--co-greenish);
-    \&_icon > i {
+    &_icon > iconify-icon {
       color: var(--fi-greenish);
     }
   }
@@ -46,32 +45,32 @@
 
 .Button {
   &:global(.--outline) {
-    color: var(--co-carbon-footprint);
     border: 2px solid var(--co-mountain-fig);
     background-color: transparent;
-    \&_icon > i {
+    color: var(--co-carbon-footprint);
+    &_icon > iconify-icon {
       color: var(--co-carbon-footprint);
     }
   }
 }
 
-.Button {
-  &:global(.--full) {
-    width: 100%;
-  }
+.Button:global(.--full) {
+  width: 100%;
 }
 
 /* Compose ----------------------------------------------------------------- */
 
 .Button {
   &:global(.HeaderMain_UlICn) {
-    width: 9rem;
-    \&_text {
+    width: 8rem;
+    &_text {
       font-weight: var(--fo-bold);
     }
   }
 }
 
-.Button:global(.ToolbarWrapButton) {
-  width: 100%;
+.Button {
+  &:global(.HomePageModalAddBookmarks_JqagP) {
+    width: 9rem;
+  }
 }

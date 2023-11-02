@@ -1,17 +1,17 @@
-.HeaderSection {
+.Header {
   display: flex;
   align-items: center;
-  height: 8rem;
-  border-bottom: 0.0625rem solid #2f3847;
+  height: 6rem;
+  border-bottom: 0.0625rem solid #2f3847; /* FIX: */
   color: var(--co-cold-morning);
-  &_heading {
+  &_box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
   }
   &_title {
-    font-weight: var(--fo-bold);
     margin-bottom: 0.25rem;
+    font-weight: var(--fo-bold);
   }
 }

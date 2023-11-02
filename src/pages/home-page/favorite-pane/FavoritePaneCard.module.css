@@ -7,29 +7,30 @@
   border-radius: 0.4rem;
   background-color: var(--co-diamond-black);
   color: var(--co-cold-morning);
-  &:hover {
+}
+  .Card:hover {
     border-color: var(--co-carbon-footprint);
   }
-  &_content {
+  .Card_content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
   }
-  &_title {
+  .Card_title {
     margin: 0 0 0.25rem;
     color: var(--co-cold-morning);
     font-weight: var(--fo-medium);
     font-size: 1.2rem;
-    &:hover {
+  }
+  .Card_title:hover {
       text-decoration: underline;
     }
-  }
-  &_text {
+  .Card_text {
     color: var(--co-carbon-footprint);
     font-size: 0.9rem;
   }
-  &_thumb {
+  .Card_thumb {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,4 +38,3 @@
     height: 2.8rem;
     font-size: 1.2rem;
   }
-}
