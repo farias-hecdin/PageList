@@ -1,21 +1,20 @@
 [
   {
-    "originId": "SWp26L6EBfqApaQOSkezr",
-    "id": "eBDd0DDrKh0ncE_vuYqRP",
+    "originId": "C1",
+    "id": "C1-T1",
     "name": "Programming",
     "lists": []
   },
   {
-    "originId": "SWp26L6EBfqApaQOSkezr",
-    "id": "CE4mvhmBrHidZA7lKZpzW",
+    "originId": "C1",
+    "id": "C1-T2",
     "name": "Languages",
     "lists": []
   },
   {
-    "originId": "DQjQKyllFOSTX-6q7BHGs",
-    "id": "IgN4x0F4IFHxTu8v1HTJ2",
+    "originId": "C2",
+    "id": "C2-T1",
     "name": "News",
     "lists": []
   }
 ]
-

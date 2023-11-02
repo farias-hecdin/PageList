@@ -1,24 +1,9 @@
-.Modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100dvh;
-  padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
 .Container {
   &_title {
+    margin-bottom: 0.25rem;
     color: var(--co-cold-morning);
     font-weight: var(--fo-bold);
     font-size: 1.4rem;
-    margin-bottom: 0.25rem;
   }
   &_text {
     color: var(--co-cold-morning);

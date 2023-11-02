@@ -9,10 +9,16 @@ export const SavePage = () => {
   const { drawerCollections, drawerTopics, drawerLists, drawerLinks } = useContext(DataContext);
   const { savedBookmarks, selectedCollection, bookmarksList } = useContext(BookmarksContext);
 
+  /** Limpiar textarea */
+  const cleanTextarea = () => {
+    let $nodeTextarea = document.getElementById("textarea_xucOeryf8lU");
+    $nodeTextarea.value = "";
+  }
+
   // Exportar datos -----------------------------------------------------------
 
   /** Exportar datos al exterior
-   * @param {boolean} _isDownloader
+   * @param {boolean} _isDownloader ¿El contenido es descargable?
    */
   const clickButtonExport = (_isDownloader = false) => {
     try {
@@ -20,18 +26,21 @@ export const SavePage = () => {
       let mapDataFromBookmarks = mapNewDataArray();
       let currentDate = getCurrentDate();
       let fileName = `Pagelist_${currentDate}`;
-      let dataInString = JSON.stringify(mapDataFromBookmarks);
+      let dataInString = JSON.stringify(mapDataFromBookmarks, null, 4);
 
       $nodeTextarea.value = dataInString;
       if (_isDownloader === true) {
         makeHtmlNodeAndFile(fileName, dataInString);
       }
     } catch (error) {
-      console.warn("Error in SavePage > clickButtonExport: " + error.message);
+      console.warn("Error in SavePage > clickButtonExport: " + error.stack);
+      console.warn(error.stack);
     }
   };
 
-  /** Retornar la fecha actual en formato: Year_Month_Day */
+  /** Retornar la fecha actual en formato: Year_Month_Day
+   * @return {string}
+   */
   const getCurrentDate = () => {
     let d = new Date();
     let date = { year: d.getFullYear(), month: d.getMonth(), day: d.getDay() };
@@ -45,7 +54,7 @@ export const SavePage = () => {
   };
 
   /** Crear un elemento anchor `<a>` HTML y un fichero *.json
-   * @param {string} _fileName
+   * @param {string} _fileName ¿Cual es el nombre del archivo?
    * @param {string} _contentOfFile
    */
   const makeHtmlNodeAndFile = (_fileName, _contentOfFile) => {
@@ -60,55 +69,48 @@ export const SavePage = () => {
     URL.revokeObjectURL(link.href);
   };
 
-  /** Mapear un nuevo array a partir de lo datos existentes en `collections`,
+  /** HERE: Mapear un nuevo array a partir de lo datos existentes en `collections`,
   `topics`, `lists` y `links`.
   * @return {Array.<Object.<string, ?>>}
   */
   const mapNewDataArray = () => {
-    let collections = drawerCollections.state;
-    let topics = drawerTopics.state;
-    let lists = drawerLists.state;
-    let links = drawerLinks.state;
+    const collections = [...drawerCollections.state];
+    const topics = [...drawerTopics.state];
+    const lists = [...drawerLists.state];
+    const links = [...drawerLinks.state];
 
-    for (const itemCollection of collections) {
-      for (const itemTopic of topics) {
-        if (itemTopic.originId === itemCollection.id) {
-          itemCollection.topics.push(itemTopic);
-          for (const itemList of lists) {
-            if (itemList.originId === itemTopic.id) {
-              itemTopic.lists.push(itemList);
-              for (const itemLink of links) {
-                if (itemLink.originId === itemList.id) {
-                  itemList.links.push(itemLink);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    // Reiniciar el estado dado por push()
-    topics.length = 0;
-    lists.length = 0;
-    links.length = 0;
+    // Asigna las listas y los enlaces a los temas
+    topics.map(topic => {
+      topic.lists = lists.filter(list => list.originId === topic.id);
+      topic.lists.map(list => {
+        list.links = links.filter(link => link.originId === list.id);
+      });
+    });
+    // Asigna los temas a las colecciones
+    collections.map(collection => {
+      collection.topics = topics.filter(topic => topic.originId === collection.id);
+    });
 
     return collections;
   };
 
   // Importar datos  ----------------------------------------------------------
+  const isValidJSON = (_data) => {
+    let regex = /^[\{|\[\s+\}]/;
+    if (!regex.test(_data)) {
+      throw alert("El valor ingresado no es un objeto JSON válido");
+    } else {
+      return JSON.parse(_data);
+    }
+  }
 
   /** Importar datos del input y validar sus propiedades */
   const importDataAndValidate = () => {
     let $nodeTextarea = document.getElementById("textarea_xucOeryf8lU");
     let dataToImport = $nodeTextarea.value;
-    let regex = /^[\{|\[\s+\}]/;
 
-    if (dataToImport === "") {
-      return alert("Datas not found");
-    }
-    if (!regex.test(dataToImport)) throw alert("El valor ingresado no es un objeto JSON válido");
-
-    dataToImport = JSON.parse(dataToImport);
+    if (!dataToImport) return alert("Datas not found");
+    dataToImport = isValidJSON(dataToImport)
 
     // Validar datos importados
     let dataArray;
@@ -172,20 +174,21 @@ export const SavePage = () => {
   };
 
   return (
-    <section className={css.SavePage}>
+    <section className={css.Container}>
       <HeaderSection pTitle="Manage" pText="Export and import your bookmark sections" />
-      <div className={css.SavePage_frame}>
-        <nav className={css.Textarea}>
-          <div className={css.Textarea_toolbar}>
+      <div className={css.Container_box}>
+        <nav className={css.Toolbar}>
+          <div className={css.Toolbar_box}>
             <ButtonBase pText="Export" pIcon="download" pHandleClick={clickButtonExport} />
             <ButtonBase pText="Download as JSON" pIcon="download" pHandleClick={() => clickButtonExport(true)} />
             <ButtonBase pText="Import" pIcon="upload" pHandleClick={clickButtonImport} />
           </div>
           <ButtonBase pText="Delete saved" pIcon="delete" pHandleClick={deleteDataInLocalStorage} />
+          <ButtonBase pText="Clean" pIcon="download HERE:" pHandleClick={cleanTextarea} />
         </nav>
         <textarea
-          className={css.Textarea_input}
-          id="textarea_xucOeryf8lUy8FNIqA1eL"
+          className={css.Container_textarea}
+          id="textarea_xucOeryf8lU"
           placeholder="Write a valid bookmark collection..."
         ></textarea>
       </div>

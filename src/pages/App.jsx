@@ -8,9 +8,9 @@ export const App = () => {
   // Mostrar la pagina activa
   const [activePage, setActivePage] = useState("home");
   return (
-    <div className={css.App}>
+    <div className={css.Container}>
       <HeaderMain pPageName={activePage} pChangePage={setActivePage} />
-      <main className={css.App_frame}>
+      <main className={css.Container_box}>
         {activePage === "home" && <HomePage />}
         {activePage === "manage" && <SavePage />}
       </main>

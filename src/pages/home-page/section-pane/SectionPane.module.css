@@ -8,46 +8,55 @@
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
-  & > div {
+}
+
+.Header > div {
     width: 100%;
   }
-  &_title {
+
+.Header_title {
     margin-bottom: 0.25rem;
     font-weight: var(--fo-medium);
     font-size: 1.5rem;
   }
-  &_text {
+
+.Header_text {
     color: var(--co-carbon-footprint);
     font-size: 0.9rem;
   }
-}
 
 .List {
   margin-top: 2rem;
-  &_items {
+}
+
+.List_items {
     gap: 0.5rem;
     list-style: none;
   }
-}
 
 .Tree {
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   background-color: var(--co-diamond-black);
-  &_header {
+}
+
+.Tree_header {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-  &_header:global(.--expand) + &_list {
+
+.Tree_header:global(.--expand) + .Tree_list {
     display: none;
   }
-  &_title {
+
+.Tree_title {
     width: 100%;
     font-size: 1.1rem;
   }
-  &_number {
+
+.Tree_number {
     width: 3rem;
     padding: 0.25rem 0;
     border-radius: 0.4rem;
@@ -55,32 +64,36 @@
     color: var(--co-carbon-footprint);
     text-align: center;
   }
-  &_list {
+
+.Tree_list {
     display: block;
     list-style: none;
   }
-  &_item {
-    &:first-child {
+
+.Tree_item:first-child {
       margin-top: 0.8rem;
     }
-    & > div {
+
+.Tree_item > div {
       display: flex;
       align-items: center;
       gap: 1rem;
       padding: 0.5rem 1rem;
       border-radius: 0.4rem;
     }
-    & > div:hover {
+
+.Tree_item > div:hover {
       background: var(--co-mountain-fig);
     }
-  }
-  &_itemText {
+
+.Tree_itemText {
     width: 100%;
   }
-  &_itemIcon {
+
+.Tree_itemIcon {
     line-height: 0;
-    & > iconify-icon {
+  }
+
+.Tree_itemIcon > iconify-icon {
       font-size: 1.1rem;
     }
-  }
-}

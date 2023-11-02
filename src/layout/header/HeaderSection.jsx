@@ -8,10 +8,10 @@ import css from "./HeaderSection.module.css";
  */
 export const HeaderSection = ({ pTitle, pText, children }) => {
   return (
-    <header className={css.HeaderSection}>
-      <div className={css.HeaderSection_heading}>
-        <h2 className={css.HeaderSection_title}>{pTitle}</h2>
-        <p className={css.HeaderSection_text}>{pText}</p>
+    <header className={css.Header}>
+      <div className={css.Header_box}>
+        <h2 className={css.Header_title}>{pTitle}</h2>
+        <p className={css.Header_text}>{pText}</p>
       </div>
       {children}
     </header>

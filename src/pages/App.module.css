@@ -1,27 +1,8 @@
-:root {
-  /* Colors */
-
-  --co-black-pearl: #1e242e;
-  --co-carbon-footprint: #7d818a;
-  --co-cold-morning: #e5e5e5;
-  --co-diamond-black: #28303d;
-  --co-greenish: #3da95f;
-  --co-mountain-fig: #3a3a47;
-  --co-neverything: #111a1c;
-  --co-zucchini: #154533;
-
-  /* Filter */
-
-  --fi-carbon-footprint: invert(53%) sepia(6%) saturate(489%) hue-rotate(184deg) brightness(95%) contrast(93%);
-  --fi-cold-morning: invert(98%) sepia(2%) saturate(486%) hue-rotate(56deg) brightness(117%) contrast(80%);
-  --fi-greenish: invert(48%) sepia(99%) saturate(291%) hue-rotate(87deg) brightness(96%) contrast(86%);
-}
-
-.App {
+.Container {
   display: flex;
   flex-direction: column;
   background-color: var(--co-diamond-black);
-  &_frame {
+  &_box {
     display: flex;
     min-height: 100vh;
     margin: 0 2rem 1rem;

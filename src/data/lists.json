@@ -1,26 +1,14 @@
 [
   {
-    "originId": "eBDd0DDrKh0ncE_vuYqRP",
-    "id": "DGFKWXo39UlH8ASzSQcCN",
+    "originId": "C1-T1",
+    "id": "C1-T1-L1",
     "name": "JavaScript",
     "links": []
   },
   {
-    "originId": "CE4mvhmBrHidZA7lKZpzW",
-    "id": "GHTdxN6C2z3PZizoDHxgL",
+    "originId": "C1-T2",
+    "id": "C1-T2-L1",
     "name": "English",
-    "links": []
-  },
-  {
-    "originId": "CE4mvhmBrHidZA7lKZpzW",
-    "id": "poIwn7heCotKyUi00lxa7",
-    "name": "German",
-    "links": []
-  },
-  {
-    "originId": "IgN4x0F4IFHxTu8v1HTJ2",
-    "id": "dKJaY1AGSqDgYlBwKWsne",
-    "name": "Tech",
     "links": []
   }
 ]

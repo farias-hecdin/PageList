@@ -4,33 +4,35 @@
   width: 100%;
   padding: 0rem 3rem;
   border-radius: 0.8rem;
-  background-color: #232a36;
-  &_frame {
+  background-color: #232a36; /* FIX: */
+  &_box {
+    height: 71vh;
+    margin: 2rem 0;
+  }
+  &_boxInner {
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr 1.5fr;
-    height: 100%;
-    margin: 2rem 0;
   }
 }
 
 .Navbar {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
   align-items: center;
+  gap: 1rem;
   width: 100%;
   margin-left: 2rem;
-  &_frame {
+  &_box {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
   &_text {
     width: 9rem;
-    padding: 0 1rem;
-    white-space: nowrap;
     overflow: hidden;
+    padding: 0 1rem;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
