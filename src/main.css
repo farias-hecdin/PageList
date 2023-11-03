@@ -97,10 +97,10 @@ select {
 }
 
 select::-ms-expand {
-    display: none;
-  }
+  display: none;
+}
 
-select{
+select {
   outline: none;
 }
 

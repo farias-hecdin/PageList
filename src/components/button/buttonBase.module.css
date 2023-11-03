@@ -1,0 +1,90 @@
+.Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  padding: 0 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  background-color: var(--co-mountain-fig);
+  color: var(--co-carbon-footprint);
+  &_text {
+    font-size: 1rem;
+  }
+  &_icon {
+    margin: 0;
+    line-height: 0;
+  }
+  &_icon > iconify-icon {
+    color: var(--fi-carbon-footprint);
+    font-size: 1.3rem;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  &:hover {
+    border-color: var(--co-greenish);
+    background-color: var(--co-zucchini);
+    color: var(--co-greenish);
+  }
+}
+
+/* State ------------------------------------------------------------------- */
+
+.Button {
+  &:global(.--active) {
+    background-color: var(--co-zucchini);
+    color: var(--co-greenish);
+    &_icon > iconify-icon {
+      color: var(--fi-greenish);
+    }
+  }
+}
+
+.Button {
+  &:global(.--outline) {
+    border: 2px solid var(--co-mountain-fig);
+    background-color: transparent;
+    color: var(--co-carbon-footprint);
+    &:hover {
+      border-color: var(--co-greenish);
+      color: var(--co-greenish);
+    }
+  }
+}
+
+.Button {
+  &:global(.--ghost) {
+    border: 0;
+    background-color: transparent;
+    color: var(--co-carbon-footprint);
+    &:hover {
+      color: var(--co-greenish);
+    }
+  }
+}
+
+/* Compose ----------------------------------------------------------------- */
+
+.Button {
+  &:global(.HeaderMain_UlICn) {
+    width: 8rem;
+    &_text {
+      font-weight: var(--fo-bold);
+    }
+  }
+}
+
+.Button {
+  &:global(.HomePageModalAddBookmarks_JqagP) {
+    width: 9rem;
+  }
+}
+
+.Button {
+  &:global(.SectionPane_WQkiS) {
+    padding: 0 0.25rem;
+  }
+}

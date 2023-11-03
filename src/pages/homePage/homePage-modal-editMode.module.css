@@ -1,0 +1,48 @@
+.Container {
+  &_title {
+    margin-bottom: 0.25rem;
+    color: var(--co-cold-morning);
+    font-weight: var(--fo-bold);
+    font-size: 1.4rem;
+  }
+  &_text {
+    color: var(--co-cold-morning);
+  }
+  &_box {
+    margin: 2rem 0;
+  }
+}
+
+.isHidden {
+  display: none;
+}
+
+.Button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 2.25rem;
+  padding: 1rem 0.6rem;
+  border: 1px solid transparent;
+  background-color: var(--co-mountain-fig);
+  color: var(--co-carbon-footprint);
+  &:first-child {
+    border-radius: 0.5rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  &:last-child {
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  & > iconify-icon {
+    color: var(--fi-carbon-footprint);
+    font-size: 1.3rem;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+}

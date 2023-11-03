@@ -2,7 +2,7 @@ import { useState, createContext } from "react";
 import COLLECTIONS from "../../data/collections.json";
 import TOPICS from "../../data/topics.json";
 
-let bookmarksList =[{}]
+let bookmarksList = [{}];
 
 // Crear un Context y un Provider
 export const BookmarksContext = createContext(null);
