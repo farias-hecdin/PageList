@@ -1,0 +1,40 @@
+.Card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.6rem 1.3rem;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  background-color: var(--co-diamond-black);
+  color: var(--co-cold-morning);
+}
+.Card:hover {
+  border-color: var(--co-carbon-footprint);
+}
+.Card_content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.Card_title {
+  margin: 0 0 0.25rem;
+  color: var(--co-cold-morning);
+  font-weight: var(--fo-medium);
+  font-size: 1.2rem;
+}
+.Card_title:hover {
+  text-decoration: underline;
+}
+.Card_text {
+  color: var(--co-carbon-footprint);
+  font-size: 0.9rem;
+}
+.Card_thumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 2.8rem;
+  font-size: 1.2rem;
+}
