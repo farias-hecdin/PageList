@@ -2,11 +2,12 @@ import css from "./buttonBase.module.css";
 import { onClickMissing } from "../../utils/common.js";
 
 /**
- * @param {Object} prop
+ * @param {object} prop
  * @param {string} prop.pIcon
  * @param {string} prop.pText
  * @param {string} prop.pStyled
- * @param {function} prop.pHandleClick
+ * @param {Function} prop.pHandleClick
+ * @returns {HTMLElement}
  */
 export const ButtonBase = ({ pIcon, pText, pHandleClick, pStyled }) => {
   return (

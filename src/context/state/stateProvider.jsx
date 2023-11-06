@@ -9,7 +9,8 @@ export const StateProvider = ({ children }) => {
 
   // Exportar datos
   const value = {
-    showCollectionModal: { state: showCollectionModal, set: setShowCollectionModal },
+    showCollectionModal,
+    setShowCollectionModal,
   };
   return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };

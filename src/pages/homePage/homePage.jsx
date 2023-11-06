@@ -9,15 +9,14 @@ import { SectionPaneModal } from "./sectionPane/sectionPane-modal.jsx";
 import { useContext, useState } from "react";
 
 export const HomePage = () => {
-  const { selectedCollectionX } = useContext(DataContext);
+  const { selectedCollection } = useContext(DataContext);
 
-  // Mostrar ventana de la lista de colecciones -------------------------------
+  // Mostrar ventanas modales -------------------------------
 
   const [isOpenModalToSelectAnCollection, setIsOpenModalToSelectAnCollection] = useState(false);
-  const [isOpenModalToAddBookmarks, setIsOpenModalToAddBookmarks] = useState(false);
-
-  /** Mostrar ventana modal */
   const toggleModalToSelectAnCollection = () => setIsOpenModalToSelectAnCollection(!isOpenModalToSelectAnCollection);
+
+  const [isOpenModalToAddBookmarks, setIsOpenModalToAddBookmarks] = useState(false);
   const toggleModalToAddBookmarks = () => setIsOpenModalToAddBookmarks(!isOpenModalToAddBookmarks);
 
   return (
@@ -33,12 +32,12 @@ export const HomePage = () => {
             </div>
             <WrapBase pStyled="HomePage_JhI8l">
               <ButtonBase pIcon="note-stack-outline" pHandleClick={toggleModalToSelectAnCollection} />
-              <p className={css.Navbar_text}>{selectedCollectionX.state.id}</p>
+              <p className={css.Navbar_text}>{selectedCollection.name}</p>
             </WrapBase>
           </div>
         </HeaderSection>
         <div className={css.Container_box}>
-          {selectedCollectionX.state.id === "None" ? (
+          {selectedCollection.id === "None" ? (
             <EmptyState
               pIcon="info-outline"
               pTitle="Nothing here"

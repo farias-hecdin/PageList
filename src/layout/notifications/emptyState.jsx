@@ -1,10 +1,11 @@
 import css from "./emptyState.module.css";
 
 /**
- * @param {Object} prop
+ * @param {object} prop
  * @param {string} prop.pTitle
  * @param {string} prop.pText
  * @param {string} prop.pIcon
+ * @returns {HTMLElement}
  */
 export const EmptyState = ({ pIcon, pTitle, pText }) => {
   return (

@@ -45,11 +45,12 @@
 
 .Button {
   &:global(.--outline) {
-    border: 2px solid var(--co-mountain-fig);
+    border: 0.0625rem solid var(--co-mountain-fig);
     background-color: transparent;
     color: var(--co-carbon-footprint);
     &:hover {
       border-color: var(--co-greenish);
+      background-color: var(--co-zucchini);
       color: var(--co-greenish);
     }
   }
@@ -57,10 +58,12 @@
 
 .Button {
   &:global(.--ghost) {
-    border: 0;
+    border-color: transparent;
     background-color: transparent;
     color: var(--co-carbon-footprint);
     &:hover {
+      border-color: var(--co-greenish);
+      background-color: var(--co-zucchini);
       color: var(--co-greenish);
     }
   }
@@ -83,8 +86,10 @@
   }
 }
 
-.Button {
-  &:global(.SectionPane_WQkiS) {
-    padding: 0 0.25rem;
-  }
+.Button:global(.SectionPane_WQkiS) {
+  padding: 0 0.25rem;
+ position: absolute;
+ top: 1rem;
+ right: 1rem;
+ z-index: 1;
 }

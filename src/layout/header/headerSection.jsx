@@ -5,6 +5,7 @@ import css from "./headerSection.module.css";
  * @param {string} prop.pTitle
  * @param {string} prop.pText
  * @param {HTMLElement} prop.children
+ * @returns {HTMLElement}
  */
 export const HeaderSection = ({ pTitle, pText, children }) => {
   return (

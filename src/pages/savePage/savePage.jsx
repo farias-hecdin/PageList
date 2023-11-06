@@ -1,14 +1,13 @@
 import css from "./savePage.module.css";
 import { ButtonBase } from "../../components/index";
-import { DataContext, BookmarksContext } from "../../context/index";
+import { DataContext } from "../../context/index";
 import { HeaderSection } from "../../layout/index";
 import { useContext } from "react";
 
 export const SavePage = () => {
-  const { drawerCollections, drawerTopics, drawerLists, drawerLinks } = useContext(DataContext);
-  const { savedBookmarks, selectedCollection, bookmarksList } = useContext(BookmarksContext);
+  const { dataCollections, dataTopics, dataLists, dataLinks, selectedCollection } = useContext(DataContext);
 
-  /** Limpiar textarea */
+  /** Limpiar el contenido de un textarea */
   const cleanTextarea = () => {
     let $nodeTextarea = document.getElementById("textarea_xucOeryf8lU");
     $nodeTextarea.value = "";
@@ -16,8 +15,9 @@ export const SavePage = () => {
 
   // Exportar datos -----------------------------------------------------------
 
-  /** Exportar datos al exterior
-   * @param {boolean} _isDownloader ¿El contenido se descargara?
+  /**
+   * Exportar datos al exterior
+   * @param {boolean} _isDownloader ¿Contenido es descargable?
    */
   const clickButtonExport = (_isDownloader = false) => {
     try {
@@ -36,8 +36,9 @@ export const SavePage = () => {
     }
   };
 
-  /** Retornar la fecha actual en formato: Year_Month_Day
-   * @return {string}
+  /**
+   * Retornar la fecha actual en formato: Year_Month_Day
+   * @returns {string}
    */
   const getCurrentDate = () => {
     let d = new Date();
@@ -51,9 +52,10 @@ export const SavePage = () => {
     return `${year}_${month}_${day}`;
   };
 
-  /** Crear un elemento anchor `<a>` HTML y un fichero *.json
-   * @param {string} _fileName ¿Cual es el nombre del archivo?
-   * @param {string} _contentOfFile ¿Cual es el contenido?
+  /**
+   * Crear un elemento anchor `<a>` HTML y un fichero *.json
+   * @param {string} _fileName ¿Nombre del archivo?
+   * @param {string} _contentOfFile ¿Contenido?
    */
   const makeHtmlNodeAndFile = (_fileName, _contentOfFile) => {
     let link = document.createElement("a");
@@ -66,15 +68,16 @@ export const SavePage = () => {
     URL.revokeObjectURL(link.href);
   };
 
-  /** Mapear un nuevo array a partir de lo datos existentes en `collections`,
-   `topics`, `lists` y `links`.
-   * @return {Array.<Object.<string, ?>>}
+  /**
+   * Mapear un nuevo array a partir de lo datos existentes en `collections`,
+   * `topics`, `lists` y `links` y retornar el resultado.
+   * @returns {Array}
    */
   const mapNewDataArray = () => {
-    const collections = [...drawerCollections.state];
-    const topics = [...drawerTopics.state];
-    const lists = [...drawerLists.state];
-    const links = [...drawerLinks.state];
+    const collections = [...dataCollections];
+    const topics = [...dataTopics];
+    const lists = [...dataLists];
+    const links = [...dataLinks];
 
     // Asigna las listas y los enlaces a los temas
     topics.map((topic) => {
@@ -93,8 +96,11 @@ export const SavePage = () => {
 
   // Importar datos  ----------------------------------------------------------
 
-  /** Comprovar si los datos cumple con el patron asignado
-   * @param {string} _data
+  /**
+   * Comprovar si los datos cumple con el patron asignado y retornarlo en un
+   * array de objectos
+   * @param {string} _data ¿JSON stringify a validar?
+   * @returns {Array}
    */
   const isValidJSON = (_data) => {
     const regex = /^[\{|\[\s+\}]/;
@@ -105,7 +111,10 @@ export const SavePage = () => {
     return JSON.parse(_data);
   };
 
-  /** Importar datos del input y validar sus propiedades */
+  /**
+   * Importar datos del input y validar sus propiedades
+   * @returns {Array}
+   */
   const importDataAndValidate = () => {
     let $nodeTextarea = document.getElementById("textarea_xucOeryf8lU");
     let dataToImport = $nodeTextarea.value;
@@ -149,7 +158,8 @@ export const SavePage = () => {
     return dataToImport;
   };
 
-  /** Guardar datos en localStorage
+  /**
+   * Guardar datos en localStorage
    * @param {string} _dataToLocalStorage
    */
   const saveDataInLocalStorage = (_dataToLocalStorage) => {
@@ -167,8 +177,8 @@ export const SavePage = () => {
 
       saveDataInLocalStorage(newBookmarksList);
 
-      savedBookmarks.set(newBookmarksList);
-      selectedCollection.set(resetSelectedCollection);
+      setSavedBookmarks(newBookmarksList);
+      setSelectedCollection(resetSelectedCollection);
     } catch (error) {
       console.warn("SavePage > clickButtonImport", error.stack);
     }
@@ -179,7 +189,7 @@ export const SavePage = () => {
     const question = confirm("Do you want to delete the saved section?");
     if (question === true) {
       localStorage.setItem("pagelist__latestSection", "");
-      savedBookmarks.set(bookmarksList);
+      setSavedBookmarks(bookmarksList);
     }
   };
 

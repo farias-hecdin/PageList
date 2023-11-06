@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0rem 1rem;
+    padding: 3px 1rem;
   }
   &_header:global(.--expand) + &_list {
     display: none;
@@ -52,19 +52,17 @@
     list-style: none;
   }
   &_item {
-    & > div {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0rem 1rem;
-      border-radius: 0.4rem;
-    }
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 3px 1rem;
+    border-radius: 0.4rem;
     &:first-child {
-      margin-top: 0.5rem;
+      margin-top: 0.3rem;
     }
-  }
-  &_item > div:hover {
-    background: var(--co-mountain-fig);
+    &:hover {
+      background: var(--co-mountain-fig);
+    }
   }
   &_text {
     width: 100%;

@@ -7,7 +7,7 @@ import { deleteThisElement } from "../../../utils/common";
 import { useContext, useState } from "react";
 
 export const FavoritePane = () => {
-  const { drawerLinks, selectedList } = useContext(DataContext);
+  const { dataLinks, selectedList } = useContext(DataContext);
 
   // Activar el modo edicion
   const [editMode, setEditMode] = useState(false);
@@ -15,27 +15,27 @@ export const FavoritePane = () => {
 
   return (
     <section className={css.Container}>
-      {1 === 0 ? (
+      {false ? (
         <EmptyState pIcon="info-outline" pTitle="Nothing here" pText="Choose a list to access your favorite links." />
       ) : (
         <>
           <header className={css.Header}>
             <div>
-              <h2 className={css.Header_title}>{selectedList.state.name}</h2>
-              <p className={css.Header_text}>{selectedList.state.id} bookmarks</p>
+              <h2 className={css.Header_title}>{selectedList.name}</h2>
+              <p className={css.Header_text}>{selectedList.id} bookmarks</p>
             </div>
             <ButtonBase pIcon="edit" pHandleClick={enabledEditMode} />
           </header>
           <ul className={css.List}>
-            {drawerLinks.state.map((itemLinks) => {
-              if (itemLinks.originId === selectedList.state.id)
+            {dataLinks.map((itemLinks) => {
+              if (itemLinks.originId === selectedList.id)
                 return (
                   <li key={crypto.randomUUID()}>
                     <FavoritePaneCard pTitle={itemLinks.title} pUrl={itemLinks.url} />
                     {editMode && (
                       <ButtonBase
                         pIcon="delete-outline"
-                        pHandleClick={() => deleteThisElement(itemLinks.id, drawerLinks)}
+                        pHandleClick={() => deleteThisElement(itemLinks.id, dataLinks)}
                       />
                     )}
                   </li>

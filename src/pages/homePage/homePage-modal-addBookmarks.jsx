@@ -5,26 +5,30 @@ import { useContext } from "react";
 import { sortByName } from "../../utils/common";
 
 /**
- * @param {Object} prop
+ * @param {object} prop
  * @param {boolean} prop.pShowModal
+ * @returns {HTMLElement}
  */
 export const HomePageModalAddBookmarks = ({ pShowModal }) => {
-  const { drawerCollections, drawerTopics, drawerLists, drawerLinks } = useContext(DataContext);
+  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataLinks } =
+    useContext(DataContext);
 
   // Ordenar datos por nombre
-  const sortCollections = sortByName(drawerCollections.state);
-  const sortTopics = sortByName(drawerTopics.state);
-  const sortLists = sortByName(drawerLists.state);
+  const sortCollections = sortByName(dataCollections);
+  const sortTopics = sortByName(dataTopics);
+  const sortLists = sortByName(dataLists);
 
-  /** Extrae el valor de un conjunto `<input>` y `<select>` y retorna un objeto
+  /**
+   * Extrae el valor de un conjunto `<input>` y `<select>` y retorna un objeto
    * @param {string} _inputId
    * @param {string} _selectId
+   * @returns {object}
    */
   const extractInputValues = (_inputId, _selectId) => {
-    let $nodeInput = document?.getElementById(_inputId);
-    let $nodeSelect = document?.getElementById(_selectId);
+    let $nodeInput = document.getElementById(_inputId);
+    let $nodeSelect = document.getElementById(_selectId);
     let selectValue = $nodeSelect?.options[$nodeSelect.selectedIndex].value;
-    let inputValue = $nodeInput?.value === "" ? "_EMPTY_" : $nodeInput?.value;
+    let inputValue = $nodeInput.value === "" ? "_EMPTY_" : $nodeInput.value;
     $nodeInput.value = "";
 
     return {
@@ -42,7 +46,7 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
       name: data.inputValue,
       topics: [],
     };
-    drawerCollections.set((prev) => [template, ...prev]);
+    setDataCollections((prev) => [template, ...prev]);
     alert("New collection added");
   };
 
@@ -54,7 +58,7 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
       name: data.inputValue,
       lists: [],
     };
-    drawerTopics.set((prev) => [template, ...prev]);
+    setDataTopics((prev) => [template, ...prev]);
     alert("New topic added");
   };
 
@@ -66,7 +70,7 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
       name: data.inputValue,
       links: [],
     };
-    drawerLists.set((prev) => [template, ...prev]);
+    setDataLists((prev) => [template, ...prev]);
     alert("New list added");
   };
 
@@ -78,7 +82,7 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
       title: data.inputValue,
       url: data.selectValue,
     };
-    drawerLinks.set((prev) => [template, ...prev]);
+    setDataLinks((prev) => [template, ...prev]);
     alert("New link added");
   };
 
@@ -103,7 +107,7 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
           <ButtonBase
             pStyled="HomePageModalAddBookmarks_JqagP"
             pText="Add collection"
-            pHandleClick={(e) => addNewCollection(e)}
+            pHandleClick={() => addNewCollection()}
           />
         </div>
         <div className={css.Form}>

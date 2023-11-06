@@ -1,33 +1,35 @@
 import css from "./headerMain.module.css";
 import website_logo from "../../assets/brand/fake-logo.svg";
-import { BookmarksContext } from "../../context/index";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
 import { useContext } from "react";
 import { useState } from "react";
+import { DataContext } from "../../context/data/dataProvider";
 
 /**
- * @param {Object} prop
- * @param {function} prop.pChangePage
+ * @param {object} prop
+ * @param {Function} prop.pChangePage
  * @param {string} prop.pPageName
+ * @returns {HTMLElement}
  */
 export const HeaderMain = ({ pChangePage, pPageName }) => {
-  /** Mostar la pagina selecionada
-   * @param {string} _selectedPage
+  /**
+   * Mostar la pagina selecionada
+   * @param {string} _selectedPage ¿Nombre de la pagina?
    */
   const showActivePage = (_selectedPage) => {
     pChangePage(_selectedPage);
   };
 
   // Revisar la ultima seccion ------------------------------------------------
-  const { savedBookmarks } = useContext(BookmarksContext);
-  const [indicatorLoadSection, setIndicatorLoadSection] = useState(false);
+  const { setSavedCollection } = useContext(DataContext);
+  const [setIndicatorLoadSection] = useState(false);
 
   const funcCheckLatestSection = () => {
     let latestSectionData = localStorage.getItem("pagelist__latestSection");
     // Validar el tipo de dato
     if (typeof latestSectionData === "string") {
       latestSectionData = JSON.parse(latestSectionData);
-      savedBookmarks.set(latestSectionData);
+      setSavedCollection(latestSectionData);
     }
     // Imprimir un mensaje
     setIndicatorLoadSection(true);

@@ -11,4 +11,17 @@
     border-radius: 0.8rem;
     background-color: var(--co-neverything);
   }
+  &_footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem 0.5rem;
+    width: 100%;
+  }
+  &_icon {
+    & > iconify-icon {
+      font-size: 3rem;
+      color: var(--co-carbon-footprint);
+    }
+  }
 }

@@ -1,26 +1,31 @@
-/** Eliminar un elemento de un Array de objetos y los anexa a un estado `set`
+/**
+ * Eliminar un elemento de un Array de objetos y anexarlos al estado `set`
  * @param {string} _deleteElement ¿Id del elemento a eliminar?
- * @param {Array.<Object.<string, ?>>} _fromArray ¿Origen del elemento a eliminar?
+ * @param {Array} _fromArray ¿Origen del elemento a eliminar?
+ * @param {Function} _updateArray
  */
-export const deleteThisElement = (_deleteElement, _fromArray) => {
-  let data = _fromArray.state;
-  let newARRAY = data.filter((item) => item.id !== _deleteElement);
-  _fromArray.set(newARRAY);
+export const deleteThisElement = (_deleteElement, _fromArray, _updateArray) => {
+  let data = _fromArray;
+  let dataBefore = data.filter((item) => item.id !== _deleteElement);
+  _updateArray(dataBefore);
 };
 
-/** Ordenar los elementos de un Array de objetos por orden alfabetico y retorna el resultado
- * @param {Array.<Object.<string, ?>>} _array ¿Array de objetos a ordenar?
+/**
+ * Ordenar los elementos de un Array de objetos por orden alfabetico y retorna
+ * el resultado
+ * @param {Array} _fromArray ¿Elementos a ordenar?
+ * @returns {Array}
  */
-export const sortByName = (_array) => {
-  const anArray = _array;
-  anArray.sort((a, b) => {
-    // ignore upper and lowercase
+export const sortByName = (_fromArray) => {
+  const data = _fromArray;
+  data.sort((a, b) => {
+    // ignorar upper y lowercase
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
-    // return a number
+    // retornar un numero
     return nameA.localeCompare(nameB);
   });
-  return anArray;
+  return data;
 };
 
 /** Notificar si el evento onClick no esta declarado */

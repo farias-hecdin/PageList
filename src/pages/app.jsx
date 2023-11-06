@@ -14,6 +14,16 @@ export const App = () => {
         {activePage === "home" && <HomePage />}
         {activePage === "manage" && <SavePage />}
       </main>
+      <footer className={css.Container_footer}>
+        <a
+          className={css.Container_icon}
+          href="https://github.com/farias-hecdin/Pagelist"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <iconify-icon icon="mdi:github"></iconify-icon>
+        </a>
+      </footer>
     </div>
   );
 };

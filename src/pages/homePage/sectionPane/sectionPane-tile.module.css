@@ -1,29 +1,32 @@
 .Tile {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 13rem;
-  overflow: hidden;
-  padding: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.4rem;
-  background-color: var(--co-mountain-fig);
-  color: var(--co-carbon-footprint);
-}
-.Tile:global(.--active) {
-  color: var(--co-greenish);
-}
-.Tile:hover {
-  border-color: var(--co-greenish);
-  background-color: var(--co-zucchini);
-  color: var(--co-greenish);
-}
-.Tile_text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.Tile > iconify-icon {
-  font-size: 2rem;
+  position: relative;
+  &_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 13rem;
+    overflow: hidden;
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.4rem;
+    background-color: var(--co-mountain-fig);
+    color: var(--co-carbon-footprint);
+    &:global(.--active) {
+      color: var(--co-greenish);
+    }
+    & > iconify-icon {
+      font-size: 2rem;
+    }
+    &:hover {
+      border-color: var(--co-greenish);
+      background-color: var(--co-zucchini);
+      color: var(--co-greenish);
+    }
+  }
+  &_text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

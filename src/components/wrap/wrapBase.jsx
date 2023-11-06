@@ -1,7 +1,7 @@
 import css from "./wrapBase.module.css";
 
 /**
- * @param {Object} prop
+ * @param {object} prop
  * @param {HTMLElement} prop.children
  * @param {pStyled} prop.pStyled
  */

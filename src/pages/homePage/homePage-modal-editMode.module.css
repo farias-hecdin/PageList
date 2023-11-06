@@ -11,6 +11,10 @@
   &_box {
     margin: 2rem 0;
   }
+  &_subtext {
+    font-weight: var(--fo-bold);
+    margin-left: 0.5rem;
+  }
 }
 
 .isHidden {
@@ -24,7 +28,7 @@
   width: 100%;
   height: 2.25rem;
   padding: 1rem 0.6rem;
-  border: 1px solid transparent;
+  border: 0.0625rem solid transparent;
   background-color: var(--co-mountain-fig);
   color: var(--co-carbon-footprint);
   &:first-child {
@@ -44,5 +48,10 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+  }
+  &:hover {
+    border-color: var(--co-greenish);
+    background-color: var(--co-zucchini);
+    color: var(--co-greenish);
   }
 }
