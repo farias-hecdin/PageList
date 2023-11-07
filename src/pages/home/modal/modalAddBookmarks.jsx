@@ -1,16 +1,16 @@
-import css from "./homePage-modal-addBookmarks.module.css";
-import { ButtonBase, ModalBase, WrapBase } from "../../components/index";
-import { DataContext } from "../../context/index";
+import css from "./modalAddBookmarks.module.css";
+import { ButtonBase, ModalBase, WrapBase } from "../../../components/index";
+import { DataContext } from "../../../context/index";
 import { useContext } from "react";
-import { sortByName } from "../../utils/common";
+import { sortByName } from "../../../utils/common";
 
 /**
  * @param {object} prop
- * @param {boolean} prop.pShowModal
+ * @param {boolean} prop.showModal
  * @returns {HTMLElement}
  */
-export const HomePageModalAddBookmarks = ({ pShowModal }) => {
-  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataLinks } =
+export const ModalAddBookmarks = ({ showModal }) => {
+  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataBookmarks } =
     useContext(DataContext);
 
   // Ordenar datos por nombre
@@ -82,12 +82,12 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
       title: data.inputValue,
       url: data.selectValue,
     };
-    setDataLinks((prev) => [template, ...prev]);
+    setDataBookmarks((prev) => [template, ...prev]);
     alert("New link added");
   };
 
   return (
-    <ModalBase pIsOpen={pShowModal} pId="modal_AZiStXOUbn">
+    <ModalBase isOpen={showModal} id="modal_AZiStXOUbn">
       <header className={css.Container_header}>
         <p className={css.Container_title}>Add</p>
         <p className={css.Container_text}>Wide your list of bookmarks</p>
@@ -95,7 +95,7 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
       <div className={css.Container_box}>
         <div className={css.Form}>
           <p className={css.Form_title}>New collection:</p>
-          <WrapBase pStyled="HomePageModalAddBookmarks_AW5eY">
+          <WrapBase styled="ModalAddBookmarks_AW5eY">
             <input
               className={css.Form_input}
               type="text"
@@ -104,15 +104,11 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
               maxLength={23}
             />
           </WrapBase>
-          <ButtonBase
-            pStyled="HomePageModalAddBookmarks_JqagP"
-            pText="Add collection"
-            pHandleClick={() => addNewCollection()}
-          />
+          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" handleClick={() => addNewCollection()} />
         </div>
         <div className={css.Form}>
           <p className={css.Form_title}>New topic:</p>
-          <WrapBase pStyled="HomePageModalAddBookmarks_AW5eY">
+          <WrapBase styled="ModalAddBookmarks_AW5eY">
             <input
               className={css.Form_input}
               type="text"
@@ -131,15 +127,11 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
               </select>
             </div>
           </WrapBase>
-          <ButtonBase
-            pStyled="HomePageModalAddBookmarks_JqagP"
-            pText="Add topic"
-            pHandleClick={(e) => addNewTopic(e)}
-          />
+          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add topic" handleClick={(e) => addNewTopic(e)} />
         </div>
         <div className={css.Form}>
           <p className={css.Form_title}>New list:</p>
-          <WrapBase pStyled="HomePageModalAddBookmarks_AW5eY">
+          <WrapBase styled="ModalAddBookmarks_AW5eY">
             <input
               className={css.Form_input}
               type="text"
@@ -158,11 +150,11 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
               </select>
             </div>
           </WrapBase>
-          <ButtonBase pStyled="HomePageModalAddBookmarks_JqagP" pText="Add list" pHandleClick={(e) => addNewList(e)} />
+          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewList(e)} />
         </div>
         <div className={css.Form}>
           <p className={css.Form_title}>New links:</p>
-          <WrapBase pStyled="HomePageModalAddBookmarks_AW5eY">
+          <WrapBase styled="ModalAddBookmarks_AW5eY">
             <input
               className={css.Form_input}
               type="text"
@@ -181,7 +173,7 @@ export const HomePageModalAddBookmarks = ({ pShowModal }) => {
               </select>
             </div>
           </WrapBase>
-          <ButtonBase pStyled="HomePageModalAddBookmarks_JqagP" pText="Add list" pHandleClick={(e) => addNewLinks(e)} />
+          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewLinks(e)} />
         </div>
       </div>
     </ModalBase>

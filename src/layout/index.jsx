@@ -1,5 +1,5 @@
 import { HeaderMain } from "./header/headerMain.jsx";
-import { HeaderSection } from "./header/headerSection.jsx";
-import { EmptyState } from "./notifications/emptyState.jsx";
+import { HeaderSecondary } from "./header/headerSecondary.jsx";
+import { MessageFeedback } from "./message/messageFeedback.jsx";
 
-export { HeaderMain, EmptyState, HeaderSection };
+export { HeaderMain, MessageFeedback, HeaderSecondary };

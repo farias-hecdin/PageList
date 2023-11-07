@@ -71,25 +71,25 @@
 
 /* Compose ----------------------------------------------------------------- */
 
-.Button {
-  &:global(.HeaderMain_UlICn) {
-    width: 8rem;
-    &_text {
-      font-weight: var(--fo-bold);
-    }
+.Button:global(.HeaderMain_UlICn) {
+  width: 8rem;
+  &_text {
+    font-weight: var(--fo-bold);
   }
 }
 
-.Button {
-  &:global(.HomePageModalAddBookmarks_JqagP) {
-    width: 9rem;
-  }
+.Button:global(.ModalAddBookmarks_JqagP) {
+  width: 9rem;
 }
 
-.Button:global(.SectionPane_WQkiS) {
+.Button:global(.CollectionsModal_WQkiS) {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
   padding: 0 0.25rem;
- position: absolute;
- top: 1rem;
- right: 1rem;
- z-index: 1;
+}
+
+.Button:global(.TopicsPane_WQkiS) {
+  padding: 0 0.25rem;
 }

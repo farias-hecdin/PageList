@@ -19,7 +19,7 @@
   align-items: center;
 }
 
-.Container:global(.HomePageModalAddBookmarks_AW5eY) {
+.Container:global(.ModalAddBookmarks_AW5eY) {
   align-items: center;
   gap: 1rem;
   width: 25rem;

@@ -5,12 +5,34 @@ export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   // Mostrar ventana modal
-  const [showCollectionModal, setShowCollectionModal] = useState(false);
+  const [openCollectionsModal, setOpenCollectionsModal] = useState(false);
+  const [openModalAddBookmarks, setOpenModalAddBookmarks] = useState(false);
+  const [openModalEditMode, setOpenModalEditMode] = useState(false);
+
+  // Contadores de elementos
+  const [counterCollections, setCounterCollections] = useState(0);
+  const [counterTopics, setCounterTopics] = useState(0);
+  const [counterLists, setCounterLists] = useState(0);
+  const [counterBookmarks, setCounterBookmarks] = useState(0);
 
   // Exportar datos
-  const value = {
-    showCollectionModal,
-    setShowCollectionModal,
+  const modals = {
+    openCollectionsModal,
+    setOpenCollectionsModal,
+    openModalAddBookmarks,
+    setOpenModalAddBookmarks,
+    openModalEditMode,
+    setOpenModalEditMode,
   };
-  return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
+  const counters = {
+    counterCollections,
+    setCounterCollections,
+    counterTopics,
+    setCounterTopics,
+    counterBookmarks,
+    setCounterBookmarks,
+    counterLists,
+    setCounterLists,
+  };
+  return <StateContext.Provider value={{ ...modals, ...counters }}>{children}</StateContext.Provider>;
 };

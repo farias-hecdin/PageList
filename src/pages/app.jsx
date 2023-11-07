@@ -1,22 +1,28 @@
 import css from "./app.module.css";
+import { BackupPage } from "./backup/backupPage.jsx";
 import { HeaderMain } from "../layout/index.jsx";
-import { HomePage } from "./homePage/homePage.jsx";
-import { SavePage } from "./savePage/savePage.jsx";
+import { HomePage } from "./home/homePage.jsx";
 import { useState } from "react";
 
 export const App = () => {
   // Mostrar la pagina activa
-  const [activePage, setActivePage] = useState("home");
+  const [activePage, setActivePage] = useState("Home");
   return (
     <div className={css.Container}>
-      <HeaderMain pPageName={activePage} pChangePage={setActivePage} />
+      <HeaderMain pageName={activePage} updatePage={setActivePage} />
       <main className={css.Container_box}>
-        {activePage === "home" && <HomePage />}
-        {activePage === "manage" && <SavePage />}
+        {activePage === "Home" && <HomePage />}
+        {activePage === "Backup" && <BackupPage />}
       </main>
-      <footer className={css.Container_footer}>
+      <footer className={css.Footer}>
+        <p className={css.Footer_author}>
+          This website was done by
+          <a href="https://github.com/farias-hecdin/" target="_blank" rel="noopener noreferrer">
+            Hecdin Farias
+          </a>
+        </p>
         <a
-          className={css.Container_icon}
+          className={css.Footer_github}
           href="https://github.com/farias-hecdin/Pagelist"
           target="_blank"
           rel="noopener noreferrer"

@@ -11,17 +11,29 @@
     border-radius: 0.8rem;
     background-color: var(--co-neverything);
   }
-  &_footer {
+}
+
+.Footer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  padding: 0 2rem 0.8rem;
+  &_author {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 2rem 0.5rem;
-    width: 100%;
+    gap: 0.3rem;
+    font-size: 1rem;
+    color: var(--co-carbon-footprint);
+    & > a {
+      color: inherit;
+      text-decoration: underline;
+    }
   }
-  &_icon {
+  &_github {
+    order: -1;
     & > iconify-icon {
-      font-size: 3rem;
       color: var(--co-carbon-footprint);
+      font-size: 2rem;
     }
   }
 }

@@ -14,16 +14,14 @@ module.exports = {
     sourceType: 'module'
   },
   settings: { react: { version: '18.2' } },
-  plugins: [
-    'react-refresh',
-    'jsdoc',
-  ],
+  plugins: ['react-refresh', 'jsdoc'],
   rules: {
     "jsdoc/require-asterisk-prefix": 1,
     'jsdoc/require-description': 0,
     'jsdoc/require-param-description': 0,
     'jsdoc/require-property-description': 0,
     'jsdoc/require-returns-description': 0,
+    "react/no-access-state-in-setstate": "error",
     'react/prop-types': 0,
     'react-refresh/only-export-components': [
       'warn',

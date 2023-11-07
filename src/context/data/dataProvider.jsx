@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import COLLECTIONS from "../../data/collections.json";
 import TOPICS from "../../data/topics.json";
 import LISTS from "../../data/lists.json";
-import LINKS from "../../data/links.json";
+import BOOKMARKS from "../../data/bookmarks.json";
 
 // Crear un Context y un Provider
 export const DataContext = createContext(null);
@@ -12,24 +12,26 @@ export const DataProvider = ({ children }) => {
   const [dataCollections, setDataCollections] = useState(COLLECTIONS);
   const [dataTopics, setDataTopics] = useState(TOPICS);
   const [dataLists, setDataLists] = useState(LISTS);
-  const [dataLinks, setDataLinks] = useState(LINKS);
+  const [dataBookmarks, setDataBookmarks] = useState(BOOKMARKS);
 
-  // Set de datos obtenidos al seleccionar un elemento
-  const [selectedCollection, setSelectedCollection] = useState({ id: "None", number: 0, name: "None" });
-  const [selectedList, setSelectedList] = useState({ id: "None", number: 0, name: "None" });
+  // Referencias obtenidas al seleccionar elementos
+  const [selectedCollection, setSelectedCollection] = useState({ id: "0", name: "None" });
+  const [selectedList, setSelectedList] = useState({ id: "0", name: "None" });
 
   // localstorage
   const [savedCollection, setSavedCollection] = useState();
 
-  const value = {
+  const datas = {
     dataCollections,
     setDataCollections,
     dataTopics,
     setDataTopics,
     dataLists,
     setDataLists,
-    dataLinks,
-    setDataLinks,
+    dataBookmarks,
+    setDataBookmarks,
+  };
+  const references = {
     selectedCollection,
     setSelectedCollection,
     selectedList,
@@ -38,5 +40,5 @@ export const DataProvider = ({ children }) => {
     setSavedCollection,
   };
 
-  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
+  return <DataContext.Provider value={{ ...datas, ...references }}>{children}</DataContext.Provider>;
 };

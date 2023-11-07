@@ -3,21 +3,21 @@ import { onClickMissing } from "../../utils/common.js";
 
 /**
  * @param {object} prop
- * @param {string} prop.pIcon
- * @param {string} prop.pText
- * @param {string} prop.pStyled
- * @param {Function} prop.pHandleClick
+ * @param {string} prop.icon
+ * @param {string} prop.text
+ * @param {string} prop.styled
+ * @param {Function} prop.handleClick
  * @returns {HTMLElement}
  */
-export const ButtonBase = ({ pIcon, pText, pHandleClick, pStyled }) => {
+export const ButtonBase = ({ icon, text, handleClick, styled }) => {
   return (
-    <button className={`${css.Button} ${pStyled || ""}`} onClick={pHandleClick || onClickMissing}>
-      {pIcon && (
+    <button className={`${css.Button} ${styled || ""}`} onClick={handleClick || onClickMissing}>
+      {icon && (
         <span className={css.Button_icon}>
-          <iconify-icon icon={`material-symbols:${pIcon}`}></iconify-icon>
+          <iconify-icon icon={`material-symbols:${icon}`}></iconify-icon>
         </span>
       )}
-      {pText && <span className={css.Button_text}>{pText}</span>}
+      {text && <span className={css.Button_text}>{text}</span>}
     </button>
   );
 };

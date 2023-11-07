@@ -1,4 +1,4 @@
-.Tile {
+.Card {
   position: relative;
   &_box {
     display: flex;

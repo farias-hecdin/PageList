@@ -7,17 +7,17 @@ import { DataContext } from "../../context/data/dataProvider";
 
 /**
  * @param {object} prop
- * @param {Function} prop.pChangePage
- * @param {string} prop.pPageName
+ * @param {Function} prop.updatePage
+ * @param {string} prop.pageName
  * @returns {HTMLElement}
  */
-export const HeaderMain = ({ pChangePage, pPageName }) => {
+export const HeaderMain = ({ updatePage, pageName }) => {
   /**
    * Mostar la pagina selecionada
-   * @param {string} _selectedPage ¿Nombre de la pagina?
+   * @param {string} pSelectedPage ¿Nombre de la pagina?
    */
-  const showActivePage = (_selectedPage) => {
-    pChangePage(_selectedPage);
+  const showActivePage = (pSelectedPage) => {
+    updatePage(pSelectedPage);
   };
 
   // Revisar la ultima seccion ------------------------------------------------
@@ -44,22 +44,22 @@ export const HeaderMain = ({ pChangePage, pPageName }) => {
       <nav className={css.Navbar}>
         <WrapBase>
           <ButtonBase
-            pStyled={`HeaderMain_UlICn ${pPageName === "home" ? "--active" : ""}`}
-            pIcon="bookmarks-outline"
-            pText="Bookmarks"
-            pHandleClick={() => showActivePage("home")}
+            styled={`HeaderMain_UlICn ${pageName === "Home" && "--active"}`}
+            icon="bookmarks-outline"
+            text="Bookmarks"
+            handleClick={() => showActivePage("Home")}
           />
           <ButtonBase
-            pStyled={`HeaderMain_UlICn ${pPageName === "manage" ? "--active" : ""}`}
-            pIcon="folder-outline"
-            pText="Manage"
-            pHandleClick={() => showActivePage("manage")}
+            styled={`HeaderMain_UlICn ${pageName === "Backup" && "--active"}`}
+            icon="folder-outline"
+            text="Manage"
+            handleClick={() => showActivePage("Backup")}
           />
         </WrapBase>
         <div className={css.Navbar_box}>
-          <ButtonBase pText="Save" pIcon="save-outline" />
-          <ButtonBase pText="Load" pIcon="update" pHandleClick={funcCheckLatestSection} />
-          <ButtonBase pText="Config" pIcon="settings-outline" />
+          <ButtonBase text="Save" icon="save-outline" />
+          <ButtonBase text="Load" icon="update" handleClick={funcCheckLatestSection} />
+          <ButtonBase text="Config" icon="settings-outline" />
         </div>
       </nav>
     </header>

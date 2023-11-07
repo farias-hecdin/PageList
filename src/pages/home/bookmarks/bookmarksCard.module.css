@@ -1,0 +1,40 @@
+.Card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.6rem 1.3rem;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  background-color: var(--co-diamond-black);
+  color: var(--co-cold-morning);
+  &:hover {
+    border-color: var(--co-carbon-footprint);
+  }
+  &_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  &_title {
+    margin: 0 0 0.25rem;
+    color: var(--co-cold-morning);
+    font-weight: var(--fo-medium);
+    font-size: 1.2rem;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &_text {
+    color: var(--co-carbon-footprint);
+    font-size: 0.9rem;
+  }
+  &_thumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 2.8rem;
+    font-size: 1.2rem;
+  }
+}

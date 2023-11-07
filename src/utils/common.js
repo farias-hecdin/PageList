@@ -1,23 +1,23 @@
 /**
  * Eliminar un elemento de un Array de objetos y anexarlos al estado `set`
- * @param {string} _deleteElement ¿Id del elemento a eliminar?
- * @param {Array} _fromArray ¿Origen del elemento a eliminar?
- * @param {Function} _updateArray
+ * @param {string} elementId_ ¿Id del elemento a eliminar?
+ * @param {Array} originElement_ ¿Origen del elemento a eliminar?
+ * @param {Function} updaterOrigin_ ¿Funcion `set` para actualizar el origen del elemento?
  */
-export const deleteThisElement = (_deleteElement, _fromArray, _updateArray) => {
-  let data = _fromArray;
-  let dataBefore = data.filter((item) => item.id !== _deleteElement);
-  _updateArray(dataBefore);
+export const deleteElementAndUpdateState = (elementId_, originElement_, updaterOrigin_) => {
+  let data = originElement_;
+  let dataBefore = data.filter((item) => item.id !== elementId_);
+  updaterOrigin_(dataBefore);
 };
 
 /**
  * Ordenar los elementos de un Array de objetos por orden alfabetico y retorna
  * el resultado
- * @param {Array} _fromArray ¿Elementos a ordenar?
+ * @param {Array} fromArray_ ¿Elementos a ordenar?
  * @returns {Array}
  */
-export const sortByName = (_fromArray) => {
-  const data = _fromArray;
+export const sortByName = (fromArray_) => {
+  const data = fromArray_;
   data.sort((a, b) => {
     // ignorar upper y lowercase
     const nameA = a.name.toUpperCase();
@@ -31,4 +31,20 @@ export const sortByName = (_fromArray) => {
 /** Notificar si el evento onClick no esta declarado */
 export const onClickMissing = () => {
   alert("Sorry, this functionality is not available yet.");
+};
+
+/**
+ * Comparar `descendent.originId` con `element.id` y retorna el numero de coincidencias.
+ * @param {Array} descendentData_ ¿Datos de los elementos descendientes?
+ * @param {string} elementId_ ¿Id del elemento actual?
+ * @returns {number}
+ */
+export const compareAndCountIds = (descendentData_, elementId_) => {
+  let coincidence = 0;
+  for (const descendent of descendentData_) {
+    if (descendent.originId === elementId_) {
+      coincidence++;
+    }
+  }
+  return coincidence;
 };

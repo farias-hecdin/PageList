@@ -1,11 +1,11 @@
-import css from "./savePage.module.css";
+import css from "./backupPage.module.css";
 import { ButtonBase } from "../../components/index";
 import { DataContext } from "../../context/index";
-import { HeaderSection } from "../../layout/index";
+import { HeaderSecondary } from "../../layout/index";
 import { useContext } from "react";
 
-export const SavePage = () => {
-  const { dataCollections, dataTopics, dataLists, dataLinks, selectedCollection } = useContext(DataContext);
+export const BackupPage = () => {
+  const { dataCollections, dataTopics, dataLists, dataBookmarks, selectedCollection } = useContext(DataContext);
 
   /** Limpiar el contenido de un textarea */
   const cleanTextarea = () => {
@@ -77,7 +77,7 @@ export const SavePage = () => {
     const collections = [...dataCollections];
     const topics = [...dataTopics];
     const lists = [...dataLists];
-    const links = [...dataLinks];
+    const links = [...dataBookmarks];
 
     // Asigna las listas y los enlaces a los temas
     topics.map((topic) => {
@@ -195,15 +195,15 @@ export const SavePage = () => {
 
   return (
     <section className={css.Container}>
-      <HeaderSection pTitle="Manage" pText="Export and import your bookmark sections" />
+      <HeaderSecondary title="Manage" text="Export and import your bookmark sections" />
       <div className={css.Container_box}>
         <nav className={css.Toolbar}>
           <div className={css.Toolbar_box}>
-            <ButtonBase pText="Export" pIcon="download" pHandleClick={clickButtonExport} />
-            <ButtonBase pText="Download as JSON" pIcon="download" pHandleClick={() => clickButtonExport(true)} />
-            <ButtonBase pText="Import" pIcon="upload" pHandleClick={clickButtonImport} />
+            <ButtonBase text="Export" icon="download" handleClick={clickButtonExport} />
+            <ButtonBase text="Download as JSON" icon="download" handleClick={() => clickButtonExport(true)} />
+            <ButtonBase text="Import" icon="upload" handleClick={clickButtonImport} />
           </div>
-          <ButtonBase pText="Delete saved" pIcon="delete" pHandleClick={deleteDataInLocalStorage} />
+          <ButtonBase text="Delete saved" icon="delete" handleClick={deleteDataInLocalStorage} />
         </nav>
         <textarea
           className={css.Container_textarea}
@@ -211,7 +211,7 @@ export const SavePage = () => {
           placeholder="Write a valid bookmark collection..."
         ></textarea>
         <div>
-          <ButtonBase pText="Clean" pIcon="cleaning-services-outline" pHandleClick={cleanTextarea} />
+          <ButtonBase text="Clean" icon="cleaning-services-outline" handleClick={cleanTextarea} />
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import { ButtonBase } from "../../../components";
-import css from "./sectionPane-tile.module.css";
+import css from "./collectionsCard.module.css";
 
 /**
  * @param {object} prop
@@ -12,19 +12,15 @@ import css from "./sectionPane-tile.module.css";
  * @param {string} prop.text
  * @returns {HTMLElement}
  */
-export const SectionPaneModalTile = ({handleClick, handleSecondClick, hasMenu, icon, id, styled, text}) => {
+export const CollectionsCard = ({ handleClick, handleSecondClick, hasMenu, icon, id, styled, text }) => {
   return (
-    <div className={`${css.Tile} ${styled || ""}`}>
-      <button className={css.Tile_box} onClick={handleClick} data-id={id}>
+    <div className={`${css.Card} ${styled || ""}`}>
+      <button className={css.Card_box} onClick={handleClick} data-id={id}>
         <iconify-icon icon={`material-symbols:${icon}`}></iconify-icon>
-        <p className={css.Tile_text}>{text}</p>
+        <p className={css.Card_text}>{text}</p>
       </button>
       {hasMenu && (
-      <ButtonBase
-        pIcon="more-vert"
-        pStyled="--ghost SectionPane_WQkiS"
-        pHandleClick={handleSecondClick}
-      />
+        <ButtonBase icon="more-vert" styled="--ghost CollectionsModal_WQkiS" handleClick={handleSecondClick} />
       )}
     </div>
   );

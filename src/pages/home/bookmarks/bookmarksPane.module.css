@@ -8,21 +8,18 @@
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
-}
-
-.Header > div {
-  width: 100%;
-}
-
-.Header_title {
-  margin-bottom: 0.25rem;
-  font-weight: var(--fo-medium);
-  font-size: 1.5rem;
-}
-
-.Header_text {
-  color: var(--co-carbon-footprint);
-  font-size: 0.9rem;
+  & > div {
+    width: 100%;
+  }
+  &_title {
+    margin-bottom: 0.25rem;
+    font-weight: var(--fo-medium);
+    font-size: 1.5rem;
+  }
+  &_text {
+    color: var(--co-carbon-footprint);
+    font-size: 0.9rem;
+  }
 }
 
 .List {
