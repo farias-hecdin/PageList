@@ -6,6 +6,7 @@
     justify-content: center;
     gap: 0.5rem;
     width: 13rem;
+    height: 6.5rem;
     overflow: hidden;
     padding: 1rem;
     border: 1px solid transparent;
@@ -16,6 +17,7 @@
       color: var(--co-greenish);
     }
     & > iconify-icon {
+      --size: 2rem;
       font-size: 2rem;
     }
     &:hover {

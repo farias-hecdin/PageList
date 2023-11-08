@@ -40,9 +40,6 @@
     gap: 1rem;
     padding: 3px 1rem;
   }
-  &_header:global(.--expand) + &_list {
-    display: none;
-  }
   &_title {
     width: 100%;
     font-size: 1.1rem;
@@ -67,11 +64,8 @@
   &_text {
     width: 100%;
   }
-  &_icon {
-    margin: 0;
-    line-height: 0;
-  }
-  &_icon > iconify-icon {
+  &_item > iconify-icon {
+    --size: 1.1rem;
     font-size: 1.1rem;
   }
 }

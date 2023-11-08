@@ -7,6 +7,7 @@ import { useState } from "react";
 export const App = () => {
   // Mostrar la pagina activa
   const [activePage, setActivePage] = useState("Home");
+
   return (
     <div className={css.Container}>
       <HeaderMain pageName={activePage} updatePage={setActivePage} />

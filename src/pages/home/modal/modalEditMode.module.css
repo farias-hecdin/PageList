@@ -42,12 +42,8 @@
     border-top-right-radius: 0;
   }
   & > iconify-icon {
-    color: var(--fi-carbon-footprint);
+    --size: 1.3rem;
     font-size: 1.3rem;
-    pointer-events: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
   }
   &:hover {
     border-color: var(--co-greenish);

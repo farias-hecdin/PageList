@@ -5,14 +5,17 @@ import { deleteElementAndUpdateState, onClickMissing } from "../../../utils/comm
 
 /**
  * @param {object} prop
- * @param {boolean} prop.showModal
+ * @param {boolean} prop.isOpen
+ * @param {Function} prop.handleClick
  * @param {string} prop.dataElement
  * @param {string} prop.dataSource
  * @returns {HTMLElement}
  */
-export const ModalEditMode = ({ showModal, dataElement, dataSource = [] }) => {
-  const [data, setData] = dataSource;
-  const [isCloseModal, setIsCloseModal] = useState(true);
+export const ModalEditMode = ({ isOpen, handleClick }) => {
+  const dataElement = {
+    name: "Name",
+    id: "1234",
+  };
 
   const actions = [
     {
@@ -20,10 +23,7 @@ export const ModalEditMode = ({ showModal, dataElement, dataSource = [] }) => {
       active: true,
       name: "Delete this element",
       icon: "delete-forever-outline",
-      func: () => {
-        deleteElementAndUpdateState(dataElement.id, data, setData);
-        setIsCloseModal(!isCloseModal);
-      },
+      func: null,
     },
     {
       id: 2,
@@ -42,7 +42,7 @@ export const ModalEditMode = ({ showModal, dataElement, dataSource = [] }) => {
   ];
 
   return (
-    <ModalBase pIsOpen={showModal === isCloseModal} pId="modal_AZ555XOUbn">
+    <ModalBase isOpen={isOpen} handleClick={handleClick}>
       <header className={css.Container_header}>
         <p className={css.Container_title}>Edit</p>
         <p className={css.Container_text}>
@@ -54,10 +54,7 @@ export const ModalEditMode = ({ showModal, dataElement, dataSource = [] }) => {
         <ul>
           {actions.map((action) => (
             <Fragment key={crypto.randomUUID()}>
-              <button
-                className={`${action.active ? css.Button : css.isHidden}`}
-                onClick={action.func || onClickMissing}
-              >
+              <button className={`${action.active ? css.Button : css.isHidden}`}>
                 <iconify-icon icon={`material-symbols:${action.icon}`}></iconify-icon>
                 <span>{action.name}</span>
               </button>

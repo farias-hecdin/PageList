@@ -6,10 +6,11 @@ import { sortByName } from "../../../utils/common";
 
 /**
  * @param {object} prop
- * @param {boolean} prop.showModal
+ * @param {boolean} prop.isOpen
+ * @param {Function} prop.handleClick
  * @returns {HTMLElement}
  */
-export const ModalAddBookmarks = ({ showModal }) => {
+export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
   const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataBookmarks } =
     useContext(DataContext);
 
@@ -87,7 +88,7 @@ export const ModalAddBookmarks = ({ showModal }) => {
   };
 
   return (
-    <ModalBase isOpen={showModal} id="modal_AZiStXOUbn">
+    <ModalBase isOpen={isOpen} handleClick={handleClick}>
       <header className={css.Container_header}>
         <p className={css.Container_title}>Add</p>
         <p className={css.Container_text}>Wide your list of bookmarks</p>

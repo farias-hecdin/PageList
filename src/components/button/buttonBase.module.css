@@ -12,17 +12,9 @@
   &_text {
     font-size: 1rem;
   }
-  &_icon {
-    margin: 0;
-    line-height: 0;
-  }
-  &_icon > iconify-icon {
-    color: var(--fi-carbon-footprint);
+  & > iconify-icon {
+    --size: 1.3rem;
     font-size: 1.3rem;
-    pointer-events: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
   }
   &:hover {
     border-color: var(--co-greenish);
@@ -37,7 +29,7 @@
   &:global(.--active) {
     background-color: var(--co-zucchini);
     color: var(--co-greenish);
-    &_icon > iconify-icon {
+    & > iconify-icon {
       color: var(--fi-greenish);
     }
   }

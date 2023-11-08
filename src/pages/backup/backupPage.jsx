@@ -4,8 +4,10 @@ import { DataContext } from "../../context/index";
 import { HeaderSecondary } from "../../layout/index";
 import { useContext } from "react";
 
+// Nodo previo: ../app.jsx
+
 export const BackupPage = () => {
-  const { dataCollections, dataTopics, dataLists, dataBookmarks, selectedCollection } = useContext(DataContext);
+  const { dataCollections, dataTopics, dataLists, dataBookmarks } = useContext(DataContext);
 
   /** Limpiar el contenido de un textarea */
   const cleanTextarea = () => {

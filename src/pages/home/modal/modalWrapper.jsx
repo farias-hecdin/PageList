@@ -4,14 +4,29 @@ import { CollectionsModal } from "../collections/collectionsModal";
 import { ModalAddBookmarks } from "./modalAddBookmarks";
 import { ModalEditMode } from "./modalEditMode";
 
+// Nodo previo: ../../home/homePage.jsx
+
 export const ModalWrapper = () => {
-  const { openCollectionsModal, openModalAddBookmarks, openModalEditMode } = useContext(StateContext);
+  const {
+    openCollectionsModal,
+    setOpenCollectionsModal,
+    openModalAddBookmarks,
+    setOpenModalAddBookmarks,
+    openModalEditMode,
+    setOpenModalEditMode,
+  } = useContext(StateContext);
 
   return (
     <>
-      <CollectionsModal showModal={openCollectionsModal} />
-      <ModalAddBookmarks showModal={openModalAddBookmarks} />
-      {/* <ModalEditMode showModal={openModalEditMode} /> */}
+      <CollectionsModal
+        isOpen={openCollectionsModal}
+        handleClick={() => setOpenCollectionsModal(!openCollectionsModal)}
+      />
+      <ModalAddBookmarks
+        isOpen={openModalAddBookmarks}
+        handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)}
+      />
+      <ModalEditMode isOpen={openModalEditMode} handleClick={() => setOpenModalEditMode(!openModalEditMode)} />
     </>
   );
 };

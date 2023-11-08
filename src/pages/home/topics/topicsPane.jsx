@@ -4,10 +4,12 @@ import { DataContext, StateContext } from "../../../context/index";
 import { useContext, useEffect } from "react";
 import { compareAndCountIds } from "../../../utils/common";
 
+// Nodo previo: ../../home/homePage.jsx
+
 export const TopicsPane = () => {
   const { dataTopics, dataLists, selectedCollection, setSelectedList, selectedList, dataBookmarks } =
     useContext(DataContext);
-  const { counterTopics, setCounterLists } = useContext(StateContext);
+  const { counterTopics, setCounterLists, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
 
   /**
    * Actualizar el estado de acuerdo a la lista selecionada.
@@ -60,11 +62,13 @@ export const TopicsPane = () => {
                                 className={css.Tree_item}
                                 onClick={() => selectListAndUpdateState(list)}
                               >
-                                <span className={css.Tree_icon}>
-                                  <iconify-icon icon={`material-symbols:folder-outline`}></iconify-icon>
-                                </span>
+                                <iconify-icon icon={`material-symbols:folder-outline`}></iconify-icon>
                                 <p className={css.Tree_text}>{list.name}</p>
-                                <ButtonBase icon="more-vert" styled="--ghost TopicsPane_WQkiS" />
+                                <ButtonBase
+                                  icon="more-vert"
+                                  styled="--ghost TopicsPane_WQkiS"
+                                  handleClick={() => setOpenModalEditMode(!openModalEditMode)}
+                                />
                               </li>
                             );
                           }

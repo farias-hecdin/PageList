@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { compareAndCountIds } from "../../../utils/common";
 
-export const CollectionsModal = ({ showModal }) => {
+export const CollectionsModal = ({ isOpen, handleClick }) => {
   const { dataCollections, dataTopics, selectedCollection, setSelectedCollection } = useContext(DataContext);
   const { setCounterTopics } = useContext(StateContext);
 
@@ -37,7 +37,7 @@ export const CollectionsModal = ({ showModal }) => {
 
   return (
     <>
-      <ModalBase id="modal_pVWgBDgt4eY" isOpen={showModal}>
+      <ModalBase isOpen={isOpen} handleClick={handleClick}>
         <div className={css.Container_header}>
           <div>
             <p className={css.Container_title}>Collections</p>

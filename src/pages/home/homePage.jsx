@@ -7,6 +7,8 @@ import { TopicsPane } from "./topics/topicsPane.jsx";
 import { useContext } from "react";
 import { ModalWrapper } from "./modal/modalWrapper";
 
+// Nodo previo: ../app.jsx
+
 export const HomePage = () => {
   const { selectedCollection } = useContext(DataContext);
   const { openCollectionsModal, setOpenCollectionsModal, openModalAddBookmarks, setOpenModalAddBookmarks } =

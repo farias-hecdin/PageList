@@ -5,6 +5,8 @@ import { MessageFeedback } from "../../../layout/index";
 import { BookmarksCard } from "./bookmarksCard.jsx";
 import { useContext } from "react";
 
+// Nodo previo: ../../home/homePage.jsx
+
 export const BookmarksPane = () => {
   const { dataBookmarks, selectedList } = useContext(DataContext);
   const { counterLists } = useContext(StateContext);
@@ -20,7 +22,7 @@ export const BookmarksPane = () => {
               <h2 className={css.Header_title}>{selectedList.name}</h2>
               <p className={css.Header_text}>{counterLists} bookmarks</p>
             </div>
-            <ButtonBase icon="edit" />
+            <ButtonBase icon="filter-list" />
           </header>
           <ul className={css.List}>
             {dataBookmarks.map((links) => {

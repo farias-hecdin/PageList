@@ -12,11 +12,7 @@ import { onClickMissing } from "../../utils/common.js";
 export const ButtonBase = ({ icon, text, handleClick, styled }) => {
   return (
     <button className={`${css.Button} ${styled || ""}`} onClick={handleClick || onClickMissing}>
-      {icon && (
-        <span className={css.Button_icon}>
-          <iconify-icon icon={`material-symbols:${icon}`}></iconify-icon>
-        </span>
-      )}
+      {icon && <iconify-icon icon={`material-symbols:${icon}`}></iconify-icon>}
       {text && <span className={css.Button_text}>{text}</span>}
     </button>
   );
