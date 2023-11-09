@@ -7,19 +7,24 @@ import { useEffect } from "react";
 import { compareAndCountIds } from "../../../utils/common";
 
 export const CollectionsModal = ({ isOpen, handleClick }) => {
-  const { dataCollections, dataTopics, selectedCollection, setSelectedCollection } = useContext(DataContext);
-  const { setCounterTopics } = useContext(StateContext);
+  const { dataCollections, setDataCollections, dataTopics, selectedCollection, setSelectedCollection, setDeleteItem } =
+    useContext(DataContext);
+  const { setCounterTopics, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
 
   /**
    * Actualiza el estado `selectedCollection()` de acuerdo a la coleccion selecionada.
    * @param {Array|string} data_
    */
   const selectCollectionAndUpdateState = (data_) => {
-    let elementId = data_?.id || "0";
-    let elementName = data_?.name || "None";
+    let id = data_?.id || "0";
+    let name = data_?.name || "None";
 
     // Actualizar el estado
-    setSelectedCollection({ id: elementId, name: elementName });
+    setSelectedCollection((prevState) => ({
+      ...prevState,
+      collectionId: id,
+      collectionName: name,
+    }));
   };
 
   /**
@@ -27,7 +32,7 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
    * @param {Array} data_ ¿Origen del elemento?
    */
   const currentNumberElements = (data_) => {
-    let elementNumbers = data_ ? compareAndCountIds(dataTopics, data_.id) : 0;
+    let elementNumbers = data_ ? compareAndCountIds(dataTopics, data_.collectionId) : 0;
     setCounterTopics(elementNumbers);
   };
   // Actualizar el contador de `topics`
@@ -48,19 +53,28 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
         <ul className={css.Container_list}>
           <li>
             <CollectionsCard
-              icon="note-stack-outline"
+              icon="inventory-2-outline"
               text={"None"}
               styled={selectedCollection.id === "None" && "--active"}
               handleClick={() => selectCollectionAndUpdateState("None")}
             />
           </li>
-          {dataCollections.map((pCollection) => (
+          {dataCollections.map((collection) => (
             <li key={crypto.randomUUID()}>
               <CollectionsCard
-                icon="note-stack-outline"
-                text={pCollection.name}
-                styled={selectedCollection.id === pCollection.id && "--active"}
-                handleClick={() => selectCollectionAndUpdateState(pCollection)}
+                icon="inventory-2-outline"
+                text={collection.name}
+                styled={selectedCollection.id === collection.id && "--active"}
+                handleClick={() => selectCollectionAndUpdateState(collection)}
+                handleSecondClick={() => {
+                  setOpenModalEditMode(!openModalEditMode);
+                  setDeleteItem({
+                    id: collection.id,
+                    name: collection.name,
+                    state: dataCollections,
+                    set: setDataCollections,
+                  });
+                }}
                 hasMenu={true}
               />
             </li>

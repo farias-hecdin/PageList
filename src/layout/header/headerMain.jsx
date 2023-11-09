@@ -51,8 +51,8 @@ export const HeaderMain = ({ updatePage, pageName }) => {
           />
           <ButtonBase
             styled={`HeaderMain_UlICn ${pageName === "Backup" && "--active"}`}
-            icon="folder-outline"
-            text="Manage"
+            icon="hard-drive-outline"
+            text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
         </WrapBase>

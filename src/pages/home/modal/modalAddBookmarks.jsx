@@ -1,5 +1,5 @@
 import css from "./modalAddBookmarks.module.css";
-import { ButtonBase, ModalBase, WrapBase } from "../../../components/index";
+import { ButtonBase, DetailsBase, ModalBase, WrapBase } from "../../../components/index";
 import { DataContext } from "../../../context/index";
 import { useContext } from "react";
 import { sortByName } from "../../../utils/common";
@@ -94,88 +94,92 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
         <p className={css.Container_text}>Wide your list of bookmarks</p>
       </header>
       <div className={css.Container_box}>
-        <div className={css.Form}>
-          <p className={css.Form_title}>New collection:</p>
-          <WrapBase styled="ModalAddBookmarks_AW5eY">
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add collection..."
-              id="input_T22VL1iGPC"
-              maxLength={23}
-            />
-          </WrapBase>
-          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" handleClick={() => addNewCollection()} />
-        </div>
-        <div className={css.Form}>
-          <p className={css.Form_title}>New topic:</p>
-          <WrapBase styled="ModalAddBookmarks_AW5eY">
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add topic..."
-              id="input_a22VL1iGPC"
-              maxLength={23}
-            />
-            <span>for</span>
-            <div className={css.Select}>
-              <select name="choiceTopics" id="select_LCAaUzHQdk" className={css.Select_input}>
-                {sortCollections.map((itemCollection) => (
-                  <option key={crypto.randomUUID()} value={itemCollection.id}>
-                    {itemCollection.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </WrapBase>
-          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add topic" handleClick={(e) => addNewTopic(e)} />
-        </div>
-        <div className={css.Form}>
-          <p className={css.Form_title}>New list:</p>
-          <WrapBase styled="ModalAddBookmarks_AW5eY">
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add list..."
-              id="input_ooIRWuISR8"
-              maxLength={23}
-            />
-            <span>for</span>
-            <div className={css.Select}>
-              <select name="choiceTopics" id="select_ZTa2FX2bIM" className={css.Select_input}>
-                {sortTopics.map((itemTopics) => (
-                  <option key={crypto.randomUUID()} value={itemTopics.id}>
-                    {itemTopics.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </WrapBase>
-          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewList(e)} />
-        </div>
-        <div className={css.Form}>
-          <p className={css.Form_title}>New links:</p>
-          <WrapBase styled="ModalAddBookmarks_AW5eY">
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add list..."
-              id="input_ooIRWuISR1"
-              maxLength={23}
-            />
-            <span>for</span>
-            <div className={css.Select}>
-              <select name="choiceTopics" id="select_9Ta2F92bIM" className={css.Select_input}>
-                {sortLists.map((item) => (
-                  <option key={crypto.randomUUID()} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </WrapBase>
-          <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewLinks(e)} />
-        </div>
+        <DetailsBase title="Add a new collection" icon="inventory-2-outline">
+          <div className={css.Form}>
+            <WrapBase styled="ModalAddBookmarks_AW5eY">
+              <input
+                className={css.Form_input}
+                type="text"
+                placeholder="Add collection..."
+                id="input_T22VL1iGPC"
+                maxLength={23}
+              />
+            </WrapBase>
+            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" handleClick={() => addNewCollection()} />
+          </div>
+        </DetailsBase>
+        <DetailsBase title="Add a new topic" icon="folder-open-outline">
+          <div className={css.Form}>
+            <WrapBase styled="ModalAddBookmarks_AW5eY">
+              <input
+                className={css.Form_input}
+                type="text"
+                placeholder="Add topic..."
+                id="input_a22VL1iGPC"
+                maxLength={23}
+              />
+              <span>for</span>
+              <div className={css.Select}>
+                <select name="choiceTopics" id="select_LCAaUzHQdk" className={css.Select_input}>
+                  {sortCollections.map((itemCollection) => (
+                    <option key={crypto.randomUUID()} value={itemCollection.id}>
+                      {itemCollection.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </WrapBase>
+            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add topic" handleClick={(e) => addNewTopic(e)} />
+          </div>
+        </DetailsBase>
+        <DetailsBase title="Add a new list" icon="bookmarks-outline">
+          <div className={css.Form}>
+            <WrapBase styled="ModalAddBookmarks_AW5eY">
+              <input
+                className={css.Form_input}
+                type="text"
+                placeholder="Add list..."
+                id="input_ooIRWuISR8"
+                maxLength={23}
+              />
+              <span>for</span>
+              <div className={css.Select}>
+                <select name="choiceTopics" id="select_ZTa2FX2bIM" className={css.Select_input}>
+                  {sortTopics.map((itemTopics) => (
+                    <option key={crypto.randomUUID()} value={itemTopics.id}>
+                      {itemTopics.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </WrapBase>
+            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewList(e)} />
+          </div>
+        </DetailsBase>
+        <DetailsBase title="Add a new bookmarks" icon="bookmark-outline">
+          <div className={css.Form}>
+            <WrapBase styled="ModalAddBookmarks_AW5eY">
+              <input
+                className={css.Form_input}
+                type="text"
+                placeholder="Add list..."
+                id="input_ooIRWuISR1"
+                maxLength={23}
+              />
+              <span>for</span>
+              <div className={css.Select}>
+                <select name="choiceTopics" id="select_9Ta2F92bIM" className={css.Select_input}>
+                  {sortLists.map((item) => (
+                    <option key={crypto.randomUUID()} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </WrapBase>
+            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewLinks(e)} />
+          </div>
+        </DetailsBase>
       </div>
     </ModalBase>
   );

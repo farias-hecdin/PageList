@@ -8,6 +8,7 @@ export const deleteElementAndUpdateState = (elementId_, originElement_, updaterO
   let data = originElement_;
   let dataBefore = data.filter((item) => item.id !== elementId_);
   updaterOrigin_(dataBefore);
+  console.warn("ok");
 };
 
 /**

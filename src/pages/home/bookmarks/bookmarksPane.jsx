@@ -8,25 +8,25 @@ import { useContext } from "react";
 // Nodo previo: ../../home/homePage.jsx
 
 export const BookmarksPane = () => {
-  const { dataBookmarks, selectedList } = useContext(DataContext);
+  const { dataBookmarks, selectedCollection } = useContext(DataContext);
   const { counterLists } = useContext(StateContext);
 
   return (
     <section className={css.Container}>
-      {selectedList.id === "0" ? (
+      {selectedCollection.listId === "0" ? (
         <MessageFeedback icon="info-outline" title="Nothing here" text="Choose a list to access your favorite links." />
       ) : (
         <>
           <header className={css.Header}>
             <div>
-              <h2 className={css.Header_title}>{selectedList.name}</h2>
+              <h2 className={css.Header_title}>{selectedCollection.listName}</h2>
               <p className={css.Header_text}>{counterLists} bookmarks</p>
             </div>
             <ButtonBase icon="filter-list" />
           </header>
           <ul className={css.List}>
             {dataBookmarks.map((links) => {
-              if (links.originId === selectedList.id) {
+              if (links.originId === selectedCollection.listId) {
                 return (
                   <li key={crypto.randomUUID()}>
                     <BookmarksCard title={links.title} url={links.url} />

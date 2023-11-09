@@ -10,44 +10,20 @@
   }
   &_box {
     margin: 2rem 0;
+    & > ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
   &_subtext {
     margin-left: 0.5rem;
     font-weight: var(--fo-bold);
   }
-}
-
-.isHidden {
-  display: none;
-}
-
-.Button {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  height: 2.25rem;
-  padding: 1rem 0.6rem;
-  border: 0.0625rem solid transparent;
-  background-color: var(--co-mountain-fig);
-  color: var(--co-carbon-footprint);
-  &:first-child {
-    border-radius: 0.5rem;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  &:last-child {
-    border-radius: 0.5rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-  & > iconify-icon {
-    --size: 1.3rem;
-    font-size: 1.3rem;
-  }
-  &:hover {
-    border-color: var(--co-greenish);
-    background-color: var(--co-zucchini);
-    color: var(--co-greenish);
+  &_details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 }

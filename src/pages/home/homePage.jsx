@@ -26,15 +26,15 @@ export const HomePage = () => {
             </div>
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase
-                icon="note-stack-outline"
+                icon="inventory-2-outline"
                 handleClick={() => setOpenCollectionsModal(!openCollectionsModal)}
               />
-              <p className={css.Navbar_text}>{selectedCollection.name}</p>
+              <p className={css.Navbar_text}>{selectedCollection.collectionName}</p>
             </WrapBase>
           </div>
         </HeaderSecondary>
         <div className={css.Container_box}>
-          {selectedCollection.id === "0" ? (
+          {selectedCollection.collectionId === "0" ? (
             <MessageFeedback
               icon="info-outline"
               title="Nothing here"

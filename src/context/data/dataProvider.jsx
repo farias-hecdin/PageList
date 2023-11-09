@@ -15,8 +15,16 @@ export const DataProvider = ({ children }) => {
   const [dataBookmarks, setDataBookmarks] = useState(BOOKMARKS);
 
   // Referencias obtenidas al seleccionar elementos
-  const [selectedCollection, setSelectedCollection] = useState({ id: "0", name: "None" });
+  const [selectedCollection, setSelectedCollection] = useState({
+    collectionId: "0",
+    collectionName: "None",
+    topicId: "0",
+    topicName: "None",
+    listId: "0",
+    listName: "None",
+  });
   const [selectedList, setSelectedList] = useState({ id: "0", name: "None" });
+  const [deleteItem, setDeleteItem] = useState({ id: "", name: "", data: "", set: "" });
 
   // localstorage
   const [savedCollection, setSavedCollection] = useState();
@@ -38,6 +46,8 @@ export const DataProvider = ({ children }) => {
     setSelectedList,
     savedCollection,
     setSavedCollection,
+    deleteItem,
+    setDeleteItem,
   };
 
   return <DataContext.Provider value={{ ...datas, ...references }}>{children}</DataContext.Provider>;

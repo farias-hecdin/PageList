@@ -1,0 +1,45 @@
+.Details {
+  border-bottom: 0.0625rem solid #232a36;
+  border-radius: 1rem;
+  background-color: #232a36;
+  color: var(--co-carbon-footprint);
+  &[open] {
+    background-color: var(--co-mountain-fig);
+    & > summary::after {
+      content: url("https://api.iconify.design/fa6-solid/chevron-up.svg");
+    }
+  }
+  &:hover > summary {
+    color: var(--co-cold-morning);
+    &::after {
+      filter: var(--fi-cold-morning);
+    }
+  }
+  & > summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 0.6rem;
+    & > iconify-icon {
+      --size: 1.3rem;
+      font-size: 1.3rem;
+    }
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &::after {
+      content: url("https://api.iconify.design/fa6-solid/chevron-down.svg");
+      position: absolute;
+      right: 1rem;
+      filter: var(--fi-carbon-footprint);
+      float: left;
+    }
+  }
+  & > div {
+    margin: 0.2rem 0.5rem 0.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--co-black-pearl);
+  }
+}

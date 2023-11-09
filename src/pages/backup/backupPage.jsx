@@ -197,7 +197,7 @@ export const BackupPage = () => {
 
   return (
     <section className={css.Container}>
-      <HeaderSecondary title="Manage" text="Export and import your bookmark sections" />
+      <HeaderSecondary title="Backup" text="Export and import your bookmark sections" />
       <div className={css.Container_box}>
         <nav className={css.Toolbar}>
           <div className={css.Toolbar_box}>
