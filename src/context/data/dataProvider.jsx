@@ -14,20 +14,26 @@ export const DataProvider = ({ children }) => {
   const [dataLists, setDataLists] = useState(LISTS);
   const [dataBookmarks, setDataBookmarks] = useState(BOOKMARKS);
 
-  // Referencias obtenidas al seleccionar elementos
-  const [selectedCollection, setSelectedCollection] = useState({
+  // Referencias obtenidas al seleccionar un elemento
+  const [selectedItem, setSelectedItem] = useState({
     collectionId: "0",
     collectionName: "None",
     topicId: "0",
     topicName: "None",
     listId: "0",
     listName: "None",
+    bookmarkId: "0",
+    bookmarkName: "None",
   });
-  const [selectedList, setSelectedList] = useState({ id: "0", name: "None" });
-  const [deleteItem, setDeleteItem] = useState({ id: "", name: "", data: "", set: "" });
+  const [targetItem, setTargetItem] = useState({
+    id: "",
+    name: "",
+    data: "",
+    set: "",
+  });
 
   // localstorage
-  const [savedCollection, setSavedCollection] = useState();
+  const [savedData, setSavedData] = useState();
 
   const datas = {
     dataCollections,
@@ -40,14 +46,12 @@ export const DataProvider = ({ children }) => {
     setDataBookmarks,
   };
   const references = {
-    selectedCollection,
-    setSelectedCollection,
-    selectedList,
-    setSelectedList,
-    savedCollection,
-    setSavedCollection,
-    deleteItem,
-    setDeleteItem,
+    selectedItem,
+    setSelectedItem,
+    savedData,
+    setSavedData,
+    targetItem,
+    setTargetItem,
   };
 
   return <DataContext.Provider value={{ ...datas, ...references }}>{children}</DataContext.Provider>;

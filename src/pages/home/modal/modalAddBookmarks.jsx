@@ -25,7 +25,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
    * @param {string} _selectId
    * @returns {object}
    */
-  const extractInputValues = (_inputId, _selectId) => {
+  const extractInputAndSelectValue = (_inputId, _selectId) => {
     let $nodeInput = document.getElementById(_inputId);
     let $nodeSelect = document.getElementById(_selectId);
     let selectValue = $nodeSelect?.options[$nodeSelect.selectedIndex].value;
@@ -41,7 +41,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
   // Añadir nuevos datos ------------------------------------------------------
 
   const addNewCollection = () => {
-    let data = extractInputValues("input_T22VL1iGPC", null);
+    let data = extractInputAndSelectValue("input_T22VL1iGPC", null);
     let template = {
       id: crypto.randomUUID(),
       name: data.inputValue,
@@ -52,7 +52,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
   };
 
   const addNewTopic = () => {
-    let data = extractInputValues("input_a22VL1iGPC", "select_LCAaUzHQdk");
+    let data = extractInputAndSelectValue("input_a22VL1iGPC", "select_LCAaUzHQdk");
     let template = {
       originId: data.selectValue,
       id: crypto.randomUUID(),
@@ -64,19 +64,19 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
   };
 
   const addNewList = () => {
-    let data = extractInputValues("input_ooIRWuISR8", "select_ZTa2FX2bIM");
+    let data = extractInputAndSelectValue("input_ooIRWuISR8", "select_ZTa2FX2bIM");
     let template = {
       originId: data.selectValue,
       id: crypto.randomUUID(),
       name: data.inputValue,
-      links: [],
+      bookmarks: [],
     };
     setDataLists((prev) => [template, ...prev]);
     alert("New list added");
   };
 
   const addNewLinks = () => {
-    let data = extractInputValues("input_ooIRWuISR1", "select_9Ta2F92bIM");
+    let data = extractInputAndSelectValue("input_ooIRWuISR1", "select_9Ta2F92bIM");
     let template = {
       originId: data.selectValue,
       id: crypto.randomUUID(),
@@ -120,7 +120,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
               />
               <span>for</span>
               <div className={css.Select}>
-                <select name="choiceTopics" id="select_LCAaUzHQdk" className={css.Select_input}>
+                <select name="choiceTopics" id="select_Fgh3JwqNKz" className={css.Select_input}>
                   {sortCollections.map((itemCollection) => (
                     <option key={crypto.randomUUID()} value={itemCollection.id}>
                       {itemCollection.name}

@@ -13,9 +13,9 @@ export const TopicsPane = () => {
     setDataTopics,
     dataTopics,
     dataBookmarks,
-    setSelectedCollection,
-    selectedCollection,
-    setDeleteItem,
+    setSelectedItem,
+    selectedItem,
+    setTargetItem,
   } = useContext(DataContext);
   const { counterTopics, setCounterLists, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
 
@@ -27,7 +27,7 @@ export const TopicsPane = () => {
     let id = data_?.id || "0";
     let name = data_?.name || "None";
 
-    setSelectedCollection((prevState) => ({
+    setSelectedItem((prevState) => ({
       ...prevState,
       listId: id,
       listName: name,
@@ -40,20 +40,19 @@ export const TopicsPane = () => {
    */
   const currentNumberElements = (data_) => {
     let elementNumbers = data_ ? compareAndCountIds(dataBookmarks, data_.listId) : 0;
-    console.log(selectedCollection);
     setCounterLists(elementNumbers);
   };
   // Actualizar el contador de `topics`
   useEffect(() => {
-    currentNumberElements(selectedCollection);
-  }, [dataBookmarks, selectedCollection]);
+    currentNumberElements(selectedItem);
+  }, [dataBookmarks, selectedItem]);
 
   return (
     <>
       <section className={css.Container}>
         <header className={css.Header}>
           <div>
-            <h2 className={css.Header_title}>{selectedCollection.collectionName}</h2>
+            <h2 className={css.Header_title}>{selectedItem.collectionName}</h2>
             <p className={css.Header_text}>{counterTopics} Lists</p>
           </div>
           <ButtonBase icon="filter-list" />
@@ -61,7 +60,7 @@ export const TopicsPane = () => {
         <div className={css.List}>
           <ul className={css.List_items}>
             {dataTopics.map((/** @type {object} */ topic) => {
-              if (topic.originId === selectedCollection.collectionId) {
+              if (topic.originId === selectedItem.collectionId) {
                 return (
                   <li key={crypto.randomUUID()}>
                     <div className={css.Tree}>
@@ -72,7 +71,7 @@ export const TopicsPane = () => {
                           styled="--ghost TopicsPane_WQkiS"
                           handleClick={() => {
                             setOpenModalEditMode(!openModalEditMode);
-                            setDeleteItem({
+                            setTargetItem({
                               id: topic.id,
                               name: topic.name,
                               state: dataTopics,
@@ -97,7 +96,7 @@ export const TopicsPane = () => {
                                   styled="--ghost TopicsPane_WQkiS"
                                   handleClick={() => {
                                     setOpenModalEditMode(!openModalEditMode);
-                                    setDeleteItem({
+                                    setTargetItem({
                                       id: list.id,
                                       name: list.name,
                                       state: dataLists,

@@ -1,16 +1,13 @@
-import { useContext } from "react";
-import { ButtonBase } from "../../../components";
-import { StateContext } from "../../../context";
 import css from "./bookmarksCard.module.css";
 
 /**
  * @param {object} prop
  * @param {string} prop.title
  * @param {string} prop.url
+ * @param {HTMLElement} prop.children
  * @returns {HTMLElement}
  */
-export const BookmarksCard = ({ title, url }) => {
-  const { openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
+export const BookmarksCard = ({ title, url, children }) => {
   let titleLinks = title;
 
   /**
@@ -39,11 +36,7 @@ export const BookmarksCard = ({ title, url }) => {
         </a>
         <span className={css.Card_text}>{url}</span>
       </p>
-      <ButtonBase
-        icon="more-vert"
-        styled="--ghost TopicsPane_WQkiS"
-        handleClick={() => setOpenModalEditMode(!openModalEditMode)}
-      />
+      {children}
     </article>
   );
 };

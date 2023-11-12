@@ -12,6 +12,8 @@ import { DataContext } from "../../context/data/dataProvider";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName }) => {
+  const {setDataBookmarks, setDataCollections, setDataLists, setDataTopics} = useContext(DataContext);
+
   /**
    * Mostar la pagina selecionada
    * @param {string} pSelectedPage ¿Nombre de la pagina?
@@ -21,18 +23,16 @@ export const HeaderMain = ({ updatePage, pageName }) => {
   };
 
   // Revisar la ultima seccion ------------------------------------------------
-  const { setSavedCollection } = useContext(DataContext);
-  const [setIndicatorLoadSection] = useState(false);
 
-  const funcCheckLatestSection = () => {
-    let latestSectionData = localStorage.getItem("pagelist__latestSection");
-    // Validar el tipo de dato
-    if (typeof latestSectionData === "string") {
-      latestSectionData = JSON.parse(latestSectionData);
-      setSavedCollection(latestSectionData);
-    }
-    // Imprimir un mensaje
-    setIndicatorLoadSection(true);
+  const checkLatestSection = () => {
+    let datas = localStorage.getItem("pagelist__latestSection");
+
+    datas = JSON.parse(datas);
+    // Actualizar datos
+    setDataCollections(datas.collections)
+    setDataTopics(datas.topics)
+    setDataLists(datas.lists)
+    setDataBookmarks(datas.bookmarks)
   };
 
   return (
@@ -58,7 +58,7 @@ export const HeaderMain = ({ updatePage, pageName }) => {
         </WrapBase>
         <div className={css.Navbar_box}>
           <ButtonBase text="Save" icon="save-outline" />
-          <ButtonBase text="Load" icon="update" handleClick={funcCheckLatestSection} />
+          <ButtonBase text="Load" icon="update" handleClick={checkLatestSection} />
           <ButtonBase text="Config" icon="settings-outline" />
         </div>
       </nav>

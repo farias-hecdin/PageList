@@ -1,14 +1,14 @@
 [
   {
-    "originId": "C1-T1",
-    "id": "C1-T1-L1",
+    "originId": "COL1-TOP1",
+    "id": "COL1-TOP1-LIS1",
     "name": "JavaScript",
-    "links": []
+    "bookmarks": []
   },
   {
-    "originId": "C1-T2",
-    "id": "C1-T2-L1",
+    "originId": "COL1-TOP2",
+    "id": "COL1-TOP2-LIS1",
     "name": "English",
-    "links": []
+    "bookmarks": []
   }
 ]

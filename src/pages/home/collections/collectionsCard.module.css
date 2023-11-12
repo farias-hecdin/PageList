@@ -1,5 +1,8 @@
 .Card {
   position: relative;
+  &:global(.--active) &_box {
+    color: var(--co-greenish);
+  }
   &_box {
     display: flex;
     flex-direction: column;
@@ -13,9 +16,6 @@
     border-radius: 0.4rem;
     background-color: var(--co-mountain-fig);
     color: var(--co-carbon-footprint);
-    &:global(.--active) {
-      color: var(--co-greenish);
-    }
     & > iconify-icon {
       --size: 2rem;
       font-size: 2rem;

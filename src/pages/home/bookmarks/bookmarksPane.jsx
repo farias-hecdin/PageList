@@ -8,28 +8,47 @@ import { useContext } from "react";
 // Nodo previo: ../../home/homePage.jsx
 
 export const BookmarksPane = () => {
-  const { dataBookmarks, selectedCollection } = useContext(DataContext);
-  const { counterLists } = useContext(StateContext);
+  const { counterLists, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
+  const { dataBookmarks, selectedItem, setTargetItem, setDataBookmarks } = useContext(DataContext);
 
   return (
     <section className={css.Container}>
-      {selectedCollection.listId === "0" ? (
-        <MessageFeedback icon="info-outline" title="Nothing here" text="Choose a list to access your favorite links." />
+      {selectedItem.listId === "0" ? (
+        <MessageFeedback
+          icon="info-outline"
+          title="Nothing here"
+          text="Choose a list to access your favorite bookmarks."
+        />
       ) : (
         <>
           <header className={css.Header}>
             <div>
-              <h2 className={css.Header_title}>{selectedCollection.listName}</h2>
+              <h2 className={css.Header_title}>{selectedItem.listName}</h2>
               <p className={css.Header_text}>{counterLists} bookmarks</p>
             </div>
             <ButtonBase icon="filter-list" />
           </header>
           <ul className={css.List}>
-            {dataBookmarks.map((links) => {
-              if (links.originId === selectedCollection.listId) {
+            {dataBookmarks.map((bookmark) => {
+              if (bookmark.originId === selectedItem.listId) {
                 return (
                   <li key={crypto.randomUUID()}>
-                    <BookmarksCard title={links.title} url={links.url} />
+                    <BookmarksCard title={bookmark.name} url={bookmark.url}>
+                      <ButtonBase
+                        icon="more-vert"
+                        styled="--ghost TopicsPane_WQkiS"
+                        handleClick={() => {
+                          setOpenModalEditMode(!openModalEditMode);
+                          setTargetItem({
+                            id: bookmark.id,
+                            name: bookmark.name,
+                            origin: bookmark.originId,
+                            state: dataBookmarks,
+                            set: setDataBookmarks,
+                          });
+                        }}
+                      />
+                    </BookmarksCard>
                   </li>
                 );
               }

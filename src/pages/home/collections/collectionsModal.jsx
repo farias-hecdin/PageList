@@ -7,12 +7,12 @@ import { useEffect } from "react";
 import { compareAndCountIds } from "../../../utils/common";
 
 export const CollectionsModal = ({ isOpen, handleClick }) => {
-  const { dataCollections, setDataCollections, dataTopics, selectedCollection, setSelectedCollection, setDeleteItem } =
+  const { dataCollections, setDataCollections, dataTopics, selectedItem, setSelectedItem, setTargetItem } =
     useContext(DataContext);
   const { setCounterTopics, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
 
   /**
-   * Actualiza el estado `selectedCollection()` de acuerdo a la coleccion selecionada.
+   * Actualiza el estado de acuerdo a la coleccion selecionada.
    * @param {Array|string} data_
    */
   const selectCollectionAndUpdateState = (data_) => {
@@ -20,7 +20,7 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
     let name = data_?.name || "None";
 
     // Actualizar el estado
-    setSelectedCollection((prevState) => ({
+    setSelectedItem((prevState) => ({
       ...prevState,
       collectionId: id,
       collectionName: name,
@@ -37,8 +37,8 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
   };
   // Actualizar el contador de `topics`
   useEffect(() => {
-    currentNumberElements(selectedCollection);
-  }, [dataTopics, selectedCollection]);
+    currentNumberElements(selectedItem);
+  }, [dataTopics, selectedItem]);
 
   return (
     <>
@@ -55,7 +55,7 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
             <CollectionsCard
               icon="inventory-2-outline"
               text={"None"}
-              styled={selectedCollection.id === "None" && "--active"}
+              styled={selectedItem.collectionId === "0" && "--active"}
               handleClick={() => selectCollectionAndUpdateState("None")}
             />
           </li>
@@ -64,11 +64,11 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
               <CollectionsCard
                 icon="inventory-2-outline"
                 text={collection.name}
-                styled={selectedCollection.id === collection.id && "--active"}
+                styled={selectedItem.collectionId === collection.id && "--active"}
                 handleClick={() => selectCollectionAndUpdateState(collection)}
                 handleSecondClick={() => {
                   setOpenModalEditMode(!openModalEditMode);
-                  setDeleteItem({
+                  setTargetItem({
                     id: collection.id,
                     name: collection.name,
                     state: dataCollections,

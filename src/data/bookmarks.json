@@ -1,14 +1,15 @@
 [
   {
-    "originId": "C1-T1-L1",
-    "id": "C1-T1-L1-B1",
-    "title": "JavaScript Tutorial",
+    "originId": "COL1-TOP1-LIS1",
+    "id": "COL1-TOP1-LIS1-BOO1",
+    "name": "JavaScript TOPutorial",
     "url": "https://www.w3schools.com/js/"
   },
   {
-    "originId": "C1-T2-L1",
-    "id": "C1-T2-L1-B1",
-    "title": "Duolingo",
+    "originId": "COL1-TOP2-LIS1",
+    "id": "COL1-TOP2-LIS1-BOO1",
+    "name": "Duolingo",
     "url": "https://www.duolingo.com/learn/en"
   }
 ]
+

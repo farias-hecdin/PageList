@@ -1,13 +1,13 @@
 [
   {
     "originId": "0",
-    "id": "C1",
+    "id": "COL1",
     "name": "Learning",
     "topics": []
   },
   {
     "originId": "0",
-    "id": "C2",
+    "id": "COL2",
     "name": "Personal",
     "topics": []
   }
