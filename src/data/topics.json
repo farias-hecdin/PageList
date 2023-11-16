@@ -1,19 +1,19 @@
 [
   {
-    "originId": "COL1",
-    "id": "COL1-TOP1",
+    "originId": "_Learning",
+    "id": "_Programming",
     "name": "Programming",
     "lists": []
   },
   {
-    "originId": "COL1",
-    "id": "COL1-TOP2",
+    "originId": "_Learning",
+    "id": "_Languages",
     "name": "Languages",
     "lists": []
   },
   {
-    "originId": "COL2",
-    "id": "COL2-TOP1",
+    "originId": "_Personal",
+    "id": "_News",
     "name": "News",
     "lists": []
   }

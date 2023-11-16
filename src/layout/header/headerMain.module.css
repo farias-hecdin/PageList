@@ -29,4 +29,10 @@
     align-items: center;
     gap: 0.5rem;
   }
+  &_message {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: yellow;
+  }
 }

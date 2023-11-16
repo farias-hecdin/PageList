@@ -1,7 +1,7 @@
 import css from "./headerMain.module.css";
 import website_logo from "../../assets/brand/fake-logo.svg";
-import { ButtonBase, WrapBase } from "../../components/index.jsx";
-import { useContext } from "react";
+import { ButtonBase, Icon, WrapBase } from "../../components/index.jsx";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { DataContext } from "../../context/data/dataProvider";
 
@@ -12,7 +12,7 @@ import { DataContext } from "../../context/data/dataProvider";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName }) => {
-  const {setDataBookmarks, setDataCollections, setDataLists, setDataTopics} = useContext(DataContext);
+  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics } = useContext(DataContext);
 
   /**
    * Mostar la pagina selecionada
@@ -22,18 +22,18 @@ export const HeaderMain = ({ updatePage, pageName }) => {
     updatePage(pSelectedPage);
   };
 
-  // Revisar la ultima seccion ------------------------------------------------
-
   const checkLatestSection = () => {
     let datas = localStorage.getItem("pagelist__latestSection");
 
     datas = JSON.parse(datas);
     // Actualizar datos
-    setDataCollections(datas.collections)
-    setDataTopics(datas.topics)
-    setDataLists(datas.lists)
-    setDataBookmarks(datas.bookmarks)
+    setDataCollections(datas.collections);
+    setDataTopics(datas.topics);
+    setDataLists(datas.lists);
+    setDataBookmarks(datas.bookmarks);
   };
+
+  /** !feat: Notificar que se han producidos cambios en los datos */
 
   return (
     <header className={css.Container}>
@@ -42,6 +42,11 @@ export const HeaderMain = ({ updatePage, pageName }) => {
         <span className={css.Logo_title}>Pagelist</span>
       </div>
       <nav className={css.Navbar}>
+        {/* { notif == true ? ( */}
+        {/*   <p className={css.Navbar_message}> */}
+        {/*     <Icon icon="warning-outline" /> */}
+        {/*   </p>) : "" */}
+        {/* } */}
         <WrapBase>
           <ButtonBase
             styled={`HeaderMain_UlICn ${pageName === "Home" && "--active"}`}
@@ -57,7 +62,6 @@ export const HeaderMain = ({ updatePage, pageName }) => {
           />
         </WrapBase>
         <div className={css.Navbar_box}>
-          <ButtonBase text="Save" icon="save-outline" />
           <ButtonBase text="Load" icon="update" handleClick={checkLatestSection} />
           <ButtonBase text="Config" icon="settings-outline" />
         </div>

@@ -1,5 +1,5 @@
 import css from "./modalAddBookmarks.module.css";
-import { ButtonBase, DetailsBase, ModalBase, WrapBase } from "../../../components/index";
+import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index";
 import { DataContext } from "../../../context/index";
 import { useContext } from "react";
 import { sortByName } from "../../../utils/common";
@@ -29,7 +29,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
     let $nodeInput = document.getElementById(_inputId);
     let $nodeSelect = document.getElementById(_selectId);
     let selectValue = $nodeSelect?.options[$nodeSelect.selectedIndex].value;
-    let inputValue = $nodeInput.value === "" ? "_EMPTY_" : $nodeInput.value;
+    let inputValue = $nodeInput.value === "" ? "EMPTY" : $nodeInput.value;
     $nodeInput.value = "";
 
     return {
@@ -75,13 +75,15 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
     alert("New list added");
   };
 
-  const addNewLinks = () => {
+  const addNewBookmarks = () => {
     let data = extractInputAndSelectValue("input_ooIRWuISR1", "select_9Ta2F92bIM");
+    let $node = document.getElementById("input_GrLSSVeSuZ");
+    let nodeValue = $node.value;
     let template = {
       originId: data.selectValue,
       id: crypto.randomUUID(),
-      title: data.inputValue,
-      url: data.selectValue,
+      name: data.inputValue,
+      url: nodeValue,
     };
     setDataBookmarks((prev) => [template, ...prev]);
     alert("New link added");
@@ -96,88 +98,72 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       <div className={css.Container_box}>
         <DetailsBase title="Add a new collection" icon="inventory-2-outline">
           <div className={css.Form}>
-            <WrapBase styled="ModalAddBookmarks_AW5eY">
-              <input
-                className={css.Form_input}
-                type="text"
-                placeholder="Add collection..."
-                id="input_T22VL1iGPC"
-                maxLength={23}
-              />
-            </WrapBase>
+            <input
+              className={css.Form_input}
+              type="text"
+              placeholder="Add a collection"
+              id="input_T22VL1iGPC"
+              maxLength={30}
+            />
             <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" handleClick={() => addNewCollection()} />
           </div>
         </DetailsBase>
         <DetailsBase title="Add a new topic" icon="folder-open-outline">
           <div className={css.Form}>
-            <WrapBase styled="ModalAddBookmarks_AW5eY">
-              <input
-                className={css.Form_input}
-                type="text"
-                placeholder="Add topic..."
-                id="input_a22VL1iGPC"
-                maxLength={23}
-              />
-              <span>for</span>
-              <div className={css.Select}>
-                <select name="choiceTopics" id="select_Fgh3JwqNKz" className={css.Select_input}>
-                  {sortCollections.map((itemCollection) => (
-                    <option key={crypto.randomUUID()} value={itemCollection.id}>
-                      {itemCollection.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </WrapBase>
-            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add topic" handleClick={(e) => addNewTopic(e)} />
+            <input
+              className={css.Form_input}
+              type="text"
+              placeholder="Add a topic"
+              id="input_a22VL1iGPC"
+              maxLength={30}
+            />
+            <ButtonSelect id="select_fgh3jwqnkz" styled="ModalAddBookmars_mojxs">
+              {sortCollections.map((collection) => (
+                <option key={crypto.randomUUID()} value={collection.id}>
+                  {collection.name}
+                </option>
+              ))}
+            </ButtonSelect>
+            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add topic" handleClick={() => addNewTopic()} />
           </div>
         </DetailsBase>
         <DetailsBase title="Add a new list" icon="bookmarks-outline">
           <div className={css.Form}>
-            <WrapBase styled="ModalAddBookmarks_AW5eY">
-              <input
-                className={css.Form_input}
-                type="text"
-                placeholder="Add list..."
-                id="input_ooIRWuISR8"
-                maxLength={23}
-              />
-              <span>for</span>
-              <div className={css.Select}>
-                <select name="choiceTopics" id="select_ZTa2FX2bIM" className={css.Select_input}>
-                  {sortTopics.map((itemTopics) => (
-                    <option key={crypto.randomUUID()} value={itemTopics.id}>
-                      {itemTopics.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </WrapBase>
-            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewList(e)} />
+            <input
+              className={css.Form_input}
+              type="text"
+              placeholder="Add a list"
+              id="input_ooIRWuISR8"
+              maxLength={30}
+            />
+            <ButtonSelect id="select_ZTa2FX2bIM" styled="ModalAddBookmars_mojxs">
+              {sortTopics.map((topic) => (
+                <option key={crypto.randomUUID()} value={topic.id}>
+                  {topic.name}
+                </option>
+              ))}
+            </ButtonSelect>
+            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={() => addNewList()} />
           </div>
         </DetailsBase>
         <DetailsBase title="Add a new bookmarks" icon="bookmark-outline">
           <div className={css.Form}>
-            <WrapBase styled="ModalAddBookmarks_AW5eY">
-              <input
-                className={css.Form_input}
-                type="text"
-                placeholder="Add list..."
-                id="input_ooIRWuISR1"
-                maxLength={23}
-              />
-              <span>for</span>
-              <div className={css.Select}>
-                <select name="choiceTopics" id="select_9Ta2F92bIM" className={css.Select_input}>
-                  {sortLists.map((item) => (
-                    <option key={crypto.randomUUID()} value={item.id}>
-                      {item.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </WrapBase>
-            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={(e) => addNewLinks(e)} />
+            <input
+              className={css.Form_input}
+              type="text"
+              placeholder="Add a bookmark"
+              id="input_ooIRWuISR1"
+              maxLength={30}
+            />
+            <input className={css.Form_input} type="text" placeholder="Add an URL" id="input_GrLSSVeSuZ" />
+            <ButtonSelect id="select_9Ta2F92bIM" styled="ModalAddBookmars_mojxs">
+              {sortLists.map((list) => (
+                <option key={crypto.randomUUID()} value={list.id}>
+                  {list.name}
+                </option>
+              ))}
+            </ButtonSelect>
+            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={() => addNewBookmarks()} />
           </div>
         </DetailsBase>
       </div>

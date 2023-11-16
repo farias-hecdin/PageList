@@ -18,10 +18,3 @@
 .Container:global(.HomePage_JhI8l) {
   align-items: center;
 }
-
-.Container:global(.ModalAddBookmarks_AW5eY) {
-  align-items: center;
-  gap: 1rem;
-  width: 25rem;
-  color: var(--co-cold-morning);
-}

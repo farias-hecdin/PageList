@@ -1,8 +1,8 @@
 import css from "./modalEditMode.module.css";
-import { ButtonBase, DetailsBase, ModalBase } from "../../../components/index.jsx";
-import { deleteElementAndUpdateState } from "../../../utils/common";
-import { useContext } from "react";
-import { DataContext } from "../../../context";
+import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index.jsx";
+import { useContext, useState } from "react";
+import { DataContext } from "../../../context/index.jsx";
+import { deleteElementAndUpdateState, moveElementAndUpdateState, updateElementAndUpdateState } from "./modalEditMode.script.js";
 
 /**
  * @param {object} prop
@@ -11,28 +11,43 @@ import { DataContext } from "../../../context";
  * @returns {HTMLElement}
  */
 export const ModalEditMode = ({ isOpen, handleClick }) => {
-  const { targetItem, dataLists, setDataBookmarks, dataBookmarks } = useContext(DataContext);
+  const { targetItem, dataLists, setDataLists, setDataBookmarks, dataBookmarks, dataTopics } = useContext(DataContext);
+  const [titleValue, setTitleValue] = useState(null)
+  const [urlValue, setUrlValue] = useState(null)
+  console.log(urlValue)
 
-  /**
-   * Mover un elemento y actualizar el estado
-   * @param {string} id_ `string` ¿Id del elemento a mover?
-   */
-  const moveElementAndUpdateState = (id_) => {
-    const $nodeSelect = document.getElementById("select_LCAXUzHOdk");
-    const datas = dataBookmarks;
-    const value = $nodeSelect.value;
+  const typeElms = {
+    list: {
+      dataOrigin: dataTopics,
+      dataFromElement: dataLists,
+      setFromElement: setDataLists,
+    },
+    bookmark: {
+      dataOrigin: dataLists,
+      dataFromElement: dataBookmarks,
+      setFromElement: setDataBookmarks,
+    },
+  };
+  const { dataOrigin, dataFromElement, setFromElement } = typeElms[targetItem.type] || typeElms["bookmark"];
 
-    const newDatas = datas.map((item) => {
-      if (id_ === item.id) {
-        return {
-          ...item,
-          originId: value,
-        };
-      }
-      return item;
-    });
-
-    setDataBookmarks(newDatas);
+  const ToFuncDelete = {
+    pElement: targetItem.id,
+    pOrigin: targetItem.state,
+    pUpdater: setFromElement,
+  };
+  const ToFuncMove = {
+    pElement: targetItem.id,
+    pOrigin: targetItem.state,
+    pUpdater: setFromElement,
+    pSelector: "#select_LCAXUzHOdk",
+  };
+  const ToFuncUpdate = {
+    pElement: targetItem.id,
+    pOrigin: targetItem.state,
+    pUpdater: setFromElement,
+    pType: targetItem.type,
+    pSelector: "#input_EJ7aOOCCQI",
+    pSelector2: "#input_P0Z5gb5BMg",
   };
 
   return (
@@ -47,32 +62,46 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
       <div className={css.Container_box}>
         <DetailsBase title="Delete this element" icon="delete-forever-outline">
           <div className={css.Container_details}>
-            <p>
-              Do you want delete <b>{targetItem.name}</b>
-            </p>
-            <ButtonBase
-              text="Delete"
-              handleClick={() => deleteElementAndUpdateState(targetItem.id, targetItem.state, targetItem.set)}
-            />
+            <p>Do you want delete <b>{targetItem.name}</b></p>
+            <ButtonBase text="Delete" handleClick={() => deleteElementAndUpdateState(ToFuncDelete)} />
           </div>
         </DetailsBase>
-        <DetailsBase title="Move this element" icon="pan-tool-outline">
-          <div className={css.Container_details}>
-            <p>In which list would you like to move the bookmark?</p>
-            <select name="choiceTopics" id="select_LCAXUzHOdk" className={css.Select_input}>
-              {dataLists.map((item) => (
-                <option key={crypto.randomUUID()} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-            <ButtonBase text="Move" handleClick={() => moveElementAndUpdateState(targetItem.id)} />
-          </div>
-        </DetailsBase>
+        {targetItem.type !== "collection" && targetItem.type !== "topic" && (
+          <DetailsBase title="Move this element" icon="pan-tool-outline">
+            <div className={css.Container_details}>
+              <p>In which list would you like to move the bookmark?</p>
+              <ButtonSelect id="select_LCAXUzHOdk" styled="ModalEditMode_mojxs">
+                {dataOrigin.map((item) => (
+                  <option key={crypto.randomUUID()} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </ButtonSelect>
+              <ButtonBase text="Move" handleClick={() => moveElementAndUpdateState(ToFuncMove)} />
+            </div>
+          </DetailsBase>
+        )}
         <DetailsBase title="Update this element" icon="title">
-          <div className={css.Container_details}>
-            <ButtonBase text="Update" />
-          </div>
+          {/* <div className={css.Container_details}> */}
+          {/*   <input */}
+          {/*     type="text" */}
+          {/*     value={titleValue || targetItem.name} */}
+          {/*     onChange={e => setTitleValue(e.target.value)} */}
+          {/*     id="input_EJ7aOOCCQI" */}
+          {/*   /> */}
+          {/*   {targetItem.type === "bookmark" && */}
+          {/*     <input */}
+          {/*       type="text" */}
+          {/*       value={urlValue || targetItem.url} */}
+          {/*       onChange={e => setUrlValue(e.target.value)} */}
+          {/*       id="input_P0Z5gb5BMg" */}
+          {/*     /> */}
+          {/*   } */}
+          {/*   <ButtonBase */}
+          {/*     text="Update" */}
+          {/*     handleClick={() => updateElementAndUpdateState(ToFuncUpdate)} */}
+          {/*   /> */}
+          {/* </div> */}
         </DetailsBase>
       </div>
     </ModalBase>

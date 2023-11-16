@@ -1,16 +1,4 @@
 /**
- * Eliminar un elemento de un Array de objetos y anexarlos al estado `set`
- * @param {string} elementId_ ¿Id del elemento a eliminar?
- * @param {Array} originElement_ ¿Origen del elemento a eliminar?
- * @param {Function} updaterOrigin_ ¿Funcion `set` para actualizar el origen del elemento?
- */
-export const deleteElementAndUpdateState = (elementId_, originElement_, updaterOrigin_) => {
-  let data = originElement_;
-  let dataBefore = data.filter((item) => item.id !== elementId_);
-  updaterOrigin_(dataBefore);
-};
-
-/**
  * Ordenar los elementos de un Array de objetos por orden alfabetico y retorna
  * el resultado
  * @param {Array} fromArray_ ¿Elementos a ordenar?

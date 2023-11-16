@@ -28,9 +28,17 @@ export const DataProvider = ({ children }) => {
   const [targetItem, setTargetItem] = useState({
     id: "",
     name: "",
+    type: "",
+    url: "",
     data: "",
     set: "",
   });
+  // const [didChange, setDidChange] = useState({
+  //   collection: 0,
+  //   topic: 0,
+  //   list: 0,
+  //   bookmarks: 0,
+  // })
 
   // localstorage
   const [savedData, setSavedData] = useState();
@@ -51,6 +59,8 @@ export const DataProvider = ({ children }) => {
     savedData,
     setSavedData,
     targetItem,
+    // didChange,
+    // setDidChange,
     setTargetItem,
   };
 

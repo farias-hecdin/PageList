@@ -1,15 +1,26 @@
 [
   {
-    "originId": "COL1-TOP1-LIS1",
-    "id": "COL1-TOP1-LIS1-BOO1",
-    "name": "JavaScript TOPutorial",
-    "url": "https://www.w3schools.com/js/"
+    "originId": "_JavaScript",
+    "id": "d4Coe",
+    "name": "Javascript.info - The Modern JavaScript Tutorial",
+    "url": "https://javascript.info"
   },
   {
-    "originId": "COL1-TOP2-LIS1",
-    "id": "COL1-TOP2-LIS1-BOO1",
-    "name": "Duolingo",
-    "url": "https://www.duolingo.com/learn/en"
+    "originId": "_JavaScript",
+    "id": "uL4Do",
+    "name": "MDN Web Docs",
+    "url": "https://developer.mozilla.org"
+  },
+{
+    "originId": "_Python",
+    "id": "u54DX",
+    "name": "Programiz - Learn programming for Free",
+    "url": "https://www.programiz.com/python-programming"
+  },
+  {
+    "originId": "_English",
+    "id": "vRokr",
+    "name": "Duolingo - The free, fun, and effective way to learn a language!",
+    "url": "https://www.duolingo.com"
   }
 ]
-

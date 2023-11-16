@@ -1,0 +1,37 @@
+.Button {
+  padding: 0.1rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  background-color: var(--co-mountain-fig) !important;
+  color: var(--co-carbon-footprint);
+  &:hover {
+    border-color: var(--co-greenish);
+    background-color: var(--co-zucchini);
+  }
+  &:hover > &_input {
+    color: var(--co-greenish);
+  }
+  &_input {
+    padding: 0.25rem 0;
+    color: var(--co-carbon-footprint);
+    cursor: pointer;
+    &:focus {
+      color: var(--co-greenish);
+    }
+  }
+  &_input > option {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/** Compose ---------------------------------------------------------------- */
+
+.Button:global(.ModalAddBookmars_mojxs) {
+  width: 25rem;
+}
+
+.Button:global(.ModalEditMode_mojxs) {
+  width: 25rem;
+}

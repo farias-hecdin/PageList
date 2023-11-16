@@ -1,33 +1,44 @@
 .Card {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
   padding: 0.6rem 1.3rem;
   border: 1px solid transparent;
   border-radius: 0.4rem;
   background-color: var(--co-diamond-black);
   color: var(--co-cold-morning);
-  &:hover {
-    border-color: var(--co-carbon-footprint);
+  gap: 1rem;
+  &_box {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
   }
   &_content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 28rem;
   }
   &_title {
     margin: 0 0 0.25rem;
     color: var(--co-cold-morning);
     font-weight: var(--fo-medium);
     font-size: 1.2rem;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     &:hover {
       text-decoration: underline;
     }
   }
-  &_text {
+  &_url {
     color: var(--co-carbon-footprint);
     font-size: 0.9rem;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &_thumb {
     display: flex;

@@ -1,5 +1,6 @@
 .Form {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 0.8rem;
   &_title {
@@ -7,15 +8,15 @@
     color: var(--co-cold-morning);
   }
   &_input {
-    width: 100%;
-    margin: 0 0.25rem;
-    padding: 0.25rem 0;
-    border: 1px solid transparent;
+    width: 25rem;
+    padding: 0.5rem 0.8rem;
+    border: 2px solid var(--co-mountain-fig);
+    border-radius: 0.5rem;
     outline: none;
     background-color: var(--co-black-pearl);
     color: var(--co-carbon-footprint);
     &:focus {
-      border-bottom-color: var(--co-greenish);
+      border-color: var(--co-greenish);
       color: var(--co-greenish);
     }
   }
@@ -33,37 +34,11 @@
     flex-direction: column;
     gap: 0.5rem;
     width: 40rem;
+    max-height: 65dvh;
+    overflow: auto;
     margin: 2rem 0;
   }
   &_text {
     color: var(--co-cold-morning);
-  }
-}
-
-.Select {
-  width: 100%;
-  padding: 0 0.25rem;
-  border: 1px solid var(--co-carbon-footprint);
-  border-radius: 0.5rem;
-  background-color: var(--co-black-pearl);
-  &:hover {
-    border-color: var(--co-greenish);
-    background-color: var(--co-zucchini);
-  }
-  &:hover > .Select_input {
-    color: var(--co-greenish);
-  }
-  &_input {
-    padding: 0.25rem 0;
-    color: var(--co-carbon-footprint);
-    cursor: pointer;
-    &:focus {
-      color: var(--co-greenish);
-    }
-  }
-  &_input > option {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 }

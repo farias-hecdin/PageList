@@ -37,9 +37,9 @@ export const mapNewDataArray = (theCollections, theTopics, theLists, theBookmark
  */
 export const getCurrentDate = () => {
   let d = new Date();
-  let year = (d.getFullYear()).toString().slice(-2)
-  let month = (d.getMonth() + 1).toString().slice(-2)
-  let day = (d.getDay()).toString().slice(-2)
+  let year = d.getFullYear().toString().slice(-2);
+  let month = (d.getMonth() + 1).toString().slice(-2);
+  let day = d.getDay().toString().slice(-2);
 
   return `${year}_${month}_${day}`;
 };
@@ -64,7 +64,7 @@ export const makeHtmlNodeAndFile = (theFileName, theContent) => {
 
 /**
  * Comprobar si los datos cumple con el patron asignado y retornar un array
- * de objectos
+ * de objetos
  * @param {string} theData ¿JSON a validar en string?
  * @returns {Array} Array de objetos
  */
@@ -93,7 +93,7 @@ const areDataAvailable = (datas, text) => {
 
 /**
  * Importar datos del input y validar sus propiedades
- * @param {string} ElementById
+ * @param {string} ElementById ¿Id del nodo HTML?
  * @returns {Array} Array de objetos
  */
 export const importDataAndValidate = (ElementById) => {
@@ -142,7 +142,7 @@ const extractDataFromCollections = (theDatas) => {
       originId: collection.originId,
       id: collection.id,
       name: collection.name,
-      topics: []
+      topics: [],
     };
   });
 };
@@ -155,7 +155,7 @@ const extractDataFromTopics = (theDatas) => {
         originId: topic.originId,
         id: topic.id,
         name: topic.name,
-        lists: []
+        lists: [],
       };
     });
   });
@@ -170,7 +170,7 @@ const extractDataFromLists = (theDatas) => {
           originId: list.originId,
           id: list.id,
           name: list.name,
-          bookmarks: []
+          bookmarks: [],
         };
       });
     });
@@ -187,7 +187,7 @@ const extractDataFromBookmarks = (theDatas) => {
             originId: bookmark.originId,
             id: bookmark.id,
             name: bookmark.name,
-            url: bookmark.url
+            url: bookmark.url,
           };
         });
       });
@@ -196,9 +196,10 @@ const extractDataFromBookmarks = (theDatas) => {
 };
 
 /**
- * Descomponer los datos en varias partes
- * @param {Array} theDatas
- * @returns {object}
+ * Descomponer los datos en partes para ser guardados en su respetivo estado
+ * (dataCollection, dataTopics, ...)
+ * @param {Array} theDatas ¿Datos a descomponer?
+ * @returns {object} Un objecto
  */
 export const breakDownData = (theDatas) => {
   const collections = extractDataFromCollections(theDatas);
@@ -210,6 +211,6 @@ export const breakDownData = (theDatas) => {
     collections,
     topics,
     lists,
-    bookmarks
+    bookmarks,
   };
 };

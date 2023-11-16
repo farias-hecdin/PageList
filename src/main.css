@@ -1,6 +1,7 @@
 /* Typography -------------------------------------------------------------- */
 
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
 /* Fonts and colors  ------------------------------------------------------- */
 
@@ -11,6 +12,7 @@
 
   --fo-base: "Titillium Web", sans-serif;
   --fo-primary: var(--fo-base);
+  --fo-mono: "Roboto Mono", monospace;
 
   /* Weight */
 
@@ -102,6 +104,9 @@ select::-ms-expand {
 
 select {
   outline: none;
+}
+
+input {
 }
 
 /* Special classes --------------------------------------------------------- */

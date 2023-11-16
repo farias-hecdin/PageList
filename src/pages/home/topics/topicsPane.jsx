@@ -71,12 +71,14 @@ export const TopicsPane = () => {
                           styled="--ghost TopicsPane_WQkiS"
                           handleClick={() => {
                             setOpenModalEditMode(!openModalEditMode);
-                            setTargetItem({
+                            setTargetItem((prev) => ({
+                              ...prev,
                               id: topic.id,
                               name: topic.name,
+                              type: "topic",
                               state: dataTopics,
                               set: setDataTopics,
-                            });
+                            }));
                           }}
                         />
                       </div>
@@ -96,12 +98,14 @@ export const TopicsPane = () => {
                                   styled="--ghost TopicsPane_WQkiS"
                                   handleClick={() => {
                                     setOpenModalEditMode(!openModalEditMode);
-                                    setTargetItem({
+                                    setTargetItem((prev) => ({
+                                      ...prev,
                                       id: list.id,
                                       name: list.name,
+                                      type: "list",
                                       state: dataLists,
                                       set: setDataLists,
-                                    });
+                                    }));
                                   }}
                                 />
                               </li>

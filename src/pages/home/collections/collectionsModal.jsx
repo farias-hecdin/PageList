@@ -68,12 +68,14 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
                 handleClick={() => selectCollectionAndUpdateState(collection)}
                 handleSecondClick={() => {
                   setOpenModalEditMode(!openModalEditMode);
-                  setTargetItem({
+                  setTargetItem((prev) => ({
+                    ...prev,
                     id: collection.id,
                     name: collection.name,
+                    type: "collection",
                     state: dataCollections,
                     set: setDataCollections,
-                  });
+                  }));
                 }}
                 hasMenu={true}
               />

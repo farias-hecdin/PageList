@@ -1,3 +1,4 @@
+// @ts-check
 import css from "./backupPage.module.css";
 import { ButtonBase } from "../../components/index";
 import { DataContext } from "../../context/index";
@@ -56,23 +57,23 @@ export const BackupPage = () => {
   const clickButtonImport = () => {
     try {
       const newBookmarksList = importDataAndValidate("textarea_xucOeryf8lU");
-      const datas = breakDownData(newBookmarksList)
+      const datas = breakDownData(newBookmarksList);
 
       // Guardar en localStorage
       saveDataInLocalStorage(datas);
 
       // Actualizar datos
-      setDataCollections(datas.collections)
-      setDataTopics(datas.topics)
-      setDataLists(datas.lists)
-      setDataBookmarks(datas.bookmarks)
+      setDataCollections(datas.collections);
+      setDataTopics(datas.topics);
+      setDataLists(datas.lists);
+      setDataBookmarks(datas.bookmarks);
 
       // Reiniciar las referencias de `collection`
-      setSelectedItem(prevState => ({
+      setSelectedItem((prevState) => ({
         ...prevState,
         collectionId: "0",
         collectionName: "None",
-      }))
+      }));
     } catch (error) {
       console.warn("SavePage > clickButtonImport", error.stack);
     }

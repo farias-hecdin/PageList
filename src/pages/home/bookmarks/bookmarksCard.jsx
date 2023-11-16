@@ -15,27 +15,29 @@ export const BookmarksCard = ({ title, url, children }) => {
    * @param {string} pText
    * @returns {string}
    */
-  const funcGetFirstTwoLettersText = (pText) => pText.slice(0, 2);
+  const getFirstTwoLettersText = (pText) => pText.slice(0, 2);
 
   /**
    * Convertir en mayuscula un titulo
    * @param {string} pText
    * @returns {string}
    */
-  const funcToUppperCase = (pText) => pText.toUpperCase();
+  const toUppperCase = (pText) => pText.toUpperCase();
 
-  titleLinks = funcGetFirstTwoLettersText(titleLinks);
-  titleLinks = funcToUppperCase(titleLinks);
+  titleLinks = getFirstTwoLettersText(titleLinks);
+  titleLinks = toUppperCase(titleLinks);
 
   return (
     <article className={css.Card}>
-      <p className={css.Card_thumb}>{titleLinks}</p>
-      <p className={css.Card_content}>
-        <a className={css.Card_title} href={url} target="_blank" rel="noopener noreferrer">
-          {title}
-        </a>
-        <span className={css.Card_text}>{url}</span>
-      </p>
+      <div className={css.Card_box}>
+        <p className={css.Card_thumb}>{titleLinks}</p>
+        <p className={css.Card_content}>
+          <a className={css.Card_title} href={url} target="_blank" rel="noopener noreferrer">
+            {title}
+          </a>
+          <span className={css.Card_url}>{url}</span>
+        </p>
+      </div>
       {children}
     </article>
   );

@@ -42,7 +42,8 @@ export const BookmarksPane = () => {
                           setTargetItem({
                             id: bookmark.id,
                             name: bookmark.name,
-                            origin: bookmark.originId,
+                            url: bookmark.url,
+                            type: "bookmark",
                             state: dataBookmarks,
                             set: setDataBookmarks,
                           });
