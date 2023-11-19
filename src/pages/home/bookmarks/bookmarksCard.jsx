@@ -11,14 +11,14 @@ export const BookmarksCard = ({ title, url, children }) => {
   let titleLinks = title;
 
   /**
-   * Obtener las primeras dos letras de un titulo
+   * Obtener las primeras dos caracteres de un texto
    * @param {string} pText
    * @returns {string}
    */
   const getFirstTwoLettersText = (pText) => pText.slice(0, 2);
 
   /**
-   * Convertir en mayuscula un titulo
+   * Convertir en mayuscula un texto
    * @param {string} pText
    * @returns {string}
    */

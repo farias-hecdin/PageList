@@ -32,7 +32,7 @@
   &_message {
     display: flex;
     align-items: center;
-    font-size: 2rem;
     color: yellow;
+    font-size: 2rem;
   }
 }

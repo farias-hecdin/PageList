@@ -12,9 +12,8 @@
   &_text {
     font-size: 1rem;
   }
-  & > iconify-icon {
-    --size: 1.3rem;
-    font-size: 1.3rem;
+  & > svg {
+    font-size: 1rem;
   }
   &:hover {
     border-color: var(--co-greenish);
@@ -29,7 +28,7 @@
   &:global(.--active) {
     background-color: var(--co-zucchini);
     color: var(--co-greenish);
-    & > iconify-icon {
+    & > svg {
       color: var(--fi-greenish);
     }
   }

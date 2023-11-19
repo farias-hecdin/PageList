@@ -1,17 +1,16 @@
 /**
- * Ordenar los elementos de un Array de objetos por orden alfabetico y retorna
+ * Ordenar la propiedad `name` de los elementos por orden alfabetico y retorna
  * el resultado
- * @param {Array} fromArray_ ¿Elementos a ordenar?
- * @returns {Array}
+ * @param {Array<object>} pData - El array de objetos a ordenar
  */
-export const sortByName = (fromArray_) => {
-  const data = fromArray_;
+export const sortByName = (pData) => {
+  const data = pData;
   data.sort((a, b) => {
     // ignorar upper y lowercase
-    const nameA = a.name.toUpperCase();
-    const nameB = b.name.toUpperCase();
+    const textA = a.title.toUpperCase();
+    const textB = b.title.toUpperCase();
     // retornar un numero
-    return nameA.localeCompare(nameB);
+    return textA.localeCompare(textB);
   });
   return data;
 };
@@ -22,15 +21,15 @@ export const onClickMissing = () => {
 };
 
 /**
- * Comparar `descendent.originId` con `element.id` y retorna el numero de coincidencias.
- * @param {Array} descendentData_ ¿Datos de los elementos descendientes?
- * @param {string} elementId_ ¿Id del elemento actual?
+ * Comparar `children.parent` con `parent.id` y retorna el numero de coincidencias
+ * @param {Array<object>} pChildrenData - Datos de origen de los elementos hijos (children)
+ * @param {string} pElementId - Id del elemento actual (parent)
  * @returns {number}
  */
-export const compareAndCountIds = (descendentData_, elementId_) => {
+export const compareAndCountIds = (pChildrenData, pElementId) => {
   let coincidence = 0;
-  for (const descendent of descendentData_) {
-    if (descendent.originId === elementId_) {
+  for (const children of pChildrenData) {
+    if (children.parent === pElementId) {
       coincidence++;
     }
   }

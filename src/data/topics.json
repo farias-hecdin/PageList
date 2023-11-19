@@ -1,20 +1,20 @@
 [
   {
-    "originId": "_Learning",
+    "parent": "_Learning",
     "id": "_Programming",
-    "name": "Programming",
+    "title": "Programming",
     "lists": []
   },
   {
-    "originId": "_Learning",
+    "parent": "_Learning",
     "id": "_Languages",
-    "name": "Languages",
+    "title": "Languages",
     "lists": []
   },
   {
-    "originId": "_Personal",
+    "parent": "_Personal",
     "id": "_News",
-    "name": "News",
+    "title": "News",
     "lists": []
   }
 ]

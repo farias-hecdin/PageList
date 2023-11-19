@@ -1,9 +1,9 @@
 import css from "./headerMain.module.css";
 import website_logo from "../../assets/brand/fake-logo.svg";
-import { ButtonBase, Icon, WrapBase } from "../../components/index.jsx";
-import { useContext, useEffect } from "react";
-import { useState } from "react";
+import { ButtonBase, WrapBase } from "../../components/index.jsx";
+import { useContext } from "react";
 import { DataContext } from "../../context/data/dataProvider";
+import { onClickMissing } from "../../utils/common";
 
 /**
  * @param {object} prop
@@ -15,8 +15,8 @@ export const HeaderMain = ({ updatePage, pageName }) => {
   const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics } = useContext(DataContext);
 
   /**
-   * Mostar la pagina selecionada
-   * @param {string} pSelectedPage ¿Nombre de la pagina?
+   * Mostrar la pagina selecionada
+   * @param {string} pSelectedPage - Nombre de la pagina
    */
   const showActivePage = (pSelectedPage) => {
     updatePage(pSelectedPage);
@@ -44,26 +44,26 @@ export const HeaderMain = ({ updatePage, pageName }) => {
       <nav className={css.Navbar}>
         {/* { notif == true ? ( */}
         {/*   <p className={css.Navbar_message}> */}
-        {/*     <Icon icon="warning-outline" /> */}
+        {/*     <IconifyWarningOutline" /> */}
         {/*   </p>) : "" */}
         {/* } */}
         <WrapBase>
           <ButtonBase
             styled={`HeaderMain_UlICn ${pageName === "Home" && "--active"}`}
-            icon="bookmarks-outline"
+            icon={<IconifyBookmarksOutline />}
             text="Bookmarks"
             handleClick={() => showActivePage("Home")}
           />
           <ButtonBase
             styled={`HeaderMain_UlICn ${pageName === "Backup" && "--active"}`}
-            icon="hard-drive-outline"
+            icon={<IconifyHardDriveOutline />}
             text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
         </WrapBase>
         <div className={css.Navbar_box}>
-          <ButtonBase text="Load" icon="update" handleClick={checkLatestSection} />
-          <ButtonBase text="Config" icon="settings-outline" />
+          <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} />
+          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={onClickMissing} />
         </div>
       </nav>
     </header>

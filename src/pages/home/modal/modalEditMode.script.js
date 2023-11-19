@@ -1,28 +1,28 @@
 /**
  * Eliminar un elemento y actualizar el estado
- * @param {string} pElement ¿Id del elemento a eliminar?
- * @param {Array<object>} pOrigin ¿Datos de origen del elemento?
- * @param {Function} pUpdater ¿Funcion `set` para actualizar los datos de origen del elemento?
+ * @param {string} pElement - Id del elemento a eliminar
+ * @param {Array<object>} pData - Datos de origen del elemento
+ * @param {Function} pUpdater - Funcion `set` para actualizar los datos de origen del elemento
  */
-export const deleteElementAndUpdateState = ({ pElement, pOrigin, pUpdater }) => {
+export const deleteElementAndUpdateState = ({ pElement, pData, pUpdater }) => {
   let question = confirm("Are you sure");
-  let dataBefore = pOrigin.filter((item) => item.id !== pElement);
-  console.log({ pElement, pOrigin, pUpdater })
+  let dataBefore = pData.filter((item) => item.id !== pElement);
+
   if (question === true) pUpdater(dataBefore);
 };
 
 /**
  * Mover un elemento y actualizar el estado
- * @param {string} pElement ¿Id del elemento a mover?
- * @param {object} pOrigin ¿Origen del elemento?
- * @param {Function} pUpdater ¿Funcion `set` para actualizar los datos de origen del elemento?
- * @param {string} pSelector ¿Id del input/select?
+ * @param {string} pElement - Id del elemento a mover
+ * @param {object} pData - Datos de origen del elemento
+ * @param {Function} pUpdater - Funcion `set` para actualizar los datos de origen del elemento
+ * @param {string} pSelector - Selector del input/select
  */
-export const moveElementAndUpdateState = ({ pElement, pOrigin, pUpdater, pSelector }) => {
+export const moveElementAndUpdateState = ({ pElement, pData, pUpdater, pSelector }) => {
   const $node = document.querySelector(`${pSelector}`);
   const value = $node.value;
 
-  const data = pOrigin.map((item) => {
+  const data = pData.map((item) => {
     if (pElement === item.id) {
       return { ...item, originId: value };
     }
@@ -31,14 +31,15 @@ export const moveElementAndUpdateState = ({ pElement, pOrigin, pUpdater, pSelect
   pUpdater(data);
 };
 
-export const updateElementAndUpdateState = ({ pElement, pOrigin, pUpdater, pSelector, pSelector2, pType }) => {
-  const $node = document.querySelector(`${pSelector}`);
-  const value = $node.value;
-  const value2 = pType === "bookmark" ? document.querySelector(`${pSelector2}`).value : null;
+export const updateElementAndUpdateState = ({ pData, pElement, pType, pUpdater, pValue, pValue2, pEvent }) => {
+  pEvent.preventDefault();
 
-  const newData = pOrigin.map((item) => {
+  const value = pValue;
+  const value2 = pType === "bookmark" ? pValue2 : null;
+
+  const data = pData.map((item) => {
     if (pElement === item.id) {
-      const updatedItem = { ...item, name: value };
+      const updatedItem = { ...item, title: value };
       if (pType === "bookmark") {
         updatedItem.url = value2;
       }
@@ -46,6 +47,5 @@ export const updateElementAndUpdateState = ({ pElement, pOrigin, pUpdater, pSele
     }
     return item;
   });
-  pUpdater(newData);
+  pUpdater(data);
 };
-

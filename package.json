@@ -12,12 +12,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "eslint-plugin-jsdoc": "^46.8.2",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.1.63",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
     "@types/react": "^18.2.35",
     "@types/react-dom": "^18.2.14",
     "@vitejs/plugin-react": "^4.1.1",
@@ -28,6 +30,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "nanoid": "^5.0.2",
+    "plugin-jsx": "link:@svgr/core @svgr/plugin-jsx",
     "postcss": "^8.4.31",
     "postcss-calc": "^9.0.1",
     "postcss-cli": "^10.1.0",
@@ -35,6 +38,8 @@
     "postcss-nested-ancestors": "^3.0.0",
     "postcss-sorting": "^8.0.2",
     "postcss-variable-compress": "^3.0.0",
+    "unplugin-auto-import": "^0.16.7",
+    "unplugin-icons": "^0.17.4",
     "vite": "^4.5.0"
   }
 }

@@ -17,21 +17,19 @@ export const DataProvider = ({ children }) => {
   // Referencias obtenidas al seleccionar un elemento
   const [selectedItem, setSelectedItem] = useState({
     collectionId: "0",
-    collectionName: "None",
+    collectionTitle: "None",
     topicId: "0",
-    topicName: "None",
+    topicTitle: "None",
     listId: "0",
-    listName: "None",
+    listTitle: "None",
     bookmarkId: "0",
-    bookmarkName: "None",
+    bookmarkTitle: "None",
   });
   const [targetItem, setTargetItem] = useState({
     id: "",
-    name: "",
+    title: "",
     type: "",
     url: "",
-    data: "",
-    set: "",
   });
   // const [didChange, setDidChange] = useState({
   //   collection: 0,

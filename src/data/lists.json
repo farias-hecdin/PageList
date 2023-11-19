@@ -1,20 +1,20 @@
 [
   {
-    "originId": "_Programming",
+    "parent": "_Programming",
     "id": "_JavaScript",
-    "name": "JavaScript",
+    "title": "JavaScript",
     "bookmarks": []
   },
   {
-    "originId": "_Programming",
+    "parent": "_Programming",
     "id": "_Python",
-    "name": "Python",
+    "title": "Python",
     "bookmarks": []
   },
   {
-    "originId": "_Languages",
+    "parent": "_Languages",
     "id": "_English",
-    "name": "English",
+    "title": "English",
     "bookmarks": []
   }
 ]

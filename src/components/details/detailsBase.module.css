@@ -21,9 +21,8 @@
     align-items: center;
     gap: 1rem;
     padding: 0.6rem 0.6rem;
-    & > iconify-icon {
-      --size: 1.3rem;
-      font-size: 1.3rem;
+    & > svg {
+      font-size: 1rem;
     }
     &::-webkit-details-marker {
       display: none;

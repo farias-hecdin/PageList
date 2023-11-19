@@ -1,8 +1,12 @@
 import css from "./modalEditMode.module.css";
 import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index.jsx";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../../context/index.jsx";
-import { deleteElementAndUpdateState, moveElementAndUpdateState, updateElementAndUpdateState } from "./modalEditMode.script.js";
+import {
+  deleteElementAndUpdateState,
+  moveElementAndUpdateState,
+  updateElementAndUpdateState,
+} from "./modalEditMode.script.js";
 
 /**
  * @param {object} prop
@@ -11,43 +15,57 @@ import { deleteElementAndUpdateState, moveElementAndUpdateState, updateElementAn
  * @returns {HTMLElement}
  */
 export const ModalEditMode = ({ isOpen, handleClick }) => {
-  const { targetItem, dataLists, setDataLists, setDataBookmarks, dataBookmarks, dataTopics } = useContext(DataContext);
-  const [titleValue, setTitleValue] = useState(null)
-  const [urlValue, setUrlValue] = useState(null)
-  console.log(urlValue)
+  const {dataCollections, dataTopics, setDataCollections, setDataTopics, dataBookmarks, dataLists, setDataBookmarks, setDataLists, targetItem} = useContext(DataContext);
+  const [titleValue, setTitleValue] = useState("");
+  const [urlValue, setUrlValue] = useState("");
 
-  const typeElms = {
+  // Actualizar los imputs al selecionar un elemento
+  useEffect(() => {
+    setTitleValue(targetItem.title);
+    setUrlValue(targetItem.url);
+  }, [targetItem]);
+
+  // Declarar los datos necesarios para cada tipo de elemento
+  const elementType = {
+    collection: {
+      dataParent: null,
+      dataElement: dataCollections,
+      setElement: setDataCollections,
+    },
+    topic: {
+      dataParent: dataCollections,
+      dataElement: dataTopics,
+      setElement: setDataTopics,
+    },
     list: {
-      dataOrigin: dataTopics,
-      dataFromElement: dataLists,
-      setFromElement: setDataLists,
+      dataParent: dataTopics,
+      dataElement: dataLists,
+      setElement: setDataLists,
     },
     bookmark: {
-      dataOrigin: dataLists,
-      dataFromElement: dataBookmarks,
-      setFromElement: setDataBookmarks,
+      dataParent: dataLists,
+      dataElement: dataBookmarks,
+      setElement: setDataBookmarks,
     },
   };
-  const { dataOrigin, dataFromElement, setFromElement } = typeElms[targetItem.type] || typeElms["bookmark"];
+  const { dataParent, dataElement, setElement } = elementType[targetItem.type] || elementType["bookmark"];
 
-  const ToFuncDelete = {
+  // Parametros comunes para las funciones correspondientes
+  const sharedParams = {
     pElement: targetItem.id,
-    pOrigin: targetItem.state,
-    pUpdater: setFromElement,
+    pData: dataElement,
+    pUpdater: setElement,
   };
+  const ToFuncDelete = sharedParams;
   const ToFuncMove = {
-    pElement: targetItem.id,
-    pOrigin: targetItem.state,
-    pUpdater: setFromElement,
+    ...sharedParams,
     pSelector: "#select_LCAXUzHOdk",
   };
   const ToFuncUpdate = {
-    pElement: targetItem.id,
-    pOrigin: targetItem.state,
-    pUpdater: setFromElement,
+    ...sharedParams,
     pType: targetItem.type,
-    pSelector: "#input_EJ7aOOCCQI",
-    pSelector2: "#input_P0Z5gb5BMg",
+    pValue: titleValue,
+    pValue2: urlValue,
   };
 
   return (
@@ -56,24 +74,26 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
         <p className={css.Container_title}>Edit</p>
         <p className={css.Container_text}>
           What do you want to do with:
-          <span className={css.Container_subtext}>{`"${targetItem.name}"`}</span>
+          <span className={css.Container_subtext}>{`"${targetItem.title}"`}</span>
         </p>
       </header>
       <div className={css.Container_box}>
-        <DetailsBase title="Delete this element" icon="delete-forever-outline">
+        <DetailsBase title="Delete this element" icon={<IconifyDeleteForeverOutline/>}>
           <div className={css.Container_details}>
-            <p>Do you want delete <b>{targetItem.name}</b></p>
+            <p>
+              Do you want delete <b>{targetItem.title}</b>
+            </p>
             <ButtonBase text="Delete" handleClick={() => deleteElementAndUpdateState(ToFuncDelete)} />
           </div>
         </DetailsBase>
         {targetItem.type !== "collection" && targetItem.type !== "topic" && (
-          <DetailsBase title="Move this element" icon="pan-tool-outline">
+          <DetailsBase title="Move this element" icon={<IconifyPanToolOutline />}>
             <div className={css.Container_details}>
               <p>In which list would you like to move the bookmark?</p>
               <ButtonSelect id="select_LCAXUzHOdk" styled="ModalEditMode_mojxs">
-                {dataOrigin.map((item) => (
+                {dataParent.map((item) => (
                   <option key={crypto.randomUUID()} value={item.id}>
-                    {item.name}
+                    {item.title}
                   </option>
                 ))}
               </ButtonSelect>
@@ -81,27 +101,26 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             </div>
           </DetailsBase>
         )}
-        <DetailsBase title="Update this element" icon="title">
-          {/* <div className={css.Container_details}> */}
-          {/*   <input */}
-          {/*     type="text" */}
-          {/*     value={titleValue || targetItem.name} */}
-          {/*     onChange={e => setTitleValue(e.target.value)} */}
-          {/*     id="input_EJ7aOOCCQI" */}
-          {/*   /> */}
-          {/*   {targetItem.type === "bookmark" && */}
-          {/*     <input */}
-          {/*       type="text" */}
-          {/*       value={urlValue || targetItem.url} */}
-          {/*       onChange={e => setUrlValue(e.target.value)} */}
-          {/*       id="input_P0Z5gb5BMg" */}
-          {/*     /> */}
-          {/*   } */}
-          {/*   <ButtonBase */}
-          {/*     text="Update" */}
-          {/*     handleClick={() => updateElementAndUpdateState(ToFuncUpdate)} */}
-          {/*   /> */}
-          {/* </div> */}
+        <DetailsBase title="Update this element" icon={<IconifyTitle/>}>
+          <div className={css.Container_details}>
+            <form onSubmit={(e) => updateElementAndUpdateState({ ...ToFuncUpdate, pEvent: e })}>
+              <input
+                type="text"
+                value={titleValue}
+                onChange={(e) => setTitleValue(e.currentTarget.value)}
+                id="input_EJ7aOOCCQI"
+              />
+              {targetItem.type === "bookmark" && (
+                <input
+                  type="text"
+                  value={urlValue}
+                  onChange={(e) => setUrlValue(e.currentTarget.value)}
+                  id="input_P0Z5gb5BMg"
+                />
+              )}
+              <ButtonBase text="Update" type="submit" />
+            </form>
+          </div>
         </DetailsBase>
       </div>
     </ModalBase>

@@ -2,16 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   padding: 0.6rem 1.3rem;
   border: 1px solid transparent;
   border-radius: 0.4rem;
   background-color: var(--co-diamond-black);
   color: var(--co-cold-morning);
-  gap: 1rem;
   &_box {
-    gap: 1rem;
     display: flex;
     align-items: center;
+    gap: 1rem;
   }
   &_content {
     display: flex;
@@ -20,12 +20,12 @@
     width: 28rem;
   }
   &_title {
+    width: 100%;
+    overflow: hidden;
     margin: 0 0 0.25rem;
     color: var(--co-cold-morning);
     font-weight: var(--fo-medium);
     font-size: 1.2rem;
-    width: 100%;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     &:hover {
@@ -33,10 +33,10 @@
     }
   }
   &_url {
-    color: var(--co-carbon-footprint);
-    font-size: 0.9rem;
     width: 100%;
     overflow: hidden;
+    color: var(--co-carbon-footprint);
+    font-size: 0.9rem;
     text-overflow: ellipsis;
     white-space: nowrap;
   }

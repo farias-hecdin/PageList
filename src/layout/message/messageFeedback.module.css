@@ -4,8 +4,8 @@
   align-items: center;
   padding: 5rem 0 0;
   color: var(--co-carbon-footprint);
-  &_icon > iconify-icon {
-    font-size: 9rem;
+  &_icon > svg {
+    font-size: 8rem;
   }
   &_title {
     margin-bottom: 0.8rem;

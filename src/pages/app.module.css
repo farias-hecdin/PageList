@@ -31,7 +31,7 @@
   }
   &_github {
     order: -1;
-    & > iconify-icon {
+    & > * {
       color: var(--co-carbon-footprint);
       font-size: 2rem;
     }

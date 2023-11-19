@@ -6,8 +6,7 @@ import { BookmarksPane } from "./bookmarks/bookmarksPane.jsx";
 import { TopicsPane } from "./topics/topicsPane.jsx";
 import { useContext } from "react";
 import { ModalWrapper } from "./modal/modalWrapper";
-
-// Nodo previo: ../app.jsx
+import { onClickMissing } from "../../utils/common";
 
 export const HomePage = () => {
   const { selectedItem } = useContext(DataContext);
@@ -21,22 +20,22 @@ export const HomePage = () => {
         <HeaderSecondary title="Bookmarks" text="Choise a bookmark or make a new">
           <div className={css.Navbar}>
             <div className={css.Navbar_box}>
-              <ButtonBase text="New" icon="add" handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)} />
-              <ButtonBase text="Search" icon="search" />
+              <ButtonBase text="New" icon={<IconifyAdd />} handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)} />
+              <ButtonBase text="Search" icon={<IconifySearch />} handleClick={onClickMissing} />
             </div>
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase
-                icon="inventory-2-outline"
+                icon={<IconifyInventory2Outline />}
                 handleClick={() => setOpenCollectionsModal(!openCollectionsModal)}
               />
-              <p className={css.Navbar_text}>{selectedItem.collectionName}</p>
+              <p className={css.Navbar_text}>{selectedItem.collectionTitle}</p>
             </WrapBase>
           </div>
         </HeaderSecondary>
         <div className={css.Container_box}>
           {selectedItem.collectionId === "0" ? (
             <MessageFeedback
-              icon="info-outline"
+              icon={<IconifyInfoOutline />}
               title="Nothing here"
               text="Choose a collection to access your favorite bookmarks"
             />

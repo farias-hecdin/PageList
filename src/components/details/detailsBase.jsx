@@ -1,16 +1,17 @@
 import css from "./detailsBase.module.css";
 
 /**
- * @param {string} icon
- * @param {string} title
- * @param {HTMLElement} children
+ * @param {object} prop
+ * @param {string} prop.icon
+ * @param {string} prop.title
+ * @param {HTMLElement} prop.children
  * @returns {HTMLElement}
  */
 export const DetailsBase = ({ icon, title, children }) => {
   return (
     <details className={css.Details}>
       <summary className={css.Details_summary}>
-        <iconify-icon icon={`material-symbols:${icon}`}></iconify-icon>
+        {icon}
         <span>{title}</span>
       </summary>
       {children}

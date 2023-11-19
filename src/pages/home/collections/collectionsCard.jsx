@@ -4,21 +4,21 @@ import css from "./collectionsCard.module.css";
 /**
  * @param {object} prop
  * @param {Function} prop.handleClick
- * @param {Function} prop.handleSecondClick
- * @param {string} prop.icon
+ * @param {Function} prop.handle2ndClick
+ * @param {HTMLElement} prop.icon
  * @param {string} prop.id
  * @param {string} prop.styled
  * @param {string} prop.text
  * @returns {HTMLElement}
  */
-export const CollectionsCard = ({ handleClick, handleSecondClick, icon, id, styled, text }) => {
+export const CollectionsCard = ({handleClick, handle2ndClick, icon, id, text, styled = ""}) => {
   return (
-    <div className={`${css.Card} ${styled || ""}`}>
+    <div className={`${css.Card} ${styled}`}>
       <button className={css.Card_box} onClick={handleClick} data-id={id}>
-        <iconify-icon icon={`material-symbols:${icon}`}></iconify-icon>
+        {icon}
         <p className={css.Card_text}>{text}</p>
       </button>
-      <ButtonBase icon="more-vert" styled="--ghost CollectionsModal_WQkiS" handleClick={handleSecondClick} />
+      <ButtonBase icon={<IconifyMoreVert/>} styled="--ghost CollectionsModal_WQkiS" handleClick={handle2ndClick} />
     </div>
   );
 };

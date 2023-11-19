@@ -64,8 +64,7 @@
   &_text {
     width: 100%;
   }
-  &_item > iconify-icon {
-    --size: 1.1rem;
-    font-size: 1.1rem;
+  &_item > svg {
+    font-size: 1rem;
   }
 }

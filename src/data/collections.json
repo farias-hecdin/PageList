@@ -1,14 +1,14 @@
 [
   {
-    "originId": "0",
+    "parent": "0",
     "id": "_Learning",
-    "name": "Learning",
+    "title": "Learning",
     "topics": []
   },
   {
-    "originId": "0",
+    "parent": "0",
     "id": "_Personal",
-    "name": "Personal",
+    "title": "Personal",
     "topics": []
   }
 ]

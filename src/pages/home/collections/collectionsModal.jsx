@@ -4,35 +4,35 @@ import { ButtonBase, ModalBase } from "../../../components/index.jsx";
 import { CollectionsCard } from "./collectionsCard";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { compareAndCountIds } from "../../../utils/common";
+import { compareAndCountIds, onClickMissing } from "../../../utils/common";
 
 export const CollectionsModal = ({ isOpen, handleClick }) => {
-  const { dataCollections, setDataCollections, dataTopics, selectedItem, setSelectedItem, setTargetItem } =
+  const { dataCollections, dataTopics, selectedItem, setSelectedItem, setTargetItem } =
     useContext(DataContext);
   const { setCounterTopics, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
 
   /**
-   * Actualiza el estado de acuerdo a la coleccion selecionada.
-   * @param {Array|string} data_
+   * Actualizar el estado de acuerdo a la coleccion selecionada.
+   * @param {Array|string} pData
    */
-  const selectCollectionAndUpdateState = (data_) => {
-    let id = data_?.id || "0";
-    let name = data_?.name || "None";
+  const selectCollectionAndUpdateState = (pData) => {
+    let id = pData?.id || "0";
+    let title = pData?.title || "None";
 
     // Actualizar el estado
     setSelectedItem((prevState) => ({
       ...prevState,
       collectionId: id,
-      collectionName: name,
+      collectionTitle: title,
     }));
   };
 
   /**
    * Obtener el conteo de `topics` y actualiza el estado
-   * @param {Array} data_ ¿Origen del elemento?
+   * @param {Array} pData - Origen del elemento
    */
-  const currentNumberElements = (data_) => {
-    let elementNumbers = data_ ? compareAndCountIds(dataTopics, data_.collectionId) : 0;
+  const currentNumberElements = (pData) => {
+    let elementNumbers = pData ? compareAndCountIds(dataTopics, pData.collectionId) : 0;
     setCounterTopics(elementNumbers);
   };
   // Actualizar el contador de `topics`
@@ -48,12 +48,12 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
             <p className={css.Container_title}>Collections</p>
             <p className={css.Container_text}>Choose a collection boorkmarks</p>
           </div>
-          <ButtonBase icon="filter-list" />
+          <ButtonBase icon={<IconifyFilterList />} handleClick={onClickMissing} />
         </div>
         <ul className={css.Container_list}>
           <li>
             <CollectionsCard
-              icon="inventory-2-outline"
+              icon={<IconifyInventory2Outline />}
               text={"None"}
               styled={selectedItem.collectionId === "0" && "--active"}
               handleClick={() => selectCollectionAndUpdateState("None")}
@@ -62,19 +62,17 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
           {dataCollections.map((collection) => (
             <li key={crypto.randomUUID()}>
               <CollectionsCard
-                icon="inventory-2-outline"
-                text={collection.name}
+                icon={<IconifyInventory2Outline />}
+                text={collection.title}
                 styled={selectedItem.collectionId === collection.id && "--active"}
                 handleClick={() => selectCollectionAndUpdateState(collection)}
-                handleSecondClick={() => {
+                handle2ndClick={() => {
                   setOpenModalEditMode(!openModalEditMode);
                   setTargetItem((prev) => ({
                     ...prev,
                     id: collection.id,
-                    name: collection.name,
+                    title: collection.title,
                     type: "collection",
-                    state: dataCollections,
-                    set: setDataCollections,
                   }));
                 }}
                 hasMenu={true}

@@ -106,20 +106,19 @@ select {
   outline: none;
 }
 
-input {
-}
 
 /* Special classes --------------------------------------------------------- */
 
-.no--select,
-iconify-icon {
+svg,
+.no\:Select {
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
 
-iconify-icon {
-  width: var(--size);
-  height: var(--size);
+.no\:Nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

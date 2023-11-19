@@ -1,31 +1,30 @@
 // Export datas ---------------------------------------------------------------
 
 /**
- * Mapear un nuevo array de objetos a partir de lo datos existentes en
+ * Mapear un nuevo array de objetos a partir de los datos existentes en
  * `collections`, `topics`, `lists` y `bookmarks`
- * @param {Array} theCollections
- * @param {Array} theTopics
- * @param {Array} theLists
- * @param {Array} theBookmarks
- * @returns {Array} retornar un array de objeto.
+ * @param {Array} pCollections
+ * @param {Array} pTopics
+ * @param {Array} pLists
+ * @param {Array} pBookmarks
+ * @returns {Array} Retorna un array de objeto
  */
-export const mapNewDataArray = (theCollections, theTopics, theLists, theBookmarks) => {
-  const collections = [...theCollections];
-  const topics = [...theTopics];
-  const lists = [...theLists];
-  const bookmarks = [...theBookmarks];
+export const mapNewDataArray = (pCollections, pTopics, pLists, pBookmarks) => {
+  const collections = [...pCollections];
+  const topics = [...pTopics];
+  const lists = [...pLists];
+  const bookmarks = [...pBookmarks];
 
-  // Asigna las listas y los enlaces a los temas
+  // Asignar las listas y los enlaces a los temas
   topics.map((eachTopic) => {
-    eachTopic.lists = lists.filter((eachList) => eachList.originId === eachTopic.id);
-
+    eachTopic.lists = lists.filter((eachList) => eachList.origin === eachTopic.id);
     eachTopic.lists.map((eachList) => {
-      eachList.bookmarks = bookmarks.filter((eachBookmark) => eachBookmark.originId === eachList.id);
+      eachList.bookmarks = bookmarks.filter((eachBookmark) => eachBookmark.origin === eachList.id);
     });
   });
-  // Asigna los temas a las colecciones
+  // Asignar los temas a las colecciones
   collections.map((eachCollection) => {
-    eachCollection.topics = topics.filter((eachTopic) => eachTopic.originId === eachCollection.id);
+    eachCollection.topics = topics.filter((eachTopic) => eachTopic.origin === eachCollection.id);
   });
 
   return collections;
@@ -33,7 +32,7 @@ export const mapNewDataArray = (theCollections, theTopics, theLists, theBookmark
 
 /**
  * Retornar la fecha actual
- * @returns {string} Un string en formato `Year_Month_Day`
+ * @returns {string} Retorna un string en formato `Year_Month_Day`
  */
 export const getCurrentDate = () => {
   let d = new Date();
@@ -46,14 +45,14 @@ export const getCurrentDate = () => {
 
 /**
  * Crear un elemento anchor `<a>` HTML y un fichero *.json
- * @param {string} theFileName ¿Nombre del archivo?
- * @param {string} theContent ¿Contenido del archivo?
+ * @param {string} pFileName - Nombre del archivo
+ * @param {string} pContent - Contenido del archivo
  */
-export const makeHtmlNodeAndFile = (theFileName, theContent) => {
+export const makeHtmlNodeAndFile = (pFileName, pContent) => {
   let link = document.createElement("a");
-  let blob = new Blob([theContent], { type: "text/plain" });
+  let blob = new Blob([pContent], { type: "text/plain" });
 
-  link.download = theFileName + ".json";
+  link.download = pFileName + ".json";
   link.href = URL.createObjectURL(blob);
   link.click();
 
@@ -65,40 +64,40 @@ export const makeHtmlNodeAndFile = (theFileName, theContent) => {
 /**
  * Comprobar si los datos cumple con el patron asignado y retornar un array
  * de objetos
- * @param {string} theData ¿JSON a validar en string?
- * @returns {Array} Array de objetos
+ * @param {string} pData - JSON a validar
+ * @returns {Array} Retorna un array de objetos
  */
-const isValidJSON = (theData) => {
+const isValidJSON = (pData) => {
   const regex = /^[\{|\[\s+\}]/;
-  if (!regex.test(theData)) {
+  if (!regex.test(pData)) {
     alert("El valor ingresado no es un archivo JSON válido");
     throw new Error("isValidJSON");
   }
-  return JSON.parse(theData);
+  return JSON.parse(pData);
 };
 
 /**
  * Verifica si los datos especificados están disponibles
- * @param {Array} datas ¿Datos a verificar?
- * @param {string} text ¿Texto a mostrar si los datos no estan disponibles?
+ * @param {Array} pData - Datos a verificar
+ * @param {string} pText - Texto a mostrar si los datos no estan disponibles
  * @returns {boolean}
  */
-const areDataAvailable = (datas, text) => {
-  if (!datas) {
-    alert(`${text}`);
-    throw new Error("importDataAndValidate");
+const areDataAvailable = (pData, pText) => {
+  if (!pData) {
+    alert(`${pText}`);
+    throw new Error("areDataAvailable");
   }
   return true;
 };
 
 /**
- * Importar datos del input y validar sus propiedades
- * @param {string} ElementById ¿Id del nodo HTML?
- * @returns {Array} Array de objetos
+ * Importar los datos del input y validar sus propiedades
+ * @param {string} pSelector - Id del nodo HTML textarea
+ * @returns {Array} Retorna un array de objetos
  */
-export const importDataAndValidate = (ElementById) => {
-  let $nodeTextarea = document.getElementById(ElementById);
-  let dataToImport = $nodeTextarea?.value;
+export const importDataAndValidate = (pSelector) => {
+  let $node = document.querySelector(pSelector);
+  let dataToImport = $node?.value;
   let parsedData;
 
   areDataAvailable(dataToImport, "Datas not found");
@@ -126,50 +125,62 @@ export const importDataAndValidate = (ElementById) => {
 
 /*
  * Guardar datos en localStorage
- * @param {string} theData ¿Datos a exportar?
+ * @param {string} pData - Datos a exportar
  */
-export const saveDataInLocalStorage = (theData) => {
+export const saveDataInLocalStorage = (pData) => {
   let question = confirm("Do you want to save this section?");
   if (question === true) {
-    localStorage.setItem("pagelist__latestSection", JSON.stringify(theData));
+    localStorage.setItem("pagelist__latestSection", JSON.stringify(pData));
   }
 };
 
-/** @param {Array} theDatas */
-const extractDataFromCollections = (theDatas) => {
-  return theDatas.map((collection) => {
+/**
+ * Extraer datos de *
+ * @param {Array} pData
+ * @returns {object} Retorna un objeto
+ */
+const extractDataFromCollections = (pData) => {
+  return pData.map((collection) => {
     return {
-      originId: collection.originId,
+      origin: collection.origin,
       id: collection.id,
-      name: collection.name,
+      title: collection.title,
       topics: [],
     };
   });
 };
 
-/** @param {Array} theDatas */
-const extractDataFromTopics = (theDatas) => {
-  return theDatas.flatMap((collection) => {
+/**
+ * Extraer datos de *
+ * @param {Array} pData
+ * @returns {object} Retorna un objeto
+ */
+const extractDataFromTopics = (pData) => {
+  return pData.flatMap((collection) => {
     return collection.topics.map((topic) => {
       return {
-        originId: topic.originId,
+        origin: topic.origin,
         id: topic.id,
-        name: topic.name,
+        title: topic.title,
         lists: [],
       };
     });
   });
 };
 
-/** @param {Array} theDatas */
-const extractDataFromLists = (theDatas) => {
-  return theDatas.flatMap((collection) => {
+/**
+ * Extraer datos de *
+ * @param {Array} pData
+ * @returns {object} Retorna un objeto
+ */
+const extractDataFromLists = (pData) => {
+  return pData.flatMap((collection) => {
     return collection.topics.flatMap((topic) => {
       return topic.lists.map((list) => {
         return {
-          originId: list.originId,
+          origin: list.origin,
           id: list.id,
-          name: list.name,
+          title: list.title,
           bookmarks: [],
         };
       });
@@ -177,16 +188,20 @@ const extractDataFromLists = (theDatas) => {
   });
 };
 
-/** @param {Array} theDatas */
-const extractDataFromBookmarks = (theDatas) => {
-  return theDatas.flatMap((collection) => {
+/**
+ * Extraer datos de *
+ * @param {Array} pData
+ * @returns {object} Retorna un objeto
+ */
+const extractDataFromBookmarks = (pData) => {
+  return pData.flatMap((collection) => {
     return collection.topics.flatMap((topic) => {
       return topic.lists.flatMap((list) => {
         return list.bookmarks.map((bookmark) => {
           return {
-            originId: bookmark.originId,
+            origin: bookmark.origin,
             id: bookmark.id,
-            name: bookmark.name,
+            title: bookmark.title,
             url: bookmark.url,
           };
         });
@@ -196,16 +211,16 @@ const extractDataFromBookmarks = (theDatas) => {
 };
 
 /**
- * Descomponer los datos en partes para ser guardados en su respetivo estado
- * (dataCollection, dataTopics, ...)
- * @param {Array} theDatas ¿Datos a descomponer?
- * @returns {object} Un objecto
+ * Descomponer los datos en partes para ser guardados en sus estados
+ * correspondientes (ex: dataCollection, dataTopics, ...)
+ * @param {Array} pData - Los datos a descomponer
+ * @returns {object} Retorna un objeto que contiene collections, topics, lists, bookmarks
  */
-export const breakDownData = (theDatas) => {
-  const collections = extractDataFromCollections(theDatas);
-  const topics = extractDataFromTopics(theDatas);
-  const lists = extractDataFromLists(theDatas);
-  const bookmarks = extractDataFromBookmarks(theDatas);
+export const breakDownData = (pData) => {
+  const collections = extractDataFromCollections(pData);
+  const topics = extractDataFromTopics(pData);
+  const lists = extractDataFromLists(pData);
+  const bookmarks = extractDataFromBookmarks(pData);
 
   return {
     collections,

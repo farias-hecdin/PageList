@@ -4,8 +4,6 @@ import { CollectionsModal } from "../collections/collectionsModal";
 import { ModalAddBookmarks } from "./modalAddBookmarks";
 import { ModalEditMode } from "./modalEditMode";
 
-// Nodo previo: ../../home/homePage.jsx
-
 export const ModalWrapper = () => {
   const {
     openCollectionsModal,
@@ -26,7 +24,10 @@ export const ModalWrapper = () => {
         isOpen={openModalAddBookmarks}
         handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)}
       />
-      <ModalEditMode isOpen={openModalEditMode} handleClick={() => setOpenModalEditMode(!openModalEditMode)} />
+      <ModalEditMode
+        isOpen={openModalEditMode}
+        handleClick={() => setOpenModalEditMode(!openModalEditMode)}
+      />
     </>
   );
 };
