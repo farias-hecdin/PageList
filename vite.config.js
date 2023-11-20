@@ -5,7 +5,7 @@ import IconsResolver from "unplugin-icons/resolver";
 import AutoImport from "unplugin-auto-import/vite";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ cmd }) => {
+export default defineConfig(({ command }) => {
   return {
     plugins: [
       react(),
@@ -23,9 +23,9 @@ export default defineConfig(({ cmd }) => {
       }),
       Icons({ compiler: "jsx", jsx: "react" }),
     ],
-    base: cmd === "build" ? "https://farias-hecdin.github.io/Pagelist/" : "/",
+    base: command === "build" ? "https://farias-hecdin.github.io/Pagelist/" : "/",
     css: {
-      modules: { generateScopedName: cmd === "build" ? "[hash:base64:9]" : "[local]_[hash:base64:5]" },
+      modules: { generateScopedName: command === "build" ? "[hash:base64:9]" : "[local]_[hash:base64:5]" },
     },
   };
 });

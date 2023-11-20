@@ -30,7 +30,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "nanoid": "^5.0.2",
-    "plugin-jsx": "link:@svgr/core @svgr/plugin-jsx",
     "postcss": "^8.4.31",
     "postcss-calc": "^9.0.1",
     "postcss-cli": "^10.1.0",
