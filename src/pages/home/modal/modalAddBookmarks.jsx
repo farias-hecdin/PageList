@@ -34,21 +34,22 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
   };
 
   const addNewTopic = () => {
-    let data = extractInputAndSelectValue("#input_a22VL1iGPC", "#select_LCAaUzHQdk");
+    let data = extractInputAndSelectValue("#input_a22VL1iGPC", "#select_fgh3jwqnkz");
     let template = {
-      origin: data.selectValue,
+      parent: data.selectValue,
       id: crypto.randomUUID(),
       title: data.inputValue,
       lists: [],
     };
     setDataTopics((prev) => [template, ...prev]);
+    console.log(template)
     alert("New topic added");
   };
 
   const addNewList = () => {
     let data = extractInputAndSelectValue("#input_ooIRWuISR8", "#select_ZTa2FX2bIM");
     let template = {
-      origin: data.selectValue,
+      parent: data.selectValue,
       id: crypto.randomUUID(),
       title: data.inputValue,
       bookmarks: [],
@@ -62,7 +63,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
     let $node = document.querySelector("#input_GrLSSVeSuZ");
     let value = $node.value;
     let template = {
-      origin: data.selectValue,
+      parent: data.selectValue,
       id: crypto.randomUUID(),
       title: data.inputValue,
       url: value,
@@ -85,7 +86,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
               type="text"
               placeholder="Add a collection"
               id="input_T22VL1iGPC"
-              maxLength={30}
+              maxLength={50}
             />
             <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" handleClick={() => addNewCollection()} />
           </div>
@@ -97,7 +98,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
               type="text"
               placeholder="Add a topic"
               id="input_a22VL1iGPC"
-              maxLength={30}
+              maxLength={50}
             />
             <ButtonSelect id="select_fgh3jwqnkz" styled="ModalAddBookmars_mojxs">
               {sortCollections.map((collection) => (
@@ -116,7 +117,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
               type="text"
               placeholder="Add a list"
               id="input_ooIRWuISR8"
-              maxLength={30}
+              maxLength={50}
             />
             <ButtonSelect id="select_ZTa2FX2bIM" styled="ModalAddBookmars_mojxs">
               {sortTopics.map((topic) => (
@@ -135,9 +136,14 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
               type="text"
               placeholder="Add a bookmark"
               id="input_ooIRWuISR1"
-              maxLength={30}
+              maxLength={50}
             />
-            <input className={css.Form_input} type="text" placeholder="Add an URL" id="input_GrLSSVeSuZ" />
+            <input
+              className={css.Form_input}
+              type="text"
+              placeholder="Add an URL"
+              id="input_GrLSSVeSuZ"
+            />
             <ButtonSelect id="select_9Ta2F92bIM" styled="ModalAddBookmars_mojxs">
               {sortLists.map((list) => (
                 <option key={crypto.randomUUID()} value={list.id}>

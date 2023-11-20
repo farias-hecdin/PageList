@@ -5,8 +5,6 @@
 
 /* Fonts and colors  ------------------------------------------------------- */
 
-/* * {outline: 1px dashed blue;} */
-
 :root {
   /* Font-family */
 
@@ -121,4 +119,10 @@ svg,
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Utils ------------------------------------------------------------------- */
+
+:root {
+  --dim-panel: 40rem;
 }

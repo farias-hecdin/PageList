@@ -23,14 +23,17 @@ export const HeaderMain = ({ updatePage, pageName }) => {
   };
 
   const checkLatestSection = () => {
-    let datas = localStorage.getItem("pagelist__latestSection");
-
-    datas = JSON.parse(datas);
-    // Actualizar datos
-    setDataCollections(datas.collections);
-    setDataTopics(datas.topics);
-    setDataLists(datas.lists);
-    setDataBookmarks(datas.bookmarks);
+    let datas = localStorage.getItem("pagelist__latestSection") || null;
+    if (datas !== null) {
+      datas = JSON.parse(datas);
+      // Actualizar datos
+      setDataCollections(datas.collections);
+      setDataTopics(datas.topics);
+      setDataLists(datas.lists);
+      setDataBookmarks(datas.bookmarks);
+    } else {
+      alert("Empty")
+    }
   };
 
   /** !feat: Notificar que se han producidos cambios en los datos */

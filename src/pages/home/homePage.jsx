@@ -40,7 +40,7 @@ export const HomePage = () => {
               text="Choose a collection to access your favorite bookmarks"
             />
           ) : (
-            <div className={css.Container_boxInner}>
+            <div className={css.Container_wrap}>
               <TopicsPane />
               <BookmarksPane />
             </div>

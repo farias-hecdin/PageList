@@ -17,14 +17,14 @@ export const mapNewDataArray = (pCollections, pTopics, pLists, pBookmarks) => {
 
   // Asignar las listas y los enlaces a los temas
   topics.map((eachTopic) => {
-    eachTopic.lists = lists.filter((eachList) => eachList.origin === eachTopic.id);
+    eachTopic.lists = lists.filter((eachList) => eachList.parent === eachTopic.id);
     eachTopic.lists.map((eachList) => {
-      eachList.bookmarks = bookmarks.filter((eachBookmark) => eachBookmark.origin === eachList.id);
+      eachList.bookmarks = bookmarks.filter((eachBookmark) => eachBookmark.parent === eachList.id);
     });
   });
   // Asignar los temas a las colecciones
   collections.map((eachCollection) => {
-    eachCollection.topics = topics.filter((eachTopic) => eachTopic.origin === eachCollection.id);
+    eachCollection.topics = topics.filter((eachTopic) => eachTopic.parent === eachCollection.id);
   });
 
   return collections;
@@ -142,7 +142,7 @@ export const saveDataInLocalStorage = (pData) => {
 const extractDataFromCollections = (pData) => {
   return pData.map((collection) => {
     return {
-      origin: collection.origin,
+      parent: collection.parent,
       id: collection.id,
       title: collection.title,
       topics: [],
@@ -159,7 +159,7 @@ const extractDataFromTopics = (pData) => {
   return pData.flatMap((collection) => {
     return collection.topics.map((topic) => {
       return {
-        origin: topic.origin,
+        parent: topic.parent,
         id: topic.id,
         title: topic.title,
         lists: [],
@@ -178,7 +178,7 @@ const extractDataFromLists = (pData) => {
     return collection.topics.flatMap((topic) => {
       return topic.lists.map((list) => {
         return {
-          origin: list.origin,
+          parent: list.parent,
           id: list.id,
           title: list.title,
           bookmarks: [],
@@ -199,7 +199,7 @@ const extractDataFromBookmarks = (pData) => {
       return topic.lists.flatMap((list) => {
         return list.bookmarks.map((bookmark) => {
           return {
-            origin: bookmark.origin,
+            parent: bookmark.parent,
             id: bookmark.id,
             title: bookmark.title,
             url: bookmark.url,

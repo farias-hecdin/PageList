@@ -6,10 +6,9 @@
   border-radius: 0.8rem;
   background-color: #232a36; /* FIX: */
   &_box {
-    height: 71vh;
     margin: 2rem 0;
   }
-  &_boxInner {
+  &_wrap {
     display: grid;
     gap: 2rem;
     grid-template-columns: 25rem 1fr;

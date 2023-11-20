@@ -86,7 +86,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             <ButtonBase text="Delete" handleClick={() => deleteElementAndUpdateState(ToFuncDelete)} />
           </div>
         </DetailsBase>
-        {targetItem.type !== "collection" && targetItem.type !== "topic" && (
+        {targetItem.type !== "collection"  && (
           <DetailsBase title="Move this element" icon={<IconifyPanToolOutline />}>
             <div className={css.Container_details}>
               <p>In which list would you like to move the bookmark?</p>

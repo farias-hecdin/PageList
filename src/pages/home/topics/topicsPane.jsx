@@ -53,65 +53,63 @@ export const TopicsPane = () => {
           </div>
           <ButtonBase icon={<IconifyFilterList />} />
         </header>
-        <div className={css.List}>
-          <ul className={css.List_items}>
-            {dataTopics.map((/** @type {object} */ topic) => {
-              if (topic.parent === selectedItem.collectionId) {
-                return (
-                  <li key={crypto.randomUUID()}>
-                    <div className={css.Tree}>
-                      <div className={css.Tree_header}>
-                        <p className={css.Tree_title}>{topic.title}</p>
-                        <ButtonBase
-                          icon={<IconifyMoreVert/>}
-                          styled="--ghost TopicsPane_WQkiS"
-                          handleClick={() => {
-                            setOpenModalEditMode(!openModalEditMode);
-                            setTargetItem((prev) => ({
-                              ...prev,
-                              id: topic.id,
-                              title: topic.title,
-                              type: "topic",
-                            }));
-                          }}
-                        />
-                      </div>
-                      <ul className={css.Tree_list}>
-                        {dataLists.map((/** @type {object} */ list) => {
-                          if (topic.id === list.parent) {
-                            return (
-                              <li
-                                key={crypto.randomUUID()}
-                                className={css.Tree_item}
-                                onClick={() => selectListAndUpdateState(list)}
-                              >
-                                <IconifyBookmarksOutline/>
-                                <p className={css.Tree_text}>{list.title}</p>
-                                <ButtonBase
-                                  icon={<IconifyMoreVert/>}
-                                  styled="--ghost TopicsPane_WQkiS"
-                                  handleClick={() => {
-                                    setOpenModalEditMode(!openModalEditMode);
-                                    setTargetItem((prev) => ({
-                                      ...prev,
-                                      id: list.id,
-                                      title: list.title,
-                                      type: "list",
-                                    }));
-                                  }}
-                                />
-                              </li>
-                            );
-                          }
-                        })}
-                      </ul>
+        <ul className={css.List}>
+          {dataTopics.map((/** @type {object} */ topic) => {
+            if (topic.parent === selectedItem.collectionId) {
+              return (
+                <li key={crypto.randomUUID()}>
+                  <div className={css.Tree}>
+                    <div className={css.Tree_header}>
+                      <p className={css.Tree_title}>{topic.title}</p>
+                      <ButtonBase
+                        icon={<IconifyMoreVert/>}
+                        styled="--ghost TopicsPane_WQkiS"
+                        handleClick={() => {
+                          setOpenModalEditMode(!openModalEditMode);
+                          setTargetItem((prev) => ({
+                            ...prev,
+                            id: topic.id,
+                            title: topic.title,
+                            type: "topic",
+                          }));
+                        }}
+                      />
                     </div>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-        </div>
+                    <ul className={css.Tree_list}>
+                      {dataLists.map((/** @type {object} */ list) => {
+                        if (topic.id === list.parent) {
+                          return (
+                            <li
+                              key={crypto.randomUUID()}
+                              className={css.Tree_item}
+                              onClick={() => selectListAndUpdateState(list)}
+                            >
+                              <IconifyBookmarksOutline/>
+                              <p className={css.Tree_text}>{list.title}</p>
+                              <ButtonBase
+                                icon={<IconifyMoreVert/>}
+                                styled="--ghost TopicsPane_WQkiS"
+                                handleClick={() => {
+                                  setOpenModalEditMode(!openModalEditMode);
+                                  setTargetItem((prev) => ({
+                                    ...prev,
+                                    id: list.id,
+                                    title: list.title,
+                                    type: "list",
+                                  }));
+                                }}
+                              />
+                            </li>
+                          );
+                        }
+                      })}
+                    </ul>
+                  </div>
+                </li>
+              );
+            }
+          })}
+        </ul>
       </section>
     </>
   );

@@ -24,7 +24,7 @@ export const moveElementAndUpdateState = ({ pElement, pData, pUpdater, pSelector
 
   const data = pData.map((item) => {
     if (pElement === item.id) {
-      return { ...item, originId: value };
+      return { ...item, parent: value };
     }
     return item;
   });
