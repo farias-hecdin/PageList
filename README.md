@@ -12,10 +12,6 @@ Pagelist es un pequeño gestor de marcadores online diseñado para ayudarte a or
 * **Sin necesidad de crear una cuenta de usuario:** Usa Pagelist sin tener que registrarte. Simplemente accede a la aplicación y comienza a organizar tus marcadores sin restricciones.
 * **Exporta tus marcadores en formato JSON:** Pagelist te permite exportar todos tus marcadores y listas en un archivo JSON, para que puedas realizar copias de seguridad o transferirlos fácilmente a otras plataformas.
 
-## Contribuciones
-
-¡Todas las contribuciones son bienvenidas! Si encuentras algún bug o tienes alguna idea para mejorar la aplicación, no dudes en abrir un `issue` o enviar un `pull request`.
-
 ## Notas adicionales
 
 Este proyecto es mi creación personal y, como tal, es posible que contenga algunos bugs. Sin embargo, me comprometo a solucionarlos y mejorar la aplicación con el tiempo.
