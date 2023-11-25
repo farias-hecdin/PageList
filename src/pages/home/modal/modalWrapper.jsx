@@ -24,10 +24,7 @@ export const ModalWrapper = () => {
         isOpen={openModalAddBookmarks}
         handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)}
       />
-      <ModalEditMode
-        isOpen={openModalEditMode}
-        handleClick={() => setOpenModalEditMode(!openModalEditMode)}
-      />
+      <ModalEditMode isOpen={openModalEditMode} handleClick={() => setOpenModalEditMode(!openModalEditMode)} />
     </>
   );
 };

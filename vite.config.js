@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => {
             extension: "jsx",
             enabledCollections: ["material-symbols"],
             alias: {
-              "iconify": "material-symbols",
+              iconify: "material-symbols",
             },
           }),
         ],

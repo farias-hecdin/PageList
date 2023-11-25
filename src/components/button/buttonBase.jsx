@@ -10,7 +10,7 @@ import css from "./buttonBase.module.css";
  * @param {HTMLElement} prop.children
  * @returns {HTMLElement}
  */
-export const ButtonBase = ({icon, handleClick, text, type, styled = ""}) => {
+export const ButtonBase = ({ icon, handleClick, text, type, styled = "" }) => {
   return (
     <button className={`${css.Button} ${styled}`} type={type} onClick={handleClick}>
       {icon}

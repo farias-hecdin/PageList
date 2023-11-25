@@ -20,7 +20,11 @@ export const HomePage = () => {
         <HeaderSecondary title="Bookmarks" text="Choise a bookmark or make a new">
           <div className={css.Navbar}>
             <div className={css.Navbar_box}>
-              <ButtonBase text="New" icon={<IconifyAdd />} handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)} />
+              <ButtonBase
+                text="New"
+                icon={<IconifyAdd />}
+                handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)}
+              />
               <ButtonBase text="Search" icon={<IconifySearch />} handleClick={onClickMissing} />
             </div>
             <WrapBase styled="HomePage_JhI8l">

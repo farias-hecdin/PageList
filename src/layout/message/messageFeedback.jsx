@@ -10,12 +10,8 @@ import css from "./messageFeedback.module.css";
 export const MessageFeedback = ({ icon, title, text }) => {
   return (
     <div className={css.Container}>
-      <p className={css.Container_icon}>
-        {icon}
-      </p>
-      <p className={css.Container_title}>
-        {title}
-      </p>
+      <p className={css.Container_icon}>{icon}</p>
+      <p className={css.Container_title}>{title}</p>
       <p className={css.Container_text}>{text}</p>
     </div>
   );

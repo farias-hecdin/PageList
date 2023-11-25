@@ -15,7 +15,17 @@ import {
  * @returns {HTMLElement}
  */
 export const ModalEditMode = ({ isOpen, handleClick }) => {
-  const {dataCollections, dataTopics, setDataCollections, setDataTopics, dataBookmarks, dataLists, setDataBookmarks, setDataLists, targetItem} = useContext(DataContext);
+  const {
+    dataCollections,
+    dataTopics,
+    setDataCollections,
+    setDataTopics,
+    dataBookmarks,
+    dataLists,
+    setDataBookmarks,
+    setDataLists,
+    targetItem,
+  } = useContext(DataContext);
   const [titleValue, setTitleValue] = useState("");
   const [urlValue, setUrlValue] = useState("");
 
@@ -78,7 +88,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
         </p>
       </header>
       <div className={css.Container_box}>
-        <DetailsBase title="Delete this element" icon={<IconifyDeleteForeverOutline/>}>
+        <DetailsBase title="Delete this element" icon={<IconifyDeleteForeverOutline />}>
           <div className={css.Container_details}>
             <p>
               Do you want delete <b>{targetItem.title}</b>
@@ -86,7 +96,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             <ButtonBase text="Delete" handleClick={() => deleteElementAndUpdateState(ToFuncDelete)} />
           </div>
         </DetailsBase>
-        {targetItem.type !== "collection"  && (
+        {targetItem.type !== "collection" && (
           <DetailsBase title="Move this element" icon={<IconifyPanToolOutline />}>
             <div className={css.Container_details}>
               <p>In which list would you like to move the bookmark?</p>
@@ -101,7 +111,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             </div>
           </DetailsBase>
         )}
-        <DetailsBase title="Update this element" icon={<IconifyTitle/>}>
+        <DetailsBase title="Update this element" icon={<IconifyTitle />}>
           <div className={css.Container_details}>
             <form onSubmit={(e) => updateElementAndUpdateState({ ...ToFuncUpdate, pEvent: e })}>
               <input

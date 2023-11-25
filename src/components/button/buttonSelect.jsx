@@ -8,10 +8,10 @@ import css from "./buttonSelect.module.css";
  * @param {string} prop.type
  * @returns {HTMLElement}
  */
-export const ButtonSelect = ({ children, name, id, styled= "" }) => {
+export const ButtonSelect = ({ children, id, name, onChange, styled = "", value }) => {
   return (
     <div className={`${css.Button} ${styled}`}>
-      <select name={name} id={id} className={css.Button_input}>
+      <select className={css.Button_input} id={id} name={name} onChange={onChange} value={value}>
         {children}
       </select>
     </div>

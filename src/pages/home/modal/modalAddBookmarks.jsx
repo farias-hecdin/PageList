@@ -1,9 +1,8 @@
 import css from "./modalAddBookmarks.module.css";
-import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index";
+import { ButtonBase, ButtonSelect, InputRadio, ModalBase } from "../../../components/index";
 import { DataContext } from "../../../context/index";
-import { useContext } from "react";
-import { sortByName } from "../../../utils/common";
-import { extractInputAndSelectValue } from "./modalAddBookmarks.script";
+import { useContext, useEffect, useState } from "react";
+import { handleChange, sortByName } from "../../../utils/common";
 
 /**
  * @param {object} prop
@@ -12,64 +11,113 @@ import { extractInputAndSelectValue } from "./modalAddBookmarks.script";
  * @returns {HTMLElement}
  */
 export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
-  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataBookmarks } =
+  try {
+  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataBookmarks, dataBookmarks } =
     useContext(DataContext);
+
+  useEffect(() => {
+    console.log('Topics', dataTopics)
+    console.log('Bookmarks', dataBookmarks)
+  }, [dataBookmarks, dataTopics])
 
   // Ordenar datos por nombre
   const sortCollections = sortByName(dataCollections);
   const sortTopics = sortByName(dataTopics);
   const sortLists = sortByName(dataLists);
 
-  // Añadir nuevos datos ------------------------------------------------------
+  // useState para el Tabs component
+  const [pickTabs, setPickTabs] = useState({ value: "Collection" });
 
-  const addNewCollection = () => {
-    let data = extractInputAndSelectValue("#input_T22VL1iGPC", null);
-    let template = {
+  // useState para los nuevos datos
+  const [collectData, setCollectData] = useState({
+    collectionTitle: "",
+    topicTitle: "",
+    listTitle: "",
+    bookmarkTitle: "",
+    bookmarkUrl: "",
+    collection: "",
+    topic: "",
+    list: "",
+  });
+
+  // Resetear los valores de los inputs
+  const resetInputValue = () => {
+    setCollectData(prev => ({
+      ...prev,
+      collectionTitle: "",
+      topicTitle: "",
+      listTitle: "",
+      bookmarkTitle: "",
+      bookmarkUrl: "",
+    }))
+  }
+
+  // Añadir nuevos datos ------------------------------------------------------
+  const addNewCollection = (e) => {
+    e.preventDefault();
+    let data = {
       id: crypto.randomUUID(),
-      title: data.inputValue,
+      title: collectData.collectionTitle,
       topics: [],
     };
-    setDataCollections((prev) => [template, ...prev]);
+
+    setDataCollections((prev) => [data, ...prev]);
     alert("New collection added");
+    resetInputValue()
   };
 
-  const addNewTopic = () => {
-    let data = extractInputAndSelectValue("#input_a22VL1iGPC", "#select_fgh3jwqnkz");
-    let template = {
-      parent: data.selectValue,
+  const addNewTopic = (e) => {
+    e.preventDefault();
+    let data = {
+      parent: collectData.collection,
       id: crypto.randomUUID(),
-      title: data.inputValue,
+      title: collectData.topicTitle,
       lists: [],
     };
-    setDataTopics((prev) => [template, ...prev]);
-    console.log(template)
-    alert("New topic added");
+
+    if (data.parent === "") {
+      alert("Complete the fields")
+    } else {
+      setDataTopics((prev) => [data, ...prev]);
+      alert("New topic added");
+      resetInputValue()
+    }
   };
 
-  const addNewList = () => {
-    let data = extractInputAndSelectValue("#input_ooIRWuISR8", "#select_ZTa2FX2bIM");
-    let template = {
-      parent: data.selectValue,
+  const addNewList = (e) => {
+    e.preventDefault();
+    let data = {
+      parent: collectData.topic,
       id: crypto.randomUUID(),
-      title: data.inputValue,
+      title: collectData.listTitle,
       bookmarks: [],
     };
-    setDataLists((prev) => [template, ...prev]);
-    alert("New list added");
+
+    if (data.parent === "") {
+      alert("Complete the fields")
+    } else {
+      setDataLists((prev) => [data, ...prev]);
+      alert("New list added");
+      resetInputValue()
+    }
   };
 
-  const addNewBookmarks = () => {
-    let data = extractInputAndSelectValue("#input_ooIRWuISR1", "#select_9Ta2F92bIM");
-    let $node = document.querySelector("#input_GrLSSVeSuZ");
-    let value = $node.value;
-    let template = {
-      parent: data.selectValue,
+  const addNewBookmark = (e) => {
+    e.preventDefault();
+    let data = {
+      parent: collectData.list,
       id: crypto.randomUUID(),
-      title: data.inputValue,
-      url: value,
+      title: collectData.bookmarkTitle,
+      url: collectData.url,
     };
-    setDataBookmarks((prev) => [template, ...prev]);
-    alert("New link added");
+
+    if (data.parent === "") {
+      alert("Complete the fields")
+    } else {
+      setDataBookmarks((prev) => [data, ...prev]);
+      alert("New link added");
+      resetInputValue()
+    }
   };
 
   return (
@@ -79,82 +127,217 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
         <p className={css.Container_text}>Wide your list of bookmarks</p>
       </header>
       <div className={css.Container_box}>
-        <DetailsBase title="Add a new collection" icon={<IconifyInventory2Outline/>}>
-          <div className={css.Form}>
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add a collection"
-              id="input_T22VL1iGPC"
-              maxLength={50}
-            />
-            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" handleClick={() => addNewCollection()} />
-          </div>
-        </DetailsBase>
-        <DetailsBase title="Add a new topic" icon={<IconifyFolderOpenOutline/>}>
-          <div className={css.Form}>
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add a topic"
-              id="input_a22VL1iGPC"
-              maxLength={50}
-            />
-            <ButtonSelect id="select_fgh3jwqnkz" styled="ModalAddBookmars_mojxs">
-              {sortCollections.map((collection) => (
-                <option key={crypto.randomUUID()} value={collection.id}>
-                  {collection.title}
-                </option>
-              ))}
-            </ButtonSelect>
-            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add topic" handleClick={() => addNewTopic()} />
-          </div>
-        </DetailsBase>
-        <DetailsBase title="Add a new list" icon={<IconifyBookmarksOutline/>}>
-          <div className={css.Form}>
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add a list"
-              id="input_ooIRWuISR8"
-              maxLength={50}
-            />
-            <ButtonSelect id="select_ZTa2FX2bIM" styled="ModalAddBookmars_mojxs">
-              {sortTopics.map((topic) => (
-                <option key={crypto.randomUUID()} value={topic.id}>
-                  {topic.title}
-                </option>
-              ))}
-            </ButtonSelect>
-            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={() => addNewList()} />
-          </div>
-        </DetailsBase>
-        <DetailsBase title="Add a new bookmarks" icon={<IconifyBookmarkOutline/>}>
-          <div className={css.Form}>
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add a bookmark"
-              id="input_ooIRWuISR1"
-              maxLength={50}
-            />
-            <input
-              className={css.Form_input}
-              type="text"
-              placeholder="Add an URL"
-              id="input_GrLSSVeSuZ"
-            />
-            <ButtonSelect id="select_9Ta2F92bIM" styled="ModalAddBookmars_mojxs">
-              {sortLists.map((list) => (
-                <option key={crypto.randomUUID()} value={list.id}>
-                  {list.title}
-                </option>
-              ))}
-            </ButtonSelect>
-            <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add list" handleClick={() => addNewBookmarks()} />
-          </div>
-        </DetailsBase>
+        <div key={crypto.randomUUID()} className={css.Tabs}>
+          <InputRadio
+            className={css.Tabs_input}
+            id="tab_01"
+            group="tabs"
+            text="Collection"
+            onChange={() => handleChange("value", "Collection", setPickTabs)}
+            checked={pickTabs.value === "Collection"}
+          />
+          <InputRadio
+            className={css.Tabs_input}
+            id="tab_02"
+            group="tabs"
+            text={"Topic"}
+            onChange={() => handleChange("value", "Topic", setPickTabs)}
+            checked={pickTabs.value === "Topic"}
+          />
+          <InputRadio
+            className={css.Tabs_input}
+            id="tab_03"
+            group="tabs"
+            text="List"
+            onChange={() => handleChange("value", "List", setPickTabs)}
+            checked={pickTabs.value === "List"}
+          />
+          <InputRadio
+            className={css.Tabs_input}
+            id="tab_04"
+            group="tabs"
+            text="Bookmark"
+            onChange={() => handleChange("value", "Bookmark", setPickTabs)}
+            checked={pickTabs.value === "Bookmark"}
+          />
+        </div>
+        <div className={css.Tabs_content}>
+          {pickTabs.value === "Collection" && (
+            <div className={css.Form}>
+              <form onSubmit={(e) => addNewCollection(e)}>
+                <input
+                  className={css.Form_input}
+                  id="input_T22VL1iGPC"
+                  maxLength={50}
+                  minLength={3}
+                  placeholder="Add a collection"
+                  type="text"
+                  value={collectData.collectionTitle}
+                  onChange={(e) => handleChange("collectionTitle", e.currentTarget.value, setCollectData)}
+                  required={true}
+                />
+                <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" />
+              </form>
+            </div>
+          )}
+          {pickTabs.value === "Topic" && (
+            <div className={css.Form}>
+              <form onSubmit={(e) => addNewTopic(e)}>
+                <input
+                  className={css.Form_input}
+                  id="input_a22VL1iGPC"
+                  maxLength={50}
+                  minLength={3}
+                  placeholder="Add a topic"
+                  type="text"
+                  value={collectData.topicTitle}
+                  onChange={(e) => handleChange("topicTitle", e.currentTarget.value, setCollectData)}
+                  required={true}
+                />
+                <ButtonSelect
+                  id="T1"
+                  styled="ModalAddBookmars_mojxs"
+                  value={collectData.collection}
+                  onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
+                >
+                  <option value="">-- Choose an collection --</option>
+                  {sortCollections.map((parent) => (
+                    <option key={crypto.randomUUID()} value={parent.id}>
+                      {parent.title}
+                    </option>
+                  ))}
+                </ButtonSelect>
+                <ButtonBase type="submit" styled="ModalAddBookmarks_JqagP" text="Add topic" />
+              </form>
+            </div>
+          )}
+          {pickTabs.value === "List" && (
+            <div className={css.Form}>
+              <form onSubmit={(e) => addNewList(e)}>
+                <input
+                  className={css.Form_input}
+                  id="input_ooIRWuISR8"
+                  maxLength={50}
+                  minLength={3}
+                  placeholder="Add a list"
+                  type="text"
+                  value={collectData.listTitle}
+                  onChange={(e) => handleChange("listTitle", e.currentTarget.value, setCollectData)}
+                  required={true}
+                />
+                <ButtonSelect
+                  id={"L1"}
+                  styled="ModalAddBookmars_mojxs"
+                  value={collectData.collection}
+                  onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
+                >
+                  <option value="">-- Choose an collection --</option>
+                  {sortCollections.map((parent) => (
+                    <option key={crypto.randomUUID()} value={parent.id}>
+                      {parent.title}
+                    </option>
+                  ))}
+                </ButtonSelect>
+                <ButtonSelect
+                  id={"L2"}
+                  styled="ModalAddBookmars_mojxs"
+                  value={collectData.topic}
+                  onChange={(e) => handleChange("topic", e.target.value, setCollectData)}
+                >
+                  <option value="">-- Choose an topic --</option>
+                  {sortTopics.map((parent) => {
+                    if (parent.parent === collectData.collection) {
+                      return (
+                        <option key={crypto.randomUUID()} value={parent.id}>
+                          {parent.title}
+                        </option>
+                      );
+                    }
+                  })}
+                </ButtonSelect>
+                <ButtonBase type="submit" styled="ModalAddBookmarks_JqagP" text="Add list" />
+              </form>
+            </div>
+          )}
+          {pickTabs.value === "Bookmark" && (
+            <div className={css.Form}>
+              <form onSubmit={(e) => addNewBookmark(e)}>
+                <input
+                  className={css.Form_input}
+                  id="input_ooIRWuISR1"
+                  maxLength={50}
+                  minLength={3}
+                  placeholder="Add a bookmark"
+                  type="text"
+                  value={collectData.bookmarkTitle}
+                  onChange={(e) => handleChange("bookmarkTitle", e.currentTarget.value, setCollectData)}
+                  required={true}
+                />
+                <input
+                  className={css.Form_input}
+                  id="input_GrLSSVeSuZ"
+                  placeholder="Add an URL"
+                  type="text"
+                  value={collectData.bookmarkUrl}
+                  onChange={(e) => handleChange("bookmarkUrl", e.currentTarget.value, setCollectData)}
+                  required={true}
+                />
+                <ButtonSelect
+                  id={"B1"}
+                  styled="ModalAddBookmars_mojxs"
+                  value={collectData.collection}
+                  onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
+                >
+                  <option value="">-- Choose an collection --</option>
+                  {sortCollections.map((parent) => (
+                    <option key={crypto.randomUUID()} value={parent.id}>
+                      {parent.title}
+                    </option>
+                  ))}
+                </ButtonSelect>
+                <ButtonSelect
+                  id={"B2"}
+                  styled="ModalAddBookmars_mojxs"
+                  value={collectData.topic}
+                  onChange={(e) => handleChange("topic", e.target.value, setCollectData)}
+                >
+                  <option value="">-- Choose an topic --</option>
+                  {sortTopics.map((parent) => {
+                    if (parent.parent === collectData.collection) {
+                      return (
+                        <option key={crypto.randomUUID()} value={parent.id}>
+                          {parent.title}
+                        </option>
+                      );
+                    }
+                  })}
+                </ButtonSelect>
+                <ButtonSelect
+                  id={"B3"}
+                  styled="ModalAddBookmars_mojxs"
+                  value={collectData.list}
+                  onChange={(e) => handleChange("list", e.target.value, setCollectData)}
+                >
+                  <option value="">-- Choose an list --</option>
+                  {sortLists.map((parent) => {
+                    if (parent.parent === collectData.topic) {
+                      return (
+                        <option key={crypto.randomUUID()} value={parent.id}>
+                          {parent.title}
+                        </option>
+                      );
+                    }
+                  })}
+                </ButtonSelect>
+                <ButtonBase type="submit" styled="ModalAddBookmarks_JqagP" text="Add list" />
+              </form>
+            </div>
+          )}
+        </div>
       </div>
     </ModalBase>
   );
+  } catch (err) {
+    console.warn(err.stack)
+  }
 };

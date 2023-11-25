@@ -11,14 +11,14 @@ import css from "./collectionsCard.module.css";
  * @param {string} prop.text
  * @returns {HTMLElement}
  */
-export const CollectionsCard = ({handleClick, handle2ndClick, icon, id, text, styled = ""}) => {
+export const CollectionsCard = ({ handleClick, handle2ndClick, icon, id, text, styled = "" }) => {
   return (
     <div className={`${css.Card} ${styled}`}>
       <button className={css.Card_box} onClick={handleClick} data-id={id}>
         {icon}
         <p className={css.Card_text}>{text}</p>
       </button>
-      <ButtonBase icon={<IconifyMoreVert/>} styled="--ghost CollectionsModal_WQkiS" handleClick={handle2ndClick} />
+      <ButtonBase icon={<IconifyMoreVert />} styled="--ghost CollectionsModal_WQkiS" handleClick={handle2ndClick} />
     </div>
   );
 };

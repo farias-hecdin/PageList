@@ -91,7 +91,11 @@ export const BackupPage = () => {
         <nav className={css.Toolbar}>
           <div className={css.Toolbar_box}>
             <ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(false)} />
-            <ButtonBase text="Download as JSON" icon={<IconifyDownload />} handleClick={() => clickButtonExport(true)} />
+            <ButtonBase
+              text="Download as JSON"
+              icon={<IconifyDownload />}
+              handleClick={() => clickButtonExport(true)}
+            />
             <ButtonBase text="Import" icon={<IconifyUpload />} handleClick={clickButtonImport} />
           </div>
           <ButtonBase text="Delete saved" icon={<IconifyDelete />} handleClick={deleteDataInLocalStorage} />

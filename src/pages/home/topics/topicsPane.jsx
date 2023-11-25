@@ -5,14 +5,8 @@ import { useContext, useEffect } from "react";
 import { compareAndCountIds } from "../../../utils/common";
 
 export const TopicsPane = () => {
-  const {
-    dataLists,
-    dataTopics,
-    dataBookmarks,
-    setSelectedItem,
-    selectedItem,
-    setTargetItem,
-  } = useContext(DataContext);
+  const { dataLists, dataTopics, dataBookmarks, setSelectedItem, selectedItem, setTargetItem } =
+    useContext(DataContext);
   const { counterTopics, setCounterLists, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
 
   /**
@@ -62,7 +56,7 @@ export const TopicsPane = () => {
                     <div className={css.Tree_header}>
                       <p className={css.Tree_title}>{topic.title}</p>
                       <ButtonBase
-                        icon={<IconifyMoreVert/>}
+                        icon={<IconifyMoreVert />}
                         styled="--ghost TopicsPane_WQkiS"
                         handleClick={() => {
                           setOpenModalEditMode(!openModalEditMode);
@@ -84,10 +78,10 @@ export const TopicsPane = () => {
                               className={css.Tree_item}
                               onClick={() => selectListAndUpdateState(list)}
                             >
-                              <IconifyBookmarksOutline/>
+                              <IconifyFolderOutline />
                               <p className={css.Tree_text}>{list.title}</p>
                               <ButtonBase
-                                icon={<IconifyMoreVert/>}
+                                icon={<IconifyMoreVert />}
                                 styled="--ghost TopicsPane_WQkiS"
                                 handleClick={() => {
                                   setOpenModalEditMode(!openModalEditMode);

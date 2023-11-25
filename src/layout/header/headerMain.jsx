@@ -32,11 +32,9 @@ export const HeaderMain = ({ updatePage, pageName }) => {
       setDataLists(datas.lists);
       setDataBookmarks(datas.bookmarks);
     } else {
-      alert("Empty")
+      alert("Empty");
     }
   };
-
-  /** !feat: Notificar que se han producidos cambios en los datos */
 
   return (
     <header className={css.Container}>

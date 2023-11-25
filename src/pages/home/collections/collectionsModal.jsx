@@ -7,8 +7,7 @@ import { useEffect } from "react";
 import { compareAndCountIds, onClickMissing } from "../../../utils/common";
 
 export const CollectionsModal = ({ isOpen, handleClick }) => {
-  const { dataCollections, dataTopics, selectedItem, setSelectedItem, setTargetItem } =
-    useContext(DataContext);
+  const { dataCollections, dataTopics, selectedItem, setSelectedItem, setTargetItem } = useContext(DataContext);
   const { setCounterTopics, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
 
   /**

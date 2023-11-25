@@ -35,3 +35,17 @@ export const compareAndCountIds = (pChildrenData, pElementId) => {
   }
   return coincidence;
 };
+
+/**
+ * @param {object} prop
+ * @param {string} prop.pKey
+ * @param {any} prop.pValue
+ * @param {Function} prop.pUpdater
+ */
+export const handleChange = (pKey, pValue, pUpdater) => {
+  if (pKey !== null) {
+    pUpdater((prev) => ({ ...prev, [pKey]: pValue }));
+  } else {
+    pUpdater(pValue);
+  }
+};
