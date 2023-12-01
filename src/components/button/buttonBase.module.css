@@ -10,6 +10,7 @@
   background-color: var(--co-mountain-fig);
   color: var(--co-carbon-footprint);
   &_text {
+    font-weight: var(--fo-bold);
     font-size: 1rem;
   }
   & > svg {
@@ -36,8 +37,8 @@
 
 .Button {
   &:global(.--outline) {
-    border: 0.0625rem solid var(--co-mountain-fig);
-    background-color: transparent;
+    border: 0.0625rem solid oklch(38% 0.029 285.14);
+    background-color: oklch(30% 0.029 285.14);
     color: var(--co-carbon-footprint);
     &:hover {
       border-color: var(--co-greenish);

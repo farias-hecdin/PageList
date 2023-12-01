@@ -26,14 +26,14 @@
 
   /* Colors */
 
-  --co-black-pearl: #1e242e;
-  --co-carbon-footprint: #7d818a;
-  --co-cold-morning: #e5e5e5;
-  --co-diamond-black: #28303d;
-  --co-greenish: #3da95f;
-  --co-mountain-fig: #3a3a47;
-  --co-neverything: #111a1c;
-  --co-zucchini: #154533;
+  --co-black-pearl: lch(13.94% 7.61 265.82);
+  --co-carbon-footprint: lch(53.86% 5.42 268.64);
+  --co-cold-morning: lch(90.72 0 223.97);
+  --co-diamond-black: lch(19.53 9.48 265.53);
+  --co-greenish: lch(61.8% 53.13 147.26);
+  --co-mountain-fig: lch(24.82% 8.38 286.74);
+  --co-neverything: lch(8.44% 4.69 216.89);
+  --co-zucchini: lch(25.67 21.63 164.03);
 
   /* Filter */
 
@@ -87,7 +87,6 @@ h6 {
 select {
   z-index: 1;
   width: 100%;
-  margin: 0;
   border: none;
   background-color: transparent;
   font-size: inherit;
