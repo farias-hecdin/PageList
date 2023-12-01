@@ -1,0 +1,28 @@
+.Modal {
+  position: fixed;
+  top: 10dvh;
+  right: 1rem;
+  z-index: 9;
+  &_box {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.8rem;
+    background-color: var(--co-greenish);
+    background-color: #5d3fd3; /* FIX: */
+    color: #fff;
+    & > svg {
+      color: var(--co-greenish);
+      color: #fff;
+      font-size: 1.5rem;
+    }
+  }
+  &_content {
+    display: flex;
+    flex-direction: column;
+  }
+  &_title {
+    font-weight: var(--fo-bold);
+  }
+}
