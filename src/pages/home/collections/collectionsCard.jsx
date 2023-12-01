@@ -18,7 +18,9 @@ export const CollectionsCard = ({ handleClick, handle2ndClick, icon, id, text, s
         {icon}
         <p className={css.Card_text}>{text}</p>
       </button>
-      <ButtonBase icon={<IconifyMoreVert />} styled="--ghost CollectionsModal_WQkiS" handleClick={handle2ndClick} />
+      {handle2ndClick !== undefined && (
+        <ButtonBase icon={<IconifyMoreVert />} styled="--ghost CollectionsModal_WQkiS" handleClick={handle2ndClick} />
+      )}
     </div>
   );
 };

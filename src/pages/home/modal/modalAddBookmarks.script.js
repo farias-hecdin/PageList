@@ -16,3 +16,10 @@ export const extractInputAndSelectValue = (pInputSelector, pSelectSelector) => {
     selectValue: selectValue,
   };
 };
+
+/** Actualizar localStorage y retorna los nuevos datos */
+export const updateStorageAndReturnData = (prev, data, key) => {
+  let newData = [data, ...prev];
+  localStorage.setItem(key, JSON.stringify(newData));
+  return newData;
+};

@@ -1,8 +1,9 @@
 import css from "./modalAddBookmarks.module.css";
 import { ButtonBase, ButtonSelect, InputRadio, ModalBase } from "../../../components/index";
-import { DataContext } from "../../../context/index";
-import { useContext, useEffect, useState } from "react";
+import { DataContext, StateContext } from "../../../context/index";
+import { useContext, useState } from "react";
 import { handleChange, sortByName } from "../../../utils/common";
+import { updateStorageAndReturnData } from "./modalAddBookmarks.script";
 
 /**
  * @param {object} prop
@@ -11,14 +12,9 @@ import { handleChange, sortByName } from "../../../utils/common";
  * @returns {HTMLElement}
  */
 export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
-  try {
-  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataBookmarks, dataBookmarks } =
+  const { setShowPopup } = useContext(StateContext);
+  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataBookmarks } =
     useContext(DataContext);
-
-  useEffect(() => {
-    console.log('Topics', dataTopics)
-    console.log('Bookmarks', dataBookmarks)
-  }, [dataBookmarks, dataTopics])
 
   // Ordenar datos por nombre
   const sortCollections = sortByName(dataCollections);
@@ -42,17 +38,18 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
 
   // Resetear los valores de los inputs
   const resetInputValue = () => {
-    setCollectData(prev => ({
+    setCollectData((prev) => ({
       ...prev,
       collectionTitle: "",
       topicTitle: "",
       listTitle: "",
       bookmarkTitle: "",
       bookmarkUrl: "",
-    }))
-  }
+    }));
+  };
 
   // Añadir nuevos datos ------------------------------------------------------
+
   const addNewCollection = (e) => {
     e.preventDefault();
     let data = {
@@ -61,9 +58,9 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       topics: [],
     };
 
-    setDataCollections((prev) => [data, ...prev]);
-    alert("New collection added");
-    resetInputValue()
+    setDataCollections((prev) => updateStorageAndReturnData(prev, data, "pagelist_collections"));
+    resetInputValue();
+    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new collection" }));
   };
 
   const addNewTopic = (e) => {
@@ -75,13 +72,9 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       lists: [],
     };
 
-    if (data.parent === "") {
-      alert("Complete the fields")
-    } else {
-      setDataTopics((prev) => [data, ...prev]);
-      alert("New topic added");
-      resetInputValue()
-    }
+    setDataTopics((prev) => updateStorageAndReturnData(prev, data, "pagelist_topics"));
+    resetInputValue();
+    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new topic" }));
   };
 
   const addNewList = (e) => {
@@ -93,13 +86,9 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       bookmarks: [],
     };
 
-    if (data.parent === "") {
-      alert("Complete the fields")
-    } else {
-      setDataLists((prev) => [data, ...prev]);
-      alert("New list added");
-      resetInputValue()
-    }
+    setDataLists((prev) => updateStorageAndReturnData(prev, data, "pagelist_lists"));
+    resetInputValue();
+    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new list" }));
   };
 
   const addNewBookmark = (e) => {
@@ -108,16 +97,12 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       parent: collectData.list,
       id: crypto.randomUUID(),
       title: collectData.bookmarkTitle,
-      url: collectData.url,
+      url: collectData.bookmarkUrl,
     };
 
-    if (data.parent === "") {
-      alert("Complete the fields")
-    } else {
-      setDataBookmarks((prev) => [data, ...prev]);
-      alert("New link added");
-      resetInputValue()
-    }
+    setDataBookmarks((prev) => updateStorageAndReturnData(prev, data, "pagelist_bookmarks"));
+    resetInputValue();
+    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new bookmark" }));
   };
 
   return (
@@ -337,7 +322,4 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       </div>
     </ModalBase>
   );
-  } catch (err) {
-    console.warn(err.stack)
-  }
 };

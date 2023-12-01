@@ -23,17 +23,25 @@ export const HeaderMain = ({ updatePage, pageName }) => {
   };
 
   const checkLatestSection = () => {
-    let datas = localStorage.getItem("pagelist__latestSection") || null;
-    if (datas !== null) {
-      datas = JSON.parse(datas);
-      // Actualizar datos
-      setDataCollections(datas.collections);
-      setDataTopics(datas.topics);
-      setDataLists(datas.lists);
-      setDataBookmarks(datas.bookmarks);
-    } else {
-      alert("Empty");
+    let message = "";
+    let storage = [
+      { data: localStorage.getItem("pagelist_collections"), set: setDataCollections },
+      { data: localStorage.getItem("pagelist_topics"), set: setDataTopics },
+      { data: localStorage.getItem("pagelist_lists"), set: setDataLists },
+      { data: localStorage.getItem("pagelist_bookmarks"), set: setDataBookmarks },
+    ];
+    for (let i = 0; i < storage.length; i++) {
+      let data = storage[i].data;
+      if (typeof data === "string") {
+        data = JSON.parse(data);
+        // Actualizar datos
+        storage[i].set(data);
+        message = "Update";
+      } else {
+        message = "No data";
+      }
     }
+    alert(message);
   };
 
   return (
@@ -50,21 +58,21 @@ export const HeaderMain = ({ updatePage, pageName }) => {
         {/* } */}
         <WrapBase>
           <ButtonBase
-            styled={`HeaderMain_UlICn ${pageName === "Home" && "--active"}`}
+            styled={`HeaderMain_UlICn ${pageName === "Home" ? "--active" : "--ghost"}`}
             icon={<IconifyBookmarksOutline />}
             text="Bookmarks"
             handleClick={() => showActivePage("Home")}
           />
           <ButtonBase
-            styled={`HeaderMain_UlICn ${pageName === "Backup" && "--active"}`}
+            styled={`HeaderMain_UlICn ${pageName === "Backup" ? "--active" : "--ghost"}`}
             icon={<IconifyHardDriveOutline />}
             text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
         </WrapBase>
         <div className={css.Navbar_box}>
-          <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} />
-          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={onClickMissing} />
+          <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="--outline" />
+          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={onClickMissing} styled="--outline" />
         </div>
       </nav>
     </header>

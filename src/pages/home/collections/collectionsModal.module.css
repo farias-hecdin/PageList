@@ -19,10 +19,10 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(3, 1fr);
+    max-height: 65dvh;
     margin: 2rem 0;
     list-style: none;
     overflow-y: auto;
-    max-height: 65dvh;
   }
   &_footer {
     display: flex;

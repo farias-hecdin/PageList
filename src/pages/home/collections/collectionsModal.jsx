@@ -4,11 +4,11 @@ import { ButtonBase, ModalBase } from "../../../components/index.jsx";
 import { CollectionsCard } from "./collectionsCard";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { compareAndCountIds, onClickMissing } from "../../../utils/common";
+import { countMatchingChildIds, currentNumberElements, onClickMissing } from "../../../utils/common";
 
 export const CollectionsModal = ({ isOpen, handleClick }) => {
   const { dataCollections, dataTopics, selectedItem, setSelectedItem, setTargetItem } = useContext(DataContext);
-  const { setCounterTopics, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
+  const { setCounterItem, setShowModal } = useContext(StateContext);
 
   /**
    * Actualizar el estado de acuerdo a la coleccion selecionada.
@@ -17,7 +17,6 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
   const selectCollectionAndUpdateState = (pData) => {
     let id = pData?.id || "0";
     let title = pData?.title || "None";
-
     // Actualizar el estado
     setSelectedItem((prevState) => ({
       ...prevState,
@@ -26,17 +25,9 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
     }));
   };
 
-  /**
-   * Obtener el conteo de `topics` y actualiza el estado
-   * @param {Array} pData - Origen del elemento
-   */
-  const currentNumberElements = (pData) => {
-    let elementNumbers = pData ? compareAndCountIds(dataTopics, pData.collectionId) : 0;
-    setCounterTopics(elementNumbers);
-  };
   // Actualizar el contador de `topics`
   useEffect(() => {
-    currentNumberElements(selectedItem);
+    currentNumberElements(selectedItem.collectionId, dataTopics, "topics", setCounterItem);
   }, [dataTopics, selectedItem]);
 
   return (
@@ -64,15 +55,18 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
                 icon={<IconifyInventory2Outline />}
                 text={collection.title}
                 styled={selectedItem.collectionId === collection.id && "--active"}
-                handleClick={() => selectCollectionAndUpdateState(collection)}
+                handleClick={() => {
+                  selectCollectionAndUpdateState(collection);
+                  setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }));
+                }}
                 handle2ndClick={() => {
-                  setOpenModalEditMode(!openModalEditMode);
                   setTargetItem((prev) => ({
                     ...prev,
                     id: collection.id,
                     title: collection.title,
                     type: "collection",
                   }));
+                  setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
                 }}
                 hasMenu={true}
               />

@@ -3,13 +3,13 @@
 /**
  * Mapear un nuevo array de objetos a partir de los datos existentes en
  * `collections`, `topics`, `lists` y `bookmarks`
- * @param {Array} pCollections
- * @param {Array} pTopics
- * @param {Array} pLists
- * @param {Array} pBookmarks
- * @returns {Array} Retorna un array de objeto
+ * @param {Array<object>} pCollections
+ * @param {Array<object>} pTopics
+ * @param {Array<object>} pLists
+ * @param {Array<object>} pBookmarks
+ * @returns {Array<object>}
  */
-export const mapNewDataArray = (pCollections, pTopics, pLists, pBookmarks) => {
+export const assignDataToCollections = (pCollections, pTopics, pLists, pBookmarks) => {
   const collections = [...pCollections];
   const topics = [...pTopics];
   const lists = [...pLists];
@@ -31,26 +31,26 @@ export const mapNewDataArray = (pCollections, pTopics, pLists, pBookmarks) => {
 };
 
 /**
- * Retornar la fecha actual
- * @returns {string} Retorna un string en formato `Year_Month_Day`
+ * Retornar la fecha actual en formato `Year_Month_Day`
+ * @returns {string}
  */
-export const getCurrentDate = () => {
-  let d = new Date();
-  let year = d.getFullYear().toString().slice(-2);
-  let month = (d.getMonth() + 1).toString().slice(-2);
-  let day = d.getDay().toString().slice(-2);
+export const getFormattedCurrentDate = () => {
+  const d = new Date();
+  const year = d.getFullYear().toString().slice(-2);
+  const month = (d.getMonth() + 1).toString().slice(-2);
+  const day = d.getDay().toString().slice(-2);
 
   return `${year}_${month}_${day}`;
 };
 
 /**
- * Crear un elemento anchor `<a>` HTML y un fichero *.json
+ * Crear un nodo anchor `<a>` HTML y un archivo *.json
  * @param {string} pFileName - Nombre del archivo
  * @param {string} pContent - Contenido del archivo
  */
-export const makeHtmlNodeAndFile = (pFileName, pContent) => {
-  let link = document.createElement("a");
-  let blob = new Blob([pContent], { type: "text/plain" });
+export const createHtmlNodeAndFile = (pFileName, pContent) => {
+  const link = document.createElement("a");
+  const blob = new Blob([pContent], { type: "text/plain" });
 
   link.download = pFileName + ".json";
   link.href = URL.createObjectURL(blob);
@@ -65,13 +65,13 @@ export const makeHtmlNodeAndFile = (pFileName, pContent) => {
  * Comprobar si los datos cumple con el patron asignado y retornar un array
  * de objetos
  * @param {string} pData - JSON a validar
- * @returns {Array} Retorna un array de objetos
+ * @returns {Array<object>}
  */
-const isValidJSON = (pData) => {
+const validateJsonData = (pData) => {
   const regex = /^[\{|\[\s+\}]/;
   if (!regex.test(pData)) {
     alert("El valor ingresado no es un archivo JSON válido");
-    throw new Error("isValidJSON");
+    throw new Error("validateJsonData");
   }
   return JSON.parse(pData);
 };
@@ -82,10 +82,10 @@ const isValidJSON = (pData) => {
  * @param {string} pText - Texto a mostrar si los datos no estan disponibles
  * @returns {boolean}
  */
-const areDataAvailable = (pData, pText) => {
+const checkDataAvailability = (pData, pText) => {
   if (!pData) {
-    alert(`${pText}`);
-    throw new Error("areDataAvailable");
+    alert(`${pText} not found`);
+    throw new Error("checkDataAvailability");
   }
   return true;
 };
@@ -97,40 +97,51 @@ const areDataAvailable = (pData, pText) => {
  */
 export const importDataAndValidate = (pSelector) => {
   let $node = document.querySelector(pSelector);
-  let dataToImport = $node?.value;
+  let dataToImport = $node.value;
   let parsedData;
 
-  areDataAvailable(dataToImport, "Datas not found");
-  dataToImport = isValidJSON(dataToImport);
+  checkDataAvailability(dataToImport, "Datas");
+  dataToImport = validateJsonData(dataToImport);
 
   // Validar datos importados
-  areDataAvailable(dataToImport, "Collections not found");
+  checkDataAvailability(dataToImport, "Collections");
   parsedData = dataToImport;
 
   for (let collections of parsedData) {
-    areDataAvailable(collections.topics, "Topics not found");
+    checkDataAvailability(collections.topics, "Topics");
     parsedData = collections.topics;
 
     for (let topics of parsedData) {
-      areDataAvailable(topics.lists, "Lists not found");
+      checkDataAvailability(topics.lists, "Lists");
       parsedData = topics.lists;
 
       for (let lists of parsedData) {
-        areDataAvailable(lists.bookmarks, "Bookmarks not found");
+        checkDataAvailability(lists.bookmarks, "Bookmarks");
       }
     }
   }
   return dataToImport;
 };
 
-/*
- * Guardar datos en localStorage
- * @param {string} pData - Datos a exportar
+/**
+ * Gestionar los datos collections, topics, lists y bookmarks en localStorage
+ * @param {boolean} pKeyword - Accion a realizar (add y delete)
+ * @param {Array} values - Datos a exportar
  */
-export const saveDataInLocalStorage = (pData) => {
-  let question = confirm("Do you want to save this section?");
-  if (question === true) {
-    localStorage.setItem("pagelist__latestSection", JSON.stringify(pData));
+export const manageLocalStorageData = (pKeyword, ...pValues) => {
+  const values = pValues.flat();
+  const keys = ["pagelist_collections", "pagelist_topics", "pagelist_lists", "pagelist_bookmarks"];
+
+  switch (pKeyword) {
+    case "add":
+      keys.forEach((key, i) => localStorage.setItem(key, JSON.stringify(values[i])));
+      break;
+    case "delete":
+      keys.forEach((key) => localStorage.clear(key));
+      break;
+    default:
+      console.warn("manageLocalStorageData: Keyword not found");
+      break;
   }
 };
 
@@ -216,7 +227,7 @@ const extractDataFromBookmarks = (pData) => {
  * @param {Array} pData - Los datos a descomponer
  * @returns {object} Retorna un objeto que contiene collections, topics, lists, bookmarks
  */
-export const breakDownData = (pData) => {
+export const decomposeDataIntoCategories = (pData) => {
   const collections = extractDataFromCollections(pData);
   const topics = extractDataFromTopics(pData);
   const lists = extractDataFromLists(pData);

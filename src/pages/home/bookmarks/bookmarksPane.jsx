@@ -6,7 +6,7 @@ import { BookmarksCard } from "./bookmarksCard.jsx";
 import { useContext } from "react";
 
 export const BookmarksPane = () => {
-  const { counterLists, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
+  const { counterItem, setShowModal } = useContext(StateContext);
   const { dataBookmarks, selectedItem, setSelectedItem, setTargetItem } = useContext(DataContext);
 
   return (
@@ -22,7 +22,7 @@ export const BookmarksPane = () => {
           <header className={css.Header}>
             <div>
               <h2 className={css.Header_title}>{selectedItem.listTitle}</h2>
-              <p className={css.Header_text}>{counterLists} bookmarks</p>
+              <p className={css.Header_text}>{counterItem.bookmarks} bookmarks</p>
             </div>
             <ButtonBase icon={<IconifyFilterList />} />
             <ButtonBase
@@ -40,7 +40,7 @@ export const BookmarksPane = () => {
                         icon={<IconifyMoreVert />}
                         styled="--ghost TopicsPane_WQkiS"
                         handleClick={() => {
-                          setOpenModalEditMode(!openModalEditMode);
+                          setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
                           setTargetItem({
                             id: bookmark.id,
                             title: bookmark.title,

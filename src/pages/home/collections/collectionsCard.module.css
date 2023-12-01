@@ -19,7 +19,8 @@
     & > svg {
       font-size: 1.5rem;
     }
-    &:hover {
+    &:hover,
+    &:active {
       border-color: var(--co-greenish);
       background-color: var(--co-zucchini);
       color: var(--co-greenish);

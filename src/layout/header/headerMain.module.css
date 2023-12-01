@@ -8,7 +8,7 @@
 .Logo {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   &_image {
     width: 2.5rem;
     height: 2.5rem;

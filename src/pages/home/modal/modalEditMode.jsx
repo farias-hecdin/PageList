@@ -1,11 +1,12 @@
 import css from "./modalEditMode.module.css";
 import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index.jsx";
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../../context/index.jsx";
+import { DataContext, StateContext } from "../../../context/index.jsx";
 import {
-  deleteElementAndUpdateState,
-  moveElementAndUpdateState,
-  updateElementAndUpdateState,
+  removeElementById,
+  relocateElementAndUpdateState,
+  modifyElementAndUpdateState,
+  confirmAndUpdateStateAndStorageGroup,
 } from "./modalEditMode.script.js";
 
 /**
@@ -26,6 +27,9 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
     setDataLists,
     targetItem,
   } = useContext(DataContext);
+  const { setShowModal } = useContext(StateContext)
+
+  // Alamacenar el Title y Url de un elemento
   const [titleValue, setTitleValue] = useState("");
   const [urlValue, setUrlValue] = useState("");
 
@@ -64,16 +68,18 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
   const sharedParams = {
     pElement: targetItem.id,
     pData: dataElement,
-    pUpdater: setElement,
+    pSetState: setElement,
   };
-  const ToFuncDelete = sharedParams;
-  const ToFuncMove = {
+  const ToFuncDelete = {
+    ...sharedParams,
+  };
+  const ToFuncRelocate = {
     ...sharedParams,
     pSelector: "#select_LCAXUzHOdk",
   };
   const ToFuncUpdate = {
     ...sharedParams,
-    pType: targetItem.type,
+    pKeyword: targetItem.type,
     pValue: titleValue,
     pValue2: urlValue,
   };
@@ -90,16 +96,21 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
       <div className={css.Container_box}>
         <DetailsBase title="Delete this element" icon={<IconifyDeleteForeverOutline />}>
           <div className={css.Container_details}>
-            <p>
-              Do you want delete <b>{targetItem.title}</b>
-            </p>
-            <ButtonBase text="Delete" handleClick={() => deleteElementAndUpdateState(ToFuncDelete)} />
+            <p>Do you want delete this element?</p>
+            <ButtonBase
+              text="Delete"
+              handleClick={() => {
+                const data = removeElementById(ToFuncDelete)
+                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState)
+                setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }))
+              }}
+            />
           </div>
         </DetailsBase>
         {targetItem.type !== "collection" && (
           <DetailsBase title="Move this element" icon={<IconifyPanToolOutline />}>
             <div className={css.Container_details}>
-              <p>In which list would you like to move the bookmark?</p>
+              <p>Where would you like to move this element?</p>
               <ButtonSelect id="select_LCAXUzHOdk" styled="ModalEditMode_mojxs">
                 {dataParent.map((item) => (
                   <option key={crypto.randomUUID()} value={item.id}>
@@ -107,13 +118,20 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
                   </option>
                 ))}
               </ButtonSelect>
-              <ButtonBase text="Move" handleClick={() => moveElementAndUpdateState(ToFuncMove)} />
+              <ButtonBase text="Move" handleClick={() => {
+                const data = relocateElementAndUpdateState(ToFuncRelocate)
+                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState)
+                setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }))
+              }} />
             </div>
           </DetailsBase>
         )}
         <DetailsBase title="Update this element" icon={<IconifyTitle />}>
           <div className={css.Container_details}>
-            <form onSubmit={(e) => updateElementAndUpdateState({ ...ToFuncUpdate, pEvent: e })}>
+            <form onSubmit={(e) => {
+              const data = modifyElementAndUpdateState({ ...ToFuncUpdate, pEvent: e })
+              confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState)
+            }}>
               <input
                 type="text"
                 value={titleValue}

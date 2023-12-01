@@ -10,8 +10,8 @@
   align-items: flex-start;
   height: 100dvh;
   padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.6);
   &_box {
     display: flex;
     flex-direction: column;
@@ -21,9 +21,9 @@
     padding: 1rem 2rem;
     border-radius: 0.8rem;
     background-color: #232a36; /* FIX: */
-  }
-  &_footer {
-    display: flex;
-    justify-content: flex-end;
+    &_footer {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }

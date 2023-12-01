@@ -4,12 +4,12 @@ import { DataContext } from "../../context/index";
 import { HeaderSecondary } from "../../layout/index";
 import { useContext } from "react";
 import {
-  breakDownData,
-  getCurrentDate,
+  decomposeDataIntoCategories,
+  getFormattedCurrentDate,
   importDataAndValidate,
-  makeHtmlNodeAndFile,
-  mapNewDataArray,
-  saveDataInLocalStorage,
+  createHtmlNodeAndFile,
+  assignDataToCollections,
+  manageLocalStorageData,
 } from "./backupPage.script";
 
 export const BackupPage = () => {
@@ -38,14 +38,14 @@ export const BackupPage = () => {
   const clickButtonExport = (isDowloader) => {
     try {
       let $node = document.querySelector("#textarea_xucOeryf8lU");
-      let mapData = mapNewDataArray(dataCollections, dataTopics, dataLists, dataBookmarks);
-      let currentDate = getCurrentDate();
+      let mappedData = assignDataToCollections(dataCollections, dataTopics, dataLists, dataBookmarks);
+      let currentDate = getFormattedCurrentDate();
       let fileName = `Pagelist_${currentDate}`;
-      let dataInString = JSON.stringify(mapData, null, 2);
-
+      let dataInString = JSON.stringify(mappedData, null, 2);
       $node.value = dataInString;
+
       if (isDowloader === true) {
-        makeHtmlNodeAndFile(fileName, dataInString);
+        createHtmlNodeAndFile(fileName, dataInString);
       }
     } catch (error) {
       console.warn("BackupPage > clickButtonExport", error.stack);
@@ -55,11 +55,13 @@ export const BackupPage = () => {
   /** Funcion que importa datos adentro de la app */
   const clickButtonImport = () => {
     try {
-      const newBookmarksList = importDataAndValidate("#textarea_xucOeryf8lU");
-      const data = breakDownData(newBookmarksList);
-
-      // Guardar en localStorage
-      saveDataInLocalStorage(data);
+      const newData = importDataAndValidate("#textarea_xucOeryf8lU");
+      const data = decomposeDataIntoCategories(newData);
+      // Guardar datos en localStorage
+      let question = confirm("Do you want to save this section?");
+      if (question === true) {
+        manageLocalStorageData("add", [data.collections, data.topics, data.lists, data.bookmarks]);
+      }
       // Actualizar datos
       setDataCollections(data.collections);
       setDataTopics(data.topics);
@@ -77,11 +79,9 @@ export const BackupPage = () => {
   };
 
   /** Remover los datos guardados en localStorage */
-  const deleteDataInLocalStorage = () => {
+  const removeDataFromLocalStorage = () => {
     const question = confirm("Do you want to delete the saved section?");
-    if (question === true) {
-      localStorage.setItem("pagelist__latestSection", "");
-    }
+    if (question === true) manageLocalStorageData("delete");
   };
 
   return (
@@ -96,9 +96,14 @@ export const BackupPage = () => {
               icon={<IconifyDownload />}
               handleClick={() => clickButtonExport(true)}
             />
-            <ButtonBase text="Import" icon={<IconifyUpload />} handleClick={clickButtonImport} />
+            <ButtonBase text="Import" styled="--outline" icon={<IconifyUpload />} handleClick={clickButtonImport} />
           </div>
-          <ButtonBase text="Delete saved" icon={<IconifyDelete />} handleClick={deleteDataInLocalStorage} />
+          <ButtonBase
+            text="Delete saved"
+            icon={<IconifyDelete />}
+            styled="--outline"
+            handleClick={removeDataFromLocalStorage}
+          />
         </nav>
         <textarea
           className={css.Container_textarea}
@@ -106,7 +111,12 @@ export const BackupPage = () => {
           placeholder="Write a valid bookmark collection..."
         ></textarea>
         <div>
-          <ButtonBase text="Clean" icon={<IconifyCleaningServicesOutline />} handleClick={cleanTextarea} />
+          <ButtonBase
+            text="Clean"
+            styled="--outline"
+            icon={<IconifyCleaningServicesOutline />}
+            handleClick={cleanTextarea}
+          />
         </div>
       </div>
     </section>

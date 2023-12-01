@@ -13,6 +13,7 @@
     flex-direction: column;
     gap: 0.5rem;
     margin: 2rem 0;
+    width: 31rem;
   }
   &_subtext {
     margin-left: 0.5rem;

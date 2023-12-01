@@ -8,14 +8,14 @@ import { AppProvider } from "./context/app/appProvider";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AppProvider>
-      <App />
+      <App />{" "}
     </AppProvider>
   </React.StrictMode>
 );
 
 /* !feat:
  * #01: Notificar que se han producidos cambios en los datos a traves de una notificacion.
- * #0__2: Fijar valores del campo de selecion.
+ * ¡02: Fijar valores del campo de selecion.
  * #03: Captura el atributo title de una pagina al ingresar la URL en el campo de
  * crear un nuevo marcador.
  * #04: Crear un nuevo localStorage que almacene datos temporales de la App en caso

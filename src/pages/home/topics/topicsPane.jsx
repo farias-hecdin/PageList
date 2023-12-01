@@ -2,12 +2,13 @@ import css from "./topicsPane.module.css";
 import { ButtonBase } from "../../../components/index.jsx";
 import { DataContext, StateContext } from "../../../context/index";
 import { useContext, useEffect } from "react";
-import { compareAndCountIds } from "../../../utils/common";
+import { currentNumberElements } from "../../../utils/common";
+import { Fragment } from "react";
 
 export const TopicsPane = () => {
   const { dataLists, dataTopics, dataBookmarks, setSelectedItem, selectedItem, setTargetItem } =
     useContext(DataContext);
-  const { counterTopics, setCounterLists, openModalEditMode, setOpenModalEditMode } = useContext(StateContext);
+  const { counterItem, setCounterItem, setShowModal } = useContext(StateContext);
 
   /**
    * Actualizar el estado de acuerdo a la lista selecionada
@@ -16,7 +17,7 @@ export const TopicsPane = () => {
   const selectListAndUpdateState = (pData) => {
     let id = pData?.id || "0";
     let title = pData?.title || "None";
-
+    // Actualizar el estado
     setSelectedItem((prevState) => ({
       ...prevState,
       listId: id,
@@ -24,18 +25,51 @@ export const TopicsPane = () => {
     }));
   };
 
-  /**
-   * Obtener el conteo de `bookmarks` y actualiza el estado
-   * @param {Array} pData - Datos de origen del elemento
-   */
-  const currentNumberElements = (pData) => {
-    let elementNumbers = pData ? compareAndCountIds(dataBookmarks, pData.listId) : 0;
-    setCounterLists(elementNumbers);
-  };
-  // Actualizar el contador de `topics`
+  // Actualizar el contador de `bookmarks`
   useEffect(() => {
-    currentNumberElements(selectedItem);
+    currentNumberElements(selectedItem.listId, dataBookmarks, "bookmarks", setCounterItem);
   }, [dataBookmarks, selectedItem]);
+
+  // Components ---------------------------------------------------------------
+
+  const TreeHeader = ({ data }) => (
+    <div className={css.Tree_header}>
+      <p className={css.Tree_title}>{data.title}</p>
+      <ButtonBase
+        icon={<IconifyMoreVert />}
+        styled="--ghost TopicsPane_WQkiS"
+        handleClick={() => {
+          setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+          setTargetItem((prev) => ({
+            ...prev,
+            id: data.id,
+            title: data.title,
+            type: "topic",
+          }));
+        }}
+      />
+    </div>
+  );
+
+  const TreeList = ({ data }) => (
+    <li className={css.Tree_item} onClick={() => selectListAndUpdateState(data)}>
+      <IconifyFolderOutline />
+      <p className={css.Tree_text}>{data.title}</p>
+      <ButtonBase
+        icon={<IconifyMoreVert />}
+        styled="--ghost TopicsPane_WQkiS"
+        handleClick={() => {
+          setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+          setTargetItem((prev) => ({
+            ...prev,
+            id: data.id,
+            title: data.title,
+            type: "list",
+          }));
+        }}
+      />
+    </li>
+  );
 
   return (
     <>
@@ -43,57 +77,24 @@ export const TopicsPane = () => {
         <header className={css.Header}>
           <div>
             <h2 className={css.Header_title}>{selectedItem.collectionTitle}</h2>
-            <p className={css.Header_text}>{counterTopics} Lists</p>
+            <p className={css.Header_text}>{counterItem.topics} Lists</p>
           </div>
           <ButtonBase icon={<IconifyFilterList />} />
         </header>
         <ul className={css.List}>
-          {dataTopics.map((/** @type {object} */ topic) => {
+          {dataTopics.map((topic) => {
             if (topic.parent === selectedItem.collectionId) {
               return (
                 <li key={crypto.randomUUID()}>
                   <div className={css.Tree}>
-                    <div className={css.Tree_header}>
-                      <p className={css.Tree_title}>{topic.title}</p>
-                      <ButtonBase
-                        icon={<IconifyMoreVert />}
-                        styled="--ghost TopicsPane_WQkiS"
-                        handleClick={() => {
-                          setOpenModalEditMode(!openModalEditMode);
-                          setTargetItem((prev) => ({
-                            ...prev,
-                            id: topic.id,
-                            title: topic.title,
-                            type: "topic",
-                          }));
-                        }}
-                      />
-                    </div>
+                    <TreeHeader data={topic} />
                     <ul className={css.Tree_list}>
-                      {dataLists.map((/** @type {object} */ list) => {
+                      {dataLists.map((list) => {
                         if (topic.id === list.parent) {
                           return (
-                            <li
-                              key={crypto.randomUUID()}
-                              className={css.Tree_item}
-                              onClick={() => selectListAndUpdateState(list)}
-                            >
-                              <IconifyFolderOutline />
-                              <p className={css.Tree_text}>{list.title}</p>
-                              <ButtonBase
-                                icon={<IconifyMoreVert />}
-                                styled="--ghost TopicsPane_WQkiS"
-                                handleClick={() => {
-                                  setOpenModalEditMode(!openModalEditMode);
-                                  setTargetItem((prev) => ({
-                                    ...prev,
-                                    id: list.id,
-                                    title: list.title,
-                                    type: "list",
-                                  }));
-                                }}
-                              />
-                            </li>
+                            <Fragment key={crypto.randomUUID()}>
+                              <TreeList data={list} />
+                            </Fragment>
                           );
                         }
                       })}

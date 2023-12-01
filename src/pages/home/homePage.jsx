@@ -10,8 +10,7 @@ import { onClickMissing } from "../../utils/common";
 
 export const HomePage = () => {
   const { selectedItem } = useContext(DataContext);
-  const { openCollectionsModal, setOpenCollectionsModal, openModalAddBookmarks, setOpenModalAddBookmarks } =
-    useContext(StateContext);
+  const { setShowModal } = useContext(StateContext);
 
   return (
     <>
@@ -21,16 +20,16 @@ export const HomePage = () => {
           <div className={css.Navbar}>
             <div className={css.Navbar_box}>
               <ButtonBase
-                text="New"
+                text="Add new"
                 icon={<IconifyAdd />}
-                handleClick={() => setOpenModalAddBookmarks(!openModalAddBookmarks)}
+                handleClick={() => setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }))}
               />
-              <ButtonBase text="Search" icon={<IconifySearch />} handleClick={onClickMissing} />
+              <ButtonBase text="Search" styled="--outline" icon={<IconifySearch />} handleClick={onClickMissing} />
             </div>
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase
                 icon={<IconifyInventory2Outline />}
-                handleClick={() => setOpenCollectionsModal(!openCollectionsModal)}
+                handleClick={() => setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
               />
               <p className={css.Navbar_text}>{selectedItem.collectionTitle}</p>
             </WrapBase>

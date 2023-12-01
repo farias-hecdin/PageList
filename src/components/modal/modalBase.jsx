@@ -12,14 +12,14 @@ export const ModalBase = ({ children, isOpen, handleClick }) => {
   return (
     <>
       {isOpen && (
-        <aside className={css.Modal}>
+        <div className={css.Modal}>
           <div className={css.Modal_box}>
             {children}
             <footer className={css.Modal_footer}>
               <ButtonBase text="Cancel" styled="--outline" handleClick={handleClick} />
             </footer>
           </div>
-        </aside>
+        </div>
       )}
     </>
   );
