@@ -3,7 +3,9 @@
 # Pagelist - Gestor de marcadores web online
 
 Pagelist es un pequeño gestor de marcadores web online diseñado para ayudarte a organizar tus marcadores web de una manera diferente.
+
 A diferencia de otros gestores, Pagelist ofrece un sistema de clasificación más detallado, lo que te permitirá organizar tus marcadores web en listas asociadas a temáticas, que a su vez se encuentran dentro de colecciones.
+
 En Pagelist, cada colección actúa como un espacio de trabajo independiente. De esta forma, podrás mantener tus marcadores web separados y bien organizados.
 
 ## Características principales
