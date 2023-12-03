@@ -1,12 +1,13 @@
 .Container {
+  margin: 0 auto;
+  max-width: 1920px;
   display: flex;
   flex-direction: column;
-  background-color: var(--co-diamond-black);
+  padding: 0 1.5rem;
   &_box {
     display: flex;
-    min-height: 100vh;
-    margin: 0 2rem 1rem;
-    padding: 2rem;
+    min-height: 100dvh;
+    padding: 1.5rem;
     border: 0.125rem solid var(--co-mountain-fig);
     border-radius: 0.8rem;
     background-color: var(--co-neverything);
@@ -17,11 +18,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  width: 100%;
-  padding: 0 2rem 0.8rem;
+  padding: 1rem 0;
   &_author {
     display: flex;
-    gap: 0.3rem;
+    gap: 0.5rem;
     color: var(--co-carbon-footprint);
     font-size: 1rem;
     & > a {

@@ -75,11 +75,11 @@ export const TopicsPane = () => {
     <>
       <section className={css.Container}>
         <header className={css.Header}>
-          <div>
+          <div className={css.Header_box}>
             <h2 className={css.Header_title}>{selectedItem.collectionTitle}</h2>
-            <p className={css.Header_text}>{counterItem.topics} Lists</p>
+            <ButtonBase icon={<IconifyFilterList />} />
           </div>
-          <ButtonBase icon={<IconifyFilterList />} />
+          <p className={css.Header_text}>{counterItem.topics} Lists</p>
         </header>
         <ul className={css.List}>
           {dataTopics.map((topic) => {

@@ -27,7 +27,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
     setDataLists,
     targetItem,
   } = useContext(DataContext);
-  const { setShowModal } = useContext(StateContext)
+  const { setShowModal } = useContext(StateContext);
 
   // Alamacenar el Title y Url de un elemento
   const [titleValue, setTitleValue] = useState("");
@@ -100,9 +100,9 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             <ButtonBase
               text="Delete"
               handleClick={() => {
-                const data = removeElementById(ToFuncDelete)
-                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState)
-                setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }))
+                const data = removeElementById(ToFuncDelete);
+                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState);
+                setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
               }}
             />
           </div>
@@ -118,20 +118,25 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
                   </option>
                 ))}
               </ButtonSelect>
-              <ButtonBase text="Move" handleClick={() => {
-                const data = relocateElementAndUpdateState(ToFuncRelocate)
-                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState)
-                setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }))
-              }} />
+              <ButtonBase
+                text="Move"
+                handleClick={() => {
+                  const data = relocateElementAndUpdateState(ToFuncRelocate);
+                  confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState);
+                  setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                }}
+              />
             </div>
           </DetailsBase>
         )}
         <DetailsBase title="Update this element" icon={<IconifyTitle />}>
           <div className={css.Container_details}>
-            <form onSubmit={(e) => {
-              const data = modifyElementAndUpdateState({ ...ToFuncUpdate, pEvent: e })
-              confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState)
-            }}>
+            <form
+              onSubmit={(e) => {
+                const data = modifyElementAndUpdateState({ ...ToFuncUpdate, pEvent: e });
+                confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
+              }}
+            >
               <input
                 type="text"
                 value={titleValue}

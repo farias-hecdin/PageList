@@ -67,9 +67,9 @@
     flex-direction: column;
     gap: 0.5rem;
     width: 40rem;
+    margin: 2rem 0;
     /* max-height: 65dvh; */
     overflow: auto;
-    margin: 2rem 0;
   }
   &_text {
     color: var(--co-cold-morning);

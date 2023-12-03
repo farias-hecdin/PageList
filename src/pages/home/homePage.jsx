@@ -1,12 +1,12 @@
 import css from "./homePage.module.css";
+import { BookmarksPane } from "./bookmarks/bookmarksPane.jsx";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
 import { DataContext, StateContext } from "../../context/index.jsx";
 import { MessageFeedback, HeaderSecondary } from "../../layout/index.jsx";
-import { BookmarksPane } from "./bookmarks/bookmarksPane.jsx";
-import { TopicsPane } from "./topics/topicsPane.jsx";
-import { useContext } from "react";
 import { ModalWrapper } from "./modal/modalWrapper";
+import { TopicsPane } from "./topics/topicsPane.jsx";
 import { onClickMissing } from "../../utils/common";
+import { useContext } from "react";
 
 export const HomePage = () => {
   const { selectedItem } = useContext(DataContext);
@@ -20,7 +20,7 @@ export const HomePage = () => {
           <div className={css.Navbar}>
             <div className={css.Navbar_box}>
               <ButtonBase
-                text="Add new"
+                text="New"
                 icon={<IconifyAdd />}
                 handleClick={() => setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }))}
               />
@@ -43,7 +43,7 @@ export const HomePage = () => {
               text="Choose a collection to access your favorite bookmarks"
             />
           ) : (
-            <div className={css.Container_wrap}>
+            <div className={css.Container_boxTwo}>
               <TopicsPane />
               <BookmarksPane />
             </div>

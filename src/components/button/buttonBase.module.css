@@ -3,15 +3,16 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  height: 2.25rem;
-  padding: 0 0.6rem;
-  border: 1px solid transparent;
+  height: 2.1rem;
+  padding: 0 0.63rem;
+  border: 0.0625rem solid transparent;
   border-radius: 0.5rem;
   background-color: var(--co-mountain-fig);
   color: var(--co-carbon-footprint);
   &_text {
     font-weight: var(--fo-bold);
     font-size: 1rem;
+    user-select: none;
   }
   & > svg {
     font-size: 1rem;
@@ -25,39 +26,33 @@
 
 /* State ------------------------------------------------------------------- */
 
-.Button {
-  &:global(.--active) {
+.Button:global(.--active) {
+  background-color: var(--co-zucchini);
+  color: var(--co-greenish);
+  & > svg {
+    color: var(--fi-greenish);
+  }
+}
+
+.Button:global(.--outline) {
+  border: 0.0625rem solid oklch(38% 0.029 285.14);
+  background-color: oklch(30% 0.029 285.14);
+  color: var(--co-carbon-footprint);
+  &:hover {
+    border-color: var(--co-greenish);
     background-color: var(--co-zucchini);
     color: var(--co-greenish);
-    & > svg {
-      color: var(--fi-greenish);
-    }
   }
 }
 
-.Button {
-  &:global(.--outline) {
-    border: 0.0625rem solid oklch(38% 0.029 285.14);
-    background-color: oklch(30% 0.029 285.14);
-    color: var(--co-carbon-footprint);
-    &:hover {
-      border-color: var(--co-greenish);
-      background-color: var(--co-zucchini);
-      color: var(--co-greenish);
-    }
-  }
-}
-
-.Button {
-  &:global(.--ghost) {
-    border-color: transparent;
-    background-color: transparent;
-    color: var(--co-carbon-footprint);
-    &:hover {
-      border-color: var(--co-greenish);
-      background-color: var(--co-zucchini);
-      color: var(--co-greenish);
-    }
+.Button:global(.--ghost) {
+  border-color: transparent;
+  background-color: transparent;
+  color: var(--co-carbon-footprint);
+  &:hover {
+    border-color: var(--co-greenish);
+    background-color: var(--co-zucchini);
+    color: var(--co-greenish);
   }
 }
 
@@ -84,4 +79,17 @@
 
 .Button:global(.TopicsPane_WQkiS) {
   padding: 0 0.25rem;
+}
+
+/* Media query ============================================================= */
+
+@media screen and (max-width: 401px) {
+  .Button {
+    &_text {
+      display: none;
+    }
+    &:global(.HeaderMain_UlICn) {
+      width: auto;
+    }
+  }
 }

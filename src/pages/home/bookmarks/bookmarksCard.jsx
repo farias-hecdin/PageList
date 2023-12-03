@@ -31,12 +31,12 @@ export const BookmarksCard = ({ title, url, children }) => {
     <article className={css.Card}>
       <div className={css.Card_box}>
         <p className={css.Card_thumb}>{titleLinks}</p>
-        <p className={css.Card_content}>
-          <a className={css.Card_title} href={url} target="_blank" rel="noopener noreferrer">
+        <div className={css.Card_content}>
+          <span className={css.Card_title} href={url} target="_blank" rel="noopener noreferrer">
             {title}
-          </a>
+          </span>
           <span className={css.Card_url}>{url}</span>
-        </p>
+        </div>
       </div>
       {children}
     </article>

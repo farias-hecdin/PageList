@@ -34,7 +34,7 @@ export const BookmarksPane = () => {
             {dataBookmarks.map((bookmark) => {
               if (bookmark.parent === selectedItem.listId) {
                 return (
-                  <li key={crypto.randomUUID()}>
+                  <li key={crypto.randomUUID()} className={css.List_item}>
                     <BookmarksCard title={bookmark.title} url={bookmark.url}>
                       <ButtonBase
                         icon={<IconifyMoreVert />}

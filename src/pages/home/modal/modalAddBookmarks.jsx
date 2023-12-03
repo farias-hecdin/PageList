@@ -154,7 +154,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   className={css.Form_input}
                   id="input_T22VL1iGPC"
                   maxLength={50}
-                  minLength={3}
+                  minLength={2}
                   placeholder="Add a collection"
                   type="text"
                   value={collectData.collectionTitle}
@@ -172,7 +172,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   className={css.Form_input}
                   id="input_a22VL1iGPC"
                   maxLength={50}
-                  minLength={3}
+                  minLength={2}
                   placeholder="Add a topic"
                   type="text"
                   value={collectData.topicTitle}
@@ -203,7 +203,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   className={css.Form_input}
                   id="input_ooIRWuISR8"
                   maxLength={50}
-                  minLength={3}
+                  minLength={2}
                   placeholder="Add a list"
                   type="text"
                   value={collectData.listTitle}
@@ -251,7 +251,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   className={css.Form_input}
                   id="input_ooIRWuISR1"
                   maxLength={50}
-                  minLength={3}
+                  minLength={2}
                   placeholder="Add a bookmark"
                   type="text"
                   value={collectData.bookmarkTitle}

@@ -10,12 +10,12 @@
     gap: 0.5rem;
     width: 13rem;
     height: 6.5rem;
-    overflow: hidden;
     padding: 1rem;
     border: 1px solid transparent;
     border-radius: 0.4rem;
     background-color: var(--co-mountain-fig);
     color: var(--co-carbon-footprint);
+    overflow: hidden;
     & > svg {
       font-size: 1.5rem;
     }
@@ -27,8 +27,8 @@
     }
   }
   &_text {
-    overflow: hidden;
     text-overflow: ellipsis;
+    overflow: hidden;
     white-space: nowrap;
   }
 }

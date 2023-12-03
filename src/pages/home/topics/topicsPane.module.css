@@ -1,20 +1,21 @@
 .Container {
-  padding-right: 2rem;
-  border-right: 1px solid #2f3847;
   color: var(--co-cold-morning);
 }
 
 .Header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 1rem;
-  & > div {
-    width: 100%;
+  &_box {
+    display: flex;
+    gap: 0.25rem;
   }
   &_title {
-    margin-bottom: 0.25rem;
     font-weight: var(--fo-medium);
     font-size: 1.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   &_text {
     color: var(--co-carbon-footprint);
@@ -23,26 +24,27 @@
 }
 
 .List {
-  gap: 0.5rem;
-  height: 90%;
   margin-top: 2rem;
   list-style: none;
   overflow-y: auto;
+  height: 75vh;
 }
 
 .Tree {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   border-radius: 0.5rem;
   background-color: var(--co-diamond-black);
   &_header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
-    padding: 3px 1rem;
+    padding: 0.1rem 1rem;
   }
   &_title {
-    width: 100%;
-    font-size: 1.1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   &_list {
     display: block;
@@ -52,10 +54,10 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 3px 1rem;
+    padding: 0.1rem 1rem;
     border-radius: 0.4rem;
     &:first-child {
-      margin-top: 0.3rem;
+      margin-top: 0.1rem;
     }
     &:hover,
     &:active {
@@ -63,7 +65,9 @@
     }
   }
   &_text {
-    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   &_item > svg {
     font-size: 1.2rem;

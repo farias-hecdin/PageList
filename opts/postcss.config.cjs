@@ -1,4 +1,5 @@
-// postcss --no-map --replace src/**/*.css --config ./temp
+// command: postcss --no-map --replace src/**/*.css --config ./opts
+
 module.exports = {
   plugins: {
     "postcss-sorting": {
@@ -61,7 +62,6 @@ module.exports = {
         "height",
         "min-height",
         "max-height",
-        "overflow",
         "margin",
         "margin-top",
         "margin-right",
@@ -133,14 +133,15 @@ module.exports = {
         "opacity",
         /* Text properties*/
         "font",
+        "font-family",
+        "font-range",
+        "font-size",
+        "font-size-adjust",
+        "font-smoothing",
+        "font-stretch",
         "font-style",
         "font-variant",
         "font-weight",
-        "font-size",
-        "font-family",
-        "font-size-adjust",
-        "font-stretch",
-        "font-smoothing",
         "line-height",
         "text-align",
         "text-align-last",
@@ -157,16 +158,17 @@ module.exports = {
         "text-justify",
         "text-orientation",
         "text-outline",
-        "text-overflow",
-        "text-overflow-ellipsis",
-        "text-overflow-mode",
         "text-size-adjust",
         "text-transform",
         "text-wrap",
         "text-shadow",
+        "text-overflow",
+        "text-overflow-ellipsis",
+        "text-overflow-mode",
         "word-break",
         "word-spacing",
         "word-wrap",
+        "overflow",
         /* Animation and transition */
         "transition",
         "transition-property",

@@ -6,14 +6,18 @@
 /* Fonts and colors  ------------------------------------------------------- */
 
 :root {
-  /* Font-family */
+  /* Breakpoints */
+  /* (https://gs.statcounter.com/screen-resolution-stats) */
+  /* (360px > x > 960px) (960px > x > 1920px) */
 
+  /* Fonts ----------------------------------------------------------------- */
+
+  /* Font-family */
   --fo-base: "Titillium Web", sans-serif;
   --fo-primary: var(--fo-base);
   --fo-mono: "Roboto Mono", monospace;
 
   /* Weight */
-
   /* --fo-black: 900; */
   /* --fo-extrabold: 800; */
   --fo-bold: 700;
@@ -24,7 +28,7 @@
   /* --fo-extralight: 200; */
   /* --fo-thin: 100; */
 
-  /* Colors */
+  /* Colors ---------------------------------------------------------------- */
 
   --co-black-pearl: lch(13.94% 7.61 265.82);
   --co-carbon-footprint: lch(53.86% 5.42 268.64);
@@ -53,17 +57,34 @@
   font-family: var(--fo-base);
 }
 
+/* * {outline: 1px dashed cyan;} */
+
+html {
+  font-size: responsive 15px 16px;
+  font-range: 960px 1920px;
+}
+
+@media screen and (max-width: 959px) {
+  html {
+    font-size: responsive 14px 15px;
+    font-range: 360px 959px;
+  }
+}
+
 body {
   min-height: 100dvh;
-  background-color: #222222;
-  font-size: 16px;
+  background-color: var(--co-diamond-black);
 }
 
 ul {
   margin: 0;
   padding-left: 0;
+  & > li {
+    list-style: none;
+  }
 }
 
+span, p { font-size: 1rem;}
 a:link,
 a:visited {
   text-decoration: none;
@@ -105,22 +126,15 @@ select {
 
 /* Special classes --------------------------------------------------------- */
 
-svg,
-.no\:Select {
+svg {
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
 
-.no\:Nowrap {
-  overflow: hidden;
+.nowrap {
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
-}
-
-/* Utils ------------------------------------------------------------------- */
-
-:root {
-  --dim-panel: 40rem;
 }

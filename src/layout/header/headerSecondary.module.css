@@ -1,17 +1,27 @@
 .Header {
   display: flex;
   align-items: center;
-  height: 6rem;
+  gap: 1rem;
   border-bottom: 0.0625rem solid #2f3847; /* FIX: */
+  padding: 1.5rem 0;
   color: var(--co-cold-morning);
   &_box {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 0.25rem;
     width: 100%;
   }
   &_title {
-    margin-bottom: 0.25rem;
     font-weight: var(--fo-bold);
+  }
+}
+
+@media screen and (max-width: 959px) {
+  .Header {
+    flex-direction: column;
+    &_box {
+      text-align: center;
+    }
   }
 }
