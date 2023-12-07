@@ -58,9 +58,6 @@ devDependencies:
   postcss:
     specifier: ^8.4.32
     version: 8.4.32
-  postcss-calc:
-    specifier: ^9.0.1
-    version: 9.0.1(postcss@8.4.32)
   postcss-cli:
     specifier: ^10.1.0
     version: 10.1.0(postcss@8.4.32)
@@ -70,9 +67,6 @@ devDependencies:
   postcss-nested-ancestors:
     specifier: ^3.0.0
     version: 3.0.0(postcss@8.4.32)
-  postcss-responsive-type:
-    specifier: ^1.0.0
-    version: 1.0.0
   postcss-sorting:
     specifier: ^8.0.2
     version: 8.0.2(postcss@8.4.32)
@@ -2617,17 +2611,6 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /postcss-calc@9.0.1(postcss@8.4.32):
-    resolution: {integrity: sha512-TipgjGyzP5QzEhsOZUaIkeO5mKeMFpebWzRogWG/ysonUlnHcq5aJe0jOjpfzUU8PeSaBQnrE8ehR0QA5vs8PQ==}
-    engines: {node: ^14 || ^16 || >=18.0}
-    peerDependencies:
-      postcss: ^8.2.2
-    dependencies:
-      postcss: 8.4.32
-      postcss-selector-parser: 6.0.13
-      postcss-value-parser: 4.2.0
-    dev: true
-
   /postcss-cli@10.1.0(postcss@8.4.32):
     resolution: {integrity: sha512-Zu7PLORkE9YwNdvOeOVKPmWghprOtjFQU3srMUGbdz3pHJiFh7yZ4geiZFMkjMfB0mtTFR3h8RemR62rPkbOPA==}
     engines: {node: '>=14'}
@@ -2705,12 +2688,6 @@ packages:
     resolution: {integrity: sha512-HvExULSwLqHLgUy1rl3ANIqCsvMS0WHss2UOsXhXnQaZ9VCc2oBvIpXrl00IUFT5ZDITME0o6oiXeiHr2SAIfw==}
     dev: true
 
-  /postcss-responsive-type@1.0.0:
-    resolution: {integrity: sha512-O4kAKbc4RLnSkzcguJ6ojW67uOfeILaj+8xjsO0quLU94d8BKCqYwwFEUVRNbj0YcXA6d3uF/byhbaEATMRVig==}
-    dependencies:
-      postcss: 6.0.23
-    dev: true
-
   /postcss-selector-parser@6.0.13:
     resolution: {integrity: sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==}
     engines: {node: '>=4'}
@@ -2738,15 +2715,6 @@ packages:
       postcss: ^8.2.8
     dependencies:
       postcss: 8.4.32
-    dev: true
-
-  /postcss@6.0.23:
-    resolution: {integrity: sha512-soOk1h6J3VMTZtVeVpv15/Hpdl2cBLX3CAw4TAbkpTJiNPk9YP/zWcD1ND+xEtvyuuvKzbxliTOIyvkSeSJ6ag==}
-    engines: {node: '>=4.0.0'}
-    dependencies:
-      chalk: 2.4.2
-      source-map: 0.6.1
-      supports-color: 5.5.0
     dev: true
 
   /postcss@8.4.32:
@@ -3002,11 +2970,6 @@ packages:
 
   /source-map-js@1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
-    engines: {node: '>=0.10.0'}
-    dev: true
-
-  /source-map@0.6.1:
-    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
     dev: true
 
