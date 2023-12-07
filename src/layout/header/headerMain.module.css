@@ -1,6 +1,7 @@
 .Container {
   display: flex;
   justify-content: space-between;
+  gap: 2rem;
   width: 100%;
   padding: 0.6rem 0;
 }
@@ -22,13 +23,11 @@
   }
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (width <= 600px) {
   .Logo {
-    &_image {
-      --size: 1.8rem;
-    }
     &_title {
       font-size: 1.5rem;
+      display: none;
     }
   }
 }

@@ -45,8 +45,6 @@
   font-family: var(--fo-base);
 }
 
-* {outline: 1px dashed cyan;}
-
 html {
   font-size: clamp(0.813rem, 0.192vw + 0.769rem, 1rem);
 }
@@ -95,7 +93,10 @@ ul {
   }
 }
 
-span, p { font-size: 1rem;}
+span,
+p {
+  font-size: 1rem;
+}
 a:link,
 a:visited {
   text-decoration: none;
@@ -151,4 +152,3 @@ svg {
 }
 
 /* Media queries --------------------------------------------------- */
-

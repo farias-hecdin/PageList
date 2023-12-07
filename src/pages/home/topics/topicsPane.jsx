@@ -81,7 +81,9 @@ export const TopicsPane = () => {
         <header className={css.Header}>
           <div className={css.Header_box}>
             <h2 className={css.Header_title}>{selectedItem.collectionTitle}</h2>
-            <p className={css.Header_text}>{counterItem.topics} {counterItem.topics > 1 ? "lists" : "list"}</p>
+            <p className={css.Header_text}>
+              {counterItem.topics} {counterItem.topics > 1 ? "lists" : "list"}
+            </p>
           </div>
           <ButtonBase icon={<IconifyFilterList />} />
         </header>

@@ -28,6 +28,7 @@
 .Form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.8rem;
   & > form,
   & > div {
@@ -40,6 +41,8 @@
     border: 2px solid var(--co-mountain-fig);
     border-radius: 0.5rem;
     outline: none;
+      width: 100%;
+      min-width: 20.8rem;
     background-color: var(--co-black-pearl);
     color: var(--co-carbon-footprint);
     &:focus {
@@ -48,7 +51,6 @@
     }
   }
 }
-
 
 .Container {
   &_title {
@@ -72,10 +74,7 @@
 
 @media screen and (width <= 600px) {
   .Form {
-    flex-direction: column;
-    align-items: flex-start;
     &_input {
-      width: 19rem;
     }
   }
   .Container {

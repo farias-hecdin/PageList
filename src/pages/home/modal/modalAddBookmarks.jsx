@@ -161,7 +161,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   onChange={(e) => handleChange("collectionTitle", e.currentTarget.value, setCollectData)}
                   required={true}
                 />
-                <ButtonBase styled="ModalAddBookmarks_JqagP" text="Add collection" />
+                <ButtonBase styled="ModalAddBookmarks_JqagP" icon={<IconifyDone />} text="Add" />
               </form>
             </div>
           )}
@@ -191,7 +191,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                     </option>
                   ))}
                 </ButtonSelect>
-                <ButtonBase type="submit" styled="ModalAddBookmarks_JqagP" text="Add topic" />
+                <ButtonBase type="submit" styled="ModalAddBookmarks_JqagP" icon={<IconifyDone />} text="Add" />
               </form>
             </div>
           )}
@@ -237,7 +237,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                     }
                   })}
                 </ButtonSelect>
-                <ButtonBase type="submit" styled="ModalAddBookmarks_JqagP" text="Add list" />
+                <ButtonBase type="submit" icon={<IconifyDone />} styled="ModalAddBookmarks_JqagP" text="Add" />
               </form>
             </div>
           )}
@@ -308,7 +308,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                     }
                   })}
                 </ButtonSelect>
-                <ButtonBase type="submit" styled="ModalAddBookmarks_JqagP" text="Add list" />
+                <ButtonBase type="submit" icon={<IconifyDone />} styled="ModalAddBookmarks_JqagP" text="Add" />
               </form>
             </div>
           )}

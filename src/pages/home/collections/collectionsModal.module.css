@@ -33,11 +33,10 @@
   }
 }
 
-
 @media screen and (width <= 600px) {
-.Container {
-  &_list {
-    grid-template-columns: repeat(2, 1fr);
+  .Container {
+    &_list {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
-}
 }

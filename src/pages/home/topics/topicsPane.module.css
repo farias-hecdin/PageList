@@ -8,6 +8,15 @@
   }
 }
 
+@media screen and (width <= 600px) {
+  .Container {
+    color: var(--co-cold-morning);
+    &_list {
+      height: 13rem;
+    }
+  }
+}
+
 .Header {
   display: flex;
   justify-content: space-between;

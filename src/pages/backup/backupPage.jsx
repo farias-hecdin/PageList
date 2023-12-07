@@ -92,7 +92,7 @@ export const BackupPage = () => {
           <div className={css.Toolbar_box}>
             <ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(false)} />
             <ButtonBase
-              text="Download as JSON"
+              text="as JSON"
               icon={<IconifyDownload />}
               handleClick={() => clickButtonExport(true)}
             />

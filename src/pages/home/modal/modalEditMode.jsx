@@ -88,7 +88,8 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
     <ModalBase isOpen={isOpen} handleClick={handleClick}>
       <header className={css.Header}>
         <p className={css.Header_title}>Edit</p>
-        <p className={css.Header_text}>What do you want to do with:
+        <p className={css.Header_text}>
+          What do you want to do with:
           <span className={css.Header_subtext}>{`"${targetItem.title}"`}</span>
         </p>
       </header>
@@ -98,6 +99,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             <p>Do you want delete this element?</p>
             <ButtonBase
               text="Delete"
+              icon={<IconifyDone />}
               handleClick={() => {
                 const data = removeElementById(ToFuncDelete);
                 confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState);
@@ -119,6 +121,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
               </ButtonSelect>
               <ButtonBase
                 text="Move"
+                icon={<IconifyDone />}
                 handleClick={() => {
                   const data = relocateElementAndUpdateState(ToFuncRelocate);
                   confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState);
@@ -150,7 +153,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
                   id="input_P0Z5gb5BMg"
                 />
               )}
-              <ButtonBase text="Update" type="submit" />
+              <ButtonBase text="Update" icon={<IconifyDone />} type="submit" />
             </form>
           </div>
         </DetailsBase>

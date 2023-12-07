@@ -16,6 +16,10 @@
     margin-bottom: 0.25rem;
     font-size: 1.5rem;
     font-weight: var(--fo-medium);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
   &_text {
     color: var(--co-carbon-footprint);
@@ -33,4 +37,3 @@
     list-style: none;
   }
 }
-

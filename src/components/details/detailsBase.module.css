@@ -41,3 +41,6 @@
     background-color: var(--co-black-pearl);
   }
 }
+
+@media screen and (width <= 600px) {
+}
