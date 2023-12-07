@@ -14,8 +14,8 @@
   }
   &_title {
     margin-bottom: 0.25rem;
-    font-weight: var(--fo-medium);
     font-size: 1.5rem;
+    font-weight: var(--fo-medium);
   }
   &_text {
     color: var(--co-carbon-footprint);

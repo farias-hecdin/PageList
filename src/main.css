@@ -8,7 +8,7 @@
 :root {
   /* Breakpoints */
   /* (https://gs.statcounter.com/screen-resolution-stats) */
-  /* (360px > x > 960px) (960px > x > 1920px) */
+  /* (360px > x > 600px) (600px > x > 1920px) */
 
   /* Fonts ----------------------------------------------------------------- */
 
@@ -28,21 +28,9 @@
   /* --fo-extralight: 200; */
   /* --fo-thin: 100; */
 
-  /* Colors ---------------------------------------------------------------- */
-
-  --co-black-pearl: lch(13.94% 7.61 265.82);
-  --co-carbon-footprint: lch(53.86% 5.42 268.64);
-  --co-cold-morning: lch(90.72 0 223.97);
-  --co-diamond-black: lch(19.53 9.48 265.53);
-  --co-greenish: lch(61.8% 53.13 147.26);
-  --co-mountain-fig: lch(24.82% 8.38 286.74);
-  --co-neverything: lch(8.44% 4.69 216.89);
-  --co-zucchini: lch(25.67 21.63 164.03);
-
   /* Filter */
 
   --fi-carbon-footprint: invert(53%) sepia(6%) saturate(489%) hue-rotate(184deg) brightness(95%) contrast(93%);
-  --fi-cold-morning: invert(98%) sepia(2%) saturate(486%) hue-rotate(56deg) brightness(117%) contrast(80%);
   --fi-greenish: invert(48%) sepia(99%) saturate(291%) hue-rotate(87deg) brightness(96%) contrast(86%);
 }
 
@@ -57,23 +45,46 @@
   font-family: var(--fo-base);
 }
 
-/* * {outline: 1px dashed cyan;} */
+* {outline: 1px dashed cyan;}
 
 html {
-  font-size: responsive 15px 16px;
-  font-range: 960px 1920px;
+  font-size: clamp(0.813rem, 0.192vw + 0.769rem, 1rem);
 }
 
-@media screen and (max-width: 959px) {
-  html {
-    font-size: responsive 14px 15px;
-    font-range: 360px 959px;
-  }
+body[data-css="normal"] {
+  --co-black-pearl: lch(13.94% 7.61 265.82);
+  --co-carbon-footprint: lch(53.86% 5.42 268.64);
+  --co-cold-morning: lch(90.72 0 223.97);
+  --co-diamond-black: lch(19.53 9.48 265.53);
+  --co-greenish: lch(61.8% 53.13 147.26);
+  --co-mountain-fig: lch(24.82% 8.38 286.74);
+  --co-neverything: lch(8.44% 4.69 216.89);
+  --co-zucchini: lch(25.67 21.63 164.03);
+  --co-sky-captain: lch(16.78% 8.87 266.58);
+  --c1: lch(18.51% 10.82 288.04);
+  --c2: lch(27.8% 10.83 287.21);
+  --fi-cold-morning: invert(98%) sepia(2%) saturate(486%) hue-rotate(56deg) brightness(117%) contrast(80%);
+  background-color: var(--co-sky-captain);
+}
+
+body[data-css="light"] {
+  --co-black-pearl: lch(92% 4.69 216.89);
+  --co-carbon-footprint: lch(30% 5.42 268.64);
+  --co-cold-morning: #43474e;
+  --co-diamond-black: lch(88% 13.22 117.91);
+  --co-greenish: lch(31.8% 53.13 147.26);
+  --co-mountain-fig: lch(88% 13.22 117.91);
+  --co-zucchini: lch(81.8% 53.13 147.26);
+  --co-neverything: lch(87% 4.69 216.89);
+  --co-sky-captain: lch(98% 13.22 117.91);
+  --c1: lch(96% 13.22 117.91);
+  --c2: lch(89% 13.22 117.91);
+  --fi-cold-morning: invert(27%) sepia(2%) saturate(2278%) hue-rotate(180deg) brightness(97%) contrast(93%);
 }
 
 body {
   min-height: 100dvh;
-  background-color: var(--co-diamond-black);
+  background-color: var(--co-sky-captain);
 }
 
 ul {
@@ -110,8 +121,8 @@ select {
   width: 100%;
   border: none;
   background-color: transparent;
-  font-size: inherit;
   font-family: inherit;
+  font-size: inherit;
   line-height: inherit;
   cursor: inherit;
 }
@@ -138,3 +149,6 @@ svg {
   overflow: hidden;
   white-space: nowrap;
 }
+
+/* Media queries --------------------------------------------------- */
+

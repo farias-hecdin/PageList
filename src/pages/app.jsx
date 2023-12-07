@@ -17,7 +17,7 @@ export const App = () => {
       </main>
       <footer className={css.Footer}>
         <p className={css.Footer_author}>
-          This website was done by
+          Made by
           <a href="https://github.com/farias-hecdin/" target="_blank" rel="noopener noreferrer">
             Hecdin Farias
           </a>

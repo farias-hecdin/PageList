@@ -1,7 +1,6 @@
 .Details {
-  border-bottom: 0.0625rem solid #232a36;
   border-radius: 1rem;
-  background-color: #232a36;
+  background-color: var(--co-mountain-fig);
   color: var(--co-carbon-footprint);
   &[open] {
     background-color: var(--co-mountain-fig);

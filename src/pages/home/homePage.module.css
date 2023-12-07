@@ -4,18 +4,18 @@
   width: 100%;
   padding: 0rem 2rem;
   border-radius: 0.8rem;
-  background-color: #232a36; /* FIX: */
+  background-color: var(--co-sky-captain);
   &_box {
     margin: 2rem 0;
   }
   &_boxTwo {
     display: grid;
     gap: 2rem;
-    grid-template-columns: 20rem 1fr;
+    grid-template-columns: 1fr 1.5fr;
   }
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (width <= 600px) {
   .Container {
     &_boxTwo {
       display: flex;
@@ -44,10 +44,11 @@
   }
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (width <= 600px) {
   .Navbar {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     &_box {
       gap: 1rem;
     }

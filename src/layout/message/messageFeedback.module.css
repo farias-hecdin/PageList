@@ -4,12 +4,13 @@
   align-items: center;
   padding: 2rem;
   color: var(--co-carbon-footprint);
+  text-align: center;
   &_icon > svg {
     font-size: 8rem;
   }
   &_title {
     margin-bottom: 0.8rem;
-    font-weight: var(--fo-bold);
     font-size: 2rem;
+    font-weight: var(--fo-bold);
   }
 }

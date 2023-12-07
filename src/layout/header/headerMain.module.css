@@ -17,8 +17,8 @@
   }
   &_title {
     color: var(--co-cold-morning);
-    font-weight: var(--fo-bold);
     font-size: 1.7rem;
+    font-weight: var(--fo-bold);
   }
 }
 

@@ -1,33 +1,36 @@
 .Container {
   color: var(--co-cold-morning);
+  &_list {
+    height: 75vh;
+    margin-top: 2rem;
+    list-style: none;
+    overflow-y: auto;
+  }
 }
 
 .Header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1rem;
   &_box {
     display: flex;
+    flex-direction: column;
     gap: 0.25rem;
   }
   &_title {
-    font-weight: var(--fo-medium);
+    display: -webkit-box;
     font-size: 1.5rem;
-    text-overflow: ellipsis;
+    font-weight: var(--fo-medium);
     overflow: hidden;
-    white-space: nowrap;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
   &_text {
     color: var(--co-carbon-footprint);
     font-size: 0.9rem;
   }
-}
-
-.List {
-  margin-top: 2rem;
-  list-style: none;
-  overflow-y: auto;
-  height: 75vh;
 }
 
 .Tree {
@@ -36,22 +39,23 @@
   background-color: var(--co-diamond-black);
   &_header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
-    padding: 0.1rem 1rem;
+    padding: 0.5rem 1rem;
   }
   &_title {
-    text-overflow: ellipsis;
+    display: -webkit-box;
     overflow: hidden;
-    white-space: nowrap;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
   &_list {
-    display: block;
     list-style: none;
   }
   &_item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     padding: 0.1rem 1rem;
@@ -64,12 +68,18 @@
       background: var(--co-mountain-fig);
     }
   }
-  &_text {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  &_subheader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    & svg {
+      font-size: 1.2rem;
+    }
   }
-  &_item > svg {
-    font-size: 1.2rem;
+  &_text {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
 }

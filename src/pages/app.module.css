@@ -1,12 +1,12 @@
 .Container {
-  margin: 0 auto;
-  max-width: 1920px;
   display: flex;
   flex-direction: column;
+  max-width: 1920px;
+  margin: 0 auto;
   padding: 0 1.5rem;
   &_box {
     display: flex;
-    min-height: 100dvh;
+    min-height: 99dvh;
     padding: 1.5rem;
     border: 0.125rem solid var(--co-mountain-fig);
     border-radius: 0.8rem;
@@ -18,10 +18,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 1rem 1rem 1.5rem;
   &_author {
     display: flex;
     gap: 0.5rem;
+    width: 100%;
     color: var(--co-carbon-footprint);
     font-size: 1rem;
     & > a {
@@ -30,10 +31,9 @@
     }
   }
   &_github {
-    order: -1;
     & > * {
       color: var(--co-carbon-footprint);
-      font-size: 2rem;
+      font-size: 2.2rem;
     }
   }
 }

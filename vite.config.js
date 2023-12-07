@@ -23,7 +23,7 @@ export default defineConfig(({ command }) => {
       }),
       Icons({ compiler: "jsx", jsx: "react" }),
     ],
-    base: command === "build" ? "https://farias-hecdin.github.io/Pagelist/" : "/",
+    // base: command === "build" ? "https://farias-hecdin.github.io/Pagelist/" : "/",
     css: {
       modules: { generateScopedName: command === "build" ? "[hash:base64:9]" : "[local]_[hash:base64:5]" },
     },

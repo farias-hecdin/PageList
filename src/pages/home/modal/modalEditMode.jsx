@@ -86,14 +86,13 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
 
   return (
     <ModalBase isOpen={isOpen} handleClick={handleClick}>
-      <header className={css.Container_header}>
-        <p className={css.Container_title}>Edit</p>
-        <p className={css.Container_text}>
-          What do you want to do with:
-          <span className={css.Container_subtext}>{`"${targetItem.title}"`}</span>
+      <header className={css.Header}>
+        <p className={css.Header_title}>Edit</p>
+        <p className={css.Header_text}>What do you want to do with:
+          <span className={css.Header_subtext}>{`"${targetItem.title}"`}</span>
         </p>
       </header>
-      <div className={css.Container_box}>
+      <div className={css.Container}>
         <DetailsBase title="Delete this element" icon={<IconifyDeleteForeverOutline />}>
           <div className={css.Container_details}>
             <p>Do you want delete this element?</p>

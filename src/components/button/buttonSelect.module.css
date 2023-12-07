@@ -28,10 +28,6 @@
 
 /** Compose ---------------------------------------------------------------- */
 
-.Button:global(.ModalAddBookmars_mojxs) {
-  width: 25rem;
-}
-
 .Button:global(.ModalEditMode_mojxs) {
-  width: 25rem;
+  width: 18rem;
 }

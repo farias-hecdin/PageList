@@ -34,7 +34,7 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
     <>
       <ModalBase isOpen={isOpen} handleClick={handleClick}>
         <div className={css.Container_header}>
-          <div>
+          <div className={css.Container_box}>
             <p className={css.Container_title}>Collections</p>
             <p className={css.Container_text}>Choose a collection boorkmarks</p>
           </div>

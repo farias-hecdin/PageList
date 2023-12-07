@@ -1,16 +1,18 @@
 .Container {
   &_header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    & > div {
+    gap: 1rem;
+    &_box {
       width: 100%;
     }
   }
   &_title {
     margin-bottom: 0.25rem;
     color: var(--co-cold-morning);
-    font-weight: var(--fo-bold);
     font-size: 1.4rem;
+    font-weight: var(--fo-bold);
   }
   &_text {
     color: var(--co-cold-morning);
@@ -18,8 +20,8 @@
   &_list {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-    max-height: 65dvh;
+    grid-template-columns: repeat(3, 11rem);
+    max-height: 65vh;
     margin: 2rem 0;
     list-style: none;
     overflow-y: auto;
@@ -29,4 +31,13 @@
     justify-content: flex-end;
     margin: 1rem 0 0;
   }
+}
+
+
+@media screen and (width <= 600px) {
+.Container {
+  &_list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 }

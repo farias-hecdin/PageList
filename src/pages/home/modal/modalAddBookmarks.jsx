@@ -181,7 +181,6 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 />
                 <ButtonSelect
                   id="T1"
-                  styled="ModalAddBookmars_mojxs"
                   value={collectData.collection}
                   onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
                 >
@@ -212,7 +211,6 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 />
                 <ButtonSelect
                   id={"L1"}
-                  styled="ModalAddBookmars_mojxs"
                   value={collectData.collection}
                   onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
                 >
@@ -225,7 +223,6 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 </ButtonSelect>
                 <ButtonSelect
                   id={"L2"}
-                  styled="ModalAddBookmars_mojxs"
                   value={collectData.topic}
                   onChange={(e) => handleChange("topic", e.target.value, setCollectData)}
                 >
@@ -269,7 +266,6 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 />
                 <ButtonSelect
                   id={"B1"}
-                  styled="ModalAddBookmars_mojxs"
                   value={collectData.collection}
                   onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
                 >
@@ -282,7 +278,6 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 </ButtonSelect>
                 <ButtonSelect
                   id={"B2"}
-                  styled="ModalAddBookmars_mojxs"
                   value={collectData.topic}
                   onChange={(e) => handleChange("topic", e.target.value, setCollectData)}
                 >
@@ -299,7 +294,6 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 </ButtonSelect>
                 <ButtonSelect
                   id={"B3"}
-                  styled="ModalAddBookmars_mojxs"
                   value={collectData.list}
                   onChange={(e) => handleChange("list", e.target.value, setCollectData)}
                 >

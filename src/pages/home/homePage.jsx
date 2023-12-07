@@ -24,7 +24,11 @@ export const HomePage = () => {
                 icon={<IconifyAdd />}
                 handleClick={() => setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }))}
               />
-              <ButtonBase text="Search" styled="--outline" icon={<IconifySearch />} handleClick={onClickMissing} />
+              <ButtonBase
+                text="Search"
+                styled="--outline"
+                icon={<IconifySearch />} handleClick={onClickMissing}
+              />
             </div>
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase

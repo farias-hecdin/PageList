@@ -1,5 +1,16 @@
 .Card {
   position: relative;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  background-color: var(--co-mountain-fig);
+  &:hover,
+  &:active {
+    border-color: var(--co-greenish);
+    background-color: var(--co-zucchini);
+    .Card_box {
+      color: var(--co-greenish);
+    }
+  }
   &:global(.--active) &_box {
     color: var(--co-greenish);
   }
@@ -7,28 +18,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
     gap: 0.5rem;
-    width: 13rem;
+    width: 100%;
     height: 6.5rem;
     padding: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.4rem;
-    background-color: var(--co-mountain-fig);
+    border: none;
+    background-color: transparent;
     color: var(--co-carbon-footprint);
-    overflow: hidden;
     & > svg {
       font-size: 1.5rem;
     }
-    &:hover,
-    &:active {
-      border-color: var(--co-greenish);
-      background-color: var(--co-zucchini);
-      color: var(--co-greenish);
-    }
   }
   &_text {
-    text-overflow: ellipsis;
+    display: -webkit-box;
     overflow: hidden;
-    white-space: nowrap;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
 }

@@ -3,15 +3,14 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  height: 2.1rem;
-  padding: 0 0.63rem;
+  padding: 0.4rem 0.63rem;
   border: 0.0625rem solid transparent;
   border-radius: 0.5rem;
   background-color: var(--co-mountain-fig);
   color: var(--co-carbon-footprint);
   &_text {
-    font-weight: var(--fo-bold);
     font-size: 1rem;
+    font-weight: var(--fo-bold);
     user-select: none;
   }
   & > svg {
@@ -35,8 +34,8 @@
 }
 
 .Button:global(.--outline) {
-  border: 0.0625rem solid oklch(38% 0.029 285.14);
-  background-color: oklch(30% 0.029 285.14);
+  border: 0.0625rem solid var(--c2);
+  background-color: var(--c1);
   color: var(--co-carbon-footprint);
   &:hover {
     border-color: var(--co-greenish);
@@ -58,38 +57,35 @@
 
 /* Compose ----------------------------------------------------------------- */
 
-.Button:global(.HeaderMain_UlICn) {
-  width: 8rem;
-  &_text {
-    font-weight: var(--fo-bold);
+.Button {
+  &:global(.HeaderMain_UlICn) {
+    width: 8rem;
+    &_text {
+      font-weight: var(--fo-bold);
+    }
+  }
+  &:global(.ModalAddBookmarks_JqagP) {
+    width: 9rem;
+  }
+  &:global(.CollectionsModal_WQkiS) {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    padding: 0 0.25rem;
+  }
+  &:global(.TopicsPane_WQkiS) {
+    padding: 0 0.25rem;
   }
 }
 
-.Button:global(.ModalAddBookmarks_JqagP) {
-  width: 9rem;
-}
-
-.Button:global(.CollectionsModal_WQkiS) {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1;
-  padding: 0 0.25rem;
-}
-
-.Button:global(.TopicsPane_WQkiS) {
-  padding: 0 0.25rem;
-}
-
-/* Media query ============================================================= */
-
-@media screen and (max-width: 401px) {
+@media screen and (width <= 600px) {
   .Button {
     &_text {
       display: none;
     }
-    &:global(.HeaderMain_UlICn) {
-      width: auto;
-    }
+  }
+  .Button:global(.HeaderMain_UlICn) {
+    width: auto;
   }
 }

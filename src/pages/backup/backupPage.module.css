@@ -4,7 +4,7 @@
   width: 100%;
   padding: 0rem 2rem;
   border-radius: 0.8rem;
-  background-color: #232a36; /* FIX: */
+  background-color: var(--co-sky-captain);
   &_box {
     display: flex;
     flex-direction: column;

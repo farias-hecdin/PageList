@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-bottom: 0.0625rem solid #2f3847; /* FIX: */
   padding: 1.5rem 0;
+  border-bottom: 0.0625rem solid #2f3847; /* FIX: */
   color: var(--co-cold-morning);
   &_box {
     display: flex;
@@ -17,7 +17,7 @@
   }
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (width <= 600px) {
   .Header {
     flex-direction: column;
     &_box {
