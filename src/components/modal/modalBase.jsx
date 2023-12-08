@@ -16,9 +16,7 @@ export const ModalBase = ({ children, isOpen, handleClick }) => {
           <div className={css.Modal_box}>
             {children}
             <footer className={css.Modal_footer}>
-              <ButtonBase text="Cancel"
-                  icon={<IconifyClose/>}
-                styled="--outline" handleClick={handleClick} />
+              <ButtonBase text="Cancel" styled="--outline" handleClick={handleClick} />
             </footer>
           </div>
         </div>

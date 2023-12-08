@@ -41,8 +41,8 @@
     border: 2px solid var(--co-mountain-fig);
     border-radius: 0.5rem;
     outline: none;
-      width: 100%;
-      min-width: 20.8rem;
+    width: 100%;
+    min-width: 20.8rem;
     background-color: var(--co-black-pearl);
     color: var(--co-carbon-footprint);
     &:focus {

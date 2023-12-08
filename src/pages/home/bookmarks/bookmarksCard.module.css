@@ -50,10 +50,9 @@
 }
 
 @media screen and (width <= 600px) {
-
-.Card {
-  &_url {
-    width: 25vw;
+  .Card {
+    &_url {
+      width: 25vw;
+    }
   }
-}
 }

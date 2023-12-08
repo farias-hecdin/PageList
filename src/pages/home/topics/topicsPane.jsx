@@ -14,14 +14,16 @@ export const TopicsPane = () => {
    * Actualizar el estado de acuerdo a la lista selecionada
    * @param {Array|string} pData
    */
-  const selectListAndUpdateState = (pData) => {
+  const selectListAndUpdateState = (pData, pType) => {
     let id = pData?.id || "0";
     let title = pData?.title || "None";
+    let type = pType
     // Actualizar el estado
     setSelectedItem((prevState) => ({
       ...prevState,
       listId: id,
       listTitle: title,
+      type: type
     }));
   };
 
@@ -33,7 +35,7 @@ export const TopicsPane = () => {
   // Components ---------------------------------------------------------------
 
   const TreeHeader = ({ data }) => (
-    <div className={css.Tree_header}>
+    <div className={css.Tree_header} onClick={() => selectListAndUpdateState(data, 'topic')}>
       <p className={css.Tree_title}>{data.title}</p>
       <ButtonBase
         icon={<IconifyMoreVert />}
@@ -51,8 +53,8 @@ export const TopicsPane = () => {
     </div>
   );
 
-  const TreeList = ({ data }) => (
-    <li className={css.Tree_item} onClick={() => selectListAndUpdateState(data)}>
+  const TreeList = ({ data, type }) => (
+    <li className={css.Tree_item} onClick={() => selectListAndUpdateState(data, type)}>
       <div className={css.Tree_subheader}>
         <div>
           <IconifyFolderOutline />
@@ -88,6 +90,9 @@ export const TopicsPane = () => {
           <ButtonBase icon={<IconifyFilterList />} />
         </header>
         <ul className={css.Container_list}>
+          {/* Entra a un tema y ver los marcadores de todas las listas
+            Ex: Programacion == go, js
+          */}
           {dataTopics.map((topic) => {
             if (topic.parent === selectedItem.collectionId) {
               return (
@@ -99,7 +104,7 @@ export const TopicsPane = () => {
                         if (topic.id === list.parent) {
                           return (
                             <Fragment key={crypto.randomUUID()}>
-                              <TreeList data={list} />
+                              <TreeList data={list} type={'list'} />
                             </Fragment>
                           );
                         }

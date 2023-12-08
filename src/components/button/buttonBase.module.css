@@ -82,9 +82,9 @@
 @media screen and (width <= 600px) {
   .Button {
     flex-wrap: wrap;
-  &_text {
-    font-size: 1rem;
-  }
+    &_text {
+      font-size: 1rem;
+    }
   }
   .Button:global(.HeaderMain_UlICn) {
     width: auto;

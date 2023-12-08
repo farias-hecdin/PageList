@@ -55,9 +55,8 @@ export const modifyElementAndUpdateState = ({ pData, pElement, pKeyword, pSetSta
  * @param {string} pKeyword
  * @param {Function} pSetState - Funcion `set` para actualizar los datos de origen del elemento
  */
-export const confirmAndUpdateStateAndStorageGroup = (pAsk, pValue, pKeyword, pSetState) => {
-  let question = pAsk ? confirm("Are you sure?") : true;
-  let value = pValue;
+export const confirmAndUpdateStateAndStorageGroup = (pAsk, pValue, pKeyword, pSetState, pTarget) => {
+  let question = pAsk ? confirm(`Target: "${pTarget}" \nAre you sure?`) : true;
   if (question === true) {
     pSetState(() => {
       let data = pValue;

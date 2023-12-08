@@ -51,7 +51,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
   }
   &_title {
     display: -webkit-box;
@@ -67,7 +67,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding: 0.1rem 1rem;
+    padding: 0.35rem 1rem;
     border-radius: 0.4rem;
     &:first-child {
       margin-top: 0.1rem;

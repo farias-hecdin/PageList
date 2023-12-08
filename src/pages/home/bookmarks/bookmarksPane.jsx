@@ -7,7 +7,27 @@ import { useContext } from "react";
 
 export const BookmarksPane = () => {
   const { counterItem, setShowModal } = useContext(StateContext);
-  const { dataBookmarks, selectedItem, setSelectedItem, setTargetItem } = useContext(DataContext);
+  const { dataBookmarks, dataLists, selectedItem, setSelectedItem, setTargetItem } = useContext(DataContext);
+
+  const Bookmarks =(data) => {
+    const bookmark = data.data
+    return (
+      <BookmarksCard title={bookmark.title} url={bookmark.url}>
+        <ButtonBase
+          icon={<IconifyMoreVert />}
+          styled="--ghost TopicsPane_WQkiS"
+          handleClick={() => {
+            setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+            setTargetItem({
+              id: bookmark.id,
+              title: bookmark.title,
+              url: bookmark.url,
+              type: "bookmark",
+            });
+          }}
+        />
+      </BookmarksCard>
+    )}
 
   return (
     <section className={css.Container}>
@@ -28,35 +48,38 @@ export const BookmarksPane = () => {
             <ButtonBase
               icon={<IconifyClose />}
               handleClick={() => setSelectedItem((prev) => ({ ...prev, listId: "0" }))}
-            />
-          </header>
-          <ul className={css.List}>
-            {dataBookmarks.map((bookmark) => {
-              if (bookmark.parent === selectedItem.listId) {
-                return (
-                  <li key={crypto.randomUUID()} className={css.List_item}>
-                    <BookmarksCard title={bookmark.title} url={bookmark.url}>
-                      <ButtonBase
-                        icon={<IconifyMoreVert />}
-                        styled="--ghost TopicsPane_WQkiS"
-                        handleClick={() => {
-                          setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
-                          setTargetItem({
-                            id: bookmark.id,
-                            title: bookmark.title,
-                            url: bookmark.url,
-                            type: "bookmark",
-                          });
-                        }}
-                      />
-                    </BookmarksCard>
-                  </li>
-                );
+              />
+            </header>
+            <ul className={css.Container_list}>
+              {selectedItem.type === 'list' &&
+                dataBookmarks.map((bookmark) => {
+                  if (bookmark.parent === selectedItem.listId){
+                    return (
+                      <li key={crypto.randomUUID()} className={css.List_item}>
+                        <Bookmarks data={bookmark}/>
+                      </li>
+                    )
+                  }
+                })
               }
-            })}
-          </ul>
-        </>
-      )}
+              {selectedItem.type === 'topic' &&
+                dataBookmarks.map((bookmark) => (
+                  dataLists.map((list) => {
+                    if (list.parent === selectedItem.listId) {
+                      if (bookmark.parent === list.id) {
+                        return (
+                          <li key={crypto.randomUUID()} className={css.List_item}>
+                            <Bookmarks data={bookmark}/>
+                          </li>
+                        )
+                      }
+                    }
+                  })
+                ))
+              }
+            </ul>
+          </>
+        )}
     </section>
   );
 };

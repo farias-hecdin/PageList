@@ -42,27 +42,31 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
   // Declarar los datos necesarios para cada tipo de elemento
   const elementType = {
     collection: {
+      dataMajor: null,
       dataParent: null,
       dataElement: dataCollections,
       setElement: setDataCollections,
     },
     topic: {
+      dataMajor: null,
       dataParent: dataCollections,
       dataElement: dataTopics,
       setElement: setDataTopics,
     },
     list: {
+      dataMajor: dataCollections,
       dataParent: dataTopics,
       dataElement: dataLists,
       setElement: setDataLists,
     },
     bookmark: {
+      dataMajor: dataTopics,
       dataParent: dataLists,
       dataElement: dataBookmarks,
       setElement: setDataBookmarks,
     },
   };
-  const { dataParent, dataElement, setElement } = elementType[targetItem.type] || elementType["bookmark"];
+  const { dataParent, dataElement, setElement, dataMajor } = elementType[targetItem.type] || elementType["bookmark"];
 
   // Parametros comunes para las funciones correspondientes
   const sharedParams = {
@@ -102,7 +106,13 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
               icon={<IconifyDone />}
               handleClick={() => {
                 const data = removeElementById(ToFuncDelete);
-                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState);
+                confirmAndUpdateStateAndStorageGroup(
+                  true,
+                  data,
+                  targetItem.type,
+                  sharedParams.pSetState,
+                  targetItem.title
+                );
                 setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
               }}
             />
@@ -113,18 +123,33 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             <div className={css.Container_details}>
               <p>Where would you like to move this element?</p>
               <ButtonSelect id="select_LCAXUzHOdk" styled="ModalEditMode_mojxs">
-                {dataParent.map((item) => (
-                  <option key={crypto.randomUUID()} value={item.id}>
-                    {item.title}
-                  </option>
-                ))}
+                {targetItem.type !== "topic" &&
+                  dataMajor.map((major) =>
+                    dataParent.map((parent) => {
+                      if (parent.parent === major.id) {
+                        return (
+                          <option key={crypto.randomUUID()} value={parent.id}>
+                            {major.title + " - " + parent.title}
+                          </option>
+                        );
+                      }
+                    })
+                  )}
+                {targetItem.type === "topic" &&
+                  dataParent.map((parent) => {
+                    return (
+                      <option key={crypto.randomUUID()} value={parent.id}>
+                        {parent.title}
+                      </option>
+                    );
+                  })}
               </ButtonSelect>
               <ButtonBase
                 text="Move"
                 icon={<IconifyDone />}
                 handleClick={() => {
                   const data = relocateElementAndUpdateState(ToFuncRelocate);
-                  confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState);
+                  confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
                   setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
                 }}
               />

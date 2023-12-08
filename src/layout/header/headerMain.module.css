@@ -10,11 +10,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  & > svg {
-    --size: 2.2rem;
-    width: var(--size);
-    height: var(--size);
-    filter: var(--fi-cold-morning);
+  & > iconify-icon {
+    font-size: 2.2rem;
+    color: var(--co-cold-morning);
   }
   &_title {
     color: var(--co-cold-morning);

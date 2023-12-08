@@ -41,7 +41,6 @@
 }
 
 @media screen and (width <= 600px) {
-
   .Toolbar {
     justify-content: center;
   }
