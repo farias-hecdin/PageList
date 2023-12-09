@@ -50,8 +50,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  border-radius: 0.5rem;
     gap: 1rem;
     padding: 0.6rem 1rem;
+    &:hover,
+    &:active {
+      background: var(--co-mountain-fig);
+    }
   }
   &_title {
     display: -webkit-box;
@@ -68,7 +73,7 @@
     align-items: center;
     gap: 1rem;
     padding: 0.35rem 1rem;
-    border-radius: 0.4rem;
+    border-radius: 0.5rem;
     &:first-child {
       margin-top: 0.1rem;
     }

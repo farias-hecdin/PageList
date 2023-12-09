@@ -3,7 +3,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 0;
-  border-bottom: 0.0625rem solid #2f3847; /* FIX: */
+  border-bottom: 0.0625rem solid var(--co-mountain-fig);
   color: var(--co-cold-morning);
   &_box {
     display: flex;

@@ -16,6 +16,7 @@
   }
   &_title {
     color: var(--co-cold-morning);
+    font-family: var(--fo-primary);
     font-size: 1.7rem;
     font-weight: var(--fo-bold);
   }

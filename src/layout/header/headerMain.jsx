@@ -11,7 +11,7 @@ import { onClickMissing } from "../../utils/common";
  * @param {string} prop.pageName
  * @returns {HTMLElement}
  */
-export const HeaderMain = ({ updatePage, pageName }) => {
+export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
   const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics, setSelectedItem } = useContext(DataContext);
 
   /**
@@ -77,7 +77,7 @@ export const HeaderMain = ({ updatePage, pageName }) => {
         </WrapBase>
         <div className={css.Navbar_box}>
           <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="--outline" />
-          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={onClickMissing} styled="--outline" />
+          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={changeTheme} styled="--outline" />
         </div>
       </nav>
     </header>

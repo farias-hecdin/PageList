@@ -6,7 +6,7 @@
   padding: 0.4rem 0.63rem;
   border: 0.0625rem solid transparent;
   border-radius: 0.5rem;
-  background-color: var(--co-mountain-fig);
+  background-color: var(--co-diamond-black);
   color: var(--co-carbon-footprint);
   &_text {
     font-size: 1rem;
@@ -34,8 +34,8 @@
 }
 
 .Button:global(.--outline) {
-  border: 0.0625rem solid var(--c2);
-  background-color: var(--c1);
+  border: 0.0625rem solid var(--co-mountain-fig);
+  background-color: var(--co-freinacht-black);
   color: var(--co-carbon-footprint);
   &:hover {
     border-color: var(--co-greenish);

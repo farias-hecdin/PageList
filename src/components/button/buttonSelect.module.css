@@ -2,7 +2,7 @@
   padding: 0.1rem 0.8rem;
   border: 1px solid transparent;
   border-radius: 0.5rem;
-  background-color: var(--co-mountain-fig) !important;
+  background-color: var(--co-diamond-black);
   color: var(--co-carbon-footprint);
   &:hover {
     border-color: var(--co-greenish);
