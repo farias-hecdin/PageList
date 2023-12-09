@@ -100,8 +100,7 @@ export const BackupPage = () => {
       <div className={css.Container_box}>
         <nav className={css.Toolbar}>
           <div className={css.Toolbar_box}>
-            <ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(false)} />
-            <ButtonBase text="as JSON" icon={<IconifyDownload />} handleClick={() => clickButtonExport(true)} />
+            <ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(true)} />
             <ButtonBase text="Import" styled="--outline" icon={<IconifyUpload />} handleClick={clickButtonImport} />
             <label htmlFor="ula5" className={css.Toolbar_uploadInput}>
               <input id="ula5" type="file" onChange={uploadFile}/>

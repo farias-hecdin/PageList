@@ -12,7 +12,7 @@ import { onClickMissing } from "../../utils/common";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName }) => {
-  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics } = useContext(DataContext);
+  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics, setSelectedItem } = useContext(DataContext);
 
   /**
    * Mostrar la pagina selecionada
@@ -42,6 +42,11 @@ export const HeaderMain = ({ updatePage, pageName }) => {
       }
     }
     alert(message);
+
+    setSelectedItem(prev => ({
+    ...prev,
+    collectionId: '0'
+    }))
   };
 
   return (
