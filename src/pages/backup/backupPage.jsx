@@ -10,6 +10,7 @@ import {
   createHtmlNodeAndFile,
   assignDataToCollections,
   manageLocalStorageData,
+  getJsonFileContent,
 } from "./backupPage.script";
 
 export const BackupPage = () => {
@@ -53,10 +54,19 @@ export const BackupPage = () => {
   };
 
   /** Funcion que importa datos adentro de la app */
+  const uploadFile = async (event) => {
+    const $node = document.querySelector("#textarea_xucOeryf8lU");
+    const data = await getJsonFileContent(event)
+    $node.value = data
+  }
+
   const clickButtonImport = () => {
     try {
-      const newData = importDataAndValidate("#textarea_xucOeryf8lU");
-      const data = decomposeDataIntoCategories(newData);
+      const $node = document.querySelector("#textarea_xucOeryf8lU");
+      let data = $node.value
+
+      data = importDataAndValidate(data);
+      data = decomposeDataIntoCategories(data);
       // Guardar datos en localStorage
       let question = confirm("Do you want to save this section?");
       if (question === true) {
@@ -93,6 +103,9 @@ export const BackupPage = () => {
             <ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(false)} />
             <ButtonBase text="as JSON" icon={<IconifyDownload />} handleClick={() => clickButtonExport(true)} />
             <ButtonBase text="Import" styled="--outline" icon={<IconifyUpload />} handleClick={clickButtonImport} />
+            <label htmlFor="ula5" className={css.Toolbar_uploadInput}>
+              <input id="ula5" type="file" onChange={uploadFile}/>
+            </label>
           </div>
           <ButtonBase
             text="Delete saved"

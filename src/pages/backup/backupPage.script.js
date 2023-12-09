@@ -61,6 +61,25 @@ export const createHtmlNodeAndFile = (pFileName, pContent) => {
 
 // Import datas ---------------------------------------------------------------
 
+export const getJsonFileContent = (event) => {
+  return new Promise((resolve, reject) => {
+    let file = event.target.files[0]
+    // Validar el archivo
+    if (file.type !== 'application/json') {
+      throw new Error("ERROR, the file format is incorrect. Please upload a .json file")
+    }
+    // Captura el contenido del archivo
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function() {
+      resolve(reader.result)
+    }
+    reader.onerror = function() {
+      reject(reader.error);
+    };
+  })
+}
+
 /**
  * Comprobar si los datos cumple con el patron asignado y retornar un array
  * de objetos
@@ -95,9 +114,8 @@ const checkDataAvailability = (pData, pText) => {
  * @param {string} pSelector - Id del nodo HTML textarea
  * @returns {Array} Retorna un array de objetos
  */
-export const importDataAndValidate = (pSelector) => {
-  let $node = document.querySelector(pSelector);
-  let dataToImport = $node.value;
+export const importDataAndValidate = (data = []) => {
+  let dataToImport = data;
   let parsedData;
 
   checkDataAvailability(dataToImport, "Datas");
