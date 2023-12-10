@@ -63,22 +63,22 @@ export const createHtmlNodeAndFile = (pFileName, pContent) => {
 
 export const getJsonFileContent = (event) => {
   return new Promise((resolve, reject) => {
-    let file = event.target.files[0]
+    let file = event.target.files[0];
     // Validar el archivo
-    if (file.type !== 'application/json') {
-      throw new Error("ERROR, the file format is incorrect. Please upload a .json file")
+    if (file.type !== "application/json") {
+      throw new Error("ERROR, the file format is incorrect. Please upload a .json file");
     }
     // Captura el contenido del archivo
     const reader = new FileReader();
     reader.readAsText(file);
-    reader.onload = function() {
-      resolve(reader.result)
-    }
-    reader.onerror = function() {
+    reader.onload = function () {
+      resolve(reader.result);
+    };
+    reader.onerror = function () {
       reject(reader.error);
     };
-  })
-}
+  });
+};
 
 /**
  * Comprobar si los datos cumple con el patron asignado y retornar un array

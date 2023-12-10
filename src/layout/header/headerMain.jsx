@@ -1,9 +1,7 @@
 import css from "./headerMain.module.css";
-import website_logo from "../../assets/brand/fake-logo.svg";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
 import { useContext } from "react";
-import { DataContext } from "../../context/data/dataProvider";
-import { onClickMissing } from "../../utils/common";
+import { DataContext, StateContext } from "../../context/index.jsx";
 
 /**
  * @param {object} prop
@@ -12,7 +10,9 @@ import { onClickMissing } from "../../utils/common";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
-  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics, setSelectedItem } = useContext(DataContext);
+  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics, setSelectedItem } =
+    useContext(DataContext);
+  const {setShowPopup} = useContext(StateContext)
 
   /**
    * Mostrar la pagina selecionada
@@ -41,12 +41,9 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
         message = "No data";
       }
     }
-    alert(message);
 
-    setSelectedItem(prev => ({
-    ...prev,
-    collectionId: '0'
-    }))
+    setSelectedItem((prev) => ({...prev, collectionId: "0",}));
+    setShowPopup((prev) => ({ ...prev, show: true, message: "Load section" }));
   };
 
   return (

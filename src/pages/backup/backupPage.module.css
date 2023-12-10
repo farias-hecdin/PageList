@@ -11,6 +11,9 @@
     gap: 2rem;
     height: 75vh;
     margin-top: 2rem;
+    & > footer {
+      padding-bottom: 1.5rem;
+    }
   }
   &_textarea {
     width: 100%;
@@ -40,7 +43,28 @@
   }
   &_uploadInput {
     display: flex;
+    justify-content: center;
     align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.63rem;
+    border-radius: 0.5rem;
+    color: var(--co-carbon-footprint);
+    border: 0.0625rem solid var(--co-mountain-fig);
+    background-color: var(--co-freinacht-black);
+    color: var(--co-carbon-footprint);
+    & > input {
+      display: none;
+    }
+    & > span {
+      font-size: 1rem;
+      font-weight: var(--fo-bold);
+      user-select: none;
+    }
+    &:hover {
+      border-color: var(--co-greenish);
+      background-color: var(--co-zucchini);
+      color: var(--co-greenish);
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import { DataContext, StateContext } from "../../../context/index.jsx";
 import { ButtonBase, ModalBase } from "../../../components/index.jsx";
 import { CollectionsCard } from "./collectionsCard";
 import { useContext } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { countMatchingChildIds, currentNumberElements, onClickMissing } from "../../../utils/common";
 
 export const CollectionsModal = ({ isOpen, handleClick }) => {
@@ -24,6 +24,7 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
       collectionTitle: title,
     }));
   };
+
 
   // Actualizar el contador de `topics`
   useEffect(() => {
@@ -50,7 +51,7 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
             />
           </li>
           {dataCollections.map((collection) => (
-            <li key={crypto.randomUUID()}>
+            <li key={collection.id}>
               <CollectionsCard
                 icon={<IconifyInventory2Outline />}
                 text={collection.title}

@@ -17,26 +17,34 @@ export const TopicsPane = () => {
   const selectListAndUpdateState = (pData, pType) => {
     let id = pData?.id || "0";
     let title = pData?.title || "None";
-    let type = pType
+    let type = pType;
     // Actualizar el estado
     setSelectedItem((prevState) => ({
       ...prevState,
       listId: id,
       listTitle: title,
-      type: type
+      type: type,
     }));
   };
 
   // Actualizar el contador de `bookmarks`
   useEffect(() => {
-    currentNumberElements(selectedItem.listId, dataBookmarks, "bookmarks", setCounterItem);
+    if (selectedItem.type === 'list') {
+      currentNumberElements(selectedItem.listId, dataBookmarks, "bookmarks", setCounterItem);
+    }
+    else {
+      let data = dataLists.filter(list => list.parent === selectedItem.listId)
+      let data2 = data.flatMap(list => dataBookmarks.filter(bookmark => bookmark.parent === list.id))
+      let num = data2.length
+      setCounterItem(prev => ({...prev, bookmarks: num}))
+    }
   }, [dataBookmarks, selectedItem]);
 
   // Components ---------------------------------------------------------------
 
   const TreeHeader = ({ data }) => (
-    <div className={css.Tree_header} onClick={() => selectListAndUpdateState(data, 'topic')}>
-      <p className={css.Tree_title}>{data.title}</p>
+    <div className={css.Tree_header} onClick={() => selectListAndUpdateState(data, "topic")}>
+      <p className={`${css.Tree_title} ${selectedItem.listId === data.id && "--active"}`}>{data.title}</p>
       <ButtonBase
         icon={<IconifyMoreVert />}
         styled="--ghost TopicsPane_WQkiS"
@@ -55,7 +63,7 @@ export const TopicsPane = () => {
 
   const TreeList = ({ data, type }) => (
     <li className={css.Tree_item} onClick={() => selectListAndUpdateState(data, type)}>
-      <div className={css.Tree_subheader}>
+      <div className={`${css.Tree_subheader} ${selectedItem.listId === data.id && "--active"}`}>
         <div>
           <IconifyFolderOutline />
         </div>
@@ -63,7 +71,7 @@ export const TopicsPane = () => {
       </div>
       <ButtonBase
         icon={<IconifyMoreVert />}
-        styled="--ghost TopicsPane_WQkiS"
+        styled={`--ghost TopicsPane_WQkiS`}
         handleClick={() => {
           setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
           setTargetItem((prev) => ({
@@ -84,15 +92,12 @@ export const TopicsPane = () => {
           <div className={css.Header_box}>
             <h2 className={css.Header_title}>{selectedItem.collectionTitle}</h2>
             <p className={css.Header_text}>
-              {counterItem.topics} {counterItem.topics > 1 ? "lists" : "list"}
+              {counterItem.topics} {counterItem.topics > 1 ? "topics" : "topic"}
             </p>
           </div>
           <ButtonBase icon={<IconifyFilterList />} />
         </header>
         <ul className={css.Container_list}>
-          {/* Entra a un tema y ver los marcadores de todas las listas
-            Ex: Programacion == go, js
-          */}
           {dataTopics.map((topic) => {
             if (topic.parent === selectedItem.collectionId) {
               return (
@@ -103,8 +108,8 @@ export const TopicsPane = () => {
                       {dataLists.map((list) => {
                         if (topic.id === list.parent) {
                           return (
-                            <Fragment key={crypto.randomUUID()}>
-                              <TreeList data={list} type={'list'} />
+                            <Fragment key={list.id}>
+                              <TreeList data={list} type={"list"} />
                             </Fragment>
                           );
                         }

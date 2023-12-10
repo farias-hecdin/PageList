@@ -56,14 +56,14 @@ export const BackupPage = () => {
   /** Funcion que importa datos adentro de la app */
   const uploadFile = async (event) => {
     const $node = document.querySelector("#textarea_xucOeryf8lU");
-    const data = await getJsonFileContent(event)
-    $node.value = data
-  }
+    const data = await getJsonFileContent(event);
+    $node.value = data;
+  };
 
   const clickButtonImport = () => {
     try {
       const $node = document.querySelector("#textarea_xucOeryf8lU");
-      let data = $node.value
+      let data = $node.value;
 
       data = importDataAndValidate(data);
       data = decomposeDataIntoCategories(data);
@@ -103,7 +103,8 @@ export const BackupPage = () => {
             <ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(true)} />
             <ButtonBase text="Import" styled="--outline" icon={<IconifyUpload />} handleClick={clickButtonImport} />
             <label htmlFor="ula5" className={css.Toolbar_uploadInput}>
-              <input id="ula5" type="file" onChange={uploadFile}/>
+              <span>Upload</span>
+              <input id="ula5" type="file" onChange={uploadFile} />
             </label>
           </div>
           <ButtonBase
@@ -118,14 +119,14 @@ export const BackupPage = () => {
           id="textarea_xucOeryf8lU"
           placeholder="Write a valid bookmark collection..."
         ></textarea>
-        <div>
+        <footer>
           <ButtonBase
             text="Clean"
             styled="--outline"
             icon={<IconifyCleaningServicesOutline />}
             handleClick={cleanTextarea}
           />
-        </div>
+        </footer>
       </div>
     </section>
   );

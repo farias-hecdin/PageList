@@ -24,7 +24,7 @@ export const DataProvider = ({ children }) => {
     listTitle: "None",
     bookmarkId: "0",
     bookmarkTitle: "None",
-    type: null
+    type: null,
   });
   const [targetItem, setTargetItem] = useState({
     id: "",

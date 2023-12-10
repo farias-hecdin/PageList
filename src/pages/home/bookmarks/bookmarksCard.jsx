@@ -32,9 +32,9 @@ export const BookmarksCard = ({ title, url, children }) => {
       <div className={css.Card_box}>
         <p className={css.Card_thumb}>{titleLinks}</p>
         <div className={css.Card_content}>
-          <span className={css.Card_title} href={url} target="_blank" rel="noopener noreferrer">
+          <a className={css.Card_title} href={url} target="_blank" rel="noopener noreferrer">
             {title}
-          </span>
+          </a>
           <span className={css.Card_url}>{url}</span>
         </div>
       </div>

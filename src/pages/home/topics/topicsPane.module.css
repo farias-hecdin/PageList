@@ -50,7 +50,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  border-radius: 0.5rem;
+    border-radius: 0.5rem;
     gap: 1rem;
     padding: 0.6rem 1rem;
     &:hover,
@@ -63,6 +63,9 @@
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+  }
+  &_title:global(.--active) {
+    color: var(--co-greenish);
   }
   &_list {
     list-style: none;
@@ -89,6 +92,9 @@
     & svg {
       font-size: 1.2rem;
     }
+  }
+  &_subheader:global(.--active) {
+    color: var(--co-greenish);
   }
   &_text {
     display: -webkit-box;

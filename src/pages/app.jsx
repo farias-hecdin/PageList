@@ -5,13 +5,13 @@ import { HomePage } from "./home/homePage.jsx";
 import { useState } from "react";
 
 export const App = () => {
-  const [theme, setTheme] = useState('1st');
+  const [theme, setTheme] = useState("1st");
   // Mostrar la pagina activa
   const [activePage, setActivePage] = useState("Home");
 
   const changeTheme = () => {
-    setTheme(prevTheme => prevTheme === '1st' ? '2nd' : '1st');
-  }
+    setTheme((prevTheme) => (prevTheme === "1st" ? "2nd" : "1st"));
+  };
 
   return (
     <div className={css.Container} data-theme={theme}>

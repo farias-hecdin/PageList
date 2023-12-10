@@ -52,9 +52,9 @@ div[data-theme="1st"] {
   --co-greenish: lch(62% 53 147.3);
   --co-mountain-fig: lch(25% 8.4 286.7);
   --co-neverything: lch(8.4% 4.7 216.9);
-  --co-zucchini: lch(25.7% 21.6 164.0);
-  --co-sky-captain: lch(16.0% 8.9 266.6);
-  --co-freinacht-black: lch(18.0% 8.9 266.6);
+  --co-zucchini: lch(25.7% 21.6 164);
+  --co-sky-captain: lch(16% 8.9 266.6);
+  --co-freinacht-black: lch(18% 8.9 266.6);
   --co-black-knight: lch(12% 7.6 265.8);
   background-color: var(--co-sky-captain);
 }
