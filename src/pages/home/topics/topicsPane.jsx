@@ -1,7 +1,7 @@
 import css from "./topicsPane.module.css";
 import { ButtonBase } from "../../../components/index.jsx";
 import { DataContext, StateContext } from "../../../context/index";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { currentNumberElements } from "../../../utils/common";
 import { Fragment } from "react";
 
@@ -9,6 +9,9 @@ export const TopicsPane = () => {
   const { dataLists, dataTopics, dataBookmarks, setSelectedItem, selectedItem, setTargetItem } =
     useContext(DataContext);
   const { counterItem, setCounterItem, setShowModal } = useContext(StateContext);
+
+  /** Mostrar una lista */
+  const [toggleList, setToggleList] = useState()
 
   /**
    * Actualizar el estado de acuerdo a la lista selecionada
@@ -40,11 +43,12 @@ export const TopicsPane = () => {
     }
   }, [dataBookmarks, selectedItem]);
 
+
   // Components ---------------------------------------------------------------
 
   const TreeHeader = ({ data }) => (
-    <div className={css.Tree_header} onClick={() => selectListAndUpdateState(data, "topic")}>
-      <p className={`${css.Tree_title} ${selectedItem.listId === data.id && "--active"}`}>{data.title}</p>
+    <div className={css.Tree_header} onClick={() => setToggleList(prev => prev === data.id ? "" : data.id)}>
+      <p className={css.Tree_title}>{data.title}</p>
       <ButtonBase
         icon={<IconifyMoreVert />}
         styled="--ghost TopicsPane_WQkiS"
@@ -104,7 +108,16 @@ export const TopicsPane = () => {
                 <li key={crypto.randomUUID()}>
                   <div className={css.Tree}>
                     <TreeHeader data={topic} />
+                    { toggleList == topic.id &&
                     <ul className={css.Tree_list}>
+                      <li className={css.Tree_item} onClick={() => selectListAndUpdateState(topic, "topic")}>
+                        <div className={`${css.Tree_subheader} ${selectedItem.listId === topic.id && "--active"}`}>
+                          <div>
+                            <IconifyFolderOutline />
+                          </div>
+                          <p className={css.Tree_text}>All</p>
+                        </div>
+                      </li>
                       {dataLists.map((list) => {
                         if (topic.id === list.parent) {
                           return (
@@ -115,6 +128,7 @@ export const TopicsPane = () => {
                         }
                       })}
                     </ul>
+                  }
                   </div>
                 </li>
               );

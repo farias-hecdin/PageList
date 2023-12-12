@@ -48,7 +48,7 @@ div[data-theme="1st"] {
   --co-black-pearl: lch(12% 7.6 265.8); /* Wraper */
   --co-carbon-footprint: lch(55% 5.4 268.65);
   --co-cold-morning: lch(91% 0 223.9);
-  --co-diamond-black: lch(20% 9.4 265.5); /* button */
+  --co-diamond-black: lch(21% 9.4 265.5); /* button */
   --co-greenish: lch(62% 53 147.3);
   --co-mountain-fig: lch(25% 8.4 286.7);
   --co-neverything: lch(8.4% 4.7 216.9);
@@ -64,12 +64,12 @@ div[data-theme="2nd"] {
   --co-carbon-footprint: lch(30% 5.42 268.64);
   --co-cold-morning: lch(30.03% 4.75 270.38);
   --co-diamond-black: lch(88% 13.22 117.91);
-  --co-greenish: lch(31.8% 53.13 147.26);
+  --co-greenish: lch(51.8% 53.13 147.26);
   --co-mountain-fig: lch(88% 13.22 117.91);
   --co-zucchini: lch(81.8% 53.13 147.26);
   --co-neverything: lch(87% 4.69 216.89);
   --co-sky-captain: lch(98% 13.22 117.91);
-  --co-freinacht-black-: lch(96% 13.22 117.91);
+  --co-freinacht-black: lch(96% 13.22 117.91);
   --co-black-knight: lch(82% 4.69 216.89);
   background-color: var(--co-sky-captain);
 }
