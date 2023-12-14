@@ -12,7 +12,7 @@ import { DataContext, StateContext } from "../../context/index.jsx";
 export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
   const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics, setSelectedItem } =
     useContext(DataContext);
-  const {setShowPopup} = useContext(StateContext)
+  const { setShowPopup } = useContext(StateContext);
 
   /**
    * Mostrar la pagina selecionada
@@ -42,7 +42,7 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
       }
     }
 
-    setSelectedItem((prev) => ({...prev, collectionId: "0",}));
+    setSelectedItem((prev) => ({ ...prev, collectionId: "0" }));
     setShowPopup((prev) => ({ ...prev, show: true, message: "Load section" }));
   };
 

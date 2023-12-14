@@ -1,15 +1,15 @@
 .Details {
   border-radius: 1rem;
-  background-color: var(--co-mountain-fig);
-  color: var(--co-carbon-footprint);
+  background-color: var(--co-color-06);
+  color: var(--co-color-02);
   &[open] {
-    background-color: var(--co-mountain-fig);
+    background-color: var(--co-color-06);
     & > summary::after {
       content: url("https://api.iconify.design/fa6-solid/chevron-up.svg");
     }
   }
   &:hover > summary {
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
     &::after {
       filter: var(--fi-cold-morning);
     }
@@ -38,7 +38,7 @@
     margin: 0.2rem 0.5rem 0.5rem;
     padding: 1rem;
     border-radius: 0.5rem;
-    background-color: var(--co-black-knight);
+    background-color: var(--co-color-12);
   }
 }
 

@@ -20,7 +20,7 @@
     min-height: 10rem;
     padding: 1rem 2rem;
     border-radius: 0.8rem;
-    background-color: var(--co-sky-captain);
+    background-color: var(--co-color-10);
     &_footer {
       display: flex;
       justify-content: flex-end;

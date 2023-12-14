@@ -1,7 +1,7 @@
+import "./main.css";
+import "modern-normalize";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "modern-normalize";
-import "./main.css";
 import { App } from "./pages/app.jsx";
 import { AppProvider } from "./context/app/appProvider";
 
@@ -15,16 +15,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 /* !feat:
  * #01: Notificar que se han producidos cambios en los datos a traves de una notificacion.
- * ¡02: Fijar valores del campo de selecion.
  * #03: Captura el atributo title de una pagina al ingresar la URL en el campo de
  * crear un nuevo marcador.
- * ¡04: Crear un nuevo localStorage que almacene datos temporales de la App en caso
- * de que el navegador se cierre y no se hayan exportado los cambios.
  * #05: Corregir la UI.
  * #06: Crear un componente 'badge' que notificque que una accion determinada se ha
  * realizado con exito.
  * #07: Carga una lista determinada de marcadores para mejorar el redimiento del App
  * al tener cientos de marcadores.
  * #08: Añadir un contador de visita frecuente de un marcador.
- * ¡09: Importar datos subiendo un archivo JSON.
  */

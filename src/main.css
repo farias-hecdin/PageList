@@ -45,38 +45,44 @@ html {
 }
 
 div[data-theme="1st"] {
-  --co-black-pearl: lch(12% 7.6 265.8); /* Wraper */
-  --co-carbon-footprint: lch(55% 5.4 268.65);
-  --co-cold-morning: lch(91% 0 223.9);
-  --co-diamond-black: lch(21% 9.4 265.5); /* button */
-  --co-greenish: lch(62% 53 147.3);
-  --co-mountain-fig: lch(25% 8.4 286.7);
-  --co-neverything: lch(8.4% 4.7 216.9);
-  --co-zucchini: lch(25.7% 21.6 164);
-  --co-sky-captain: lch(16% 8.9 266.6);
-  --co-freinacht-black: lch(18% 8.9 266.6);
-  --co-black-knight: lch(12% 7.6 265.8);
-  background-color: var(--co-sky-captain);
+  --co-color-01: lch(12% 7.6 265.8);
+  --co-color-02: lch(55% 5.4 268.65);
+  --co-color-03: lch(91% 0 223.9);
+  --co-color-04: lch(21% 9.4 265.5);
+  --co-color-05: lch(62% 53 147.3);
+  --co-color-A5: lch(62% 53 147.3);
+  --co-color-08: var(--co-color-05);
+  --co-color-06: lch(25% 8.4 286.7);
+  --co-color-A6: var(--co-color-06);
+  --co-color-09: lch(8.4% 4.7 216.9);
+  --co-color-07: lch(25.7% 21.6 164);
+  --co-color-10: lch(16% 8.9 266.6);
+  --co-color-11: lch(18% 8.9 266.6);
+  --co-color-12: lch(12% 7.6 265.8);
+  background-color: var(--co-color-10);
 }
 
 div[data-theme="2nd"] {
-  --co-black-pearl: lch(92% 4.69 216.89);
-  --co-carbon-footprint: lch(30% 5.42 268.64);
-  --co-cold-morning: lch(30.03% 4.75 270.38);
-  --co-diamond-black: lch(88% 13.22 117.91);
-  --co-greenish: lch(51.8% 53.13 147.26);
-  --co-mountain-fig: lch(88% 13.22 117.91);
-  --co-zucchini: lch(81.8% 53.13 147.26);
-  --co-neverything: lch(87% 4.69 216.89);
-  --co-sky-captain: lch(98% 13.22 117.91);
-  --co-freinacht-black: lch(96% 13.22 117.91);
-  --co-black-knight: lch(82% 4.69 216.89);
-  background-color: var(--co-sky-captain);
+  --co-color-01: lch(92% 4.69 216.89);
+  --co-color-02: lch(30% 5 270.38);
+  --co-color-03: lch(19% 4.75 270.38);
+  --co-color-04: lch(87.11% 5.87 273.6);
+  --co-color-05: #ffffff;
+  --co-color-A5: #000000;
+  --co-color-06: lch(86.11% 5.87 273.6);
+  --co-color-A6: lch(92.11% 5.87 273.6);
+  --co-color-07: #005fb9;
+  --co-color-08: #005fb9;
+  --co-color-09: lch(80.7% 20.08 251.28);
+  --co-color-10: #e6eff6;
+  --co-color-11: lch(97.11% 5.87 273.6);
+  --co-color-12: lch(98.11% 5.87 273.6);
+  background-color: var(--co-color-10);
 }
 
 body {
   min-height: 100dvh;
-  background-color: var(--co-sky-captain);
+  background-color: var(--co-color-10);
 }
 
 ul {

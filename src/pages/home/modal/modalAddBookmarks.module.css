@@ -13,11 +13,11 @@
       gap: 1rem;
       padding: 0.5rem 0.9rem;
       border-bottom: 2px solid transparent;
-      color: var(--co-carbon-footprint);
+      color: var(--co-color-02);
     }
     &:checked + label {
-      border-bottom-color: var(--co-greenish);
-      color: var(--co-greenish);
+      border-bottom-color: var(--co-color-08);
+      color: var(--co-color-08);
     }
   }
   &_content {
@@ -38,17 +38,17 @@
   }
   &_input {
     padding: 0.5rem 0.8rem;
-    border: 2px solid var(--co-mountain-fig);
+    border: 2px solid var(--co-color-06);
     border-radius: 0.5rem;
     outline: none;
     width: 100%;
     min-width: 20.8rem;
     font-family: var(--fo-secondary);
-    background-color: var(--co-black-pearl);
-    color: var(--co-carbon-footprint);
+    background-color: var(--co-color-01);
+    color: var(--co-color-02);
     &:focus {
-      border-color: var(--co-greenish);
-      color: var(--co-greenish);
+      border-color: var(--co-color-08);
+      color: var(--co-color-08);
     }
   }
 }
@@ -56,7 +56,7 @@
 .Container {
   &_title {
     margin-bottom: 0.25rem;
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
     font-size: 1.4rem;
     font-weight: var(--fo-bold);
   }
@@ -69,7 +69,7 @@
     overflow: auto;
   }
   &_text {
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
   }
 }
 

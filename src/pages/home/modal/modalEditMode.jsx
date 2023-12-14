@@ -98,7 +98,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
         </p>
       </header>
       <div className={css.Container}>
-        <DetailsBase title="Delete this element" icon={<IconifyDeleteForeverOutline />}>
+        <DetailsBase name="gFOSr" title="Delete this element" icon={<IconifyDeleteForeverOutline />}>
           <div className={css.Container_details}>
             <p>Do you want delete this element?</p>
             <ButtonBase
@@ -119,7 +119,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
           </div>
         </DetailsBase>
         {targetItem.type !== "collection" && (
-          <DetailsBase title="Move this element" icon={<IconifyPanToolOutline />}>
+          <DetailsBase name="gFOSr" title="Move this element" icon={<IconifyPanToolOutline />}>
             <div className={css.Container_details}>
               <p>Where would you like to move this element?</p>
               <ButtonSelect id="select_LCAXUzHOdk" styled="ModalEditMode_mojxs">
@@ -156,7 +156,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
             </div>
           </DetailsBase>
         )}
-        <DetailsBase title="Update this element" icon={<IconifyTitle />}>
+        <DetailsBase name="gFOSr" title="Update this element" icon={<IconifyTitle />}>
           <div className={css.Container_details}>
             <form
               onSubmit={(e) => {

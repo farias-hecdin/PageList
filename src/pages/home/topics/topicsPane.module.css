@@ -1,5 +1,5 @@
 .Container {
-  color: var(--co-cold-morning);
+  color: var(--co-color-03);
   &_list {
     height: 75vh;
     margin-top: 2rem;
@@ -10,7 +10,7 @@
 
 @media screen and (width <= 600px) {
   .Container {
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
     &_list {
       height: 13rem;
     }
@@ -37,7 +37,7 @@
     -webkit-line-clamp: 1;
   }
   &_text {
-    color: var(--co-carbon-footprint);
+    color: var(--co-color-02);
     font-size: 0.9rem;
   }
 }
@@ -45,18 +45,18 @@
 .Tree {
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  background-color: var(--co-diamond-black);
+  background-color: var(--co-color-04);
   &_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--co-diamond-black);
+    background-color: var(--co-color-04);
     border-radius: 0.5rem;
     gap: 1rem;
     padding: 0.6rem 1rem;
     &:hover,
     &:active {
-      background: var(--co-mountain-fig);
+      background: var(--co-color-06);
     }
   }
   &_title {
@@ -66,13 +66,12 @@
     -webkit-line-clamp: 1;
   }
   &_title:global(.--active) {
-    color: var(--co-greenish);
+    color: var(--co-color-05);
   }
   &_list {
     list-style: none;
-    background-color: var(--co-freinacht-black);
+    background-color: var(--co-color-11);
     border-radius: 0 0 0.5rem 0.5rem;
-
   }
   &_item {
     display: flex;
@@ -80,13 +79,13 @@
     align-items: center;
     gap: 1rem;
     padding: 0.35rem 1rem;
-    border-radius: 0.5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
     &:first-child {
       margin-top: 0.1rem;
     }
     &:hover,
     &:active {
-      background: var(--co-mountain-fig);
+      background: var(--co-color-A6);
     }
   }
   &_subheader {
@@ -98,7 +97,7 @@
     }
   }
   &_subheader:global(.--active) {
-    color: var(--co-greenish);
+    color: var(--co-color-08);
   }
   &_text {
     display: -webkit-box;

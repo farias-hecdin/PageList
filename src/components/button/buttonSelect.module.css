@@ -1,22 +1,22 @@
 .Button {
   padding: 0.1rem 0.8rem;
-  border: 1px solid transparent;
+  border: 1px solid var(--co-color-06);
   border-radius: 0.5rem;
-  background-color: var(--co-diamond-black);
-  color: var(--co-carbon-footprint);
+  background-color: var(--co-color-04);
+  color: var(--co-color-02);
   &:hover {
-    border-color: var(--co-greenish);
-    background-color: var(--co-zucchini);
+    border-color: var(--co-color-05);
+    background-color: var(--co-color-07);
   }
   &:hover > &_input {
-    color: var(--co-greenish);
+    color: var(--co-color-05);
   }
   &_input {
     padding: 0.25rem 0;
-    color: var(--co-carbon-footprint);
+    color: var(--co-color-02);
     cursor: pointer;
     &:focus {
-      color: var(--co-greenish);
+      color: var(--co-color-05);
     }
   }
   &_input > option {

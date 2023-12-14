@@ -11,43 +11,46 @@ export const TopicsPane = () => {
   const { counterItem, setCounterItem, setShowModal } = useContext(StateContext);
 
   /** Mostrar una lista */
-  const [toggleList, setToggleList] = useState()
+  const [toggleList, setToggleList] = useState();
 
   /**
    * Actualizar el estado de acuerdo a la lista selecionada
-   * @param {Array|string} pData
+   * @param {Array|string} pList
    */
-  const selectListAndUpdateState = (pData, pType) => {
-    let id = pData?.id || "0";
-    let title = pData?.title || "None";
+  const selectListAndUpdateState = (pTopic, pList, pType) => {
+    let topicId = pTopic?.id || "0";
+    let topicTitle = pTopic?.title || "None";
+    let listId = pList?.id || "0";
+    let listTitle = pList?.title || "None";
     let type = pType;
     // Actualizar el estado
     setSelectedItem((prevState) => ({
       ...prevState,
-      listId: id,
-      listTitle: title,
+      topicId: topicId,
+      topicTitle: topicTitle,
+      listId: listId,
+      listTitle: listTitle,
       type: type,
     }));
+    console.warn(pTopic.title);
   };
 
   // Actualizar el contador de `bookmarks`
   useEffect(() => {
-    if (selectedItem.type === 'list') {
+    if (selectedItem.type === "list") {
       currentNumberElements(selectedItem.listId, dataBookmarks, "bookmarks", setCounterItem);
-    }
-    else {
-      let data = dataLists.filter(list => list.parent === selectedItem.listId)
-      let data2 = data.flatMap(list => dataBookmarks.filter(bookmark => bookmark.parent === list.id))
-      let num = data2.length
-      setCounterItem(prev => ({...prev, bookmarks: num}))
+    } else {
+      let data = dataLists.filter((list) => list.parent === selectedItem.listId);
+      let data2 = data.flatMap((list) => dataBookmarks.filter((bookmark) => bookmark.parent === list.id));
+      let num = data2.length;
+      setCounterItem((prev) => ({ ...prev, bookmarks: num }));
     }
   }, [dataBookmarks, selectedItem]);
-
 
   // Components ---------------------------------------------------------------
 
   const TreeHeader = ({ data }) => (
-    <div className={css.Tree_header} onClick={() => setToggleList(prev => prev === data.id ? "" : data.id)}>
+    <div className={css.Tree_header} onClick={() => setToggleList((prev) => (prev === data.id ? "" : data.id))}>
       <p className={css.Tree_title}>{data.title}</p>
       <ButtonBase
         icon={<IconifyMoreVert />}
@@ -65,8 +68,8 @@ export const TopicsPane = () => {
     </div>
   );
 
-  const TreeList = ({ data, type }) => (
-    <li className={css.Tree_item} onClick={() => selectListAndUpdateState(data, type)}>
+  const TreeList = ({ parent, data, type }) => (
+    <li className={css.Tree_item} onClick={() => selectListAndUpdateState(parent, data, type)}>
       <div className={`${css.Tree_subheader} ${selectedItem.listId === data.id && "--active"}`}>
         <div>
           <IconifyFolderOutline />
@@ -108,27 +111,27 @@ export const TopicsPane = () => {
                 <li key={crypto.randomUUID()}>
                   <div className={css.Tree}>
                     <TreeHeader data={topic} />
-                    { toggleList == topic.id &&
-                    <ul className={css.Tree_list}>
-                      <li className={css.Tree_item} onClick={() => selectListAndUpdateState(topic, "topic")}>
-                        <div className={`${css.Tree_subheader} ${selectedItem.listId === topic.id && "--active"}`}>
-                          <div>
-                            <IconifyFolderOutline />
+                    {toggleList == topic.id && (
+                      <ul className={css.Tree_list}>
+                        <li className={css.Tree_item} onClick={() => selectListAndUpdateState(topic, topic, "topic")}>
+                          <div className={`${css.Tree_subheader} ${selectedItem.listId === topic.id && "--active"}`}>
+                            <div>
+                              <IconifyFolderOutline />
+                            </div>
+                            <p className={css.Tree_text}>All</p>
                           </div>
-                          <p className={css.Tree_text}>All</p>
-                        </div>
-                      </li>
-                      {dataLists.map((list) => {
-                        if (topic.id === list.parent) {
-                          return (
-                            <Fragment key={list.id}>
-                              <TreeList data={list} type={"list"} />
-                            </Fragment>
-                          );
-                        }
-                      })}
-                    </ul>
-                  }
+                        </li>
+                        {dataLists.map((list) => {
+                          if (topic.id === list.parent) {
+                            return (
+                              <Fragment key={list.id}>
+                                <TreeList parent={topic} data={list} type={"list"} />
+                              </Fragment>
+                            );
+                          }
+                        })}
+                      </ul>
+                    )}
                   </div>
                 </li>
               );

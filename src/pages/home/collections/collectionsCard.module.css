@@ -2,17 +2,20 @@
   position: relative;
   border: 1px solid transparent;
   border-radius: 0.4rem;
-  background-color: var(--co-mountain-fig);
+  background-color: var(--co-color-06);
   &:hover,
   &:active {
-    border-color: var(--co-greenish);
-    background-color: var(--co-zucchini);
+    border-color: var(--co-color-05);
+    background-color: var(--co-color-07);
     .Card_box {
-      color: var(--co-greenish);
+      color: var(--co-color-05);
     }
   }
   &:global(.--active) &_box {
-    color: var(--co-greenish);
+    color: var(--co-color-08);
+  }
+  &:global(.--active):hover &_box {
+    color: var(--co-color-05);
   }
   &_box {
     display: flex;
@@ -25,7 +28,7 @@
     padding: 1rem;
     border: none;
     background-color: transparent;
-    color: var(--co-carbon-footprint);
+    color: var(--co-color-02);
     & > svg {
       font-size: 1.5rem;
     }

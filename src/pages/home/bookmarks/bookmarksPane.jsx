@@ -3,11 +3,12 @@ import { ButtonBase } from "../../../components/index.jsx";
 import { DataContext, StateContext } from "../../../context/index.jsx";
 import { MessageFeedback } from "../../../layout/index";
 import { BookmarksCard } from "./bookmarksCard.jsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export const BookmarksPane = () => {
   const { counterItem, setShowModal } = useContext(StateContext);
-  const { dataBookmarks, dataLists, selectedItem, setSelectedItem, setTargetItem } = useContext(DataContext);
+  const { dataBookmarks, dataLists, selectedItem, setSelectedItem, setTargetItem, setPinData, pinData } =
+    useContext(DataContext);
 
   const Bookmarks = (data) => {
     const bookmark = data.data;
@@ -45,6 +46,13 @@ export const BookmarksPane = () => {
               <h2 className={css.Header_title}>{selectedItem.listTitle}</h2>
               <p className={css.Header_text}>{counterItem.bookmarks} bookmarks</p>
             </div>
+            <ButtonBase
+              icon={<IconifyAdd />}
+              handleClick={() => {
+                setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
+                setPinData(true);
+              }}
+            />
             <ButtonBase icon={<IconifyFilterList />} />
             <ButtonBase
               icon={<IconifyClose />}

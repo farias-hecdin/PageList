@@ -1,7 +1,7 @@
 import css from "./modalAddBookmarks.module.css";
 import { ButtonBase, ButtonSelect, InputRadio, ModalBase } from "../../../components/index";
 import { DataContext, StateContext } from "../../../context/index";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { handleChange, sortByName } from "../../../utils/common";
 import { updateStorageAndReturnData } from "./modalAddBookmarks.script";
 
@@ -13,8 +13,17 @@ import { updateStorageAndReturnData } from "./modalAddBookmarks.script";
  */
 export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
   const { setShowPopup } = useContext(StateContext);
-  const { dataCollections, setDataCollections, dataTopics, setDataTopics, dataLists, setDataLists, setDataBookmarks } =
-    useContext(DataContext);
+  const {
+    dataCollections,
+    setDataCollections,
+    dataTopics,
+    setDataTopics,
+    dataLists,
+    setDataLists,
+    setDataBookmarks,
+    pinData,
+    selectedItem,
+  } = useContext(DataContext);
 
   // Ordenar datos por nombre
   const sortCollections = sortByName(dataCollections);
@@ -100,10 +109,15 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       url: collectData.bookmarkUrl,
     };
 
+    console.warn(collectData.list);
     setDataBookmarks((prev) => updateStorageAndReturnData(prev, data, "pagelist_bookmarks"));
     resetInputValue();
     setShowPopup((prev) => ({ ...prev, show: true, message: "Add new bookmark" }));
   };
+
+  useEffect(() => {
+    setCollectData((prev) => ({ ...prev, list: selectedItem.listId }));
+  }, [selectedItem.listId]);
 
   return (
     <ModalBase isOpen={isOpen} handleClick={handleClick}>
@@ -186,7 +200,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 >
                   <option value="">-- Choose an collection --</option>
                   {sortCollections.map((parent) => (
-                    <option key={crypto.randomUUID()} value={parent.id}>
+                    <option key={parent.id} value={parent.id}>
                       {parent.title}
                     </option>
                   ))}
@@ -216,7 +230,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 >
                   <option value="">-- Choose an collection --</option>
                   {sortCollections.map((parent) => (
-                    <option key={crypto.randomUUID()} value={parent.id}>
+                    <option key={parent.id} value={parent.id}>
                       {parent.title}
                     </option>
                   ))}
@@ -230,7 +244,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   {sortTopics.map((parent) => {
                     if (parent.parent === collectData.collection) {
                       return (
-                        <option key={crypto.randomUUID()} value={parent.id}>
+                        <option key={parent.id} value={parent.id}>
                           {parent.title}
                         </option>
                       );
@@ -269,9 +283,13 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   value={collectData.collection}
                   onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
                 >
-                  <option value="">-- Choose an collection --</option>
+                  {pinData === true ? (
+                    <option value={selectedItem.collectionId}>-- {selectedItem.collectionTitle} --</option>
+                  ) : (
+                    <option value="">-- Choose an collection --</option>
+                  )}
                   {sortCollections.map((parent) => (
-                    <option key={crypto.randomUUID()} value={parent.id}>
+                    <option key={parent.id} value={parent.id}>
                       {parent.title}
                     </option>
                   ))}
@@ -281,27 +299,39 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   value={collectData.topic}
                   onChange={(e) => handleChange("topic", e.target.value, setCollectData)}
                 >
-                  <option value="">-- Choose an topic --</option>
+                  {pinData === true ? (
+                    <option value={selectedItem.topicId}>-- {selectedItem.topicTitle} --</option>
+                  ) : (
+                    <option value="">-- Choose an topic --</option>
+                  )}
                   {sortTopics.map((parent) => {
                     if (parent.parent === collectData.collection) {
                       return (
-                        <option key={crypto.randomUUID()} value={parent.id}>
+                        <option key={parent.id} value={parent.id}>
                           {parent.title}
                         </option>
                       );
                     }
                   })}
                 </ButtonSelect>
+                {/* !1a: */}
                 <ButtonSelect
                   id={"B3"}
                   value={collectData.list}
-                  onChange={(e) => handleChange("list", e.target.value, setCollectData)}
+                  onChange={(e) => {
+                    handleChange("list", e.target.value, setCollectData);
+                  }}
                 >
-                  <option value="">-- Choose an list --</option>
+                  {pinData == true ? (
+                    <option value={selectedItem.listId}>-- {selectedItem.listTitle} --</option>
+                  ) : (
+                    <option value="">-- Choose an list --</option>
+                  )}
                   {sortLists.map((parent) => {
-                    if (parent.parent === collectData.topic) {
+                    if (parent.parent === collectData.topic || parent.parent === selectedItem.listId) {
+                      console.warn(parent.parent === selectedItem.listId);
                       return (
-                        <option key={crypto.randomUUID()} value={parent.id}>
+                        <option key={parent.id} value={parent.id}>
                           {parent.title}
                         </option>
                       );

@@ -10,12 +10,12 @@
   }
   &_title {
     margin-bottom: 0.25rem;
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
     font-size: 1.4rem;
     font-weight: var(--fo-bold);
   }
   &_text {
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
   }
   &_list {
     display: grid;

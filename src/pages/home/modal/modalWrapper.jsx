@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { StateContext } from "../../../context";
+import { DataContext, StateContext } from "../../../context";
 import { MessageFloat } from "../../../layout";
 import { CollectionsModal } from "../collections/collectionsModal";
 import { ModalAddBookmarks } from "./modalAddBookmarks";
@@ -7,6 +7,7 @@ import { ModalEditMode } from "./modalEditMode";
 
 export const ModalWrapper = () => {
   const { showModal, setShowModal, showPopup, setShowPopup } = useContext(StateContext);
+  const { setPinData } = useContext(DataContext);
 
   // Esconder mensaje de notificacion al ser activado
   useEffect(() => {
@@ -25,7 +26,10 @@ export const ModalWrapper = () => {
       />
       <ModalAddBookmarks
         isOpen={showModal.addBookmarks}
-        handleClick={() => setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }))}
+        handleClick={() => {
+          setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
+          setPinData(false);
+        }}
       />
       <ModalEditMode
         isOpen={showModal.editMode}

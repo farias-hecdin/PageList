@@ -39,6 +39,9 @@ export const DataProvider = ({ children }) => {
   //   bookmarks: 0,
   // })
 
+  // Pin data
+  const [pinData, setPinData] = useState(false);
+
   // localstorage
   const [savedData, setSavedData] = useState();
 
@@ -61,6 +64,8 @@ export const DataProvider = ({ children }) => {
     // didChange,
     // setDidChange,
     setTargetItem,
+    pinData,
+    setPinData,
   };
 
   return <DataContext.Provider value={{ ...datas, ...references }}>{children}</DataContext.Provider>;

@@ -29,6 +29,7 @@ export const HomePage = () => {
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase
                 icon={<IconifyInventory2Outline />}
+                text="Open"
                 handleClick={() => setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
               />
               <p className={css.Navbar_text}>{selectedItem.collectionTitle}</p>

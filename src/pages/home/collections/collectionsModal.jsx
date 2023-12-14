@@ -25,7 +25,6 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
     }));
   };
 
-
   // Actualizar el contador de `topics`
   useEffect(() => {
     currentNumberElements(selectedItem.collectionId, dataTopics, "topics", setCounterItem);

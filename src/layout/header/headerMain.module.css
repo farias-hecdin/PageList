@@ -12,10 +12,10 @@
   gap: 0.5rem;
   & > iconify-icon {
     font-size: 2.2rem;
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
   }
   &_title {
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
     font-family: var(--fo-primary);
     font-size: 1.7rem;
     font-weight: var(--fo-bold);

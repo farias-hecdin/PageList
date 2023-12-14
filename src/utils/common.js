@@ -87,5 +87,5 @@ export const updateStorageGroup = (pKeyword, pData) => {
 export const currentNumberElements = (pParentId, pChildren, pKey, pSetState) => {
   let elementNumbers = countMatchingChildIds(pChildren, pParentId);
   pSetState((prev) => ({ ...prev, [pKey]: elementNumbers }));
-  return elementNumbers
+  return elementNumbers;
 };

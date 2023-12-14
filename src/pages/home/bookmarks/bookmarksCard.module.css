@@ -5,8 +5,8 @@
   padding: 0.6rem 1rem;
   border: 0.0625rem solid transparent;
   border-radius: 0.4rem;
-  background-color: var(--co-diamond-black);
-  color: var(--co-cold-morning);
+  background-color: var(--co-color-04);
+  color: var(--co-color-03);
   &_box {
     display: grid;
     align-items: center;
@@ -27,7 +27,7 @@
     gap: 0.2rem;
   }
   &_title {
-    color: var(--co-cold-morning);
+    color: var(--co-color-03);
     font-size: 1.2rem;
     font-weight: var(--fo-medium);
     overflow: hidden;
@@ -39,7 +39,7 @@
     }
   }
   &_url {
-    color: var(--co-carbon-footprint);
+    color: var(--co-color-02);
     font-size: 0.9rem;
     overflow: hidden;
     width: 20vw;
