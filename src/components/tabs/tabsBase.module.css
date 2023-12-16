@@ -1,0 +1,21 @@
+.Tabs {
+  display: flex;
+  &_input {
+    display: none;
+    & + label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 0.9rem;
+      border-bottom: 2px solid transparent;
+      color: var(--co-color-02);
+    }
+    &:checked + label {
+      border-bottom-color: var(--co-color-08);
+      color: var(--co-color-08);
+    }
+  }
+  &_content {
+    padding: 2rem 0 0;
+  }
+}

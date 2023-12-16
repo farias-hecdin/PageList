@@ -23,3 +23,28 @@ export const updateStorageAndReturnData = (prev, data, key) => {
   localStorage.setItem(key, JSON.stringify(newData));
   return newData;
 };
+
+export const addNewElement = (event, collectData, elementType, setDataFunction, storageKey, titleKey, parentKey) => {
+  event.preventDefault();
+  let data = {
+    id: crypto.randomUUID(),
+    title: collectData[titleKey],
+  };
+
+  if (parentKey) {
+    data.parent = collectData[parentKey];
+  }
+  if (elementType === "collection") {
+    data.topics = [];
+  } else if (elementType === "topic") {
+    data.lists = [];
+  } else if (elementType === "list") {
+    data.bookmarks = [];
+  } else if (elementType === "bookmark") {
+    data.url = collectData.bookmarkUrl;
+  }
+
+  setDataFunction((prev) => updateStorageAndReturnData(prev, data, storageKey));
+  resetInputValue();
+  setShowPopup((prev) => ({ ...prev, show: true, message: `Add new ${elementType}` }));
+};

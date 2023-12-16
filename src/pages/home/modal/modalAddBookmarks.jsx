@@ -1,9 +1,10 @@
 import css from "./modalAddBookmarks.module.css";
-import { ButtonBase, ButtonSelect, InputRadio, ModalBase } from "../../../components/index";
+import { ButtonBase, ButtonSelect, ModalBase } from "../../../components/index";
 import { DataContext, StateContext } from "../../../context/index";
 import { useContext, useEffect, useState } from "react";
 import { handleChange, sortByName } from "../../../utils/common";
-import { updateStorageAndReturnData } from "./modalAddBookmarks.script";
+import { addNewElement, updateStorageAndReturnData } from "./modalAddBookmarks.script";
+import { TabsBase } from "../../../components/tabs/tabsBase";
 
 /**
  * @param {object} prop
@@ -35,18 +36,18 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
 
   // useState para los nuevos datos
   const [collectData, setCollectData] = useState({
-    collectionTitle: "",
-    topicTitle: "",
-    listTitle: "",
-    bookmarkTitle: "",
-    bookmarkUrl: "",
     collection: "",
+    collectionTitle: "",
     topic: "",
+    topicTitle: "",
     list: "",
+    listTitle: "",
+    bookmarkUrl: "",
+    bookmarkTitle: "",
   });
 
   // Resetear los valores de los inputs
-  const resetInputValue = () => {
+  const resetInputValue = () =>
     setCollectData((prev) => ({
       ...prev,
       collectionTitle: "",
@@ -55,65 +56,6 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       bookmarkTitle: "",
       bookmarkUrl: "",
     }));
-  };
-
-  // Añadir nuevos datos ------------------------------------------------------
-
-  const addNewCollection = (e) => {
-    e.preventDefault();
-    let data = {
-      id: crypto.randomUUID(),
-      title: collectData.collectionTitle,
-      topics: [],
-    };
-
-    setDataCollections((prev) => updateStorageAndReturnData(prev, data, "pagelist_collections"));
-    resetInputValue();
-    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new collection" }));
-  };
-
-  const addNewTopic = (e) => {
-    e.preventDefault();
-    let data = {
-      parent: collectData.collection,
-      id: crypto.randomUUID(),
-      title: collectData.topicTitle,
-      lists: [],
-    };
-
-    setDataTopics((prev) => updateStorageAndReturnData(prev, data, "pagelist_topics"));
-    resetInputValue();
-    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new topic" }));
-  };
-
-  const addNewList = (e) => {
-    e.preventDefault();
-    let data = {
-      parent: collectData.topic,
-      id: crypto.randomUUID(),
-      title: collectData.listTitle,
-      bookmarks: [],
-    };
-
-    setDataLists((prev) => updateStorageAndReturnData(prev, data, "pagelist_lists"));
-    resetInputValue();
-    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new list" }));
-  };
-
-  const addNewBookmark = (e) => {
-    e.preventDefault();
-    let data = {
-      parent: collectData.list,
-      id: crypto.randomUUID(),
-      title: collectData.bookmarkTitle,
-      url: collectData.bookmarkUrl,
-    };
-
-    console.warn(collectData.list);
-    setDataBookmarks((prev) => updateStorageAndReturnData(prev, data, "pagelist_bookmarks"));
-    resetInputValue();
-    setShowPopup((prev) => ({ ...prev, show: true, message: "Add new bookmark" }));
-  };
 
   useEffect(() => {
     setCollectData((prev) => ({ ...prev, list: selectedItem.listId }));
@@ -126,48 +68,30 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
         <p className={css.Container_text}>Wide your list of bookmarks</p>
       </header>
       <div className={css.Container_box}>
-        <div key={crypto.randomUUID()} className={css.Tabs}>
-          <InputRadio
-            className={css.Tabs_input}
-            id="tab_01"
-            group="tabs"
-            text="Collection"
-            onChange={() => handleChange("value", "Collection", setPickTabs)}
-            checked={pickTabs.value === "Collection"}
-          />
-          <InputRadio
-            className={css.Tabs_input}
-            id="tab_02"
-            group="tabs"
-            text={"Topic"}
-            onChange={() => handleChange("value", "Topic", setPickTabs)}
-            checked={pickTabs.value === "Topic"}
-          />
-          <InputRadio
-            className={css.Tabs_input}
-            id="tab_03"
-            group="tabs"
-            text="List"
-            onChange={() => handleChange("value", "List", setPickTabs)}
-            checked={pickTabs.value === "List"}
-          />
-          <InputRadio
-            className={css.Tabs_input}
-            id="tab_04"
-            group="tabs"
-            text="Bookmark"
-            onChange={() => handleChange("value", "Bookmark", setPickTabs)}
-            checked={pickTabs.value === "Bookmark"}
-          />
-        </div>
+        <TabsBase
+          pickTabs={pickTabs}
+          setPickTabs={setPickTabs}
+          handleChange={handleChange}
+          tabs={[{ text: "Collection" }, { text: "Topic" }, { text: "List" }, { text: "Bookmark" }]}
+        />
         <div className={css.Tabs_content}>
           {pickTabs.value === "Collection" && (
             <div className={css.Form}>
-              <form onSubmit={(e) => addNewCollection(e)}>
+              <form
+                onSubmit={(e) =>
+                  addNewElement(
+                    e,
+                    collectData,
+                    "collection",
+                    setDataCollections,
+                    "pagelist_collections",
+                    "collectionTitle"
+                  )
+                }
+              >
                 <input
                   className={css.Form_input}
                   id="input_T22VL1iGPC"
-                  maxLength={50}
                   minLength={2}
                   placeholder="Add a collection"
                   type="text"
@@ -181,11 +105,14 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
           )}
           {pickTabs.value === "Topic" && (
             <div className={css.Form}>
-              <form onSubmit={(e) => addNewTopic(e)}>
+              <form
+                onSubmit={(e) =>
+                  addNewElement(e, collectData, "topic", setDataTopics, "pagelist_topics", "topicTitle", "collection")
+                }
+              >
                 <input
                   className={css.Form_input}
                   id="input_a22VL1iGPC"
-                  maxLength={50}
                   minLength={2}
                   placeholder="Add a topic"
                   type="text"
@@ -211,11 +138,14 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
           )}
           {pickTabs.value === "List" && (
             <div className={css.Form}>
-              <form onSubmit={(e) => addNewList(e)}>
+              <form
+                onSubmit={(e) =>
+                  addNewElement(e, collectData, "list", setDataLists, "pagelist_lists", "listTitle", "topic")
+                }
+              >
                 <input
                   className={css.Form_input}
                   id="input_ooIRWuISR8"
-                  maxLength={50}
                   minLength={2}
                   placeholder="Add a list"
                   type="text"
@@ -257,7 +187,19 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
           )}
           {pickTabs.value === "Bookmark" && (
             <div className={css.Form}>
-              <form onSubmit={(e) => addNewBookmark(e)}>
+              <form
+                onSubmit={(e) =>
+                  addNewElement(
+                    e,
+                    collectData,
+                    "bookmark",
+                    setDataBookmarks,
+                    "pagelist_bookmarks",
+                    "bookmarkTitle",
+                    "list"
+                  )
+                }
+              >
                 <input
                   className={css.Form_input}
                   id="input_ooIRWuISR1"
@@ -314,13 +256,10 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                     }
                   })}
                 </ButtonSelect>
-                {/* !1a: */}
                 <ButtonSelect
                   id={"B3"}
                   value={collectData.list}
-                  onChange={(e) => {
-                    handleChange("list", e.target.value, setCollectData);
-                  }}
+                  onChange={(e) => handleChange("list", e.target.value, setCollectData)}
                 >
                   {pinData == true ? (
                     <option value={selectedItem.listId}>-- {selectedItem.listTitle} --</option>
