@@ -29,7 +29,6 @@ export const HomePage = () => {
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase
                 icon={<IconifyInventory2Outline />}
-                text="Open"
                 handleClick={() => setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
               />
               <p className={css.Navbar_text}>{selectedItem.collectionTitle}</p>
@@ -44,7 +43,7 @@ export const HomePage = () => {
               text="Choose a collection to access your favorite bookmarks"
             />
           ) : (
-            <div className={css.Container_boxTwo}>
+            <div className={css.Container_frame}>
               <TopicsPane />
               <BookmarksPane />
             </div>
