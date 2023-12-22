@@ -1,0 +1,52 @@
+.Card {
+  position: relative;
+  border-radius: 0.4rem;
+  background-color: var(--co-color-04);
+  overflow: hidden;
+  &:global(.--active) &_box {
+    color: var(--co-color-08);
+  }
+  &:global(.--active) &_text {
+    color: var(--co-color-08);
+  }
+  &:global(.--active):hover &_box {
+    color: var(--co-color-05);
+  }
+  &_box {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 0.8rem;
+    border: none;
+    background-color: transparent;
+    color: var(--co-color-02);
+    transition: 0.2s;
+    & > svg {
+      font-size: 1.5rem;
+    }
+  }
+  &:hover &_box {
+    color: var(--co-color-05);
+    border-color: var(--co-color-05);
+    background-color: var(--co-color-07);
+  }
+  &_content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 78%;
+  }
+  &_text {
+    display: -webkit-box;
+    color: var(--co-color-03);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  &_subtext {
+    font-size: 0.8rem;
+  }
+}

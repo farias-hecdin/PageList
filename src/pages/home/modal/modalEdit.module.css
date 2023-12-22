@@ -1,0 +1,58 @@
+.Header {
+  display: flex;
+  flex-direction: column;
+  &_title {
+    margin-bottom: 0.25rem;
+    color: var(--co-color-03);
+    font-size: 1.4rem;
+    font-weight: var(--fo-bold);
+  }
+  &_text {
+    color: var(--co-color-03);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  &_subtext {
+    margin-left: 0.5rem;
+    font-weight: var(--fo-bold);
+  }
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 50vw;
+  margin: 2rem 0;
+  &_details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    & > form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 18rem;
+    }
+    & input {
+      width: 100%;
+      padding: 0.5rem 0.8rem;
+      border: 2px solid var(--co-color-06);
+      border-radius: 0.5rem;
+      outline: none;
+      font-family: var(--fo-secondary);
+      background-color: var(--co-color-01);
+      color: var(--co-color-02);
+      &:focus {
+        border-color: var(--co-color-08);
+        color: var(--co-color-08);
+      }
+    }
+  }
+}
+
+@media screen and (width <= 600px) {
+}

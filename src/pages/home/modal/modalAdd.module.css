@@ -1,0 +1,64 @@
+.Radio {
+  display: flex;
+  flex-direction: column;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  & > form,
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  &_input {
+    padding: 0.5rem 0.8rem;
+    border: 2px solid var(--co-color-06);
+    border-radius: 0.5rem;
+    outline: none;
+    width: 100%;
+    min-width: 20.8rem;
+    font-family: var(--fo-secondary);
+    background-color: var(--co-color-01);
+    color: var(--co-color-02);
+    &:focus {
+      border-color: var(--co-color-08);
+      color: var(--co-color-08);
+    }
+  }
+}
+
+.Container {
+  &_title {
+    margin-bottom: 0.25rem;
+    color: var(--co-color-03);
+    font-size: 1.4rem;
+    font-weight: var(--fo-bold);
+  }
+  &_box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 50vw;
+    margin: 2rem 0;
+    overflow: auto;
+  }
+  &_text {
+    color: var(--co-color-03);
+  }
+}
+
+@media screen and (width <= 600px) {
+  .Form {
+    &_input {
+    }
+  }
+  .Container {
+    &_box {
+      width: 100%;
+    }
+  }
+}
