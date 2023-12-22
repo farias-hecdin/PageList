@@ -6,21 +6,10 @@
   border-radius: 0.8rem;
   background-color: var(--co-color-10);
   &_box {
-    margin: 2rem 0;
-  }
-  &_frame {
     display: grid;
+    margin: 2rem 0;
     gap: 2rem;
-    grid-template-columns: 1fr 1.5fr;
-  }
-}
-
-@media screen and (width <= 600px) {
-  .Container {
-    &_boxTwo {
-      display: flex;
-      flex-direction: column;
-    }
+    grid-template-columns: 0.5fr 1fr;
   }
 }
 

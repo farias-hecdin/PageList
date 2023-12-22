@@ -22,22 +22,6 @@ export const onClickMissing = () => {
 };
 
 /**
- * Comparar `children.parent` con `parent.id` y retorna el numero de coincidencias
- * @param {Array<object>} pChildrenData - Datos de origen de los elementos hijos
- * @param {string} pElementId - Id del elemento actual (parent)
- * @returns {number}
- */
-export const countMatchingChildIds = (pChildrenData, pParentId) => {
-  let coincidence = 0;
-  for (const children of pChildrenData) {
-    if (children.parent === pParentId) {
-      coincidence++;
-    }
-  }
-  return coincidence;
-};
-
-/**
  * @param {string} pKey
  * @param {any} pValue
  * @param {Function} pSetState
@@ -88,4 +72,20 @@ export const currentNumberElements = (pParentId, pChildren, pKey, pSetState) => 
   let elementNumbers = countMatchingChildIds(pChildren, pParentId);
   pSetState((prev) => ({ ...prev, [pKey]: elementNumbers }));
   return elementNumbers;
+};
+
+/**
+ * Comparar `children.parent` con `parent.id` y retorna el numero de coincidencias
+ * @param {Array<object>} pChildren - Datos de origen de los elementos hijos
+ * @param {string} pElementId - Id del elemento actual (parent)
+ * @returns {number}
+ */
+export const countMatchingChildIds = (pChildren, pParentId) => {
+  let coincidence = 0;
+  for (const children of pChildren) {
+    if (children.parent === pParentId) {
+      coincidence++;
+    }
+  }
+  return coincidence;
 };

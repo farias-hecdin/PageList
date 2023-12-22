@@ -19,6 +19,9 @@ devDependencies:
   '@iconify-json/material-symbols':
     specifier: ^1.1.65
     version: 1.1.65
+  '@iconify-json/material-symbols-light':
+    specifier: ^1.1.7
+    version: 1.1.7
   '@svgr/core':
     specifier: ^8.1.0
     version: 8.1.0
@@ -581,6 +584,12 @@ packages:
 
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
+    dev: true
+
+  /@iconify-json/material-symbols-light@1.1.7:
+    resolution: {integrity: sha512-HqYIHNqAgQoFOyZlPEvF+d4L/4Jpcyka0AvpXP8eCVF+ASbTIL4MZ+hlIVupAeStS2Yb8y5o3CUOSXevw5guLw==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify-json/material-symbols@1.1.65:

@@ -44,25 +44,25 @@ html {
   font-size: clamp(0.813rem, 0.192vw + 0.769rem, 1rem);
 }
 
-div[data-theme="1st"] {
+div[data-theme="dark"] {
   --co-color-01: lch(12% 7.6 265.8);
   --co-color-02: lch(55% 5.4 268.65);
   --co-color-03: lch(91% 0 223.9);
-  --co-color-04: lch(21% 9.4 265.5);
+  --co-color-04: lch(22% 9.4 265);
   --co-color-05: lch(62% 53 147.3);
   --co-color-A5: lch(62% 53 147.3);
   --co-color-08: var(--co-color-05);
-  --co-color-06: lch(25% 8.4 286.7);
+  --co-color-06: lch(30% 8.4 286.7);
   --co-color-A6: var(--co-color-06);
   --co-color-09: lch(8.4% 4.7 216.9);
   --co-color-07: lch(25.7% 21.6 164);
   --co-color-10: lch(16% 8.9 266.6);
-  --co-color-11: lch(18% 8.9 266.6);
+  --co-color-11: lch(18% 9.4 265);
   --co-color-12: lch(12% 7.6 265.8);
   background-color: var(--co-color-10);
 }
 
-div[data-theme="2nd"] {
+div[data-theme="light"] {
   --co-color-01: lch(92% 4.69 216.89);
   --co-color-02: lch(30% 5 270.38);
   --co-color-03: lch(19% 4.75 270.38);

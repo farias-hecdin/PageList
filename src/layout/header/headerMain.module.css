@@ -1,7 +1,7 @@
 .Container {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 3rem;
   width: 100%;
   padding: 0.6rem 0;
 }
@@ -22,15 +22,6 @@
   }
 }
 
-@media screen and (width <= 600px) {
-  .Logo {
-    &_title {
-      font-size: 1.5rem;
-      display: none;
-    }
-  }
-}
-
 .Navbar {
   display: flex;
   gap: 1rem;
@@ -38,5 +29,32 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
+  }
+}
+
+.Search {
+  display: flex;
+  align-items: center;
+  &_input {
+    width: 25rem;
+    padding: 0 1rem 0.6rem;
+    background: transparent;
+    border: 1px solid var(--co-color-06);
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    &:focus {
+      border-color: var(--co-color-05);
+      color: var(--co-color-05);
+      outline: none;
+    }
+  }
+}
+
+@media screen and (width <= 600px) {
+  .Logo {
+    &_title {
+      font-size: 1.5rem;
+      display: none;
+    }
   }
 }

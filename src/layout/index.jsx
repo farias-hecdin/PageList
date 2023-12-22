@@ -3,4 +3,4 @@ import { HeaderSecondary } from "./header/headerSecondary.jsx";
 import { MessageFeedback } from "./message/messageFeedback.jsx";
 import { MessageFloat } from "./message/messageFloat.jsx";
 
-export { HeaderMain, MessageFeedback, HeaderSecondary, MessageFloat };
+export { HeaderMain, HeaderSecondary, MessageFeedback, MessageFloat };

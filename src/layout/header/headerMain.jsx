@@ -1,12 +1,13 @@
 import css from "./headerMain.module.css";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
-import { useContext } from "react";
 import { DataContext, StateContext } from "../../context/index.jsx";
+import { useContext } from "react";
 
 /**
  * @param {object} prop
  * @param {Function} prop.updatePage
  * @param {string} prop.pageName
+ * @param {string} prop.changeTheme
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
@@ -23,27 +24,32 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
   };
 
   const checkLatestSection = () => {
-    let message = "";
-    let storage = [
-      { data: localStorage.getItem("pagelist_collections"), set: setDataCollections },
-      { data: localStorage.getItem("pagelist_topics"), set: setDataTopics },
-      { data: localStorage.getItem("pagelist_lists"), set: setDataLists },
-      { data: localStorage.getItem("pagelist_bookmarks"), set: setDataBookmarks },
-    ];
-    for (let i = 0; i < storage.length; i++) {
-      let data = storage[i].data;
-      if (typeof data === "string") {
-        data = JSON.parse(data);
-        // Actualizar datos
-        storage[i].set(data);
-        message = "Update";
-      } else {
-        message = "No data";
-      }
-    }
+    let answer = confirm("Are you sure?");
 
-    setSelectedItem((prev) => ({ ...prev, collectionId: "0" }));
-    setShowPopup((prev) => ({ ...prev, show: true, message: "Load section" }));
+    if (answer) {
+      const storage = [
+        { data: localStorage.getItem("pagelist_collections"), set: setDataCollections },
+        { data: localStorage.getItem("pagelist_topics"), set: setDataTopics },
+        { data: localStorage.getItem("pagelist_lists"), set: setDataLists },
+        { data: localStorage.getItem("pagelist_bookmarks"), set: setDataBookmarks },
+      ];
+      let message = null;
+
+      for (let i = 0; i < storage.length; i++) {
+        let data = storage[i].data;
+        if (typeof data === "string") {
+          message = "Load section";
+          // Actualizar datos
+          data = JSON.parse(data);
+          storage[i].set(data);
+        } else {
+          message = "No data";
+        }
+      }
+
+      setSelectedItem((prev) => ({ ...prev, collectionId: "0" }));
+      setShowPopup((prev) => ({ ...prev, show: true, message: message }));
+    }
   };
 
   return (
@@ -52,29 +58,27 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
         <iconify-icon icon="tabler:bookmarks"></iconify-icon>
         <span className={css.Logo_title}>Pagelist</span>
       </div>
+      <label className={css.Search} for="search">
+        <input className={css.Search_input} name="search" type="text" placeholder="Search bookmarks..." />
+      </label>
       <nav className={css.Navbar}>
-        {/* { notif == true ? ( */}
-        {/*   <p className={css.Navbar_message}> */}
-        {/*     <IconifyWarningOutline" /> */}
-        {/*   </p>) : "" */}
-        {/* } */}
         <WrapBase>
           <ButtonBase
-            styled={`HeaderMain_UlICn ${pageName === "Home" ? "--active" : "--ghost"}`}
-            icon={<IconifyBookmarksOutline />}
+            styled={`HeaderMain_UlICn ${pageName === "Home" ? "is-active" : "is-ghost"}`}
+            icon={<IconifyBookmarkOutline />}
             text="Bookmarks"
             handleClick={() => showActivePage("Home")}
           />
           <ButtonBase
-            styled={`HeaderMain_UlICn ${pageName === "Backup" ? "--active" : "--ghost"}`}
-            icon={<IconifyHardDriveOutline />}
+            styled={`HeaderMain_UlICn ${pageName === "Backup" ? "is-active" : "is-ghost"}`}
+            icon={<IconifySaveOutline />}
             text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
         </WrapBase>
         <div className={css.Navbar_box}>
-          <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="--outline" />
-          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={changeTheme} styled="--outline" />
+          <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="is-outline" />
+          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={changeTheme} styled="is-outline" />
         </div>
       </nav>
     </header>

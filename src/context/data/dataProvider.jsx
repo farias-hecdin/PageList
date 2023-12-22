@@ -32,12 +32,6 @@ export const DataProvider = ({ children }) => {
     type: "",
     url: "",
   });
-  // const [didChange, setDidChange] = useState({
-  //   collection: 0,
-  //   topic: 0,
-  //   list: 0,
-  //   bookmarks: 0,
-  // })
 
   // Pin data
   const [pinData, setPinData] = useState(false);
@@ -61,8 +55,6 @@ export const DataProvider = ({ children }) => {
     savedData,
     setSavedData,
     targetItem,
-    // didChange,
-    // setDidChange,
     setTargetItem,
     pinData,
     setPinData,

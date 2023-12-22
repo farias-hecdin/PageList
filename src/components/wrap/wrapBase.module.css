@@ -2,7 +2,7 @@
   display: flex;
   gap: 0.5rem;
   padding: 0.3rem;
-  border: 2px solid var(--co-color-06);
+  border: 1px solid var(--co-color-06);
   border-radius: calc(0.3rem + 0.5rem);
   background-color: var(--co-color-01);
 }

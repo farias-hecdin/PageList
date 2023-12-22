@@ -3,21 +3,21 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0.63rem;
-  border: 1px solid var(--co-color-06);
+  padding: 0.3rem 0.6rem;
+  border: 1px solid transparent;
   border-radius: 0.5rem;
   background-color: var(--co-color-04);
   color: var(--co-color-02);
   &_text {
-    font-size: 1rem;
     font-weight: var(--fo-bold);
     user-select: none;
+    line-height: 1;
   }
   & > svg {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   &:hover {
-    border-color: var(--co-color-05);
+    border-color: transparent;
     background-color: var(--co-color-07);
     color: var(--co-color-05);
   }
@@ -25,30 +25,31 @@
 
 /* State ------------------------------------------------------------------- */
 
-.Button:global(.--active) {
+.Button:global(.is-active) {
   background-color: var(--co-color-07);
   color: var(--co-color-05);
   & > svg {
-    color: var(--fi-greenish);
+    color: var(--co-color-05);
   }
 }
 
-.Button:global(.--outline) {
+.Button:global(.is-outline) {
+  border: 1px solid var(--co-color-06);
   background-color: transparent;
   color: var(--co-color-02);
   &:hover {
-    border-color: var(--co-color-05);
+    border-color: transparent;
     background-color: var(--co-color-07);
     color: var(--co-color-05);
   }
 }
 
-.Button:global(.--ghost) {
+.Button:global(.is-ghost) {
   border-color: transparent;
   background-color: transparent;
   color: var(--co-color-02);
   &:hover {
-    border-color: var(--co-color-05);
+    border-color: transparent;
     background-color: var(--co-color-07);
     color: var(--co-color-05);
   }
@@ -56,26 +57,28 @@
 
 /* Compose ----------------------------------------------------------------- */
 
-.Button {
-  &:global(.HeaderMain_UlICn) {
-    width: 8rem;
-    &_text {
-      font-weight: var(--fo-bold);
-    }
+.Button:global(.HeaderMain_UlICn) {
+  min-width: 8rem;
+  &_text {
+    font-weight: var(--fo-bold);
   }
-  &:global(.ModalAddBookmarks_JqagP) {
-    width: 9rem;
-  }
-  &:global(.CollectionsModal_WQkiS) {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1;
-    padding: 0 0.25rem;
-  }
-  &:global(.TopicsPane_WQkiS) {
-    padding: 0 0.25rem;
-  }
+}
+
+.Button:global(.ModalAddBookmarks_JqagP) {
+  width: 9rem;
+}
+
+.Button:global(.CollectionsModal_WQkiS) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.5rem;
+  z-index: 1;
+  padding: 0 0.25rem;
+}
+
+.Button:global(.TopicsPane_WQkiS) {
+  padding: 0 0.25rem;
 }
 
 @media screen and (width <= 600px) {

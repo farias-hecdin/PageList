@@ -1,11 +1,11 @@
 import css from "./homePage.module.css";
-import { BookmarksPane } from "./bookmarks/bookmarksPane.jsx";
+import { PaneBookmarks } from "./pane/paneBookmarks.jsx";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
+import { CollectionsPane } from "./collections/collectionsPane";
 import { DataContext, StateContext } from "../../context/index.jsx";
-import { MessageFeedback, HeaderSecondary } from "../../layout/index.jsx";
+import { HeaderSecondary } from "../../layout/index.jsx";
 import { ModalWrapper } from "./modal/modalWrapper";
 import { TopicsPane } from "./topics/topicsPane.jsx";
-import { onClickMissing } from "../../utils/common";
 import { useContext } from "react";
 
 export const HomePage = () => {
@@ -24,7 +24,6 @@ export const HomePage = () => {
                 icon={<IconifyAdd />}
                 handleClick={() => setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }))}
               />
-              <ButtonBase text="Search" styled="--outline" icon={<IconifySearch />} handleClick={onClickMissing} />
             </div>
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase
@@ -36,18 +35,8 @@ export const HomePage = () => {
           </div>
         </HeaderSecondary>
         <div className={css.Container_box}>
-          {selectedItem.collectionId === "0" ? (
-            <MessageFeedback
-              icon={<IconifyInfoOutline />}
-              title="Nothing here"
-              text="Choose a collection to access your favorite bookmarks"
-            />
-          ) : (
-            <div className={css.Container_frame}>
-              <TopicsPane />
-              <BookmarksPane />
-            </div>
-          )}
+          {selectedItem.collectionId === "0" ? <CollectionsPane /> : <TopicsPane />}
+          <PaneBookmarks />
         </div>
       </section>
     </>

@@ -5,12 +5,13 @@ import { HomePage } from "./home/homePage.jsx";
 import { useState } from "react";
 
 export const App = () => {
-  const [theme, setTheme] = useState("1st");
   // Mostrar la pagina activa
   const [activePage, setActivePage] = useState("Home");
 
+  // Cambiar tema
+  const [theme, setTheme] = useState("dark");
   const changeTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "1st" ? "2nd" : "1st"));
+    setTheme((prev) => (prev === "dark" ? "dark" : "light"));
   };
 
   return (

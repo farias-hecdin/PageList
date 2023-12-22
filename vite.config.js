@@ -14,9 +14,10 @@ export default defineConfig(({ command }) => {
           IconsResolver({
             prefix: false,
             extension: "jsx",
-            enabledCollections: ["material-symbols"],
+            enabledCollections: ["material-symbols", "material-symbols-light"],
             alias: {
               iconify: "material-symbols",
+              'iconify-light': "material-symbols-light",
             },
           }),
         ],

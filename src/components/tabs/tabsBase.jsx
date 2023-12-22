@@ -1,4 +1,4 @@
-import { InputRadio } from "../input/InputRadio";
+import { InputRadio } from "../index.jsx";
 import css from "./tabsBase.module.css";
 
 export const TabsBase = ({ pickTabs, setPickTabs, handleChange, tabs }) => {

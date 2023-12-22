@@ -2,13 +2,13 @@ import css from "./detailsBase.module.css";
 
 /**
  * @param {object} prop
- * @param {string} prop.icon
- * @param {string} prop.title
- * @param {string} prop.name
  * @param {HTMLElement} prop.children
+ * @param {string} prop.icon
+ * @param {string} prop.name
+ * @param {string} prop.title
  * @returns {HTMLElement}
  */
-export const DetailsBase = ({ icon, title, name, children }) => {
+export const DetailsBase = ({ children, icon, name, title }) => {
   return (
     <details name={name} className={css.Details}>
       <summary className={css.Details_summary}>
