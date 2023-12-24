@@ -7,7 +7,7 @@ import css from "./bookmarksCard.module.css";
  * @param {HTMLElement} prop.children
  * @returns {HTMLElement}
  */
-export const BookmarksCard = ({ title, url, children }) => {
+export const CardBookmarks = ({ title, url, children }) => {
   let titleLinks = title;
 
   /**

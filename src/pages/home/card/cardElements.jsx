@@ -1,5 +1,5 @@
 import { ButtonBase } from "../../../components";
-import css from "./collectionsCard.module.css";
+import css from "./CardElements.module.css";
 
 /**
  * @param {object} prop
@@ -11,16 +11,17 @@ import css from "./collectionsCard.module.css";
  * @param {string} prop.text
  * @returns {HTMLElement}
  */
-export const CollectionsCard = ({ handleClick, handle2ndClick, icon, id, text, styled = "" }) => {
+export const CardElements = ({ handleClick, handle2ndClick, icon, id, text, styled = "" }) => {
   return (
     <div className={`${css.Card} ${styled}`}>
+      {icon}
       <button className={css.Card_box} onClick={handleClick} data-id={id}>
-        {icon}
-        <p className={css.Card_text}>{text}</p>
+        <div className={css.Card_content}>
+          <p className={css.Card_text}>{text}</p>
+          <p className={css.Card_subtext}>{0} elements</p>
+        </div>
       </button>
-      {handle2ndClick !== undefined && (
-        <ButtonBase icon={<IconifyMoreVert />} styled="--ghost CollectionsModal_WQkiS" handleClick={handle2ndClick} />
-      )}
+      {handle2ndClick && <ButtonBase icon={<IconifyMoreVert />} styled="is-ghost" handleClick={handle2ndClick} />}
     </div>
   );
 };

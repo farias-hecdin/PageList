@@ -1,10 +1,9 @@
-import css from "./modalAddBookmarks.module.css";
-import { ButtonBase, ButtonSelect, ModalBase } from "../../../components/index";
+import css from "./modalAdd.module.css";
+import { ButtonBase, ButtonSelect, ModalBase, TabsBase } from "../../../components/index";
 import { DataContext, StateContext } from "../../../context/index";
 import { useContext, useEffect, useState } from "react";
 import { handleChange, sortByName } from "../../../utils/common";
-import { addNewElement, updateStorageAndReturnData } from "./modalAddBookmarks.script";
-import { TabsBase } from "../../../components/tabs/tabsBase";
+import { addNewElement, updateStorageAndReturnData } from "./modalAdd.script";
 
 /**
  * @param {object} prop
@@ -12,7 +11,7 @@ import { TabsBase } from "../../../components/tabs/tabsBase";
  * @param {Function} prop.handleClick
  * @returns {HTMLElement}
  */
-export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
+export const ModalAdd = ({ isOpen, handleClick }) => {
   const { setShowPopup } = useContext(StateContext);
   const {
     dataCollections,

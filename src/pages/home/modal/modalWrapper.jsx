@@ -1,13 +1,12 @@
 import { useContext, useEffect } from "react";
 import { DataContext, StateContext } from "../../../context";
 import { MessageFloat } from "../../../layout";
-import { CollectionsModal } from "../collections/collectionsModal";
-import { ModalAddBookmarks } from "./modalAddBookmarks";
-import { ModalEditMode } from "./modalEditMode";
+import { ModalAdd } from "./modalAdd";
+import { ModalEdit } from "./modalEdit";
 
 export const ModalWrapper = () => {
   const { showModal, setShowModal, showPopup, setShowPopup } = useContext(StateContext);
-  const { setPinData } = useContext(DataContext);
+  const { setPinData } = useContext(ReferenceContext);
 
   // Esconder mensaje de notificacion al ser activado
   useEffect(() => {
@@ -20,18 +19,18 @@ export const ModalWrapper = () => {
 
   return (
     <>
-      <CollectionsModal
-        isOpen={showModal.collectionsPane}
-        handleClick={() => setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
-      />
-      <ModalAddBookmarks
+      {/* <CollectionsModal */}
+      {/*   isOpen={showModal.collectionsPane} */}
+      {/*   handleClick={() => setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))} */}
+      {/* /> */}
+      <ModalAdd
         isOpen={showModal.addBookmarks}
         handleClick={() => {
           setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
           setPinData(false);
         }}
       />
-      <ModalEditMode
+      <ModalEdit
         isOpen={showModal.editMode}
         handleClick={() => setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }))}
       />

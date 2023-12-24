@@ -11,7 +11,7 @@ export const StateProvider = ({ children }) => {
     editMode: false,
   });
 
-  // Contadores de elementos
+  // Contador de elementos
   const [counterItem, setCounterItem] = useState({
     collections: 0,
     topics: 0,
@@ -25,7 +25,28 @@ export const StateProvider = ({ children }) => {
     message: "",
   });
 
-  // Exportar datos
+  const [selectedItem, setSelectedItem] = useState({
+    collectionId: "0",
+    collectionTitle: "None",
+    topicId: "0",
+    topicTitle: "None",
+    listId: "0",
+    listTitle: "None",
+    bookmarkId: "0",
+    bookmarkTitle: "None",
+    type: null,
+  });
+
+  const [targetItem, setTargetItem] = useState({
+    id: "",
+    title: "",
+    type: "",
+    url: "",
+  });
+
+  // Pin data
+  const [pinData, setPinData] = useState(false);
+
   const value = {
     showModal,
     setShowModal,
@@ -33,6 +54,10 @@ export const StateProvider = ({ children }) => {
     setCounterItem,
     showPopup,
     setShowPopup,
+    selectedItem,
+    setSelectedItem,
+    targetItem,
+    setTargetItem
   };
   return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };

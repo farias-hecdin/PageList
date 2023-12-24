@@ -1,4 +1,4 @@
-import css from "./modalEditMode.module.css";
+import css from "./modalEdit.module.css";
 import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index.jsx";
 import { useContext, useEffect, useState } from "react";
 import { DataContext, StateContext } from "../../../context/index.jsx";
@@ -7,7 +7,7 @@ import {
   relocateElementAndUpdateState,
   modifyElementAndUpdateState,
   confirmAndUpdateStateAndStorageGroup,
-} from "./modalEditMode.script.js";
+} from "./modalEdit.script.js";
 
 /**
  * @param {object} prop
@@ -15,7 +15,7 @@ import {
  * @param {Function} prop.handleClick
  * @returns {HTMLElement}
  */
-export const ModalEditMode = ({ isOpen, handleClick }) => {
+export const ModalEdit = ({ isOpen, handleClick }) => {
   const {
     dataCollections,
     dataTopics,

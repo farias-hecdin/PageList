@@ -1,6 +1,6 @@
 import css from "./headerMain.module.css";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
-import { DataContext, StateContext } from "../../context/index.jsx";
+import { DataContext, ReferenceContext, StateContext } from "../../context/index.jsx";
 import { useContext } from "react";
 
 /**
@@ -11,16 +11,16 @@ import { useContext } from "react";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
-  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics, setSelectedItem } =
-    useContext(DataContext);
+  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics } = useContext(DataContext);
+  const { setSelectedItem } = useContext(ReferenceContext);
   const { setShowPopup } = useContext(StateContext);
 
   /**
    * Mostrar la pagina selecionada
-   * @param {string} pSelectedPage - Nombre de la pagina
+   * @param {string} selectedPage - Nombre de la pagina
    */
-  const showActivePage = (pSelectedPage) => {
-    updatePage(pSelectedPage);
+  const showActivePage = (selectedPage) => {
+    updatePage(selectedPage);
   };
 
   const checkLatestSection = () => {
@@ -75,10 +75,16 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
             text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
+          <ButtonBase
+            styled={`HeaderMain_UlICn ${pageName === "Backup" ? "is-active" : "is-ghost"}`}
+            icon={<IconifySearch />}
+            text="Search"
+            handleClick={() => showActivePage("Backup")}
+          />
         </WrapBase>
         <div className={css.Navbar_box}>
           <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="is-outline" />
-          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={changeTheme} styled="is-outline" />
+          <ButtonBase text="Theme" icon={<IconifySettingsOutline />} handleClick={changeTheme} styled="is-outline" />
         </div>
       </nav>
     </header>
