@@ -9,7 +9,7 @@
     display: grid;
     margin: 2rem 0;
     gap: 2rem;
-    grid-template-columns: 0.5fr 1fr;
+    grid-template-columns: 35% 100%;
   }
 }
 

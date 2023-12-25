@@ -5,14 +5,14 @@ export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   // Mostrar ventana modal
-  const [showModal, setShowModal] = useState({
+  const [showModal, $showModal] = useState({
     collectionsPane: false,
     addBookmarks: false,
     editMode: false,
   });
 
   // Contador de elementos
-  const [counterItem, setCounterItem] = useState({
+  const [counterItem, $counterItem] = useState({
     collections: 0,
     topics: 0,
     lists: 0,
@@ -20,12 +20,12 @@ export const StateProvider = ({ children }) => {
   });
 
   // Notificacion
-  const [showPopup, setShowPopup] = useState({
+  const [showPopup, $showPopup] = useState({
     show: false,
     message: "",
   });
 
-  const [selectedItem, setSelectedItem] = useState({
+  const [selectedItem, $selectedItem] = useState({
     collectionId: "0",
     collectionTitle: "None",
     topicId: "0",
@@ -37,7 +37,7 @@ export const StateProvider = ({ children }) => {
     type: null,
   });
 
-  const [targetItem, setTargetItem] = useState({
+  const [targetItem, $targetItem] = useState({
     id: "",
     title: "",
     type: "",
@@ -45,19 +45,21 @@ export const StateProvider = ({ children }) => {
   });
 
   // Pin data
-  const [pinData, setPinData] = useState(false);
+  const [pinData, $pinData] = useState(false);
 
   const value = {
     showModal,
-    setShowModal,
+    $showModal,
     counterItem,
-    setCounterItem,
+    $counterItem,
     showPopup,
-    setShowPopup,
+    $showPopup,
     selectedItem,
-    setSelectedItem,
+    $selectedItem,
+    pinData,
+    $pinData,
     targetItem,
-    setTargetItem
+    $targetItem,
   };
   return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };

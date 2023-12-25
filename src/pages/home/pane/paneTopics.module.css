@@ -1,0 +1,108 @@
+.Container {
+  color: var(--co-color-03);
+  &_list {
+    height: 75vh;
+    margin-top: 2rem;
+    list-style: none;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .Container {
+    color: var(--co-color-03);
+    &_list {
+      height: 13rem;
+    }
+  }
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  &_box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  &_title {
+    display: -webkit-box;
+    font-size: 1.5rem;
+    font-weight: var(--fo-medium);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  &_text {
+    color: var(--co-color-02);
+    font-size: 0.9rem;
+  }
+}
+
+.Tree {
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--co-color-04);
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--co-color-04);
+    border-radius: 0.5rem;
+    gap: 1rem;
+    padding: 0.6rem 1rem;
+    &:hover,
+    &:active {
+      background: var(--co-color-06);
+    }
+  }
+  &_title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  &_title:global(.--active) {
+    color: var(--co-color-05);
+  }
+  &_list {
+    list-style: none;
+    background-color: var(--co-color-11);
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+  &_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.35rem 1rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    &:first-child {
+      margin-top: 0.1rem;
+    }
+    &:hover,
+    &:active {
+      background: var(--co-color-A6);
+    }
+  }
+  &_subheader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    & svg {
+      font-size: 1.2rem;
+    }
+  }
+  &_subheader:global(.--active) {
+    color: var(--co-color-08);
+  }
+  &_text {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+}

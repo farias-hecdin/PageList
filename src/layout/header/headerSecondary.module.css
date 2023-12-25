@@ -1,27 +1,29 @@
-.Header {
+.Container {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 0;
   border-bottom: 0.0625rem solid var(--co-color-06);
   color: var(--co-color-03);
-  &_box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.25rem;
-    width: 100%;
-  }
+}
+
+.Header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 100%;
   &_title {
     font-weight: var(--fo-bold);
   }
 }
 
 @media screen and (width <= 600px) {
-  .Header {
+  .Container {
     flex-direction: column;
-    &_box {
-      text-align: center;
-    }
+  }
+
+  .Header {
+    text-align: center;
   }
 }

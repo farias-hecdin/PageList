@@ -1,4 +1,4 @@
-import css from "./bookmarksCard.module.css";
+import css from "./cardBookmark.module.css";
 
 /**
  * @param {object} prop
@@ -7,7 +7,7 @@ import css from "./bookmarksCard.module.css";
  * @param {HTMLElement} prop.children
  * @returns {HTMLElement}
  */
-export const CardBookmarks = ({ title, url, children }) => {
+export const CardBookmark = ({ title, url, children }) => {
   let titleLinks = title;
 
   /**

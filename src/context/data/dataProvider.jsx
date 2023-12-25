@@ -5,7 +5,7 @@ export const DataContext = createContext(null);
 
 export const DataProvider = ({ children }) => {
   // Set de datos
-  const [dataCollections, setDataCollections] = useState([
+  const [dataCollections, $dataCollections] = useState([
     {
       id: "XnBZ0",
       title: "My first collection",
@@ -13,7 +13,7 @@ export const DataProvider = ({ children }) => {
     },
   ]);
 
-  const [dataTopics, setDataTopics] = useState([
+  const [dataTopics, $dataTopics] = useState([
     {
       parent: "XnBZ0",
       id: "Mo1gG",
@@ -22,7 +22,7 @@ export const DataProvider = ({ children }) => {
     },
   ]);
 
-  const [dataLists, setDataLists] = useState([
+  const [dataLists, $dataLists] = useState([
     {
       parent: "Mo1gG",
       id: "RDTbX",
@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
     },
   ]);
 
-  const [dataBookmarks, setDataBookmarks] = useState([
+  const [dataBookmarks, $dataBookmarks] = useState([
     {
       parent: "RDTbX",
       id: "d4Coe",
@@ -45,19 +45,19 @@ export const DataProvider = ({ children }) => {
   ]);
 
   // localstorage
-  const [savedData, setSavedData] = useState();
+  const [savedData, $savedData] = useState();
 
   const value = {
-    dataCollections,
-    setDataCollections,
-    dataTopics,
-    setDataTopics,
-    dataLists,
-    setDataLists,
+    $dataBookmarks,
+    $dataCollections,
+    $dataLists,
+    $dataTopics,
+    $savedData,
     dataBookmarks,
-    setDataBookmarks,
+    dataCollections,
+    dataLists,
+    dataTopics,
     savedData,
-    setSavedData
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

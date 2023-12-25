@@ -9,8 +9,8 @@ import css from "./headerSecondary.module.css";
  */
 export const HeaderSecondary = ({ title, text, children }) => {
   return (
-    <header className={css.Header}>
-      <div className={css.Header_box}>
+    <header className={css.Container}>
+      <div className={css.Header}>
         <h2 className={css.Header_title}>{title}</h2>
         <p className={css.Header_text}>{text}</p>
       </div>

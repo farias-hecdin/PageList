@@ -1,6 +1,6 @@
 import css from "./headerMain.module.css";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
-import { DataContext, ReferenceContext, StateContext } from "../../context/index.jsx";
+import { DataContext, StateContext } from "../../context/index.jsx";
 import { useContext } from "react";
 
 /**
@@ -11,9 +11,8 @@ import { useContext } from "react";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
-  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics } = useContext(DataContext);
-  const { setSelectedItem } = useContext(ReferenceContext);
-  const { setShowPopup } = useContext(StateContext);
+  const { $dataBookmarks, $dataCollections, $dataLists, $dataTopics } = useContext(DataContext);
+  const { $showPopup, $selectedItem } = useContext(StateContext);
 
   /**
    * Mostrar la pagina selecionada
@@ -23,33 +22,33 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
     updatePage(selectedPage);
   };
 
+  /** Carga la ultima seccion */
   const checkLatestSection = () => {
     let answer = confirm("Are you sure?");
 
-    if (answer) {
-      const storage = [
-        { data: localStorage.getItem("pagelist_collections"), set: setDataCollections },
-        { data: localStorage.getItem("pagelist_topics"), set: setDataTopics },
-        { data: localStorage.getItem("pagelist_lists"), set: setDataLists },
-        { data: localStorage.getItem("pagelist_bookmarks"), set: setDataBookmarks },
-      ];
-      let message = null;
+    if (!answer) return;
 
-      for (let i = 0; i < storage.length; i++) {
-        let data = storage[i].data;
-        if (typeof data === "string") {
-          message = "Load section";
-          // Actualizar datos
-          data = JSON.parse(data);
-          storage[i].set(data);
-        } else {
-          message = "No data";
-        }
+    const storage = [
+      { data: localStorage.getItem("pagelist_collections"), set: $dataCollections },
+      { data: localStorage.getItem("pagelist_topics"), set: $dataTopics },
+      { data: localStorage.getItem("pagelist_lists"), set: $dataLists },
+      { data: localStorage.getItem("pagelist_bookmarks"), set: $dataBookmarks },
+    ];
+    let message = "";
+
+    for (let i = 0; i < storage.length; i++) {
+      let data = storage[i].data;
+      if (typeof data === "string") {
+        message = "Load section";
+        // Actualizar datos
+        data = JSON.parse(data);
+        storage[i].set(data);
+      } else {
+        message = "No data";
       }
-
-      setSelectedItem((prev) => ({ ...prev, collectionId: "0" }));
-      setShowPopup((prev) => ({ ...prev, show: true, message: message }));
     }
+    $selectedItem((prev) => ({ ...prev, collectionId: "0" }));
+    $showPopup((prev) => ({ ...prev, show: true, message: message }));
   };
 
   return (
@@ -58,7 +57,7 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
         <iconify-icon icon="tabler:bookmarks"></iconify-icon>
         <span className={css.Logo_title}>Pagelist</span>
       </div>
-      <label className={css.Search} for="search">
+      <label className={css.Search} htmlFor="search">
         <input className={css.Search_input} name="search" type="text" placeholder="Search bookmarks..." />
       </label>
       <nav className={css.Navbar}>
@@ -75,12 +74,12 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
             text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
-          <ButtonBase
-            styled={`HeaderMain_UlICn ${pageName === "Backup" ? "is-active" : "is-ghost"}`}
-            icon={<IconifySearch />}
-            text="Search"
-            handleClick={() => showActivePage("Backup")}
-          />
+          {/* <ButtonBase */}
+          {/*   styled={`HeaderMain_UlICn ${pageName === "More" ? "is-active" : "is-ghost"}`} */}
+          {/*   icon={<IconifyAccountTreeOutline />} */}
+          {/*   text="More" */}
+          {/*   handleClick={() => showActivePage("More")} */}
+          {/* /> */}
         </WrapBase>
         <div className={css.Navbar_box}>
           <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="is-outline" />

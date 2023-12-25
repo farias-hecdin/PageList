@@ -1,0 +1,28 @@
+.Container {
+  color: var(--co-color-03);
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  &_box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  &_title {
+    display: -webkit-box;
+    font-size: 1.5rem;
+    font-weight: var(--fo-medium);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  &_text {
+    color: var(--co-color-02);
+    font-size: 0.9rem;
+  }
+}

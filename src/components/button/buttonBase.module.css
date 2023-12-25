@@ -68,7 +68,7 @@
   width: 9rem;
 }
 
-.Button:global(.CollectionsModal_WQkiS) {
+.Button:global(.CardElements_WQkiS) {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

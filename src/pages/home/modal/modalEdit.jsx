@@ -2,12 +2,7 @@ import css from "./modalEdit.module.css";
 import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index.jsx";
 import { useContext, useEffect, useState } from "react";
 import { DataContext, StateContext } from "../../../context/index.jsx";
-import {
-  removeElementById,
-  relocateElementAndUpdateState,
-  modifyElementAndUpdateState,
-  confirmAndUpdateStateAndStorageGroup,
-} from "./modalEdit.script.js";
+import { removeElementById, relocateElementAndUpdateState, modifyElementAndUpdateState, confirmAndUpdateStateAndStorageGroup } from "./modalEdit.script.js";
 
 /**
  * @param {object} prop
@@ -16,27 +11,17 @@ import {
  * @returns {HTMLElement}
  */
 export const ModalEdit = ({ isOpen, handleClick }) => {
-  const {
-    dataCollections,
-    dataTopics,
-    setDataCollections,
-    setDataTopics,
-    dataBookmarks,
-    dataLists,
-    setDataBookmarks,
-    setDataLists,
-    targetItem,
-  } = useContext(DataContext);
-  const { setShowModal } = useContext(StateContext);
+  const { dataCollections, dataTopics, $dataCollections, $dataTopics, dataBookmarks, dataLists, $dataBookmarks, $dataLists } = useContext(DataContext);
+  const { targetItem, $showModal } = useContext(StateContext);
 
   // Alamacenar el Title y Url de un elemento
-  const [titleValue, setTitleValue] = useState("");
-  const [urlValue, setUrlValue] = useState("");
+  const [titleValue, $titleValue] = useState("");
+  const [urlValue, $urlValue] = useState("");
 
   // Actualizar los imputs al selecionar un elemento
   useEffect(() => {
-    setTitleValue(targetItem.title);
-    setUrlValue(targetItem.url);
+    $titleValue(targetItem.title);
+    $urlValue(targetItem.url);
   }, [targetItem]);
 
   // Declarar los datos necesarios para cada tipo de elemento
@@ -45,34 +30,34 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
       dataMajor: null,
       dataParent: null,
       dataElement: dataCollections,
-      setElement: setDataCollections,
+      $element: $dataCollections,
     },
     topic: {
       dataMajor: null,
       dataParent: dataCollections,
       dataElement: dataTopics,
-      setElement: setDataTopics,
+      $element: $dataTopics,
     },
     list: {
       dataMajor: dataCollections,
       dataParent: dataTopics,
       dataElement: dataLists,
-      setElement: setDataLists,
+      $element: $dataLists,
     },
     bookmark: {
       dataMajor: dataTopics,
       dataParent: dataLists,
       dataElement: dataBookmarks,
-      setElement: setDataBookmarks,
+      $element: $dataBookmarks,
     },
   };
-  const { dataParent, dataElement, setElement, dataMajor } = elementType[targetItem.type] || elementType["bookmark"];
+  const { dataParent, dataElement, $element, dataMajor } = elementType[targetItem.type] || elementType["bookmark"];
 
   // Parametros comunes para las funciones correspondientes
   const sharedParams = {
     pElement: targetItem.id,
     pData: dataElement,
-    pSetState: setElement,
+    pSetState: $element,
   };
   const ToFuncDelete = {
     ...sharedParams,
@@ -106,14 +91,8 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
               icon={<IconifyDone />}
               handleClick={() => {
                 const data = removeElementById(ToFuncDelete);
-                confirmAndUpdateStateAndStorageGroup(
-                  true,
-                  data,
-                  targetItem.type,
-                  sharedParams.pSetState,
-                  targetItem.title
-                );
-                setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState, targetItem.title);
+                $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
               }}
             />
           </div>
@@ -150,7 +129,7 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
                 handleClick={() => {
                   const data = relocateElementAndUpdateState(ToFuncRelocate);
                   confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
-                  setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                  $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
                 }}
               />
             </div>
@@ -164,19 +143,9 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
                 confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
               }}
             >
-              <input
-                type="text"
-                value={titleValue}
-                onChange={(e) => setTitleValue(e.currentTarget.value)}
-                id="input_EJ7aOOCCQI"
-              />
+              <input type="text" value={titleValue} onChange={(e) => $titleValue(e.currentTarget.value)} id="input_EJ7aOOCCQI" />
               {targetItem.type === "bookmark" && (
-                <input
-                  type="text"
-                  value={urlValue}
-                  onChange={(e) => setUrlValue(e.currentTarget.value)}
-                  id="input_P0Z5gb5BMg"
-                />
+                <input type="text" value={urlValue} onChange={(e) => $urlValue(e.currentTarget.value)} id="input_P0Z5gb5BMg" />
               )}
               <ButtonBase text="Update" icon={<IconifyDone />} type="submit" />
             </form>

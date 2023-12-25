@@ -1,18 +1,18 @@
-import css from "./bookmarksPane.module.css";
+import css from "./paneBookmarks.module.css";
 import { ButtonBase } from "../../../components/index.jsx";
 import { DataContext, StateContext } from "../../../context/index.jsx";
 import { MessageFeedback } from "../../../layout/index";
-import { BookmarksCard } from "./bookmarksCard.jsx";
+import { CardBookmark } from "../card/cardBookmark.jsx";
 import { useContext } from "react";
 
-export const BookmarksPane = () => {
-  const { counterItem, $showModal } = useContext(StateContext);
-  const { $pinData, $selectedItem, $targetItem, dataBookmarks, dataLists, selectedItem } = useContext(DataContext);
+export const PaneBookmarks = () => {
+  const { counterItem, $showModal, $selectedItem, $targetItem, $pinData, pinData } = useContext(StateContext);
+  const { dataBookmarks, dataLists, selectedItem } = useContext(DataContext);
 
   const Bookmarks = (data) => {
     const bookmark = data.data;
     return (
-      <BookmarksCard title={bookmark.title} url={bookmark.url}>
+      <CardBookmark title={bookmark.title} url={bookmark.url}>
         <ButtonBase
           icon={<IconifyMoreVert />}
           styled="--ghost TopicsPane_WQkiS"
@@ -26,7 +26,7 @@ export const BookmarksPane = () => {
             });
           }}
         />
-      </BookmarksCard>
+      </CardBookmark>
     );
   };
 
@@ -52,30 +52,30 @@ export const BookmarksPane = () => {
             <ButtonBase icon={<IconifyClose />} handleClick={() => $selectedItem((prev) => ({ ...prev, listId: "0" }))} />
           </header>
           <ul className={css.Container_list}>
-            {selectedItem.type === "list" &&
-              dataBookmarks.map((bookmark) => {
-                if (bookmark.parent === selectedItem.listId) {
-                  return (
-                    <li key={bookmark.id} className={css.List_item}>
-                      <Bookmarks data={bookmark} />
-                    </li>
-                  );
-                }
-              })}
-            {selectedItem.type === "topic" &&
-              dataBookmarks.map((bookmark) =>
-                dataLists.map((list) => {
-                  if (list.parent === selectedItem.listId) {
-                    if (bookmark.parent === list.id) {
-                      return (
-                        <li key={bookmark.id} className={css.List_item}>
-                          <Bookmarks data={bookmark} />
-                        </li>
-                      );
-                    }
-                  }
-                })
-              )}
+            {/* {selectedItem.type === "list" && */}
+            {/*   dataBookmarks.map((bookmark) => { */}
+            {/*     if (bookmark.parent === selectedItem.listId) { */}
+            {/*       return ( */}
+            {/*         <li key={bookmark.id} className={css.List_item}> */}
+            {/*           <Bookmarks data={bookmark} /> */}
+            {/*         </li> */}
+            {/*       ); */}
+            {/*     } */}
+            {/*   })} */}
+            {/* {selectedItem.type === "topic" && */}
+            {/*   dataBookmarks.map((bookmark) => */}
+            {/*     dataLists.map((list) => { */}
+            {/*       if (list.parent === selectedItem.listId) { */}
+            {/*         if (bookmark.parent === list.id) { */}
+            {/*           return ( */}
+            {/*             <li key={bookmark.id} className={css.List_item}> */}
+            {/*               <Bookmarks data={bookmark} /> */}
+            {/*             </li> */}
+            {/*           ); */}
+            {/*         } */}
+            {/*       } */}
+            {/*     }) */}
+            {/*   )} */}
           </ul>
         </>
       )}

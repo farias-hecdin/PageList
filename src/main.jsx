@@ -14,13 +14,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 
 /* !feat:
-    "parent": "_JavaScript",
-    "id": "d4Coe",
-    "date_added",
-    "type",
-    "title": "Javascript.info - The Modern JavaScript Tutorial",
-    "url": "https://javascript.info"
-
  * #1.1: Recomendar realizar una copia de seguridad.
  * #1.2: Captura el atributo title de una pagina al ingresar la URL.
  * #1.2: Corregir la UI.
@@ -32,4 +25,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
  * #2.2: Fecha de creacion de un marcador.
  * #2.3: Añadir marca de tiempo videos de Youtube.
  * #2.4: Estado del marcador (visto, pendiente).
+ * #2.5: Multi-seleccion
  */

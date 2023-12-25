@@ -1,6 +1,6 @@
 import css from "./backupPage.module.css";
 import { ButtonBase } from "../../components/index";
-import { DataContext } from "../../context/index";
+import { DataContext, StateContext } from "../../context/index";
 import { HeaderSecondary } from "../../layout/index";
 import { useContext } from "react";
 import {
@@ -14,22 +14,13 @@ import {
 } from "./backupPage.script";
 
 export const BackupPage = () => {
-  const {
-    dataCollections,
-    setDataCollections,
-    dataTopics,
-    setDataTopics,
-    dataLists,
-    setDataLists,
-    dataBookmarks,
-    setDataBookmarks,
-    setSelectedItem,
-  } = useContext(DataContext);
+  const { $dataBookmarks, $dataCollections, $dataLists, $dataTopics, dataBookmarks, dataCollections, dataLists, dataTopics } = useContext(DataContext);
+  const { $selectedItem } = useContext(StateContext);
 
   /** Limpiar el contenido de un HTML textarea */
   const cleanTextarea = () => {
-    let $node = document.querySelector("#textarea_xucOeryf8lU");
-    $node.value = "";
+    let nodeTextarea = document.querySelector("#textarea_xucOeryf8lU");
+    nodeTextarea.value = "";
   };
 
   /**
@@ -73,13 +64,13 @@ export const BackupPage = () => {
         manageLocalStorageData("add", [data.collections, data.topics, data.lists, data.bookmarks]);
       }
       // Actualizar datos
-      setDataCollections(data.collections);
-      setDataTopics(data.topics);
-      setDataLists(data.lists);
-      setDataBookmarks(data.bookmarks);
+      $dataCollections(data.collections);
+      $dataTopics(data.topics);
+      $dataLists(data.lists);
+      $dataBookmarks(data.bookmarks);
       // Reiniciar las referencias de `collection`
-      setSelectedItem((prevState) => ({
-        ...prevState,
+      $selectedItem((prev) => ({
+        ...prev,
         collectionId: "0",
         collectionName: "None",
       }));
@@ -107,25 +98,11 @@ export const BackupPage = () => {
               <input id="ula5" type="file" onChange={uploadFile} />
             </label>
           </div>
-          <ButtonBase
-            text="Delete saved"
-            icon={<IconifyDelete />}
-            styled="is-outline"
-            handleClick={removeDataFromLocalStorage}
-          />
+          <ButtonBase text="Delete saved" icon={<IconifyDelete />} styled="is-outline" handleClick={removeDataFromLocalStorage} />
         </nav>
-        <textarea
-          className={css.Container_textarea}
-          id="textarea_xucOeryf8lU"
-          placeholder="Write a valid bookmark collection..."
-        ></textarea>
+        <textarea className={css.Container_textarea} id="textarea_xucOeryf8lU" placeholder="Write a valid bookmark collection..."></textarea>
         <footer>
-          <ButtonBase
-            text="Clean"
-            styled="is-outline"
-            icon={<IconifyCleaningServicesOutline />}
-            handleClick={cleanTextarea}
-          />
+          <ButtonBase text="Clean" styled="is-outline" icon={<IconifyCleaningServicesOutline />} handleClick={cleanTextarea} />
         </footer>
       </div>
     </section>

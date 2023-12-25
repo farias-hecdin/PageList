@@ -1,0 +1,55 @@
+.Container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 1rem;
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.Card {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 1rem;
+  width: 100%;
+  border: none;
+  color: var(--co-color-02);
+  padding: 1rem;
+  background-color: var(--co-color-04);
+  transition: 0.2s;
+  & > svg {
+    font-size: 1.5rem;
+  }
+  &:hover, &:active {
+    color: var(--co-color-05);
+    border-color: var(--co-color-05);
+    background-color: var(--co-color-07);
+  }
+  &_box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 78%;
+  }
+  &_text {
+    display: -webkit-box;
+    color: var(--co-color-03);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  &_subtext {
+    font-size: 0.8rem;
+  }
+}
+
+.Container:global(.TreeItem_51Se6) {
+  & > .Card {
+    background-color: var(--co-color-11);
+    &:hover, &:active {
+      background-color: var(--co-color-07);
+    }
+  }
+}
