@@ -1,0 +1,36 @@
+.Container {
+  height: 90vh;
+  background-color: var(--background);
+  color: var(--co-color-0);
+  &_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 75vh;
+    margin: 2rem 0 0;
+    overflow-y: auto;
+  }
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  & > div {
+    width: 100%;
+  }
+  &_title {
+    display: -webkit-box;
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    font-weight: var(--fo-medium);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  &_text {
+    color: var(--co-color-2);
+    font-size: 0.9rem;
+  }
+}

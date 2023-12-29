@@ -2,7 +2,12 @@ import css from "./modalEdit.module.css";
 import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index.jsx";
 import { useContext, useEffect, useState } from "react";
 import { DataContext, StateContext } from "../../../context/index.jsx";
-import { removeElementById, relocateElementAndUpdateState, modifyElementAndUpdateState, confirmAndUpdateStateAndStorageGroup } from "./modalEdit.script.js";
+import {
+  removeElementById,
+  relocateElementAndUpdateState,
+  modifyElementAndUpdateState,
+  confirmAndUpdateStateAndStorageGroup,
+} from "./modalEdit.script.js";
 
 /**
  * @param {object} prop
@@ -11,8 +16,17 @@ import { removeElementById, relocateElementAndUpdateState, modifyElementAndUpdat
  * @returns {HTMLElement}
  */
 export const ModalEdit = ({ isOpen, handleClick }) => {
-  const { dataCollections, dataTopics, $dataCollections, $dataTopics, dataBookmarks, dataLists, $dataBookmarks, $dataLists } = useContext(DataContext);
-  const { targetItem, $showModal } = useContext(StateContext);
+  const {
+    dataCollections,
+    dataTopics,
+    $dataCollections,
+    $dataTopics,
+    dataBookmarks,
+    dataLists,
+    $dataBookmarks,
+    $dataLists,
+  } = useContext(DataContext);
+  const { targetItem, $openSection } = useContext(StateContext);
 
   // Alamacenar el Title y Url de un elemento
   const [titleValue, $titleValue] = useState("");
@@ -91,8 +105,14 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
               icon={<IconifyDone />}
               handleClick={() => {
                 const data = removeElementById(ToFuncDelete);
-                confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState, targetItem.title);
-                $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                confirmAndUpdateStateAndStorageGroup(
+                  true,
+                  data,
+                  targetItem.type,
+                  sharedParams.pSetState,
+                  targetItem.title
+                );
+                $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
               }}
             />
           </div>
@@ -129,7 +149,7 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
                 handleClick={() => {
                   const data = relocateElementAndUpdateState(ToFuncRelocate);
                   confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
-                  $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                  $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
                 }}
               />
             </div>
@@ -143,9 +163,19 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
                 confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
               }}
             >
-              <input type="text" value={titleValue} onChange={(e) => $titleValue(e.currentTarget.value)} id="input_EJ7aOOCCQI" />
+              <input
+                type="text"
+                value={titleValue}
+                onChange={(e) => $titleValue(e.currentTarget.value)}
+                id="input_EJ7aOOCCQI"
+              />
               {targetItem.type === "bookmark" && (
-                <input type="text" value={urlValue} onChange={(e) => $urlValue(e.currentTarget.value)} id="input_P0Z5gb5BMg" />
+                <input
+                  type="text"
+                  value={urlValue}
+                  onChange={(e) => $urlValue(e.currentTarget.value)}
+                  id="input_P0Z5gb5BMg"
+                />
               )}
               <ButtonBase text="Update" icon={<IconifyDone />} type="submit" />
             </form>

@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 1.5rem;
   gap: 0.8rem;
   & > form,
   & > div {
@@ -15,18 +16,18 @@
     gap: 1rem;
   }
   &_input {
-    padding: 0.5rem 0.8rem;
-    border: 2px solid var(--co-color-06);
-    border-radius: 0.5rem;
-    outline: none;
     width: 100%;
     min-width: 20.8rem;
-    font-family: var(--fo-secondary);
-    background-color: var(--co-color-01);
-    color: var(--co-color-02);
+    padding: 0.5rem 0.8rem;
+    border: 2px solid var(--co-color-9);
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: var(--co-color-1);
+    color: var(--co-color-2);
+    font-size: 1.1rem;
     &:focus {
-      border-color: var(--co-color-08);
-      color: var(--co-color-08);
+      border-color: var(--co-color-6);
+      color: var(--co-color-6);
     }
   }
 }
@@ -34,7 +35,7 @@
 .Container {
   &_title {
     margin-bottom: 0.25rem;
-    color: var(--co-color-03);
+    color: var(--co-color-0);
     font-size: 1.4rem;
     font-weight: var(--fo-bold);
   }
@@ -47,7 +48,7 @@
     overflow: auto;
   }
   &_text {
-    color: var(--co-color-03);
+    color: var(--co-color-0);
   }
 }
 

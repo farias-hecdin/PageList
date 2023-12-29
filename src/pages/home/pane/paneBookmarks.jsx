@@ -1,84 +1,87 @@
-import css from "./bookmarksPane.module.css";
+import css from "./paneBookmarks.module.css";
 import { ButtonBase } from "../../../components/index.jsx";
 import { DataContext, StateContext } from "../../../context/index.jsx";
 import { MessageFeedback } from "../../../layout/index";
-import { BookmarksCard } from "./bookmarksCard.jsx";
+import { CardBookmark } from "../card/cardBookmark.jsx";
 import { useContext } from "react";
 
-export const BookmarksPane = () => {
-  const { counterItem, $showModal } = useContext(StateContext);
-  const { $pinData, $selectedItem, $targetItem, dataBookmarks, dataLists, selectedItem } = useContext(DataContext);
-
-  const Bookmarks = (data) => {
-    const bookmark = data.data;
-    return (
-      <BookmarksCard title={bookmark.title} url={bookmark.url}>
-        <ButtonBase
-          icon={<IconifyMoreVert />}
-          styled="--ghost TopicsPane_WQkiS"
-          handleClick={() => {
-            $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
-            $targetItem({
-              id: bookmark.id,
-              title: bookmark.title,
-              url: bookmark.url,
-              type: "bookmark",
-            });
-          }}
-        />
-      </BookmarksCard>
-    );
-  };
+export const PaneBookmarks = () => {
+  const { selectedItem } = useContext(StateContext);
+  const { dataBookmarks, dataLists } = useContext(DataContext);
 
   return (
     <section className={css.Container}>
       {selectedItem.listId === "0" ? (
-        <MessageFeedback icon={<IconifyInfoOutline />} title="Nothing here" text="Choose a list to access your favorite bookmarks." />
+        <MessageFeedback
+          icon={<IconifyInfoOutline />}
+          title="Nothing here"
+          text="Choose a list to access your favorite bookmarks."
+        />
       ) : (
         <>
-          <header className={css.Header}>
-            <div>
-              <h2 className={css.Header_title}>{selectedItem.listTitle}</h2>
-              <p className={css.Header_text}>{counterItem.bookmarks} bookmarks</p>
-            </div>
-            <ButtonBase
-              icon={<IconifyAdd />}
-              handleClick={() => {
-                $showModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
-                $pinData(true);
-              }}
-            />
-            <ButtonBase icon={<IconifyFilterList />} />
-            <ButtonBase icon={<IconifyClose />} handleClick={() => $selectedItem((prev) => ({ ...prev, listId: "0" }))} />
-          </header>
+          <HeaderSection />
           <ul className={css.Container_list}>
             {selectedItem.type === "list" &&
-              dataBookmarks.map((bookmark) => {
-                if (bookmark.parent === selectedItem.listId) {
-                  return (
-                    <li key={bookmark.id} className={css.List_item}>
-                      <Bookmarks data={bookmark} />
-                    </li>
-                  );
-                }
-              })}
+              dataBookmarks.map((elem) =>
+                elem.parent === selectedItem.listId ? <AnBookmark key={elem.id} data={elem} /> : null
+              )}
             {selectedItem.type === "topic" &&
-              dataBookmarks.map((bookmark) =>
-                dataLists.map((list) => {
-                  if (list.parent === selectedItem.listId) {
-                    if (bookmark.parent === list.id) {
-                      return (
-                        <li key={bookmark.id} className={css.List_item}>
-                          <Bookmarks data={bookmark} />
-                        </li>
-                      );
-                    }
-                  }
-                })
+              dataBookmarks.map((elem) =>
+                dataLists.map((list) =>
+                  list.parent === selectedItem.listId && elem.parent === list.id ? (
+                    <AnBookmark key={elem.id} data={elem} />
+                  ) : null
+                )
               )}
           </ul>
         </>
       )}
     </section>
+  );
+};
+
+const AnBookmark = ({ data }) => {
+  const { $openSection, $targetItem } = useContext(StateContext);
+
+  return (
+    <li className={css.List_item}>
+      <CardBookmark name={data.title} url={data.url}>
+        <ButtonBase
+          icon={<IconifyMoreVert />}
+          styled="--ghost Button_lupuE"
+          handleClick={() => {
+            $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
+            $targetItem({
+              id: data.id,
+              title: data.title,
+              url: data.url,
+              type: "bookmark",
+            });
+          }}
+        />
+      </CardBookmark>
+    </li>
+  );
+};
+
+const HeaderSection = () => {
+  const { counterItem, $openSection, $selectedItem, $pinData, selectedItem } = useContext(StateContext);
+
+  return (
+    <header className={css.Header}>
+      <div>
+        <h2 className={css.Header_title}>{selectedItem.listName}</h2>
+        <p className={css.Header_text}>{counterItem.bookmarks} bookmarks</p>
+      </div>
+      <ButtonBase
+        icon={<IconifyAdd />}
+        handleClick={() => {
+          $openSection((prev) => ({ ...prev, addElem: !prev.addElem }));
+          $pinData(true);
+        }}
+      />
+      <ButtonBase icon={<IconifyFilterList />} />
+      <ButtonBase icon={<IconifyClose />} handleClick={() => $selectedItem((prev) => ({ ...prev, listId: "0" }))} />
+    </header>
   );
 };

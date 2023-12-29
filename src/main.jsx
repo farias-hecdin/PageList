@@ -5,6 +5,8 @@ import ReactDOM from "react-dom/client";
 import { App } from "./pages/app.jsx";
 import { AppProvider } from "./context/app/appProvider";
 
+console.time("benchmark");
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AppProvider>
@@ -12,6 +14,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </AppProvider>
   </React.StrictMode>
 );
+
+console.timeEnd("benchmark");
 
 /* !feat:
  * #1.1: Recomendar realizar una copia de seguridad.

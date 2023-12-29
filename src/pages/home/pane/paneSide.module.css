@@ -1,5 +1,5 @@
 .Container {
-  color: var(--co-color-03);
+  color: var(--co-color-0);
 }
 
 .Header {
@@ -22,7 +22,7 @@
     -webkit-line-clamp: 1;
   }
   &_text {
-    color: var(--co-color-02);
+    color: var(--co-color-2);
     font-size: 0.9rem;
   }
 }

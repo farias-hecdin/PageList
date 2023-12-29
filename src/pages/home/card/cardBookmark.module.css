@@ -5,13 +5,13 @@
   padding: 0.6rem 1rem;
   border: 0.0625rem solid transparent;
   border-radius: 0.4rem;
-  background-color: var(--co-color-04);
-  color: var(--co-color-03);
+  background-color: var(--co-color-3);
+  color: var(--co-color-0);
   &_box {
     display: grid;
     align-items: center;
-    grid-template-columns: 2.8rem auto;
     gap: 1rem;
+    grid-template-columns: 2.8rem auto;
   }
   &_thumb {
     display: flex;
@@ -27,11 +27,11 @@
     gap: 0.2rem;
   }
   &_title {
-    color: var(--co-color-03);
+    display: -webkit-box;
+    color: var(--co-color-0);
     font-size: 1.2rem;
     font-weight: var(--fo-medium);
     overflow: hidden;
-    display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     &:hover {
@@ -39,13 +39,13 @@
     }
   }
   &_url {
-    color: var(--co-color-02);
-    font-size: 0.9rem;
-    overflow: hidden;
     width: 20vw;
-    white-space: nowrap;
-    overflow: hidden;
+    color: var(--co-color-2);
+    font-size: 0.9rem;
     text-overflow: ellipsis;
+    overflow: hidden;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 

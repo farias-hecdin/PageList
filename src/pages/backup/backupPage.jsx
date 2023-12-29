@@ -14,7 +14,16 @@ import {
 } from "./backupPage.script";
 
 export const BackupPage = () => {
-  const { $dataBookmarks, $dataCollections, $dataLists, $dataTopics, dataBookmarks, dataCollections, dataLists, dataTopics } = useContext(DataContext);
+  const {
+    $dataBookmarks,
+    $dataCollections,
+    $dataLists,
+    $dataTopics,
+    dataBookmarks,
+    dataCollections,
+    dataLists,
+    dataTopics,
+  } = useContext(DataContext);
   const { $selectedItem } = useContext(StateContext);
 
   /** Limpiar el contenido de un HTML textarea */
@@ -29,14 +38,14 @@ export const BackupPage = () => {
    */
   const clickButtonExport = (isDowloader) => {
     try {
-      let $node = document.querySelector("#textarea_xucOeryf8lU");
+      let node = document.querySelector("#textarea_xucOeryf8lU");
       let mappedData = assignDataToCollections(dataCollections, dataTopics, dataLists, dataBookmarks);
       let currentDate = getFormattedCurrentDate();
       let fileName = `Pagelist_${currentDate}`;
       let dataInString = JSON.stringify(mappedData, null, 2);
-      $node.value = dataInString;
+      node.value = dataInString;
 
-      if (isDowloader === true) {
+      if (isDowloader) {
         createHtmlNodeAndFile(fileName, dataInString);
       }
     } catch (error) {
@@ -98,11 +107,25 @@ export const BackupPage = () => {
               <input id="ula5" type="file" onChange={uploadFile} />
             </label>
           </div>
-          <ButtonBase text="Delete saved" icon={<IconifyDelete />} styled="is-outline" handleClick={removeDataFromLocalStorage} />
+          <ButtonBase
+            text="Delete saved"
+            icon={<IconifyDelete />}
+            styled="is-outline"
+            handleClick={removeDataFromLocalStorage}
+          />
         </nav>
-        <textarea className={css.Container_textarea} id="textarea_xucOeryf8lU" placeholder="Write a valid bookmark collection..."></textarea>
+        <textarea
+          className={css.Container_textarea}
+          id="textarea_xucOeryf8lU"
+          placeholder="Write a valid bookmark collection..."
+        ></textarea>
         <footer>
-          <ButtonBase text="Clean" styled="is-outline" icon={<IconifyCleaningServicesOutline />} handleClick={cleanTextarea} />
+          <ButtonBase
+            text="Clean"
+            styled="is-outline"
+            icon={<IconifyCleaningServicesOutline />}
+            handleClick={cleanTextarea}
+          />
         </footer>
       </div>
     </section>

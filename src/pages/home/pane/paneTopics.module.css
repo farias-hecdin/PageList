@@ -1,6 +1,9 @@
 .Container {
-  color: var(--co-color-03);
+  color: var(--co-color-0);
   &_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     height: 75vh;
     margin-top: 2rem;
     list-style: none;
@@ -10,7 +13,7 @@
 
 @media screen and (width <= 600px) {
   .Container {
-    color: var(--co-color-03);
+    color: var(--co-color-0);
     &_list {
       height: 13rem;
     }
@@ -37,26 +40,24 @@
     -webkit-line-clamp: 1;
   }
   &_text {
-    color: var(--co-color-02);
+    color: var(--co-color-2);
     font-size: 0.9rem;
   }
 }
 
 .Tree {
-  margin-bottom: 1rem;
   border-radius: 0.5rem;
-  background-color: var(--co-color-04);
+  background-color: var(--co-color-3);
   &_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--co-color-04);
-    border-radius: 0.5rem;
     gap: 1rem;
     padding: 0.6rem 1rem;
-    &:hover,
-    &:active {
-      background: var(--co-color-06);
+    border-radius: 0.5rem;
+    background-color: var(--co-color-3);
+    &:hover {
+      background: var(--co-color-9);
     }
   }
   &_title {
@@ -66,12 +67,12 @@
     -webkit-line-clamp: 1;
   }
   &_title:global(.--active) {
-    color: var(--co-color-05);
+    color: var(--co-color-4);
   }
   &_list {
-    list-style: none;
-    background-color: var(--co-color-11);
     border-radius: 0 0 0.5rem 0.5rem;
+    background-color: var(--co-color-C);
+    list-style: none;
   }
   &_item {
     display: flex;
@@ -85,7 +86,7 @@
     }
     &:hover,
     &:active {
-      background: var(--co-color-A6);
+      background: var(--co-color-8);
     }
   }
   &_subheader {
@@ -97,7 +98,7 @@
     }
   }
   &_subheader:global(.--active) {
-    color: var(--co-color-08);
+    color: var(--co-color-6);
   }
   &_text {
     display: -webkit-box;

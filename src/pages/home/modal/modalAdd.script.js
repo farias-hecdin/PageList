@@ -5,11 +5,11 @@
  * @returns {object}
  */
 export const extractInputAndSelectValue = (pInputSelector, pSelectSelector) => {
-  let $nodeInput = document.querySelector(pInputSelector);
-  let $nodeSelect = document.querySelector(pSelectSelector);
-  let selectValue = $nodeSelect?.options[$nodeSelect.selectedIndex].value;
-  let inputValue = $nodeInput.value === "" ? "EMPTY" : $nodeInput.value;
-  $nodeInput.value = "";
+  let nodeInput = document.querySelector(pInputSelector);
+  let nodeSelect = document.querySelector(pSelectSelector);
+  let selectValue = nodeSelect?.options[nodeSelect.selectedIndex].value;
+  let inputValue = nodeInput.value === "" ? "EMPTY" : nodeInput.value;
+  nodeInput.value = "";
 
   return {
     inputValue: inputValue,
@@ -24,27 +24,29 @@ export const updateStorageAndReturnData = (prev, data, key) => {
   return newData;
 };
 
-export const addNewElement = (event, collectData, elementType, setDataFunction, storageKey, titleKey, parentKey) => {
+/* Añadir un nuevo elemento
+ * @param {Any} check - collectData
+ */
+export const addNew = (event, check, type, funcSet, storageKey, titleKey, parentKey) => {
   event.preventDefault();
   let data = {
     id: crypto.randomUUID(),
-    title: collectData[titleKey],
+    title: check[titleKey],
   };
 
   if (parentKey) {
-    data.parent = collectData[parentKey];
+    data.parent = check[parentKey];
   }
-  if (elementType === "collection") {
+  if (type === "collection") {
     data.topics = [];
-  } else if (elementType === "topic") {
+  } else if (type === "topic") {
     data.lists = [];
-  } else if (elementType === "list") {
+  } else if (type === "list") {
     data.bookmarks = [];
-  } else if (elementType === "bookmark") {
-    data.url = collectData.bookmarkUrl;
+  } else if (type === "bookmark") {
+    data.url = check.bookmarkUrl;
   }
 
-  setDataFunction((prev) => updateStorageAndReturnData(prev, data, storageKey));
-  resetInputValue();
-  setShowPopup((prev) => ({ ...prev, show: true, message: `Add new ${elementType}` }));
+  funcSet((prev) => updateStorageAndReturnData(prev, data, storageKey));
+  setShowPopup((prev) => ({ ...prev, show: true, message: `Add new ${type}` }));
 };

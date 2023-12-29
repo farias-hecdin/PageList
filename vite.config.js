@@ -10,6 +10,16 @@ export default defineConfig(({ command }) => {
     plugins: [
       react(),
       AutoImport({
+        // Auto-import react hooks
+        imports: [
+          "react",
+          // {
+          //   'react': [
+          //     // named imports. Ex: import { useMouse } from '@vueuse/core',
+          //     'useEffect', 'useState', 'useContext'
+          //   ],
+          // }
+        ],
         resolvers: [
           IconsResolver({
             prefix: false,
@@ -17,7 +27,7 @@ export default defineConfig(({ command }) => {
             enabledCollections: ["material-symbols", "material-symbols-light"],
             alias: {
               iconify: "material-symbols",
-              'iconify-light': "material-symbols-light",
+              "iconify-light": "material-symbols-light",
             },
           }),
         ],

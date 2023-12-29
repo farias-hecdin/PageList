@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  color: var(--co-color-02);
+  color: var(--co-color-2);
   text-align: center;
   &_icon > svg {
     font-size: 8rem;

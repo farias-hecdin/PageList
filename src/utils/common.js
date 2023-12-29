@@ -4,16 +4,16 @@
  * @param {Array<object>} pData - El array de objetos a ordenar
  * @return {Array<object>}
  */
-export const sortByName = (pData) => {
-  const data = pData;
-  data.sort((a, b) => {
+export const sortByName = (data) => {
+  const res = data;
+  res.sort((a, b) => {
     // ignorar upper y lowercase
     const textA = a.title.toUpperCase();
     const textB = b.title.toUpperCase();
     // retornar un numero
     return textA.localeCompare(textB);
   });
-  return data;
+  return res;
 };
 
 /** Notificar si el evento onClick no esta declarado */
@@ -22,38 +22,38 @@ export const onClickMissing = () => {
 };
 
 /**
- * @param {string} pKey
- * @param {any} pValue
- * @param {Function} pSetState
+ * @param {string} key
+ * @param {any} value
+ * @param {Function} funcSet
  */
-export const handleChange = (pKey, pValue, pSetState) => {
-  if (pKey !== null) {
-    pSetState((prev) => ({ ...prev, [pKey]: pValue }));
+export const handleChange = (keyword, value, funcSet) => {
+  if (keyword !== null) {
+    funcSet((prev) => ({ ...prev, [keyword]: value }));
   } else {
-    pSetState(pValue);
+    funcSet(value);
   }
 };
 
 /**
  * Actualiza localStorage de acuerdo a una palabra clave.
- * @param {string} pKeyword
- * @param {Array<object>} pData
+ * @param {string} keyword
+ * @param {Array<object>} data
  */
-export const updateStorageGroup = (pKeyword, pData) => {
+export const updateStorageGroup = (keyword, data) => {
   const keys = ["pagelist_collections", "pagelist_topics", "pagelist_lists", "pagelist_bookmarks"];
 
-  switch (pKeyword) {
+  switch (keyword) {
     case "collection":
-      localStorage.setItem(keys[0], JSON.stringify(pData));
+      localStorage.setItem(keys[0], JSON.stringify(data));
       break;
     case "topic":
-      localStorage.setItem(keys[1], JSON.stringify(pData));
+      localStorage.setItem(keys[1], JSON.stringify(data));
       break;
     case "list":
-      localStorage.setItem(keys[2], JSON.stringify(pData));
+      localStorage.setItem(keys[2], JSON.stringify(data));
       break;
     case "bookmark":
-      localStorage.setItem(keys[3], JSON.stringify(pData));
+      localStorage.setItem(keys[3], JSON.stringify(data));
       break;
     default:
       console.warn("pKeyword not found");
@@ -63,27 +63,24 @@ export const updateStorageGroup = (pKeyword, pData) => {
 
 /**
  * Obtener el cantidad de un conjunto de hijos por el Id y actualiza el estado
- * @param {string} pParentId - Id del elemento selecionado
- * @param {Array<object>} pChildren - Datos de origen del hijo
- * @param {string} pKey - Clave para `setCounterItem` (ex: topics, lists, ...)
- * @param {Function} pSetState - Funcion `setCounterItem`
+ * @param {string} parentId - Id del elemento selecionado
+ * @param {Array<object>} children - Datos de origen del hijo
  */
-export const currentNumberElements = (pParentId, pChildren, pKey, pSetState) => {
-  let elementNumbers = countMatchingChildIds(pChildren, pParentId);
-  pSetState((prev) => ({ ...prev, [pKey]: elementNumbers }));
+export const currentNumberElements = (parentId, children) => {
+  let elementNumbers = countMatchingChildIds(children, parentId);
   return elementNumbers;
 };
 
 /**
  * Comparar `children.parent` con `parent.id` y retorna el numero de coincidencias
- * @param {Array<object>} pChildren - Datos de origen de los elementos hijos
- * @param {string} pElementId - Id del elemento actual (parent)
+ * @param {Array<object>} childrenData - Datos de origen de los elementos hijos
+ * @param {string} elementId - Id del elemento actual (parent)
  * @returns {number}
  */
-export const countMatchingChildIds = (pChildren, pParentId) => {
+export const countMatchingChildIds = (childrenData, parentId) => {
   let coincidence = 0;
-  for (const children of pChildren) {
-    if (children.parent === pParentId) {
+  for (const children of childrenData) {
+    if (children.parent === parentId) {
       coincidence++;
     }
   }

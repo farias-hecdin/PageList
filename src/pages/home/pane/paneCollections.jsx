@@ -1,65 +1,57 @@
 import css from "./paneCollections.module.css";
-import { PaneSide } from "./paneSide";
-import { DataContext, StateContext } from "../../../context/index.jsx";
-import { useContext, useEffect } from "react";
 import { CardElement } from "../card/cardElement";
+import { DataContext, StateContext } from "../../../context/index.jsx";
+import { PaneSide } from "./paneSide";
 import { currentNumberElements } from "../../../utils/common";
+import { useContext, useEffect } from "react";
 
 export const PaneCollections = () => {
   const { dataCollections, dataTopics } = useContext(DataContext);
-  const { $counterItem, $showModal, selectedItem, $selectedItem, $targetItem } = useContext(StateContext);
+  const { $counterItem, counterItem, $openSection, selectedItem, $selectedItem, $targetItem } =
+    useContext(StateContext);
 
   /**
    * Actualizar el estado de acuerdo a la coleccion selecionada.
    * @param {Array|string} pData
    */
   const selectCollectionAndUpdateState = (pData) => {
-    let id = pData?.id || "0";
-    let title = pData?.title || "None";
-    // Actualizar el estado
-    $selectedItem((prevState) => ({
-      ...prevState,
-      collectionId: id,
-      collectionTitle: title,
+    $selectedItem((prev) => ({
+      ...prev,
+      collectionId: pData?.id || "0",
+      collectionName: pData?.title || "None",
     }));
   };
 
-  // Actualizar el contador de `topics`
+  // Actualizar el contador de `colections`
   useEffect(() => {
-    currentNumberElements(selectedItem.collectionId, dataTopics, "topics", $counterItem);
-  }, [dataTopics, selectedItem]);
+    $counterItem((prev) => ({ ...prev, collection: dataCollections.length }));
+  }, [dataCollections, selectedItem]);
 
   return (
-    <PaneSide title={"Collections"} counter={0}>
+    <PaneSide title={"All collections"} showButton={false} counter={counterItem.collection}>
       <ul className={css.Container_list}>
-        <li>
-          <CardElement
-            icon={<IconifyInventory2Outline />}
-            text={"None"}
-            styled={selectedItem.collectionId === "0" && "--active"}
-            handleClick={() => selectCollectionAndUpdateState("None")}
-          />
-        </li>
         {dataCollections.map((collection) => (
           <li key={collection.id}>
             <CardElement
+              counter={currentNumberElements(collection.id, dataTopics)}
               icon={<IconifyInventory2Outline />}
               text={collection.title}
               styled={selectedItem.collectionId === collection.id && "--active"}
               handleClick={() => {
+                const number = currentNumberElements(collection.id, dataTopics);
                 selectCollectionAndUpdateState(collection);
-                $showModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }));
+                $counterItem((prev) => ({ ...prev, topics: number }));
+                $openSection((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }));
               }}
-              handle2ndClick={() => {
+              handleClick2={() => {
                 $targetItem((prev) => ({
                   ...prev,
                   id: collection.id,
                   title: collection.title,
                   type: "collection",
                 }));
-                $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
               }}
-              hasMenu={true}
             />
           </li>
         ))}

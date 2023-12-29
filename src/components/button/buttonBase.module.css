@@ -4,82 +4,85 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.3rem 0.6rem;
+  min-height: 2rem;
   border: 1px solid transparent;
   border-radius: 0.5rem;
-  background-color: var(--co-color-04);
-  color: var(--co-color-02);
+  background-color: var(--co-color-3);
+  color: var(--co-color-2);
   &_text {
     font-weight: var(--fo-bold);
-    user-select: none;
     line-height: 1;
+    user-select: none;
   }
   & > svg {
     font-size: 1.2rem;
   }
   &:hover {
     border-color: transparent;
-    background-color: var(--co-color-07);
-    color: var(--co-color-05);
+    background-color: var(--co-color-7);
+    color: var(--co-color-4);
   }
 }
 
 /* State ------------------------------------------------------------------- */
 
 .Button:global(.is-active) {
-  background-color: var(--co-color-07);
-  color: var(--co-color-05);
+  background-color: var(--co-color-7);
+  color: var(--co-color-4);
   & > svg {
-    color: var(--co-color-05);
+    color: var(--co-color-4);
   }
 }
 
 .Button:global(.is-outline) {
-  border: 1px solid var(--co-color-06);
+  border: 1px solid var(--co-color-9);
   background-color: transparent;
-  color: var(--co-color-02);
+  color: var(--co-color-2);
   &:hover {
     border-color: transparent;
-    background-color: var(--co-color-07);
-    color: var(--co-color-05);
+    background-color: var(--co-color-7);
+    color: var(--co-color-4);
   }
 }
 
 .Button:global(.is-ghost) {
   border-color: transparent;
   background-color: transparent;
-  color: var(--co-color-02);
+  color: var(--co-color-2);
   &:hover {
     border-color: transparent;
-    background-color: var(--co-color-07);
-    color: var(--co-color-05);
+    background-color: var(--co-color-7);
+    color: var(--co-color-4);
   }
 }
 
 /* Compose ----------------------------------------------------------------- */
 
-.Button:global(.HeaderMain_UlICn) {
+.Button:global(.Button_kbRsO) {
   min-width: 8rem;
   &_text {
     font-weight: var(--fo-bold);
   }
 }
 
-.Button:global(.ModalAddBookmarks_JqagP) {
+.Button:global(.Button_JqagP) {
   width: 9rem;
 }
 
-.Button:global(.CardElements_WQkiS) {
+.Button:global(.Button_WQkiS) {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   right: 0.5rem;
   z-index: 1;
   padding: 0 0.25rem;
+  transform: translateY(-50%);
 }
 
-.Button:global(.TopicsPane_WQkiS) {
+.Button:global(.Button_lupuE) {
   padding: 0 0.25rem;
 }
+
+/* Media queries */
 
 @media screen and (width <= 600px) {
   .Button {
@@ -87,7 +90,7 @@
       display: none;
     }
   }
-  .Button:global(.HeaderMain_UlICn) {
+  .Button:global(.Button_kbRsO) {
     width: auto;
   }
 }

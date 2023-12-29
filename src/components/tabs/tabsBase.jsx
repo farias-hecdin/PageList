@@ -1,9 +1,9 @@
 import { InputRadio } from "../index.jsx";
 import css from "./tabsBase.module.css";
 
-export const TabsBase = ({ pickTabs, setPickTabs, handleChange, tabs }) => {
+export const TabsBase = ({ pickTabs, funcSet, handleChange, tabs }) => {
   return (
-    <div key={crypto.randomUUID()} className={css.Tabs}>
+    <div className={css.Tabs}>
       {tabs.map((tab, index) => (
         <InputRadio
           key={index}
@@ -11,7 +11,7 @@ export const TabsBase = ({ pickTabs, setPickTabs, handleChange, tabs }) => {
           id={`tab_${index + 1}`}
           group="tabs"
           text={tab.text}
-          onChange={() => handleChange("value", tab.text, setPickTabs)}
+          onChange={() => handleChange("value", tab.text, funcSet)}
           checked={pickTabs.value === tab.text}
         />
       ))}

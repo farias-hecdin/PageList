@@ -10,12 +10,12 @@
   }
   &_title {
     margin-bottom: 0.25rem;
-    color: var(--co-color-03);
+    color: var(--co-color-0);
     font-size: 1.4rem;
     font-weight: var(--fo-bold);
   }
   &_text {
-    color: var(--co-color-03);
+    color: var(--co-color-0);
   }
   &_list {
     display: flex;

@@ -1,12 +1,12 @@
 import { updateStorageGroup } from "../../../utils/common";
 
 /**
- * @param {string} pElement - Id del elemento a eliminar
- * @param {Array<object>} pData - Datos de origen del elemento
+ * @param {string} element - Id del elemento a eliminar
+ * @param {Array<object>} data - Datos de origen del elemento
  */
-export const removeElementById = ({ pElement, pData }) => {
-  let data = pData.filter((item) => item.id !== pElement);
-  return data;
+export const removeElementById = ({ element, data }) => {
+  let res = data.filter((item) => item.id !== element);
+  return res;
 };
 
 /**
@@ -16,9 +16,9 @@ export const removeElementById = ({ pElement, pData }) => {
  * @param {Function} pSetState - Funcion `set` para actualizar los datos de origen del elemento
  * @param {string} pSelector - Selector del input/select
  */
-export const relocateElementAndUpdateState = ({ pElement, pData, pSetState, pSelector }) => {
-  const $node = document.querySelector(`${pSelector}`);
-  const value = $node.value;
+export const relocateElementAndUpdateState = ({ pElement, pData, pSelector }) => {
+  const node = document.querySelector(`${pSelector}`);
+  const value = node.value;
 
   const data = pData.map((item) => {
     if (pElement === item.id) {
@@ -29,7 +29,7 @@ export const relocateElementAndUpdateState = ({ pElement, pData, pSetState, pSel
   return data;
 };
 
-export const modifyElementAndUpdateState = ({ pData, pElement, pKeyword, pSetState, pValue, pValue2, pEvent }) => {
+export const modifyElementAndUpdateState = ({ pData, pElement, pKeyword, pValue, pValue2, pEvent }) => {
   pEvent.preventDefault();
 
   const value = pValue;

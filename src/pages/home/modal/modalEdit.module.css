@@ -3,12 +3,12 @@
   flex-direction: column;
   &_title {
     margin-bottom: 0.25rem;
-    color: var(--co-color-03);
+    color: var(--co-color-0);
     font-size: 1.4rem;
     font-weight: var(--fo-bold);
   }
   &_text {
-    color: var(--co-color-03);
+    color: var(--co-color-0);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -40,19 +40,16 @@
     & input {
       width: 100%;
       padding: 0.5rem 0.8rem;
-      border: 2px solid var(--co-color-06);
+      border: 2px solid var(--co-color-9);
       border-radius: 0.5rem;
       outline: none;
+      background-color: var(--co-color-1);
+      color: var(--co-color-2);
       font-family: var(--fo-secondary);
-      background-color: var(--co-color-01);
-      color: var(--co-color-02);
       &:focus {
-        border-color: var(--co-color-08);
-        color: var(--co-color-08);
+        border-color: var(--co-color-6);
+        color: var(--co-color-6);
       }
     }
   }
-}
-
-@media screen and (width <= 600px) {
 }

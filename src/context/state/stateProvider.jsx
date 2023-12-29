@@ -5,10 +5,10 @@ export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   // Mostrar ventana modal
-  const [showModal, $showModal] = useState({
+  const [openSection, $openSection] = useState({
     collectionsPane: false,
-    addBookmarks: false,
-    editMode: false,
+    addElem: false,
+    editElem: false,
   });
 
   // Contador de elementos
@@ -27,13 +27,13 @@ export const StateProvider = ({ children }) => {
 
   const [selectedItem, $selectedItem] = useState({
     collectionId: "0",
-    collectionTitle: "None",
+    collectionName: "None",
     topicId: "0",
-    topicTitle: "None",
+    topicName: "None",
     listId: "0",
-    listTitle: "None",
+    listName: "None",
     bookmarkId: "0",
-    bookmarkTitle: "None",
+    bookmarkName: "None",
     type: null,
   });
 
@@ -48,8 +48,8 @@ export const StateProvider = ({ children }) => {
   const [pinData, $pinData] = useState(false);
 
   const value = {
-    showModal,
-    $showModal,
+    openSection,
+    $openSection,
     counterItem,
     $counterItem,
     showPopup,

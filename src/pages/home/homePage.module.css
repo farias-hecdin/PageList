@@ -4,12 +4,12 @@
   width: 100%;
   padding: 0rem 2rem;
   border-radius: 0.8rem;
-  background-color: var(--co-color-10);
+  background-color: var(--co-color-B);
   &_box {
     display: grid;
-    margin: 2rem 0;
     gap: 2rem;
-    grid-template-columns: 35% 100%;
+    grid-template-columns: 0.6fr 1fr;
+    margin: 2rem 0;
   }
 }
 

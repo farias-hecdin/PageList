@@ -11,11 +11,11 @@
   align-items: center;
   gap: 0.5rem;
   & > iconify-icon {
+    color: var(--co-color-0);
     font-size: 2.2rem;
-    color: var(--co-color-03);
   }
   &_title {
-    color: var(--co-color-03);
+    color: var(--co-color-0);
     font-family: var(--fo-primary);
     font-size: 1.7rem;
     font-weight: var(--fo-bold);
@@ -35,26 +35,57 @@
 .Search {
   display: flex;
   align-items: center;
+  width: 25rem;
+  padding: 0.1rem 0.25rem;
+  border: 1px solid var(--co-color-9);
+  border-radius: calc(0.3rem + 0.5rem);
   &_input {
-    width: 25rem;
+    width: 100%;
     padding: 0 1rem 0.6rem;
+    border: none;
     background: transparent;
-    border: 1px solid var(--co-color-06);
-    border-radius: 0.5rem;
+    color: var(--co-color-2);
     font-size: 1.1rem;
     &:focus {
-      border-color: var(--co-color-05);
-      color: var(--co-color-05);
+      border-color: var(--co-color-4);
       outline: none;
+      color: var(--co-color-2);
     }
+  }
+}
+
+.Searchbar {
+  position: relative;
+  & > ul {
+    position: absolute;
+    top: 100%;
+    z-index: 9;
+    width: 100%;
+    border-radius: calc(0.3rem + 0.5rem);
+    background-color: var(--co-color-3);
+    overflow-y: auto;
+    max-height: 70vh;
+  }
+  &_result {
+    padding: 1rem;
+    border-top: 1px solid var(--co-color-D);
+    & > a {
+      color: var(--co-color-0);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  &_result:first-child {
+    border-top: none;
   }
 }
 
 @media screen and (width <= 600px) {
   .Logo {
     &_title {
-      font-size: 1.5rem;
       display: none;
+      font-size: 1.5rem;
     }
   }
 }

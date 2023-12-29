@@ -2,9 +2,9 @@
   display: flex;
   gap: 0.5rem;
   padding: 0.3rem;
-  border: 1px solid var(--co-color-06);
+  border: 1px solid var(--co-color-9);
   border-radius: calc(0.3rem + 0.5rem);
-  background-color: var(--co-color-01);
+  background-color: var(--co-color-1);
 }
 
 /* States ------------------------------------------------------------------ */

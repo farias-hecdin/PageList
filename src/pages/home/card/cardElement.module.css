@@ -1,7 +1,7 @@
 .Container {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
   gap: 1rem;
   border-radius: 0.4rem;
   overflow: hidden;
@@ -10,21 +10,21 @@
 .Card {
   display: flex;
   align-items: center;
-  text-align: left;
   gap: 1rem;
   width: 100%;
-  border: none;
-  color: var(--co-color-02);
   padding: 1rem;
-  background-color: var(--co-color-04);
-  transition: 0.2s;
+  border: none;
+  background-color: var(--co-color-3);
+  color: var(--co-color-2);
+  text-align: left;
+  transition: 0.1s;
   & > svg {
     font-size: 1.5rem;
   }
-  &:hover, &:active {
-    color: var(--co-color-05);
-    border-color: var(--co-color-05);
-    background-color: var(--co-color-07);
+  &:hover {
+    border-color: var(--co-color-4);
+    background-color: var(--co-color-7);
+    color: var(--co-color-4);
   }
   &_box {
     position: relative;
@@ -35,7 +35,7 @@
   }
   &_text {
     display: -webkit-box;
-    color: var(--co-color-03);
+    color: var(--co-color-0);
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -47,9 +47,9 @@
 
 .Container:global(.TreeItem_51Se6) {
   & > .Card {
-    background-color: var(--co-color-11);
-    &:hover, &:active {
-      background-color: var(--co-color-07);
+    background-color: var(--co-color-C);
+    &:hover {
+      background-color: var(--co-color-7);
     }
   }
 }

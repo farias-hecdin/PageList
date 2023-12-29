@@ -8,11 +8,11 @@
       gap: 1rem;
       padding: 0.5rem 0.9rem;
       border-bottom: 2px solid transparent;
-      color: var(--co-color-02);
+      color: var(--co-color-2);
     }
     &:checked + label {
-      border-bottom-color: var(--co-color-08);
-      color: var(--co-color-08);
+      border-bottom-color: var(--co-color-6);
+      color: var(--co-color-6);
     }
   }
   &_content {

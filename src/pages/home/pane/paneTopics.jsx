@@ -1,14 +1,13 @@
 import css from "./paneTopics.module.css";
-import { DataContext, StateContext } from "../../../context/index";
-import { useContext, useEffect, useState } from "react";
-import { currentNumberElements } from "../../../utils/common";
-import { PaneSide } from "./paneSide";
 import { CardElement } from "../card/cardElement";
+import { DataContext, StateContext } from "../../../context/index";
+import { PaneSide } from "./paneSide";
+import { currentNumberElements } from "../../../utils/common";
+import { useContext } from "react";
 
 export const PaneTopics = () => {
   const { dataLists, dataTopics, dataBookmarks } = useContext(DataContext);
-
-  const { $counterItem, $selectedItem, $showModal, $targetItem, selectedItem, targetItem } = useContext(StateContext);
+  const { $counterItem, counterItem, $selectedItem, selectedItem } = useContext(StateContext);
 
   /** Mostrar una lista */
   const [toggleList, $toggleList] = useState();
@@ -17,19 +16,14 @@ export const PaneTopics = () => {
    * Actualizar el estado de acuerdo a la lista selecionada
    * @param {Array|string} pList
    */
-  const selectListAndUpdateState = (pTopic, pList, pType) => {
-    let topicId = pTopic?.id || "0";
-    let topicTitle = pTopic?.title || "None";
-    let listId = pList?.id || "0";
-    let listTitle = pList?.title || "None";
-    let type = pType;
+  const selectListAndUpdateState = (topic, list, type) => {
     // Actualizar el estado
-    $selectedItem((prevState) => ({
-      ...prevState,
-      topicId: topicId,
-      topicTitle: topicTitle,
-      listId: listId,
-      listTitle: listTitle,
+    $selectedItem((prev) => ({
+      ...prev,
+      topicId: topic?.id || "0",
+      topicName: topic?.title || "None",
+      listId: list?.id || "0",
+      listName: list?.title || "None",
       type: type,
     }));
   };
@@ -37,43 +31,97 @@ export const PaneTopics = () => {
   // Actualizar el contador de `bookmarks`
   useEffect(() => {
     if (selectedItem.type === "list") {
-      currentNumberElements(selectedItem.listId, dataBookmarks, "bookmarks", $counterItem);
+      const number = currentNumberElements(selectedItem.listId, dataBookmarks);
+      $counterItem((prev) => ({ ...prev, bookmarks: number }));
     } else {
-      let data = dataLists.filter((list) => list.parent === selectedItem.listId);
-      let data2 = data.flatMap((list) => dataBookmarks.filter((bookmark) => bookmark.parent === list.id));
-      let num = data2.length;
-      $counterItem((prev) => ({ ...prev, bookmarks: num }));
+      const number = dataLists.reduce((count, list) => {
+        return (
+          count +
+          dataBookmarks.reduce((innerCount, bookmark) => {
+            return innerCount + (bookmark.parent === list.id ? 1 : 0);
+          }, 0)
+        );
+      }, 0);
+      $counterItem((prev) => ({ ...prev, bookmarks: number }));
     }
   }, [dataBookmarks, selectedItem]);
 
-  // Components ---------------------------------------------------------------
-  useEffect(() => console.log(targetItem), [targetItem]); // !here:
+  return (
+    <PaneSide title={selectedItem.collectionName} counter={counterItem.topics}>
+      <ul className={css.Container_list}>
+        <li>
+          <CardElement text="All bookmarks" />
+        </li>
+        {dataTopics.map(
+          (topic) =>
+            topic.parent === selectedItem.collectionId && (
+              <li key={topic.id}>
+                <div className={css.Tree}>
+                  <TreeHeader data={topic} setFunc={$toggleList} />
+                  {toggleList === topic.id && (
+                    <ul className={css.Tree_list}>
+                      <CardElement
+                        icon={<IconifyFolderOutline />}
+                        text="All"
+                        styled={`TreeItem_51Se6 ${selectedItem.listId === topic.id && "--active"}`}
+                        handleClick={() => selectListAndUpdateState(topic, topic, "topic")}
+                      />
+                      {dataLists.map(
+                        (list) =>
+                          topic.id === list.parent && (
+                            <TreeItem
+                              key={list.id}
+                              parent={topic}
+                              data={list}
+                              type={"list"}
+                              func={selectListAndUpdateState}
+                            />
+                          )
+                      )}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            )
+        )}
+      </ul>
+    </PaneSide>
+  );
+};
 
-  const TreeHeader = ({ data }) => (
+const TreeHeader = ({ data, setFunc }) => {
+  const { $openSection, $targetItem, selectedItem } = useContext(StateContext);
+
+  return (
     <CardElement
       text={data.title}
       styled={selectedItem.collecId === "0" && "--active"}
-      handleClick={() => $toggleList((prev) => (prev === data.id ? "" : data.id))}
+      handleClick={() => setFunc((prev) => (prev === data.id ? "" : data.id))}
       handleClick2={() => {
-        $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
-        $targetItem((prev) => ({
-          ...prev,
-          id: data.id,
-          title: data.title,
-          type: "topic",
-        }));
+        $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
+        $targetItem((prev) => ({ ...prev, id: data.id, title: data.title, type: "topic" }));
       }}
     />
   );
+};
 
-  const TreeItem = ({ parent, data, type }) => (
+const TreeItem = ({ parent, data, type, func }) => {
+  const { dataBookmarks } = useContext(DataContext);
+  const { $openSection, $targetItem, selectedItem } = useContext(StateContext);
+
+  useEffect(() => {
+    console.log(data.id);
+  }, [selectedItem]);
+
+  return (
     <CardElement
+      counter={currentNumberElements(data.id, dataBookmarks)}
       icon={<IconifyFolderOutline />}
       text={data.title}
       styled={`TreeItem_51Se6 ${selectedItem.listId === "0" && "--active"}`}
-      handleClick={() => selectListAndUpdateState(parent, data, type)}
+      handleClick={() => func(parent, data, type)}
       handleClick2={() => {
-        $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+        $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
         $targetItem((prev) => ({
           ...prev,
           id: data.id,
@@ -82,36 +130,5 @@ export const PaneTopics = () => {
         }));
       }}
     />
-  );
-
-  return (
-    <PaneSide title={"Topics"} counter={0}>
-      <ul className={css.Container_list}>
-        {dataTopics.map((topic) => {
-          if (topic.parent === selectedItem.collectionId) {
-            return (
-              <li key={crypto.randomUUID()}>
-                <div className={css.Tree}>
-                  <TreeHeader data={topic} />
-                  {toggleList == topic.id && (
-                    <ul className={css.Tree_list}>
-                      <CardElement
-                        icon={<IconifyFolderOutline />}
-                        text="All"
-                        styled={`TreeItem_51Se6 ${selectedItem.listId === topic.id && "--active"}`}
-                        handleClick={() => selectListAndUpdateState(topic, topic, "topic")}
-                      />
-                      {dataLists.map((list) => {
-                        if (topic.id === list.parent) return <TreeItem key={list.id} parent={topic} data={list} type={"list"} />;
-                      })}
-                    </ul>
-                  )}
-                </div>
-              </li>
-            );
-          }
-        })}
-      </ul>
-    </PaneSide>
   );
 };

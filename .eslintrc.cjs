@@ -13,7 +13,10 @@ module.exports = {
     sourceType: 'module'
   },
   settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
+  plugins: [
+    '@stylistic',
+    'react-refresh'
+  ],
   rules: {
     "react/no-access-state-in-setstate": "error",
     'react/prop-types': 0,
