@@ -27,7 +27,7 @@ export const updateStorageAndReturnData = (prev, data, key) => {
 /* Añadir un nuevo elemento
  * @param {Any} check - collectData
  */
-export const addNew = (event, check, type, funcSet, storageKey, titleKey, parentKey) => {
+export const addNew = (event, check, type, funcSet, funcPopup, storageKey, titleKey, parentKey) => {
   event.preventDefault();
   let data = {
     id: crypto.randomUUID(),
@@ -48,5 +48,15 @@ export const addNew = (event, check, type, funcSet, storageKey, titleKey, parent
   }
 
   funcSet((prev) => updateStorageAndReturnData(prev, data, storageKey));
-  setShowPopup((prev) => ({ ...prev, show: true, message: `Add new ${type}` }));
+  funcPopup((prev) => ({ ...prev, show: true, message: `Add new ${type}` }));
+};
+
+/**
+ * Devuelve el dominio de una URL dada.
+ * @param {string} url - La URL de la que se quiere obtener el dominio.
+ * @return {string} El dominio de la URL.
+ */
+export const getDomain = (url) => {
+  var dominio = new URL(url).hostname;
+  return dominio;
 };

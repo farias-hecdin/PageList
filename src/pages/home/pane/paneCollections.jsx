@@ -7,7 +7,7 @@ import { useContext, useEffect } from "react";
 
 export const PaneCollections = () => {
   const { dataCollections, dataTopics } = useContext(DataContext);
-  const { $counterItem, counterItem, $openSection, selectedItem, $selectedItem, $targetItem } =
+  const { $counterItem, counterItem, $openSection, selectedItem, $selectedItem, targetItem, $targetItem } =
     useContext(StateContext);
 
   /**
@@ -25,7 +25,8 @@ export const PaneCollections = () => {
   // Actualizar el contador de `colections`
   useEffect(() => {
     $counterItem((prev) => ({ ...prev, collection: dataCollections.length }));
-  }, [dataCollections, selectedItem]);
+    console.log(targetItem)
+  }, [dataCollections, selectedItem, targetItem]);
 
   return (
     <PaneSide title={"All collections"} showButton={false} counter={counterItem.collection}>

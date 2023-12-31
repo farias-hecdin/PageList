@@ -18,7 +18,7 @@ export const CardElement = ({ counter, handleClick, handleClick2, icon, styled, 
         {icon}
         <div className={css.Card_box}>
           <p className={css.Card_text}>{text}</p>
-          {counter && <p className={css.Card_subtext}>{counter || 0} elements</p>}
+          {counter >= 0 && <p className={css.Card_subtext}>{counter || 0} elements</p>}
         </div>
       </button>
       {handleClick2 && (

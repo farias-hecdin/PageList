@@ -35,19 +35,18 @@
       flex-direction: column;
       align-items: center;
       gap: 0.6rem;
-      min-width: 18rem;
+      min-width: 60%;
     }
     & input {
       width: 100%;
       padding: 0.5rem 0.8rem;
-      border: 2px solid var(--co-color-9);
+      border: 1px solid var(--co-color-9);
       border-radius: 0.5rem;
       outline: none;
+      font-size: 1.1rem;
       background-color: var(--co-color-1);
       color: var(--co-color-2);
-      font-family: var(--fo-secondary);
       &:focus {
-        border-color: var(--co-color-6);
         color: var(--co-color-6);
       }
     }

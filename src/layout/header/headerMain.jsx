@@ -10,7 +10,7 @@ import { useContext } from "react";
  * @param {string} prop.changeTheme
  * @returns {HTMLElement}
  */
-export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
+export const HeaderMain = ({ updatePage, pageName }) => {
   const { $dataBookmarks, $dataCollections, $dataLists, $dataTopics } = useContext(DataContext);
   const { $showPopup, $selectedItem } = useContext(StateContext);
 
@@ -69,7 +69,6 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
         </WrapBase>
         <div className={css.Navbar_box}>
           <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="is-outline" />
-          <ButtonBase text="Theme" icon={<IconifySettingsOutline />} handleClick={changeTheme} styled="is-outline" />
         </div>
       </nav>
     </header>
@@ -98,14 +97,7 @@ const SearchBar = () => {
   return (
     <div className={css.Searchbar}>
       <form onSubmit={handleSearch} htmlFor="Wa1NCpukLL" className={css.Search}>
-        <input
-          className={css.Search_input}
-          name="Wa1NCpukLL"
-          type="text"
-          placeholder="Search bookmarks..."
-          autoComplete="off"
-          ref={inputRef}
-        />
+        <input id="Input_aGk4mDleYN" type="text" placeholder="Search bookmarks..." autoComplete="off" ref={inputRef} />
         <ButtonBase type="submit" icon={<IconifySearch />} />
       </form>
       <ul>

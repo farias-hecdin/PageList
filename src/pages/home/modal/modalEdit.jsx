@@ -97,91 +97,98 @@ export const ModalEdit = ({ isOpen, handleClick }) => {
         </p>
       </header>
       <div className={css.Container}>
-        <DetailsBase name="gFOSr" title="Delete this element" icon={<IconifyDeleteForeverOutline />}>
-          <div className={css.Container_details}>
-            <p>Do you want delete this element?</p>
-            <ButtonBase
-              text="Delete"
-              icon={<IconifyDone />}
-              handleClick={() => {
-                const data = removeElementById(ToFuncDelete);
-                confirmAndUpdateStateAndStorageGroup(
-                  true,
-                  data,
-                  targetItem.type,
-                  sharedParams.pSetState,
-                  targetItem.title
-                );
-                $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
-              }}
-            />
-          </div>
-        </DetailsBase>
-        {targetItem.type !== "collection" && (
-          <DetailsBase name="gFOSr" title="Move this element" icon={<IconifyPanToolOutline />}>
-            <div className={css.Container_details}>
-              <p>Where would you like to move this element?</p>
-              <ButtonSelect id="select_LCAXUzHOdk" styled="ModalEditMode_mojxs">
-                {targetItem.type !== "topic" &&
-                  dataMajor.map((major) =>
-                    dataParent.map((parent) => {
-                      if (parent.parent === major.id) {
-                        return (
-                          <option key={crypto.randomUUID()} value={parent.id}>
-                            {major.title + " - " + parent.title}
-                          </option>
-                        );
-                      }
-                    })
-                  )}
-                {targetItem.type === "topic" &&
-                  dataParent.map((parent) => {
-                    return (
-                      <option key={crypto.randomUUID()} value={parent.id}>
-                        {parent.title}
-                      </option>
-                    );
-                  })}
-              </ButtonSelect>
-              <ButtonBase
-                text="Move"
-                icon={<IconifyDone />}
-                handleClick={() => {
-                  const data = relocateElementAndUpdateState(ToFuncRelocate);
-                  confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
-                  $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
-                }}
-              />
-            </div>
-          </DetailsBase>
-        )}
-        <DetailsBase name="gFOSr" title="Update this element" icon={<IconifyTitle />}>
-          <div className={css.Container_details}>
-            <form
-              onSubmit={(e) => {
-                const data = modifyElementAndUpdateState({ ...ToFuncUpdate, pEvent: e });
-                confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
-              }}
-            >
-              <input
-                type="text"
-                value={titleValue}
-                onChange={(e) => $titleValue(e.currentTarget.value)}
-                id="input_EJ7aOOCCQI"
-              />
-              {targetItem.type === "bookmark" && (
-                <input
-                  type="text"
-                  value={urlValue}
-                  onChange={(e) => $urlValue(e.currentTarget.value)}
-                  id="input_P0Z5gb5BMg"
-                />
-              )}
-              <ButtonBase text="Update" icon={<IconifyDone />} type="submit" />
-            </form>
-          </div>
-        </DetailsBase>
+        <DeleteElem nameTag="details_hWkbC7Yfgd" />
+        {targetItem.type !== "collection" && <MoveElem nameTag="details_hWkbC7Yfgd" />}
+        <UpdateElem nameTag="details_hWkbC7Yfgd" />
       </div>
     </ModalBase>
+  );
+};
+
+const DeleteElem = ({ nameTag, data }) => {
+  return (
+    <DetailsBase name={nameTag} title="Delete this element" icon={<IconifyDeleteForeverOutline />}>
+      <div className={css.Container_details}>
+        <p>Do you want delete this element?</p>
+        <ButtonBase
+          text="Delete"
+          handleClick={() => {
+            const data = removeElementById(data);
+            confirmAndUpdateStateAndStorageGroup(true, data, targetItem.type, sharedParams.pSetState, targetItem.title);
+            $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
+          }}
+        />
+      </div>
+    </DetailsBase>
+  );
+};
+const MoveElem = ({ nameTag }) => {
+  return (
+    <DetailsBase name={nameTag} title="Move this element" icon={<IconifyPanToolOutline />}>
+      <div className={css.Container_details}>
+        <p>Where would you like to move this element?</p>
+        <ButtonSelect id="select_LCAXUzHOdk" styled="ModalEditMode_mojxs">
+          {targetItem.type !== "topic" &&
+            dataMajor.map((major) =>
+              dataParent.map((parent) => {
+                if (parent.parent === major.id) {
+                  return (
+                    <option key={crypto.randomUUID()} value={parent.id}>
+                      {major.title + " - " + parent.title}
+                    </option>
+                  );
+                }
+              })
+            )}
+          {targetItem.type === "topic" &&
+            dataParent.map((parent) => {
+              return (
+                <option key={crypto.randomUUID()} value={parent.id}>
+                  {parent.title}
+                </option>
+              );
+            })}
+        </ButtonSelect>
+        <ButtonBase
+          text="Move"
+          handleClick={() => {
+            const data = relocateElementAndUpdateState(ToFuncRelocate);
+            confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
+            $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
+          }}
+        />
+      </div>
+    </DetailsBase>
+  );
+};
+
+const UpdateElem = ({ nameTag }) => {
+  return (
+    <DetailsBase name={nameTag} title="Update this element" icon={<IconifyTitle />}>
+      <div className={css.Container_details}>
+        <form
+          onSubmit={(e) => {
+            const data = modifyElementAndUpdateState({ ...ToFuncUpdate, pEvent: e });
+            confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
+          }}
+        >
+          <input
+            type="text"
+            value={titleValue}
+            onChange={(e) => $titleValue(e.currentTarget.value)}
+            id="input_EJ7aOOCCQI"
+          />
+          {targetItem.type === "bookmark" && (
+            <input
+              type="text"
+              value={urlValue}
+              onChange={(e) => $urlValue(e.currentTarget.value)}
+              id="input_P0Z5gb5BMg"
+            />
+          )}
+          <ButtonBase text="Update" type="submit" />
+        </form>
+      </div>
+    </DetailsBase>
   );
 };

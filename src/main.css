@@ -6,9 +6,11 @@
 /* Fonts and colors  ------------------------------------------------------- */
 
 :root {
-  /* Breakpoints */
+  /* Breakpoints ----------------------------------------------------------- */
+
+  /* Smartphone: (360px > x > 600px) */
+  /* Tablet and pc: (600px > x > 1920px) */
   /* (https://gs.statcounter.com/screen-resolution-stats) */
-  /* (360px > x > 600px) (600px > x > 1920px) */
 
   /* Fonts ----------------------------------------------------------------- */
 
@@ -44,7 +46,7 @@ html {
   font-size: clamp(0.813rem, 0.192vw + 0.769rem, 1rem);
 }
 
-div[data-theme="dark"] {
+div[data-theme] {
   --co-filter-0: invert(100%) sepia(0%) saturate(4577%) hue-rotate(228deg) brightness(107%) contrast(80%);
   --co-color-1: lch(12% 7.6 265.8);
   --co-color-2: lch(55% 5.4 268.65);
@@ -60,24 +62,6 @@ div[data-theme="dark"] {
   --co-color-B: lch(16% 8.9 266.6);
   --co-color-C: lch(18% 9.4 265);
   --co-color-D: lch(12% 7.6 265.8);
-  background-color: var(--co-color-B);
-}
-
-div[data-theme="light"] {
-  --co-color-0: lch(19% 4.75 270.38);
-  --co-color-1: lch(92% 4.69 216.89);
-  --co-color-2: lch(30% 5 270.38);
-  --co-color-3: lch(87.11% 5.87 273.6);
-  --co-color-4: #ffffff;
-  --co-color-5: #000000;
-  --co-color-6: #005fb9;
-  --co-color-7: #005fb9;
-  --co-color-8: lch(92.11% 5.87 273.6);
-  --co-color-9: lch(86.11% 5.87 273.6);
-  --co-color-A: lch(80.7% 20.08 251.28);
-  --co-color-B: #e6eff6;
-  --co-color-C: lch(97.11% 5.87 273.6);
-  --co-color-D: lch(98.11% 5.87 273.6);
   background-color: var(--co-color-B);
 }
 

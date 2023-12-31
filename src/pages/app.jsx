@@ -8,15 +8,9 @@ export const App = () => {
   /** Mostrar la pagina activa */
   const [activePage, $activePage] = useState("Home");
 
-  /** Cambiar tema del sitio */
-  const [theme, $theme] = useState("dark");
-  const changeTheme = () => {
-    $theme((prev) => (prev !== "dark" ? "dark" : "light"));
-  };
-
   return (
-    <div className={css.Container} data-theme={theme}>
-      <HeaderMain pageName={activePage} updatePage={$activePage} changeTheme={changeTheme} />
+    <div className={css.Container} data-theme>
+      <HeaderMain pageName={activePage} updatePage={$activePage} />
       <main className={css.Container_box}>
         {activePage === "Home" && <HomePage />}
         {activePage === "Backup" && <BackupPage />}

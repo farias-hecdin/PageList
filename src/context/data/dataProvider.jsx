@@ -37,6 +37,7 @@ export const DataProvider = ({ children }) => {
       id: "d4Coe",
       title: "Javascript.info - The Modern JavaScript Tutorial",
       url: "https://javascript.info",
+      domain: "javascript.info",
       type: "Blog",
       dateAdded: "2020-01-01",
       view: "0",
