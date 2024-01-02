@@ -12,13 +12,13 @@ import { handleChange, sortByName } from "../../../utils/common";
  */
 export const ModalAdd = ({ isOpen, handleClick }) => {
   const { $showPopup, pinData, selectedItem } = useContext(StateContext);
-  const { dataCollections, $dataCollections, dataTopics, $dataTopics, dataLists, $dataLists, $dataBookmarks } =
+  const { dataCollection, $dataCollection, dataTopic, $dataTopic, dataList, $dataList, $dataBookmark } =
     useContext(DataContext);
 
   // Ordenar datos por nombre
-  const sortCollections = sortByName(dataCollections);
-  const sortTopics = sortByName(dataTopics);
-  const sortLists = sortByName(dataLists);
+  const sortCollections = sortByName(dataCollection);
+  const sortTopics = sortByName(dataTopic);
+  const sortLists = sortByName(dataList);
 
   // useState para el Tabs component
   const [pickTabs, $pickTabs] = useState({ value: "Collection" });
@@ -47,8 +47,8 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
     }));
 
   useEffect(() => {
-    $collectData((prev) => ({ ...prev, listId: selectedItem.listId }));
-  }, [selectedItem.listId]);
+    $collectData((prev) => ({ ...prev, listId: selectedItem.list.id }));
+  }, [selectedItem.list]);
 
   return (
     <ModalBase isOpen={isOpen} handleClick={handleClick}>
@@ -68,7 +68,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
             <FormAddElem
               data={collectData}
               type="collection"
-              funcSet={$dataCollections}
+              funcSet={$dataCollection}
               storageKey="pagelist_collections"
               titleKey="collectionName"
               parentKey={false}
@@ -86,7 +86,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
             <FormAddElem
               data={collectData}
               type="topic"
-              funcSet={$dataTopics}
+              funcSet={$dataTopic}
               storageKey="pagelist_topics"
               titleKey="topicName"
               parentKey={"collection"}
@@ -113,7 +113,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
             <FormAddElem
               data={collectData}
               type="list"
-              funcSet={$dataLists}
+              funcSet={$dataList}
               storageKey="pagelist_lists"
               titleKey="listName"
               parentKey={"topic"}
@@ -149,7 +149,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
             <FormAddElem
               data={collectData}
               type="bookmark"
-              funcSet={$dataBookmarks}
+              funcSet={$dataBookmark}
               storageKey="pagelist_bookmarks"
               titleKey="bookmarkName"
               parentKey={"list"}
@@ -176,7 +176,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
                 type="COLLECTION"
                 data={sortCollections}
                 conditional={parent.parent === collectData.collection}
-                pin={{name: selectedItem.collectionName, value: selectedItem.collectionId}}
+                pin={{ name: selectedItem.collection.name, value: selectedItem.collection.id }}
               />
               <SelectField
                 id="Select_ooIRWuI333"
@@ -186,7 +186,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
                 type="TOPIC"
                 data={sortTopics}
                 conditional={parent.parent === collectData.collection}
-                pin={{name: selectedItem.topicName, value: selectedItem.topicName}}
+                pin={{ name: selectedItem.topic.name, value: selectedItem.topic.name }}
               />
               <SelectField
                 id="Select_ooIRWuI333"
@@ -195,8 +195,8 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
                 funcSet={$collectData}
                 type="LIST"
                 data={sortLists}
-                conditional={parent.parent === collectData.topicId || parent.parent === selectedItem.listId}
-                pin={{name: selectedItem.listName, value: selectedItem.listId}}
+                conditional={parent.parent === collectData.topicId || parent.parent === selectedItem.list.id}
+                pin={{ name: selectedItem.list.name, value: selectedItem.list.id }}
               />
             </FormAddElem>
           )}

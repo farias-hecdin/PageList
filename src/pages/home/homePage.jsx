@@ -27,7 +27,7 @@ export const HomePage = () => {
           </div>
         </HeaderSecondary>
         <div className={css.Container_box}>
-          {selectedItem.collectionId === "0" ? <PaneCollections /> : <PaneTopics />}
+          {selectedItem.collection.id === "" ? <PaneCollections /> : <PaneTopics />}
           <PaneBookmarks />
         </div>
       </section>

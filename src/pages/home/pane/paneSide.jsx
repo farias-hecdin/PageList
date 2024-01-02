@@ -16,7 +16,7 @@ export const PaneSide = ({ children, counter, title, showButton = true }) => {
         {showButton && (
           <ButtonBase
             icon={<IconifyArrowBackIosNew />}
-            handleClick={() => $selectedItem((prev) => ({ ...prev, collectionId: "0" }))}
+            handleClick={() => $selectedItem((prev) => ({ ...prev, collection: { id: "", name: "" } }))}
           />
         )}
       </header>

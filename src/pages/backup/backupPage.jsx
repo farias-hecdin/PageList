@@ -3,27 +3,11 @@ import { ButtonBase } from "../../components/index";
 import { DataContext, StateContext } from "../../context/index";
 import { HeaderSecondary } from "../../layout/index";
 import { useContext } from "react";
-import {
-  decomposeDataIntoCategories,
-  getFormattedCurrentDate,
-  importDataAndValidate,
-  createHtmlNodeAndFile,
-  assignDataToCollections,
-  manageLocalStorageData,
-  getJsonFileContent,
-} from "./backupPage.script";
+import * as M from "./backupPage.script.js";
 
 export const BackupPage = () => {
-  const {
-    $dataBookmarks,
-    $dataCollections,
-    $dataLists,
-    $dataTopics,
-    dataBookmarks,
-    dataCollections,
-    dataLists,
-    dataTopics,
-  } = useContext(DataContext);
+  const { $dataBookmark, $dataCollection, $dataList, $dataTopic } = useContext(DataContext);
+  const { dataBookmark, dataCollection, dataList, dataTopic } = useContext(DataContext);
   const { $selectedItem } = useContext(StateContext);
 
   /** Limpiar el contenido de un HTML textarea */
@@ -39,14 +23,14 @@ export const BackupPage = () => {
   const clickButtonExport = (isDowloader) => {
     try {
       let node = document.querySelector("#textarea_xucOeryf8lU");
-      let mappedData = assignDataToCollections(dataCollections, dataTopics, dataLists, dataBookmarks);
-      let currentDate = getFormattedCurrentDate();
+      let mappedData = M.assignDataToCollection(dataCollection, dataTopic, dataList, dataBookmark);
+      let currentDate = M.getFormattedCurrentDate();
       let fileName = `Pagelist_${currentDate}`;
       let dataInString = JSON.stringify(mappedData, null, 2);
       node.value = dataInString;
 
       if (isDowloader) {
-        createHtmlNodeAndFile(fileName, dataInString);
+        M.createHtmlNodeAndFile(fileName, dataInString);
       }
     } catch (error) {
       console.warn("BackupPage > clickButtonExport", error.stack);
@@ -56,7 +40,7 @@ export const BackupPage = () => {
   /** Funcion que importa datos adentro de la app */
   const uploadFile = async (event) => {
     const $node = document.querySelector("#textarea_xucOeryf8lU");
-    const data = await getJsonFileContent(event);
+    const data = await M.getJsonFileContent(event);
     $node.value = data;
   };
 
@@ -65,23 +49,22 @@ export const BackupPage = () => {
       const $node = document.querySelector("#textarea_xucOeryf8lU");
       let data = $node.value;
 
-      data = importDataAndValidate(data);
-      data = decomposeDataIntoCategories(data);
+      data = M.importDataAndValidate(data);
+      data = M.decomposeDataIntoCategories(data);
       // Guardar datos en localStorage
       let question = confirm("Do you want to save this section?");
       if (question === true) {
-        manageLocalStorageData("add", [data.collections, data.topics, data.lists, data.bookmarks]);
+        M.manageLocalStorageData("add", [data.collections, data.topics, data.lists, data.bookmarks]);
       }
       // Actualizar datos
-      $dataCollections(data.collections);
-      $dataTopics(data.topics);
-      $dataLists(data.lists);
-      $dataBookmarks(data.bookmarks);
+      $dataCollection(data.collections);
+      $dataTopic(data.topics);
+      $dataList(data.lists);
+      $dataBookmark(data.bookmarks);
       // Reiniciar las referencias de `collection`
       $selectedItem((prev) => ({
         ...prev,
-        collectionId: "0",
-        collectionName: "None",
+        collection: { id: "", name: "" },
       }));
     } catch (error) {
       console.warn("BackupPage > clickButtonImport", error.stack);
@@ -91,7 +74,7 @@ export const BackupPage = () => {
   /** Remover los datos guardados en localStorage */
   const removeDataFromLocalStorage = () => {
     const question = confirm("Do you want to delete the saved section?");
-    if (question === true) manageLocalStorageData("delete");
+    if (question === true) M.manageLocalStorageData("delete");
   };
 
   return (

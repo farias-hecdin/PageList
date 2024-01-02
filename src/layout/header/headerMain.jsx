@@ -11,7 +11,7 @@ import { useContext } from "react";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName }) => {
-  const { $dataBookmarks, $dataCollections, $dataLists, $dataTopics } = useContext(DataContext);
+  const { $dataBookmark, $dataCollection, $dataList, $dataTopic } = useContext(DataContext);
   const { $showPopup, $selectedItem } = useContext(StateContext);
 
   /**
@@ -28,10 +28,10 @@ export const HeaderMain = ({ updatePage, pageName }) => {
 
     if (answer) {
       let storage = [
-        { data: localStorage.getItem("pagelist_collections"), funcSet: $dataCollections },
-        { data: localStorage.getItem("pagelist_topics"), funcSet: $dataTopics },
-        { data: localStorage.getItem("pagelist_lists"), funcSet: $dataLists },
-        { data: localStorage.getItem("pagelist_bookmarks"), funcSet: $dataBookmarks },
+        { data: localStorage.getItem("pagelist_collections"), funcSet: $dataCollection },
+        { data: localStorage.getItem("pagelist_topics"), funcSet: $dataTopic },
+        { data: localStorage.getItem("pagelist_lists"), funcSet: $dataList },
+        { data: localStorage.getItem("pagelist_bookmarks"), funcSet: $dataBookmark },
       ];
       let message = "";
 
@@ -43,7 +43,10 @@ export const HeaderMain = ({ updatePage, pageName }) => {
           message = "No data";
         }
       }
-      $selectedItem((prev) => ({ ...prev, collectionId: "0" }));
+      $selectedItem((prev) => ({
+        ...prev,
+        collection: { id: "", name: "" },
+      }));
       $showPopup((prev) => ({ ...prev, show: true, message: message }));
     }
   };
@@ -76,7 +79,7 @@ export const HeaderMain = ({ updatePage, pageName }) => {
 };
 
 const SearchBar = () => {
-  const { dataBookmarks } = useContext(DataContext);
+  const { dataBookmark } = useContext(DataContext);
   const [searchTerm, $searchTerm] = useState("");
   const inputRef = useRef();
 
@@ -87,7 +90,7 @@ const SearchBar = () => {
   };
 
   /**
-   * @param {Array<object>} data
+   * @param {Array} data
    * @param {string} term
    */
   const filteredItems = (data, term) => {
@@ -96,12 +99,12 @@ const SearchBar = () => {
 
   return (
     <div className={css.Searchbar}>
-      <form onSubmit={handleSearch} htmlFor="Wa1NCpukLL" className={css.Search}>
-        <input id="Input_aGk4mDleYN" type="text" placeholder="Search bookmarks..." autoComplete="off" ref={inputRef} />
+      <form onSubmit={handleSearch} className={css.Search}>
+        <input type="text" placeholder="Search bookmarks..." autoComplete="off" ref={inputRef} />
         <ButtonBase type="submit" icon={<IconifySearch />} />
       </form>
       <ul>
-        {filteredItems(dataBookmarks, searchTerm).map((elem) => (
+        {filteredItems(dataBookmark, searchTerm).map((elem) => (
           <li key={elem.id} className={css.Searchbar_result}>
             <a href={elem.url} target="_blank" rel="noopener noreferrer">
               {elem.title}

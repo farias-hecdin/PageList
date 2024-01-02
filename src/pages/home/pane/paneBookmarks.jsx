@@ -7,11 +7,11 @@ import { useContext } from "react";
 
 export const PaneBookmarks = () => {
   const { selectedItem } = useContext(StateContext);
-  const { dataBookmarks, dataLists } = useContext(DataContext);
+  const { dataBookmark, dataList, dataTopic, theBookmark, $theBookmark } = useContext(DataContext);
 
   return (
     <section className={css.Container}>
-      {selectedItem.listId === "0" ? (
+      {selectedItem.type === null ? (
         <MessageFeedback
           icon={<IconifyInfoOutline />}
           title="Nothing here"
@@ -21,18 +21,9 @@ export const PaneBookmarks = () => {
         <>
           <HeaderSection />
           <ul className={css.Container_list}>
-            {selectedItem.type === "list" &&
-              dataBookmarks.map((elem) =>
-                elem.parent === selectedItem.listId ? <AnBookmark key={elem.id} data={elem} /> : null
-              )}
-            {selectedItem.type === "topic" &&
-              dataBookmarks.map((elem) =>
-                dataLists.map((list) =>
-                  list.parent === selectedItem.listId && elem.parent === list.id ? (
-                    <AnBookmark key={elem.id} data={elem} />
-                  ) : null
-                )
-              )}
+            {theBookmark.map((elem) => (
+              <AnBookmark key={elem.id} data={elem} />
+            ))}
           </ul>
         </>
       )}
@@ -51,12 +42,7 @@ const AnBookmark = ({ data }) => {
           styled="--ghost Button_lupuE"
           handleClick={() => {
             $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
-            $targetItem({
-              id: data.id,
-              title: data.title,
-              url: data.url,
-              type: "bookmark",
-            });
+            $targetItem({ id: data.id, title: data.title, url: data.url, type: "bookmark" });
           }}
         />
       </CardBookmark>
@@ -70,7 +56,7 @@ const HeaderSection = () => {
   return (
     <header className={css.Header}>
       <div>
-        <h2 className={css.Header_title}>{selectedItem.listName}</h2>
+        <h2 className={css.Header_title}>{selectedItem.list.name}</h2>
         <p className={css.Header_text}>{counterItem.bookmarks} bookmarks</p>
       </div>
       <ButtonBase
@@ -81,7 +67,10 @@ const HeaderSection = () => {
         }}
       />
       <ButtonBase icon={<IconifyFilterList />} />
-      <ButtonBase icon={<IconifyClose />} handleClick={() => $selectedItem((prev) => ({ ...prev, listId: "0" }))} />
+      <ButtonBase
+        icon={<IconifyClose />}
+        handleClick={() => $selectedItem((prev) => ({ ...prev, list: { id: "", name: "" } }))}
+      />
     </header>
   );
 };

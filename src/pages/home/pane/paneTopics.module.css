@@ -1,5 +1,10 @@
 .Container {
   color: var(--co-color-0);
+  &_pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
   &_list {
     display: flex;
     flex-direction: column;

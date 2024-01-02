@@ -1,3 +1,7 @@
+import db1 from "../../data/collections.json";
+import db2 from "../../data/topics.json";
+import db3 from "../../data/lists.json";
+import db4 from "../../data/bookmarks.json";
 import { createContext, useState } from "react";
 
 // Crear un Context y un Provider
@@ -5,36 +9,40 @@ export const DataContext = createContext(null);
 
 export const DataProvider = ({ children }) => {
   // Set de datos
-  const [dataCollections, $dataCollections] = useState([
+  const [dataCollection, $dataCollection] = useState([
+    ...db1,
     {
-      id: "XnBZ0",
+      id: "C_XnBZ0",
       title: "My first collection",
       topics: [],
     },
   ]);
 
-  const [dataTopics, $dataTopics] = useState([
+  const [dataTopic, $dataTopic] = useState([
+    ...db2,
     {
-      parent: "XnBZ0",
-      id: "Mo1gG",
+      parent: "C_XnBZ0",
+      id: "T_Mo1gG",
       title: "A topic",
       lists: [],
     },
   ]);
 
-  const [dataLists, $dataLists] = useState([
+  const [dataList, $dataList] = useState([
+    ...db3,
     {
-      parent: "Mo1gG",
-      id: "RDTbX",
+      parent: "T_Mo1gG",
+      id: "L_RDTbX",
       title: "A list",
       bookmarks: [],
     },
   ]);
 
-  const [dataBookmarks, $dataBookmarks] = useState([
+  const [dataBookmark, $dataBookmark] = useState([
+    ...db4,
     {
-      parent: "RDTbX",
-      id: "d4Coe",
+      parent: "L_RDTbX",
+      id: "B_d4Coe",
       title: "Javascript.info - The Modern JavaScript Tutorial",
       url: "https://javascript.info",
       domain: "javascript.info",
@@ -43,21 +51,36 @@ export const DataProvider = ({ children }) => {
       view: "0",
       state: "None",
     },
+    {
+      parent: "Uncategorized",
+      id: "Z_789abc",
+      title: "Mastering Programming from Scratch",
+      url: "https://tutorialesweb.com",
+      domain: "tutorialesweb.com",
+      type: "Blog",
+      dateAdded: "2022-09-30",
+      view: "6",
+      state: "None",
+    },
   ]);
+
+  const [theBookmark, $theBookmark] = useState([]);
 
   // localstorage
   const [savedData, $savedData] = useState();
 
   const value = {
-    $dataBookmarks,
-    $dataCollections,
-    $dataLists,
-    $dataTopics,
+    $dataBookmark,
+    $dataCollection,
+    $dataList,
+    $dataTopic,
     $savedData,
-    dataBookmarks,
-    dataCollections,
-    dataLists,
-    dataTopics,
+    dataBookmark,
+    dataCollection,
+    theBookmark,
+    $theBookmark,
+    dataList,
+    dataTopic,
     savedData,
   };
 

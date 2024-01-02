@@ -6,51 +6,33 @@ import { currentNumberElements } from "../../../utils/common";
 import { useContext, useEffect } from "react";
 
 export const PaneCollections = () => {
-  const { dataCollections, dataTopics } = useContext(DataContext);
-  const { $counterItem, counterItem, $openSection, selectedItem, $selectedItem, targetItem, $targetItem } =
-    useContext(StateContext);
-
-  /**
-   * Actualizar el estado de acuerdo a la coleccion selecionada.
-   * @param {Array|string} pData
-   */
-  const selectCollectionAndUpdateState = (pData) => {
-    $selectedItem((prev) => ({
-      ...prev,
-      collectionId: pData?.id || "0",
-      collectionName: pData?.title || "None",
-    }));
-  };
+  const { dataCollection, dataTopic } = useContext(DataContext);
+  const { $counterItem, counterItem, $openSection, selectedItem, $selectedItem } = useContext(StateContext);
+  const { targetItem, $targetItem } = useContext(StateContext);
 
   // Actualizar el contador de `colections`
   useEffect(() => {
-    $counterItem((prev) => ({ ...prev, collection: dataCollections.length }));
-    console.log(targetItem)
-  }, [dataCollections, selectedItem, targetItem]);
+    $counterItem((prev) => ({ ...prev, collection: dataCollection.length }));
+  }, [dataCollection, selectedItem, targetItem]);
 
   return (
-    <PaneSide title={"All collections"} showButton={false} counter={counterItem.collection}>
+    <PaneSide title="All collections" showButton={false} counter={counterItem.collection}>
       <ul className={css.Container_list}>
-        {dataCollections.map((collection) => (
+        {dataCollection.map((collection) => (
           <li key={collection.id}>
             <CardElement
-              counter={currentNumberElements(collection.id, dataTopics)}
+              counter={currentNumberElements(collection.id, dataTopic)}
               icon={<IconifyInventory2Outline />}
               text={collection.title}
-              styled={selectedItem.collectionId === collection.id && "--active"}
+              styled={selectedItem.collection.id === collection.id && "--active"}
               handleClick={() => {
-                const number = currentNumberElements(collection.id, dataTopics);
-                selectCollectionAndUpdateState(collection);
+                const number = currentNumberElements(collection.id, dataTopic);
+                $selectedItem((prev) => ({ ...prev, collection: { id: collection.id, name: collection.title } }));
                 $counterItem((prev) => ({ ...prev, topics: number }));
                 $openSection((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }));
               }}
               handleClick2={() => {
-                $targetItem((prev) => ({
-                  ...prev,
-                  id: collection.id,
-                  title: collection.title,
-                  type: "collection",
-                }));
+                $targetItem((prev) => ({ ...prev, id: collection.id, title: collection.title, type: "collection" }));
                 $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
               }}
             />

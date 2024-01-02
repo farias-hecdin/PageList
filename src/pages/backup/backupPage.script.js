@@ -9,7 +9,7 @@
  * @param {Array<object>} pBookmarks
  * @returns {Array<object>}
  */
-export const assignDataToCollections = (pCollections, pTopics, pLists, pBookmarks) => {
+export const assignDataToCollection = (pCollections, pTopics, pLists, pBookmarks) => {
   const collections = [...pCollections];
   const topics = [...pTopics];
   const lists = [...pLists];
@@ -48,11 +48,11 @@ export const getFormattedCurrentDate = () => {
  * @param {string} pFileName - Nombre del archivo
  * @param {string} pContent - Contenido del archivo
  */
-export const createHtmlNodeAndFile = (pFileName, pContent) => {
+export const createHtmlNodeAndFile = (fileName, content) => {
   const link = document.createElement("a");
-  const blob = new Blob([pContent], { type: "text/plain" });
+  const blob = new Blob([content], { type: "text/plain" });
 
-  link.download = pFileName + ".json";
+  link.download = fileName + ".json";
   link.href = URL.createObjectURL(blob);
   link.click();
 

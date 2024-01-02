@@ -4,131 +4,95 @@ import { DataContext, StateContext } from "../../../context/index";
 import { PaneSide } from "./paneSide";
 import { currentNumberElements } from "../../../utils/common";
 import { useContext } from "react";
+import { PaneTopics_Tree } from "./paneTopics_Tree";
 
 export const PaneTopics = () => {
-  const { dataLists, dataTopics, dataBookmarks } = useContext(DataContext);
+  const { dataList, dataTopic, dataBookmark, theBookmark, $theBookmark } = useContext(DataContext);
   const { $counterItem, counterItem, $selectedItem, selectedItem } = useContext(StateContext);
 
   /** Mostrar una lista */
   const [toggleList, $toggleList] = useState();
 
-  /**
-   * Actualizar el estado de acuerdo a la lista selecionada
-   * @param {Array|string} pList
-   */
-  const selectListAndUpdateState = (topic, list, type) => {
-    // Actualizar el estado
-    $selectedItem((prev) => ({
-      ...prev,
-      topicId: topic?.id || "0",
-      topicName: topic?.title || "None",
-      listId: list?.id || "0",
-      listName: list?.title || "None",
-      type: type,
-    }));
-  };
-
   // Actualizar el contador de `bookmarks`
   useEffect(() => {
     if (selectedItem.type === "list") {
-      const number = currentNumberElements(selectedItem.listId, dataBookmarks);
+      const number = currentNumberElements(selectedItem.list.id, dataBookmark);
       $counterItem((prev) => ({ ...prev, bookmarks: number }));
     } else {
-      const number = dataLists.reduce((count, list) => {
+      const number = dataList.reduce((count, list) => {
         return (
           count +
-          dataBookmarks.reduce((innerCount, bookmark) => {
+          dataBookmark.reduce((innerCount, bookmark) => {
             return innerCount + (bookmark.parent === list.id ? 1 : 0);
           }, 0)
         );
       }, 0);
       $counterItem((prev) => ({ ...prev, bookmarks: number }));
     }
-  }, [dataBookmarks, selectedItem]);
+  }, [dataBookmark, selectedItem]);
+
+  // --------------------------------------------------------------------------
+
+  function mapToChildData(parentData, childData) {
+    return parentData.flatMap((parent) => childData.filter((child) => parent.id === child.parent));
+  }
+
+  function filterByParentId(data, parentId) {
+    return data.filter((item) => item.parent === parentId);
+  }
+
+  function showBookmarks(type) {
+    let data = [];
+    if (type === "collection") {
+      let topicInCollection = filterByParentId(dataTopic, selectedItem.collection.id);
+      let listInTopic = mapToChildData(topicInCollection, dataList);
+      let bookmarkInList = mapToChildData(listInTopic, dataBookmark);
+      data = bookmarkInList;
+    }
+    // if (type === 'topic') {
+    //   data = dataBookmark.map((elem) =>
+    //     dataList.map((list) =>
+    //       list.parent === selectedItem.list.id && elem.parent === list.id ? (
+    //       ) : null
+    //     )
+    //   )}
+    //{selectedItem.type === "list" &&
+    // dataBookmark.map((elem) =>
+    //   elem.parent === selectedItem.list.id ? <AnBookmark key={elem.id} data={elem} /> : null
+    // )}_
+    $theBookmark(data);
+  }
 
   return (
-    <PaneSide title={selectedItem.collectionName} counter={counterItem.topics}>
+    <PaneSide title={selectedItem.collection.name} counter={counterItem.topics}>
       <ul className={css.Container_list}>
         <li>
-          <CardElement text="All bookmarks" />
+          <div className={css.Container_pair}>
+            <CardElement
+              text="All bookmarks"
+              handleClick={() => {
+                $selectedItem((prev) => ({ ...prev, type: "collection" }));
+                showBookmarks("collection");
+              }}
+            />
+            <CardElement
+              text="Uncategorized"
+              handleClick={() => {
+                $selectedItem((prev) => ({ ...prev, type: "collection" }));
+                showBookmarks("collection");
+              }}
+            />
+          </div>
         </li>
-        {dataTopics.map(
+        {dataTopic.map(
           (topic) =>
-            topic.parent === selectedItem.collectionId && (
+            topic.parent === selectedItem.collection.id && (
               <li key={topic.id}>
-                <div className={css.Tree}>
-                  <TreeHeader data={topic} setFunc={$toggleList} />
-                  {toggleList === topic.id && (
-                    <ul className={css.Tree_list}>
-                      <CardElement
-                        icon={<IconifyFolderOutline />}
-                        text="All"
-                        styled={`TreeItem_51Se6 ${selectedItem.listId === topic.id && "--active"}`}
-                        handleClick={() => selectListAndUpdateState(topic, topic, "topic")}
-                      />
-                      {dataLists.map(
-                        (list) =>
-                          topic.id === list.parent && (
-                            <TreeItem
-                              key={list.id}
-                              parent={topic}
-                              data={list}
-                              type={"list"}
-                              func={selectListAndUpdateState}
-                            />
-                          )
-                      )}
-                    </ul>
-                  )}
-                </div>
+                <PaneTopics_Tree pTopic={topic} pToggleList={{ toggleList, $toggleList }} />
               </li>
             )
         )}
       </ul>
     </PaneSide>
-  );
-};
-
-const TreeHeader = ({ data, setFunc }) => {
-  const { $openSection, $targetItem, selectedItem } = useContext(StateContext);
-
-  return (
-    <CardElement
-      text={data.title}
-      styled={selectedItem.collecId === "0" && "--active"}
-      handleClick={() => setFunc((prev) => (prev === data.id ? "" : data.id))}
-      handleClick2={() => {
-        $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
-        $targetItem((prev) => ({ ...prev, id: data.id, title: data.title, type: "topic" }));
-      }}
-    />
-  );
-};
-
-const TreeItem = ({ parent, data, type, func }) => {
-  const { dataBookmarks } = useContext(DataContext);
-  const { $openSection, $targetItem, selectedItem } = useContext(StateContext);
-
-  useEffect(() => {
-    console.log(data.id);
-  }, [selectedItem]);
-
-  return (
-    <CardElement
-      counter={currentNumberElements(data.id, dataBookmarks)}
-      icon={<IconifyFolderOutline />}
-      text={data.title}
-      styled={`TreeItem_51Se6 ${selectedItem.listId === "0" && "--active"}`}
-      handleClick={() => func(parent, data, type)}
-      handleClick2={() => {
-        $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
-        $targetItem((prev) => ({
-          ...prev,
-          id: data.id,
-          title: data.title,
-          type: "list",
-        }));
-      }}
-    />
   );
 };

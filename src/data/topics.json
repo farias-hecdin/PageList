@@ -1,19 +1,19 @@
 [
   {
-    "parent": "_Learning",
-    "id": "_Programming",
+    "parent": "C_Learning",
+    "id": "T_Programming",
     "title": "Programming",
     "lists": []
   },
   {
-    "parent": "_Learning",
-    "id": "_Languages",
+    "parent": "C_Learning",
+    "id": "T_Languages",
     "title": "Languages",
     "lists": []
   },
   {
-    "parent": "_Personal",
-    "id": "_News",
+    "parent": "C_Personal",
+    "id": "T_News",
     "title": "News",
     "lists": []
   }

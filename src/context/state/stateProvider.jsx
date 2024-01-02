@@ -26,14 +26,10 @@ export const StateProvider = ({ children }) => {
   });
 
   const [selectedItem, $selectedItem] = useState({
-    collectionId: "0",
-    collectionName: "None",
-    topicId: "0",
-    topicName: "None",
-    listId: "0",
-    listName: "None",
-    bookmarkId: "0",
-    bookmarkName: "None",
+    collection: { id: "", name: "All" },
+    topic: { id: "", name: "All" },
+    list: { id: "", name: "All" },
+    bookmark: { id: "", name: "All" },
     type: null,
   });
 
