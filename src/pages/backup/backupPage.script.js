@@ -155,7 +155,7 @@ export const manageLocalStorageData = (pKeyword, ...pValues) => {
       keys.forEach((key, i) => localStorage.setItem(key, JSON.stringify(values[i])));
       break;
     case "delete":
-      keys.forEach((key) => localStorage.clear(key));
+      keys.forEach((key) => localStorage.removeItem(key));
       break;
     default:
       console.warn("manageLocalStorageData: Keyword not found");

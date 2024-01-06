@@ -2,8 +2,8 @@ import "./main.css";
 import "modern-normalize";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./pages/app.jsx";
-import { AppProvider } from "./context/app/appProvider";
+import { App } from "$src/pages/app";
+import { AppProvider } from "$src/context/app/appProvider";
 
 console.time("benchmark");
 

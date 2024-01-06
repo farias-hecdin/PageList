@@ -1,0 +1,33 @@
+.Button {
+  padding: 0.1rem 0.8rem;
+  border: 1px solid var(--co-color-9);
+  border-radius: 0.5rem;
+  background-color: var(--co-color-3);
+  color: var(--co-color-2);
+  &:hover {
+    border-color: var(--co-color-4);
+    background-color: var(--co-color-7);
+  }
+  &:hover > &_select {
+    color: var(--co-color-4);
+  }
+  &_select {
+    padding: 0.25rem 0;
+    color: var(--co-color-2);
+    cursor: pointer;
+    &:focus {
+      color: var(--co-color-4);
+    }
+  }
+  &_select > option {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+/** Compose ---------------------------------------------------------------- */
+
+.Button:global(.ModalEditMode_mojxs) {
+  width: 18rem;
+}

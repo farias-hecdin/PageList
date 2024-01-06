@@ -13,27 +13,3 @@
     background-color: var(--co-color-A);
   }
 }
-
-.Footer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1rem 1.5rem;
-  &_author {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-    color: var(--co-color-2);
-    font-size: 1rem;
-    & > a {
-      color: inherit;
-      text-decoration: underline;
-    }
-  }
-  &_github {
-    & > * {
-      color: var(--co-color-2);
-      font-size: 2.2rem;
-    }
-  }
-}

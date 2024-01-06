@@ -66,22 +66,17 @@ export const DataProvider = ({ children }) => {
 
   const [theBookmark, $theBookmark] = useState([]);
 
-  // localstorage
-  const [savedData, $savedData] = useState();
-
   const value = {
     $dataBookmark,
     $dataCollection,
     $dataList,
     $dataTopic,
-    $savedData,
     dataBookmark,
     dataCollection,
     theBookmark,
     $theBookmark,
     dataList,
     dataTopic,
-    savedData,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

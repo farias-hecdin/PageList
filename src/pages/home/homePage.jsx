@@ -1,10 +1,7 @@
 import css from "./homePage.module.css";
+import * as C from "./index.js";
+import * as L from "$src/components/layouts";
 import { ButtonBase } from "../../components/index.jsx";
-import { HeaderSecondary } from "../../layout/index.jsx";
-import { ModalWrapper } from "./modal/modalWrapper";
-import { PaneBookmarks } from "./pane/paneBookmarks";
-import { PaneCollections } from "./pane/paneCollections";
-import { PaneTopics } from "./pane/paneTopics";
 import { StateContext } from "../../context/index.jsx";
 import { useContext } from "react";
 
@@ -13,9 +10,8 @@ export const HomePage = () => {
 
   return (
     <>
-      <ModalWrapper />
       <section className={css.Container}>
-        <HeaderSecondary title="Bookmarks" text="Choise a bookmark or make a new">
+        <L.HeaderSecondary title="Bookmarks" text="Choise a bookmark or make a new">
           <div className={css.Navbar}>
             <div className={css.Navbar_box}>
               <ButtonBase
@@ -25,10 +21,10 @@ export const HomePage = () => {
               />
             </div>
           </div>
-        </HeaderSecondary>
+        </L.HeaderSecondary>
         <div className={css.Container_box}>
-          {selectedItem.collection.id === "" ? <PaneCollections /> : <PaneTopics />}
-          <PaneBookmarks />
+          {selectedItem.collection.id === "" ? <C.PaneCollections /> : <C.PaneTopics />}
+          <C.PaneBookmarks />
         </div>
       </section>
     </>

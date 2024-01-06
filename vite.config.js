@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
@@ -10,16 +11,8 @@ export default defineConfig(({ command }) => {
     plugins: [
       react(),
       AutoImport({
-        // Auto-import react hooks
-        imports: [
-          "react",
-          // {
-          //   'react': [
-          //     // named imports. Ex: import { useMouse } from '@vueuse/core',
-          //     'useEffect', 'useState', 'useContext'
-          //   ],
-          // }
-        ],
+        // imports: ["react"],
+        // Auto-import iconify
         resolvers: [
           IconsResolver({
             prefix: false,
@@ -34,6 +27,11 @@ export default defineConfig(({ command }) => {
       }),
       Icons({ compiler: "jsx", jsx: "react" }),
     ],
+    resolve: {
+      alias: {
+        $src: resolve(__dirname, "src"),
+      },
+    },
     base: command === "build" ? "https://farias-hecdin.github.io/Pagelist/" : "/",
     css: {
       modules: { generateScopedName: command === "build" ? "[hash:base64:9]" : "[local]_[hash:base64:5]" },
