@@ -1,7 +1,7 @@
 import css from "./PgHeaderMain.module.css";
 import { DataContext, StateContext } from "$src/context/index";
 import { useContext } from "react";
-import * as C from "$src/components/index";
+import * as C from "$src/components";
 
 /**
  * @param {object} prop
@@ -11,7 +11,7 @@ import * as C from "$src/components/index";
  * @returns {HTMLElement}
  */
 export const PgHeaderMain = ({ updatePage, pageName }) => {
-  const { $dataBookmark, $dataCollection, $dataList, $dataTopic } = useContext(DataContext);
+  const { $dataBookmark, dataBookmark, $dataCollection, $dataList, $dataTopic } = useContext(DataContext);
   const { $showPopup, $selectedItem } = useContext(StateContext);
 
   /**
@@ -56,29 +56,30 @@ export const PgHeaderMain = ({ updatePage, pageName }) => {
   return (
     <header className={css.Container}>
       <C.LogoBrand />
-      <C.SearchItems />
+      <C.SearchItems placeholder="Search a bookmark" data={dataBookmark} />
       <nav className={css.Navbar}>
         <C.WrapBase>
           <C.ButtonBase
-            styled={`Button_kbRsO ${pageName === "Home" ? "is-active" : "is-ghost"}`}
+            styled={`Button_kwjHWwBMUn ${pageName === "Home" ? "is-active" : "is-ghost"}`}
             icon={<IconifyBookmarkOutline />}
             text="Bookmarks"
             handleClick={() => showActivePage("Home")}
           />
           <C.ButtonBase
-            styled={`Button_kbRsO ${pageName === "Backup" ? "is-active" : "is-ghost"}`}
+            styled={`Button_kwjHWwBMUn ${pageName === "Backup" ? "is-active" : "is-ghost"}`}
             icon={<IconifySaveOutline />}
             text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
+          <C.ButtonBase
+            styled={`Button_kwjHWwBMUn ${pageName === "Tools" ? "is-active" : "is-ghost"}`}
+            icon={<IconifySettingsOutline />}
+            text="Tools"
+            handleClick={() => showActivePage("Tools")}
+          />
         </C.WrapBase>
         <div className={css.Navbar_box}>
-          <C.ButtonBase
-            text="Load"
-            icon={<IconifyUpdate />}
-            handleClick={checkLatestSection}
-            styled="is-outline"
-          />
+          <C.ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="is-outline" />
         </div>
       </nav>
     </header>

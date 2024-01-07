@@ -1,13 +1,12 @@
-import css from "./HeaderSecondary.module.css";
+import css from "./PgHeaderSecondary.module.css";
 
 /**
  * @param {object} prop
  * @param {string} prop.title
  * @param {string} prop.text
  * @param {HTMLElement} prop.children
- * @returns {HTMLElement}
  */
-export const HeaderSecondary = ({ title, text, children }) => {
+export const PgHeaderSecondary = ({ title, text, children }) => {
   return (
     <header className={css.Container}>
       <div className={css.Header}>

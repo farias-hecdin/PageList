@@ -1,5 +1,5 @@
 import css from "./ModalBase.module.css";
-import * as U from "../button/ButtonBase";
+import * as C from "../index.jsx";
 
 export const ModalBase = ({ buttons, children, onClick, open, text, title }) => {
   return (
@@ -13,7 +13,7 @@ export const ModalBase = ({ buttons, children, onClick, open, text, title }) => 
             </header>
             <section>{children}</section>
             <footer className={css.Modal_footer}>
-              {buttons ? buttons : <U.ButtonBase text="Cancel" styled="is-outline" handleClick={onClick} />}
+              {buttons ? buttons : <C.ButtonBase text="Cancel" styled="is-outline" handleClick={onClick} />}
             </footer>
           </div>
         </div>

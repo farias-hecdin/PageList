@@ -1,12 +1,11 @@
-import css from "./paneTopics.module.css";
-import { CardElement } from "../card/cardElement";
-import { DataContext, StateContext } from "../../../context/index";
-import { PaneSide } from "../pane/paneSide.jsx";
-import { currentNumberElements } from "../../../utils/common";
-import { useContext } from "react";
-import { PaneTopicsTree } from "./paneTopicsTree";
+import css from "./VwPaneTopics.module.css";
+import { VwSidebar } from "../VwSidebar";
+import * as C from "$src/components";
+import { useContext, useState, useEffect } from "react";
+import { currentNumberElements } from "$src/utils/common";
+import { DataContext, StateContext } from "$src/context";
 
-export const PaneTopics = () => {
+export const VwPaneTopics = () => {
   const { dataList, dataTopic, dataBookmark, theBookmark, $theBookmark } = useContext(DataContext);
   const { $counterItem, counterItem, $selectedItem, selectedItem } = useContext(StateContext);
 
@@ -64,18 +63,32 @@ export const PaneTopics = () => {
   }
 
   return (
-    <PaneSide title={selectedItem.collection.name} counter={counterItem.topics}>
+    <VwSidebar
+      title="Topics"
+      counter={counterItem.topics}
+      buttons={
+        <>
+          <C.ButtonBase icon={<IconifySearch />} styled="is-outline" />
+          <C.ButtonBase icon={<IconifyAdd />} styled="is-outline" />
+          <C.ButtonBase
+            icon={<IconifyArrowBackIosNew />}
+            handleClick={() => $selectedItem((prev) => ({ ...prev, collection: { id: "", name: "" } }))}
+            styled="is-outline"
+          />
+        </>
+      }
+    >
       <ul className={css.Container_list}>
         <li>
           <div className={css.Container_pair}>
-            <CardElement
+            <C.CardListing
               text="All bookmarks"
               handleClick={() => {
                 $selectedItem((prev) => ({ ...prev, type: "collection" }));
                 showBookmarks("collection");
               }}
             />
-            <CardElement
+            <C.CardListing
               text="Uncategorized"
               handleClick={() => {
                 $selectedItem((prev) => ({ ...prev, type: "collection" }));
@@ -88,11 +101,11 @@ export const PaneTopics = () => {
           (topic) =>
             topic.parent === selectedItem.collection.id && (
               <li key={topic.id}>
-                <PaneTopicsTree pTopic={topic} pToggleList={{ toggleList, $toggleList }} />
+                {/* <PaneTopicsTree pTopic={topic} pToggleList={{ toggleList, $toggleList }} /> */}
               </li>
             )
         )}
       </ul>
-    </PaneSide>
+    </VwSidebar>
   );
 };

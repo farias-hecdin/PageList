@@ -4,13 +4,11 @@
 
 .Header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  &_box {
+  flex-direction: column;
+  &_content {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     gap: 0.25rem;
   }
   &_title {
@@ -21,8 +19,14 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
   }
+  &_btnGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
   &_text {
     color: var(--co-color-2);
+    margin-top: 0.25rem;
     font-size: 0.9rem;
   }
 }

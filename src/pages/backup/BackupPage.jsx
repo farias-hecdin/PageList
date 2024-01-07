@@ -1,9 +1,9 @@
-import css from "./backupPage.module.css";
-import { ButtonBase } from "../../components/index";
-import { DataContext, StateContext } from "../../context/index";
-import { HeaderSecondary } from "../../layout/index";
+import css from "./BackupPage.module.css";
+import * as C from "$src/components";
+import * as M from "./BackupPage.script.js";
+import { DataContext, StateContext } from "$src/context";
+import { PgHeaderSecondary } from "$src/features/pg-layoutPage/pgHeader/PgHeaderSecondary";
 import { useContext } from "react";
-import * as M from "./backupPage.script.js";
 
 export const BackupPage = () => {
   const { $dataBookmark, $dataCollection, $dataList, $dataTopic } = useContext(DataContext);
@@ -12,7 +12,7 @@ export const BackupPage = () => {
 
   /** Limpiar el contenido de un HTML textarea */
   const cleanTextarea = () => {
-    let nodeTextarea = document.querySelector("#textarea_xucOeryf8lU");
+    let nodeTextarea = document.querySelector("#textarea_xucOeryf8l");
     nodeTextarea.value = "";
   };
 
@@ -22,7 +22,7 @@ export const BackupPage = () => {
    */
   const clickButtonExport = (isDowloader) => {
     try {
-      let node = document.querySelector("#textarea_xucOeryf8lU");
+      let node = document.querySelector("#textarea_xucOeryf8l");
       let mappedData = M.assignDataToCollection(dataCollection, dataTopic, dataList, dataBookmark);
       let currentDate = M.getFormattedCurrentDate();
       let fileName = `Pagelist_${currentDate}`;
@@ -79,18 +79,18 @@ export const BackupPage = () => {
 
   return (
     <section className={css.Container}>
-      <HeaderSecondary title="Backup" text="Export and import your bookmark sections" />
+      <PgHeaderSecondary title="Backup" text="Export and import your bookmark sections" />
       <div className={css.Container_box}>
         <nav className={css.Toolbar}>
           <div className={css.Toolbar_box}>
-            <ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(true)} />
-            <ButtonBase text="Import" styled="is-outline" icon={<IconifyUpload />} handleClick={clickButtonImport} />
+            <C.ButtonBase text="Export" icon={<IconifyDownload />} handleClick={() => clickButtonExport(true)} />
+            <C.ButtonBase text="Import" styled="is-outline" icon={<IconifyUpload />} handleClick={clickButtonImport} />
             <label htmlFor="ula5" className={css.Toolbar_uploadInput}>
               <span>Upload</span>
               <input id="ula5" type="file" onChange={uploadFile} />
             </label>
           </div>
-          <ButtonBase
+          <C.ButtonBase
             text="Delete saved"
             icon={<IconifyDelete />}
             styled="is-outline"
@@ -99,11 +99,11 @@ export const BackupPage = () => {
         </nav>
         <textarea
           className={css.Container_textarea}
-          id="textarea_xucOeryf8lU"
+          id="textarea_xucOeryf8l"
           placeholder="Write a valid bookmark collection..."
         ></textarea>
         <footer>
-          <ButtonBase
+          <C.ButtonBase
             text="Clean"
             styled="is-outline"
             icon={<IconifyCleaningServicesOutline />}

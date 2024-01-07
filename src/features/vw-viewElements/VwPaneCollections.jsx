@@ -1,11 +1,11 @@
-import css from "./paneCollections.module.css";
-import { CardElement } from "../card/cardElement";
-import { DataContext, StateContext } from "../../../context/index.jsx";
-import { PaneSide } from "./paneSide";
-import { currentNumberElements } from "../../../utils/common";
+import css from "./VwPaneCollections.module.css";
+import * as C from "$src/components";
+import { DataContext, StateContext } from "$src/context";
+import { VwSidebar } from "./VwSidebar";
+import { currentNumberElements } from "$src/utils/common";
 import { useContext, useEffect } from "react";
 
-export const PaneCollections = () => {
+export const VwPaneCollections = () => {
   const { dataCollection, dataTopic } = useContext(DataContext);
   const { $counterItem, counterItem, $openSection, selectedItem, $selectedItem } = useContext(StateContext);
   const { targetItem, $targetItem } = useContext(StateContext);
@@ -16,11 +16,25 @@ export const PaneCollections = () => {
   }, [dataCollection, selectedItem, targetItem]);
 
   return (
-    <PaneSide title="All collections" showButton={false} counter={counterItem.collection}>
+    <VwSidebar
+      title="Collections"
+      counter={counterItem.collection}
+      buttons={
+        <>
+          <C.ButtonBase icon={<IconifySearch />} styled="is-outline" />
+          <C.ButtonBase icon={<IconifyAdd />} styled="is-outline" />
+          <C.ButtonBase
+            icon={<IconifyArrowBackIosNew />}
+            handleClick={() => $selectedItem((prev) => ({ ...prev, collection: { id: "", name: "" } }))}
+            styled="is-outline"
+          />
+        </>
+      }
+    >
       <ul className={css.Container_list}>
         {dataCollection.map((collection) => (
           <li key={collection.id}>
-            <CardElement
+            <C.CardListing
               counter={currentNumberElements(collection.id, dataTopic)}
               icon={<IconifyInventory2Outline />}
               text={collection.title}
@@ -39,6 +53,6 @@ export const PaneCollections = () => {
           </li>
         ))}
       </ul>
-    </PaneSide>
+    </VwSidebar>
   );
 };

@@ -1,5 +1,6 @@
-import css from "./FieldSearch.module.css";
-import * as U from "../index.jsx";
+import css from "./SearchItems.module.css";
+import * as C from "../index";
+import { useRef, useState } from "react";
 
 export const SearchItems = ({ data, placeholder }) => {
   /**
@@ -24,11 +25,11 @@ export const SearchItems = ({ data, placeholder }) => {
     <div className={css.Field}>
       <form onSubmit={handleSearch} className={css.Field_form}>
         <input type="text" placeholder={placeholder} autoComplete="off" ref={inputRef} />
-        <U.ButtonBase type="submit" icon={<IconifySearch />} />
+        <C.ButtonBase type="submit" icon={<IconifySearch />} />
       </form>
-      <ul className={css.Field_results}>
-        {filteredItems(data, searchTerm).map((elem) => (
-          <li key={elem.id} className={css.Field_items}>
+      <ul className={css.Field_result}>
+        {filteredItems(data, searchTerm).map((elem, index) => (
+          <li key={index} className={css.Field_items}>
             <a href={elem.url} target="_blank" rel="noopener noreferrer">
               {elem.title}
             </a>

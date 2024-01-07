@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   padding: 0.3rem 0.8rem;
   min-height: 2rem;
   border: 1px solid transparent;
@@ -58,7 +58,7 @@
 
 /* Compose ----------------------------------------------------------------- */
 
-.Button:global(.Button_kbRsO) {
+.Button:global(.Button_kwjHWwBMUn) {
   min-width: 8rem;
   &_text {
     font-weight: var(--fo-bold);
@@ -69,10 +69,10 @@
   width: 9rem;
 }
 
-.Button:global(.Button_WQkiS) {
+.Button:global(.Button_tjNBzZfFxp) {
   position: absolute;
   top: 50%;
-  right: 0.5rem;
+  right: 0.8rem;
   z-index: 1;
   padding: 0 0.25rem;
   transform: translateY(-50%);
@@ -90,7 +90,7 @@
       display: none;
     }
   }
-  .Button:global(.Button_kbRsO) {
+  .Button:global(.Button_kwjHWwBMUn) {
     width: auto;
   }
 }
