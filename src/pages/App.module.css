@@ -6,7 +6,7 @@
   padding: 0 1.5rem;
   &_box {
     display: flex;
-    min-height: 99dvh;
+    height: 99dvh;
     padding: 1.5rem;
     border: 0.0625rem solid var(--co-color-9);
     border-radius: 0.8rem;

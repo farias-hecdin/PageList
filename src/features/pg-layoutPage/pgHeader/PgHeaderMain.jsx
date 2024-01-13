@@ -11,7 +11,7 @@ import * as C from "$src/components";
  * @returns {HTMLElement}
  */
 export const PgHeaderMain = ({ updatePage, pageName }) => {
-  const { $dataBookmark, dataBookmark, $dataCollection, $dataList, $dataTopic } = useContext(DataContext);
+  const { $dataBookmark, dataBookmark, $dataCollection, $dataTopic, $dataFolder } = useContext(DataContext);
   const { $showPopup, $selectedItem } = useContext(StateContext);
 
   /**
@@ -31,8 +31,8 @@ export const PgHeaderMain = ({ updatePage, pageName }) => {
     if (answer) {
       let storage = [
         { data: localStorage.getItem("pagelist_collections"), funcSet: $dataCollection },
-        { data: localStorage.getItem("pagelist_topics"), funcSet: $dataTopic },
-        { data: localStorage.getItem("pagelist_lists"), funcSet: $dataList },
+        { data: localStorage.getItem("pagelist_topics"), funcSet: $dataFolder },
+        { data: localStorage.getItem("pagelist_lists"), funcSet: $dataTopic },
         { data: localStorage.getItem("pagelist_bookmarks"), funcSet: $dataBookmark },
       ];
       let message = "";
@@ -71,12 +71,12 @@ export const PgHeaderMain = ({ updatePage, pageName }) => {
             text="Backup"
             handleClick={() => showActivePage("Backup")}
           />
-          <C.ButtonBase
-            styled={`Button_kwjHWwBMUn ${pageName === "Tools" ? "is-active" : "is-ghost"}`}
-            icon={<IconifySettingsOutline />}
-            text="Tools"
-            handleClick={() => showActivePage("Tools")}
-          />
+          {/* <C.ButtonBase */}
+          {/*   styled={`Button_kwjHWwBMUn ${pageName === "Tools" ? "is-active" : "is-ghost"}`} */}
+          {/*   icon={<IconifySettingsOutline />} */}
+          {/*   text="Tools" */}
+          {/*   handleClick={() => showActivePage("Tools")} */}
+          {/* /> */}
         </C.WrapBase>
         <div className={css.Navbar_box}>
           <C.ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="is-outline" />

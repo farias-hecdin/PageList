@@ -33,16 +33,30 @@
   }
 }
 
-@media screen and (width <= 600px) {
-  .Navbar {
+.Pinned {
+  display: flex;
+  gap: 1rem;
+  & > ul {
+    gap: 1rem;
     display: flex;
-    flex-wrap: wrap;
+  }
+  &_item {
+    white-space: nowrap;
+    display: flex;
     justify-content: center;
-    &_box {
-      gap: 1rem;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    min-height: 2rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background-color: var(--co-color-3);
+    color: var(--co-color-2);
+    & > button {
+      opacity: 0;
     }
-    &_text {
-      width: 12rem;
+    &:hover > button {
+      opacity: 1;
     }
   }
 }

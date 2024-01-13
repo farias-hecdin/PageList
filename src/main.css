@@ -67,7 +67,7 @@ div[data-theme] {
 
 body {
   min-height: 100dvh;
-  background-color: var(--co-color-B);
+  background-color: lch(16% 8.9 266.6);
 }
 
 ul {

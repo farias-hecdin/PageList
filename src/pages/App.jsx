@@ -1,9 +1,8 @@
 import css from "./App.module.css";
 import { BackupPage } from "./backup/BackupPage";
 import { HomePage } from "./home/HomePage";
-import { PgFooterMain } from "$src/features/pg-layoutPage/PgFooterMain";
-import { PgHeaderMain } from "$src/features/pg-layoutPage/pgHeader/PgHeaderMain";
 import { useState } from "react";
+import * as F from "$src/features/index.jsx";
 
 export const App = () => {
   /** Mostrar la pagina activa */
@@ -11,13 +10,13 @@ export const App = () => {
 
   return (
     <div className={css.Container} data-theme>
-      <PgHeaderMain pageName={activePage} updatePage={$activePage} />
+      <F.PgHeaderMain pageName={activePage} updatePage={$activePage} />
       {/* <C.ModalGroup /> */}
       <main className={css.Container_box}>
         {activePage === "Home" && <HomePage />}
         {activePage === "Backup" && <BackupPage />}
       </main>
-      <PgFooterMain />
+      <F.PgFooterMain />
     </div>
   );
 };

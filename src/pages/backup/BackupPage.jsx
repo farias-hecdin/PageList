@@ -1,13 +1,13 @@
 import css from "./BackupPage.module.css";
 import * as C from "$src/components";
 import * as M from "./BackupPage.script.js";
+import * as F from "$src/features";
 import { DataContext, StateContext } from "$src/context";
-import { PgHeaderSecondary } from "$src/features/pg-layoutPage/pgHeader/PgHeaderSecondary";
 import { useContext } from "react";
 
 export const BackupPage = () => {
-  const { $dataBookmark, $dataCollection, $dataList, $dataTopic } = useContext(DataContext);
-  const { dataBookmark, dataCollection, dataList, dataTopic } = useContext(DataContext);
+  const { $dataBookmark, $dataCollection, $dataTopic, $dataFolder } = useContext(DataContext);
+  const { dataBookmark, dataCollection, dataTopic, dataFolder } = useContext(DataContext);
   const { $selectedItem } = useContext(StateContext);
 
   /** Limpiar el contenido de un HTML textarea */
@@ -23,7 +23,7 @@ export const BackupPage = () => {
   const clickButtonExport = (isDowloader) => {
     try {
       let node = document.querySelector("#textarea_xucOeryf8l");
-      let mappedData = M.assignDataToCollection(dataCollection, dataTopic, dataList, dataBookmark);
+      let mappedData = M.assignDataToCollection(dataCollection, dataFolder, dataTopic, dataBookmark);
       let currentDate = M.getFormattedCurrentDate();
       let fileName = `Pagelist_${currentDate}`;
       let dataInString = JSON.stringify(mappedData, null, 2);
@@ -58,8 +58,8 @@ export const BackupPage = () => {
       }
       // Actualizar datos
       $dataCollection(data.collections);
-      $dataTopic(data.topics);
-      $dataList(data.lists);
+      $dataFolder(data.topics);
+      $dataTopic(data.lists);
       $dataBookmark(data.bookmarks);
       // Reiniciar las referencias de `collection`
       $selectedItem((prev) => ({
@@ -79,7 +79,7 @@ export const BackupPage = () => {
 
   return (
     <section className={css.Container}>
-      <PgHeaderSecondary title="Backup" text="Export and import your bookmark sections" />
+      <F.PgHeaderSecondary title="Backup" text="Export and import your bookmark sections" />
       <div className={css.Container_box}>
         <nav className={css.Toolbar}>
           <div className={css.Toolbar_box}>

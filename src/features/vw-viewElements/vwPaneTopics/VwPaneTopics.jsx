@@ -1,12 +1,12 @@
 import css from "./VwPaneTopics.module.css";
-import { VwSidebar } from "../VwSidebar";
 import * as C from "$src/components";
 import { useContext, useState, useEffect } from "react";
 import { currentNumberElements } from "$src/utils/common";
 import { DataContext, StateContext } from "$src/context";
+import * as F from "../VwElementsPane";
 
 export const VwPaneTopics = () => {
-  const { dataList, dataTopic, dataBookmark, theBookmark, $theBookmark } = useContext(DataContext);
+  const { dataTopic, dataFolder, dataBookmark, theBookmark, $theBookmark } = useContext(DataContext);
   const { $counterItem, counterItem, $selectedItem, selectedItem } = useContext(StateContext);
 
   /** Mostrar una lista */
@@ -18,7 +18,7 @@ export const VwPaneTopics = () => {
       const number = currentNumberElements(selectedItem.list.id, dataBookmark);
       $counterItem((prev) => ({ ...prev, bookmarks: number }));
     } else {
-      const number = dataList.reduce((count, list) => {
+      const number = dataTopic.reduce((count, list) => {
         return (
           count +
           dataBookmark.reduce((innerCount, bookmark) => {
@@ -43,14 +43,14 @@ export const VwPaneTopics = () => {
   function showBookmarks(type) {
     let data = [];
     if (type === "collection") {
-      let topicInCollection = filterByParentId(dataTopic, selectedItem.collection.id);
-      let listInTopic = mapToChildData(topicInCollection, dataList);
+      let topicInCollection = filterByParentId(dataFolder, selectedItem.collection.id);
+      let listInTopic = mapToChildData(topicInCollection, dataTopic);
       let bookmarkInList = mapToChildData(listInTopic, dataBookmark);
       data = bookmarkInList;
     }
     // if (type === 'topic') {
     //   data = dataBookmark.map((elem) =>
-    //     dataList.map((list) =>
+    //     dataTopic.map((list) =>
     //       list.parent === selectedItem.list.id && elem.parent === list.id ? (
     //       ) : null
     //     )
@@ -61,9 +61,15 @@ export const VwPaneTopics = () => {
     // )}_
     $theBookmark(data);
   }
+  // !---------------------------------------------------------------------------!:
+
+  const filteredElems = (parent, children) => {
+    return children.filter((elem) => elem.parent === parent.id)
+  }
+
 
   return (
-    <VwSidebar
+    <F.VwElementsPane
       title="Topics"
       counter={counterItem.topics}
       buttons={
@@ -97,15 +103,22 @@ export const VwPaneTopics = () => {
             />
           </div>
         </li>
-        {dataTopic.map(
-          (topic) =>
-            topic.parent === selectedItem.collection.id && (
-              <li key={topic.id}>
-                {/* <PaneTopicsTree pTopic={topic} pToggleList={{ toggleList, $toggleList }} /> */}
+        {
+          filteredElems(selectedItem.collection, dataFolder).map(
+            (folder) => folder.title === "" ? (
+              filteredElems(dataFolder, dataTopic).map(
+                    <li key={topic.id}>
+                      <C.CardListing text={topic.title} icon={<IconifyBookmarksOutline />} counter={0} />
+                    </li>
+                  )
+              )
+             : (
+              <li key={folder.id}>
+                <C.CardListing text={folder.title} />
               </li>
-            )
+            ))
         )}
       </ul>
-    </VwSidebar>
+    </F.VwElementsPane>
   );
 };

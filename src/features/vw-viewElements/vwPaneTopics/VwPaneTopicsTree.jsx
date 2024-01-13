@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 export const PaneTopicsTree = ({ pTopic, pToggleList }) => {
   const { $openSection, $targetItem, selectedItem } = useContext(StateContext);
-  const { dataList, dataBookmark } = useContext(DataContext);
+  const { dataTopic, dataBookmark } = useContext(DataContext);
 
   /**
    * Actualizar el estado de acuerdo a la lista selecionada
@@ -37,7 +37,7 @@ export const PaneTopicsTree = ({ pTopic, pToggleList }) => {
             text="All"
             styled={`TreeItem_51Se6 ${selectedItem.list.id === pTopic.id && "--active"}`}
           />
-          {dataList.map(
+          {dataTopic.map(
             (list) =>
               pTopic.id === list.parent && (
                 <TreeItems

@@ -11,8 +11,8 @@ import * as M from "./modalEdit.script.js";
  * @returns {HTMLElement}
  */
 export const mgManageElements = ({ isOpen, handleClick }) => {
-  const { dataCollection, dataTopic, $dataCollection, $dataTopic } = useContext(DataContext);
-  const { dataBookmark, dataList, $dataBookmark, $dataList } = useContext(DataContext);
+  const { dataCollection, dataFolder, $dataCollection, $dataFolder } = useContext(DataContext);
+  const { dataBookmark, dataTopic, $dataBookmark, $dataTopic } = useContext(DataContext);
   const { targetItem, $openSection } = useContext(StateContext);
 
   // Alamacenar el Title y Url de un elemento
@@ -36,18 +36,18 @@ export const mgManageElements = ({ isOpen, handleClick }) => {
     topic: {
       root: null,
       parent: dataCollection,
-      element: dataTopic,
-      $element: $dataTopic,
+      element: dataFolder,
+      $element: $dataFolder,
     },
     list: {
       root: dataCollection,
-      parent: dataTopic,
-      element: dataList,
-      $element: $dataList,
+      parent: dataFolder,
+      element: dataTopic,
+      $element: $dataTopic,
     },
     bookmark: {
-      root: dataTopic,
-      parent: dataList,
+      root: dataFolder,
+      parent: dataTopic,
       element: dataBookmark,
       $element: $dataBookmark,
     },

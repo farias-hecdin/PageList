@@ -12,13 +12,13 @@ import { handleChange, sortByName } from "../../../utils/common";
  */
 export const ModalAdd = ({ isOpen, handleClick }) => {
   const { $showPopup, pinData, selectedItem } = useContext(StateContext);
-  const { dataCollection, $dataCollection, dataTopic, $dataTopic, dataList, $dataList, $dataBookmark } =
+  const { dataCollection, $dataCollection, dataFolder, $dataFolder, dataTopic, $dataTopic, $dataBookmark } =
     useContext(DataContext);
 
   // Ordenar datos por nombre
   const sortCollections = sortByName(dataCollection);
-  const sortTopics = sortByName(dataTopic);
-  const sortLists = sortByName(dataList);
+  const sortTopics = sortByName(dataFolder);
+  const sortLists = sortByName(dataTopic);
 
   // useState para el Tabs component
   const [pickTabs, $pickTabs] = useState({ value: "Collection" });
@@ -82,7 +82,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
             <FormAddElem
               data={collectData}
               type="topic"
-              funcSet={$dataTopic}
+              funcSet={$dataFolder}
               storageKey="pagelist_topics"
               titleKey="topicName"
               parentKey={"collection"}
@@ -109,7 +109,7 @@ export const ModalAdd = ({ isOpen, handleClick }) => {
             <FormAddElem
               data={collectData}
               type="list"
-              funcSet={$dataList}
+              funcSet={$dataTopic}
               storageKey="pagelist_lists"
               titleKey="listName"
               parentKey={"topic"}

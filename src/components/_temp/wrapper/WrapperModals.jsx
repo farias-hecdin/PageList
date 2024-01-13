@@ -12,7 +12,7 @@ export const WrapperModals = () => {
     if (showPopup.show) {
       setTimeout(() => {
         $showPopup((prev) => ({ ...prev, show: false, message: "" }));
-      }, 3000);
+      }, 3 * 1000);
     }
   }, [showPopup]);
 

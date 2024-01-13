@@ -1,0 +1,18 @@
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &_title {
+    color: var(--co-color-0);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: var(--fo-light);
+    font-size: 2rem;
+  }
+  &_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 20rem;
+  }
+}

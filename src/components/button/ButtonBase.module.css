@@ -56,6 +56,19 @@
   }
 }
 
+/* Media queries */
+
+@media screen and (width <= 600px) {
+  .Button {
+    & > svg {
+      display: none;
+    }
+  }
+  .Button:global(.Button_kwjHWwBMUn) {
+    width: auto;
+  }
+}
+
 /* Compose ----------------------------------------------------------------- */
 
 .Button:global(.Button_kwjHWwBMUn) {
@@ -82,15 +95,6 @@
   padding: 0 0.25rem;
 }
 
-/* Media queries */
-
-@media screen and (width <= 600px) {
-  .Button {
-    & > svg {
-      display: none;
-    }
-  }
-  .Button:global(.Button_kwjHWwBMUn) {
-    width: auto;
-  }
+.Button:global(.Button_wUdyqpEVzs) {
+  white-space: nowrap;
 }

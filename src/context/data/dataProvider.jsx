@@ -12,28 +12,46 @@ export const DataProvider = ({ children }) => {
   const [dataCollection, $dataCollection] = useState([
     ...db1,
     {
-      id: "C_XnBZ0",
+      id: "CN_aMytWtRjJY",
       title: "My first collection",
+      folders: [],
+    },
+  ]);
+
+  const [dataFolder, $dataFolder] = useState([
+    ...db2,
+    {
+      parent: "CN_aMytWtRjJY",
+      id: "NF_gOFGREJKyb",
+      title: "No folder",
+      topics: [],
+    },
+    {
+      parent: "CN_aMytWtRjJY",
+      id: "FR_QjZeOVneVi",
+      title: "A topic #1",
+      topics: [],
+    },
+    {
+      parent: "CN_aMytWtRjJY",
+      id: "FR_qzItRZOARH",
+      title: "A topic #2",
       topics: [],
     },
   ]);
 
   const [dataTopic, $dataTopic] = useState([
-    ...db2,
-    {
-      parent: "C_XnBZ0",
-      id: "T_Mo1gG",
-      title: "A topic",
-      lists: [],
-    },
-  ]);
-
-  const [dataList, $dataList] = useState([
     ...db3,
     {
-      parent: "T_Mo1gG",
-      id: "L_RDTbX",
+      parent: "FR_qzItRZOARH",
+      id: "TC_MNfbdgdjiI",
       title: "A list",
+      bookmarks: [],
+    },
+    {
+      parent: "NF_gOFGREJKyb",
+      id: "TC_FBOFcGEQBy",
+      title: "A list without folder",
       bookmarks: [],
     },
   ]);
@@ -41,12 +59,11 @@ export const DataProvider = ({ children }) => {
   const [dataBookmark, $dataBookmark] = useState([
     ...db4,
     {
-      parent: "L_RDTbX",
+      parent: "TC_FBOFcGEQBy",
       id: "B_d4Coe",
       title: "Javascript.info - The Modern JavaScript Tutorial",
       url: "https://javascript.info",
       domain: "javascript.info",
-      type: "Blog",
       dateAdded: "2020-01-01",
       view: "0",
       state: "None",
@@ -57,7 +74,6 @@ export const DataProvider = ({ children }) => {
       title: "Mastering Programming from Scratch",
       url: "https://tutorialesweb.com",
       domain: "tutorialesweb.com",
-      type: "Blog",
       dateAdded: "2022-09-30",
       view: "6",
       state: "None",
@@ -69,14 +85,14 @@ export const DataProvider = ({ children }) => {
   const value = {
     $dataBookmark,
     $dataCollection,
-    $dataList,
     $dataTopic,
+    $dataFolder,
     dataBookmark,
     dataCollection,
     theBookmark,
     $theBookmark,
-    dataList,
     dataTopic,
+    dataFolder,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
