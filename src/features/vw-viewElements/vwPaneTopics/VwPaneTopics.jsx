@@ -78,7 +78,7 @@ export const VwPaneTopics = () => {
           <C.ButtonBase icon={<IconifyAdd />} styled="is-outline" />
           <C.ButtonBase
             icon={<IconifyArrowBackIosNew />}
-            handleClick={() => $selectedItem((prev) => ({ ...prev, collection: { id: "", name: "" } }))}
+            handleClick={() => $selectedItem((prev) => ({ ...prev,  id: "", name: ""  }))}
             styled="is-outline"
           />
         </>
@@ -103,21 +103,20 @@ export const VwPaneTopics = () => {
             />
           </div>
         </li>
-        {
-          filteredElems(selectedItem.collection, dataFolder).map(
-            (folder) => folder.title === "" ? (
-              filteredElems(dataFolder, dataTopic).map(
+        {dataFolder.map(folder => folder.parent === selectedItem.id && (
+            folder.title === "" ? (
+              dataTopic.map((topic) => topic.parent === folder.id && (
                     <li key={topic.id}>
                       <C.CardListing text={topic.title} icon={<IconifyBookmarksOutline />} counter={0} />
                     </li>
                   )
               )
-             : (
+            ) : (
               <li key={folder.id}>
                 <C.CardListing text={folder.title} />
               </li>
-            ))
-        )}
+            )
+            ))}
       </ul>
     </F.VwElementsPane>
   );

@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 import * as F from "../index";
 
 export const VwPaneCollections = () => {
-  const { dataCollection, dataFolder } = useContext(DataContext);
+  const { dataCollection, dataTopic } = useContext(DataContext);
   const { $counterItem, counterItem, $openSection, selectedItem, $selectedItem } = useContext(StateContext);
   const { targetItem, $targetItem } = useContext(StateContext);
 
@@ -27,21 +27,21 @@ export const VwPaneCollections = () => {
       }
     >
       <ul className={css.Container_list}>
-        {dataCollection.map((collection) => (
-          <li key={collection.id}>
+        {dataCollection.map((elem) => (
+          <li key={elem.id}>
             <C.CardListing
-              counter={currentNumberElements(collection.id, dataFolder)}
+              counter={currentNumberElements(elem.id, dataTopic)}
               icon={<IconifyInventory2Outline />}
-              text={collection.title}
-              styled={selectedItem.collection.id === collection.id && "--active"}
+              text={elem.title}
+              styled={selectedItem.id === elem.id && "--active"}
               handleClick={() => {
-                const number = currentNumberElements(collection.id, dataFolder);
-                $selectedItem((prev) => ({ ...prev, collection: { id: collection.id, name: collection.title } }));
+                const number = currentNumberElements(elem.id, dataTopic);
+                $selectedItem({ id: elem.id, name: elem.title, type: "topic" });
                 $counterItem((prev) => ({ ...prev, topics: number }));
                 $openSection((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }));
               }}
               handleClick2={() => {
-                $targetItem((prev) => ({ ...prev, id: collection.id, title: collection.title, type: "collection" }));
+                $targetItem((prev) => ({ ...prev, id: elem.id, title: elem.title, type: "collection" }));
                 $openSection((prev) => ({ ...prev, editElem: !prev.editElem }));
               }}
             />

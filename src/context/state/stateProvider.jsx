@@ -26,11 +26,9 @@ export const StateProvider = ({ children }) => {
   });
 
   const [selectedItem, $selectedItem] = useState({
-    collection: { id: "", name: "All" },
-    topic: { id: "", name: "All" },
-    list: { id: "", name: "All" },
-    bookmark: { id: "", name: "All" },
-    type: null,
+    id: "",
+    name: "",
+    type: "collection",
   });
 
   const [targetItem, $targetItem] = useState({

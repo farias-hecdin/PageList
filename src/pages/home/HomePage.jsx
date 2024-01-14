@@ -5,7 +5,7 @@ import { StateContext } from "$src/context";
 import { useContext } from "react";
 
 export const HomePage = () => {
-  const { $openSection, selectedItem } = useContext(StateContext);
+  const { selectedItem } = useContext(StateContext);
 
   return (
     <>
@@ -21,23 +21,19 @@ export const HomePage = () => {
               </li>
             </ul>
           </div>
-          {/* <C.ButtonBase */}
-          {/*   text="New" */}
-          {/*   icon={<IconifyAdd />} */}
-          {/*   handleClick={() => $openSection((prev) => ({ ...prev, addElem: !prev.addElem }))} */}
-          {/* /> */}
         </F.PgHeaderSecondary>
         <div className={css.Container_box}>
-          {selectedItem.collection.id === "" ? <F.VwPaneCollections /> : <F.VwPaneTopics />}
-          {selectedItem.type === null ? (
-            <C.ScreenFeedback
-              icon={<IconifyInfoOutline />}
-              title="Nothing here"
-              text="Choose a list to access your favorite bookmarks."
-            />
-          ) : (
-            <F.VwPaneBookmarks />
-          )}
+          {selectedItem.type == "collection" && <F.VwPaneCollections />}
+          {selectedItem.type == "topic" && <F.VwPaneTopics />}
+          {/* {selectedId.type !== true ? ( */}
+          {/*   <C.ScreenFeedback */}
+          {/*     icon={<IconifyInfoOutline />} */}
+          {/*     title="Nothing here" */}
+          {/*     text="Choose a list to access your favorite bookmarks." */}
+          {/*   /> */}
+          {/* ) : ( */}
+          {/*   <F.VwPaneBookmarks /> */}
+          {/* )} */}
         </div>
       </section>
     </>

@@ -40,6 +40,7 @@
   margin: 0;
   padding: 0;
   font-family: var(--fo-base);
+  min-width: 0;
 }
 
 html {
@@ -104,6 +105,7 @@ h4,
 h5,
 h6 {
   font-family: var(--fo-primary);
+  text-wrap: balance;
 }
 
 select {

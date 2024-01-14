@@ -1,3 +1,5 @@
+// PROMPT: Puedes crear un componente de react que interactue con el siguente codigo
+
 class Bookmark {
   constructor(title, url) {
     this.title = title;
