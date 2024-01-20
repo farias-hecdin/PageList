@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 import { countMatchingChildIds, currentNumberElements, onClickMissing } from "../../../utils/common";
 
 export const CollectionsModal = ({ isOpen, handleClick }) => {
-  const { dataCollections, dataTopics, selectedItem, setSelectedItem, setTargetItem } = useContext(DataContext);
-  const { setCounterItem, setShowModal } = useContext(StateContext);
+  const { dataCollections, dataTopics, selectedItem, $selectedItem, $targetItem } = useContext(DataContext);
+  const { $counterItem, $showModal } = useContext(StateContext);
 
   /**
    * Actualizar el estado de acuerdo a la coleccion selecionada.
@@ -18,8 +18,8 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
     let id = pData?.id || "0";
     let title = pData?.title || "None";
     // Actualizar el estado
-    setSelectedItem((prevState) => ({
-      ...prevState,
+    $selectedItem((prev) => ({
+      ...prev,
       collectionId: id,
       collectionTitle: title,
     }));
@@ -27,7 +27,7 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
 
   // Actualizar el contador de `topics`
   useEffect(() => {
-    currentNumberElements(selectedItem.collectionId, dataTopics, "topics", setCounterItem);
+    currentNumberElements(selectedItem.collectionId, dataTopics, "topics", $counterItem);
   }, [dataTopics, selectedItem]);
 
   return (
@@ -57,16 +57,16 @@ export const CollectionsModal = ({ isOpen, handleClick }) => {
                 styled={selectedItem.collectionId === collection.id && "--active"}
                 handleClick={() => {
                   selectCollectionAndUpdateState(collection);
-                  setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }));
+                  $showModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }));
                 }}
                 handle2ndClick={() => {
-                  setTargetItem((prev) => ({
+                  $targetItem((prev) => ({
                     ...prev,
                     id: collection.id,
                     title: collection.title,
                     type: "collection",
                   }));
-                  setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                  $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
                 }}
                 hasMenu={true}
               />

@@ -5,14 +5,14 @@ export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   // Mostrar ventana modal
-  const [showModal, setShowModal] = useState({
+  const [showModal, $showModal] = useState({
     collectionsPane: false,
     addBookmarks: false,
     editMode: false,
   });
 
   // Contadores de elementos
-  const [counterItem, setCounterItem] = useState({
+  const [counterItem, $counterItem] = useState({
     collections: 0,
     topics: 0,
     lists: 0,
@@ -20,7 +20,7 @@ export const StateProvider = ({ children }) => {
   });
 
   // Notificacion
-  const [showPopup, setShowPopup] = useState({
+  const [showPopup, $showPopup] = useState({
     show: false,
     message: "",
   });
@@ -28,11 +28,11 @@ export const StateProvider = ({ children }) => {
   // Exportar datos
   const value = {
     showModal,
-    setShowModal,
+    $showModal,
     counterItem,
-    setCounterItem,
+    $counterItem,
     showPopup,
-    setShowPopup,
+    $showPopup,
   };
   return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };

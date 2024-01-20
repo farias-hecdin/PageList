@@ -45,6 +45,5 @@ export const addNewElement = (event, collectData, elementType, setDataFunction, 
   }
 
   setDataFunction((prev) => updateStorageAndReturnData(prev, data, storageKey));
-  resetInputValue();
   setShowPopup((prev) => ({ ...prev, show: true, message: `Add new ${elementType}` }));
 };

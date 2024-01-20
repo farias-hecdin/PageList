@@ -19,24 +19,24 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
   const {
     dataCollections,
     dataTopics,
-    setDataCollections,
-    setDataTopics,
+    $dataCollections,
+    $dataTopics,
     dataBookmarks,
     dataLists,
-    setDataBookmarks,
-    setDataLists,
+    $dataBookmarks,
+    $dataLists,
     targetItem,
   } = useContext(DataContext);
-  const { setShowModal } = useContext(StateContext);
+  const { $showModal } = useContext(StateContext);
 
   // Alamacenar el Title y Url de un elemento
-  const [titleValue, setTitleValue] = useState("");
-  const [urlValue, setUrlValue] = useState("");
+  const [titleValue, $titleValue] = useState("");
+  const [urlValue, $urlValue] = useState("");
 
   // Actualizar los imputs al selecionar un elemento
   useEffect(() => {
-    setTitleValue(targetItem.title);
-    setUrlValue(targetItem.url);
+    $titleValue(targetItem.title);
+    $urlValue(targetItem.url);
   }, [targetItem]);
 
   // Declarar los datos necesarios para cada tipo de elemento
@@ -45,25 +45,25 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
       dataMajor: null,
       dataParent: null,
       dataElement: dataCollections,
-      setElement: setDataCollections,
+      setElement: $dataCollections,
     },
     topic: {
       dataMajor: null,
       dataParent: dataCollections,
       dataElement: dataTopics,
-      setElement: setDataTopics,
+      setElement: $dataTopics,
     },
     list: {
       dataMajor: dataCollections,
       dataParent: dataTopics,
       dataElement: dataLists,
-      setElement: setDataLists,
+      setElement: $dataLists,
     },
     bookmark: {
       dataMajor: dataTopics,
       dataParent: dataLists,
       dataElement: dataBookmarks,
-      setElement: setDataBookmarks,
+      setElement: $dataBookmarks,
     },
   };
   const { dataParent, dataElement, setElement, dataMajor } = elementType[targetItem.type] || elementType["bookmark"];
@@ -113,7 +113,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
                   sharedParams.pSetState,
                   targetItem.title
                 );
-                setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
               }}
             />
           </div>
@@ -150,7 +150,7 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
                 handleClick={() => {
                   const data = relocateElementAndUpdateState(ToFuncRelocate);
                   confirmAndUpdateStateAndStorageGroup(false, data, targetItem.type, sharedParams.pSetState);
-                  setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+                  $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
                 }}
               />
             </div>
@@ -167,14 +167,14 @@ export const ModalEditMode = ({ isOpen, handleClick }) => {
               <input
                 type="text"
                 value={titleValue}
-                onChange={(e) => setTitleValue(e.currentTarget.value)}
+                onChange={(e) => $titleValue(e.currentTarget.value)}
                 id="input_EJ7aOOCCQI"
               />
               {targetItem.type === "bookmark" && (
                 <input
                   type="text"
                   value={urlValue}
-                  onChange={(e) => setUrlValue(e.currentTarget.value)}
+                  onChange={(e) => $urlValue(e.currentTarget.value)}
                   id="input_P0Z5gb5BMg"
                 />
               )}

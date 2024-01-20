@@ -6,8 +6,8 @@ import { BookmarksCard } from "./bookmarksCard.jsx";
 import { useContext, useEffect } from "react";
 
 export const BookmarksPane = () => {
-  const { counterItem, setShowModal } = useContext(StateContext);
-  const { dataBookmarks, dataLists, selectedItem, setSelectedItem, setTargetItem, setPinData, pinData } =
+  const { counterItem, $showModal } = useContext(StateContext);
+  const { dataBookmarks, dataLists, selectedItem, $selectedItem, $targetItem, $pinData, pinData } =
     useContext(DataContext);
 
   const Bookmarks = (data) => {
@@ -18,8 +18,8 @@ export const BookmarksPane = () => {
           icon={<IconifyMoreVert />}
           styled="--ghost TopicsPane_WQkiS"
           handleClick={() => {
-            setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
-            setTargetItem({
+            $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+            $targetItem({
               id: bookmark.id,
               title: bookmark.title,
               url: bookmark.url,
@@ -49,14 +49,14 @@ export const BookmarksPane = () => {
             <ButtonBase
               icon={<IconifyAdd />}
               handleClick={() => {
-                setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
-                setPinData(true);
+                $showModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
+                $pinData(true);
               }}
             />
             <ButtonBase icon={<IconifyFilterList />} />
             <ButtonBase
               icon={<IconifyClose />}
-              handleClick={() => setSelectedItem((prev) => ({ ...prev, listId: "0" }))}
+              handleClick={() => $selectedItem((prev) => ({ ...prev, listId: "0" }))}
             />
           </header>
           <ul className={css.Container_list}>

@@ -13,15 +13,15 @@ import { TabsBase } from "../../../components/tabs/tabsBase";
  * @returns {HTMLElement}
  */
 export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
-  const { setShowPopup } = useContext(StateContext);
+  const { $showPopup } = useContext(StateContext);
   const {
     dataCollections,
-    setDataCollections,
+    $dataCollections,
     dataTopics,
-    setDataTopics,
+    $dataTopics,
     dataLists,
-    setDataLists,
-    setDataBookmarks,
+    $dataLists,
+    $dataBookmarks,
     pinData,
     selectedItem,
   } = useContext(DataContext);
@@ -32,10 +32,10 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
   const sortLists = sortByName(dataLists);
 
   // useState para el Tabs component
-  const [pickTabs, setPickTabs] = useState({ value: "Collection" });
+  const [pickTabs, $pickTabs] = useState({ value: "Collection" });
 
   // useState para los nuevos datos
-  const [collectData, setCollectData] = useState({
+  const [collectData, $collectData] = useState({
     collection: "",
     collectionTitle: "",
     topic: "",
@@ -48,7 +48,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
 
   // Resetear los valores de los inputs
   const resetInputValue = () =>
-    setCollectData((prev) => ({
+    $collectData((prev) => ({
       ...prev,
       collectionTitle: "",
       topicTitle: "",
@@ -58,7 +58,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
     }));
 
   useEffect(() => {
-    setCollectData((prev) => ({ ...prev, list: selectedItem.listId }));
+    $collectData((prev) => ({ ...prev, list: selectedItem.listId }));
   }, [selectedItem.listId]);
 
   return (
@@ -70,7 +70,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
       <div className={css.Container_box}>
         <TabsBase
           pickTabs={pickTabs}
-          setPickTabs={setPickTabs}
+          setPickTabs={$pickTabs}
           handleChange={handleChange}
           tabs={[{ text: "Collection" }, { text: "Topic" }, { text: "List" }, { text: "Bookmark" }]}
         />
@@ -78,15 +78,17 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
           {pickTabs.value === "Collection" && (
             <div className={css.Form}>
               <form
-                onSubmit={(e) =>
+                onSubmit={(e) => {
                   addNewElement(
                     e,
                     collectData,
                     "collection",
-                    setDataCollections,
+                    $dataCollections,
                     "pagelist_collections",
                     "collectionTitle"
                   )
+                  resetInputValue()
+                }
                 }
               >
                 <input
@@ -96,7 +98,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   placeholder="Add a collection"
                   type="text"
                   value={collectData.collectionTitle}
-                  onChange={(e) => handleChange("collectionTitle", e.currentTarget.value, setCollectData)}
+                  onChange={(e) => handleChange("collectionTitle", e.currentTarget.value, $collectData)}
                   required={true}
                 />
                 <ButtonBase styled="ModalAddBookmarks_JqagP" icon={<IconifyDone />} text="Add" />
@@ -107,7 +109,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
             <div className={css.Form}>
               <form
                 onSubmit={(e) =>
-                  addNewElement(e, collectData, "topic", setDataTopics, "pagelist_topics", "topicTitle", "collection")
+                  addNewElement(e, collectData, "topic", $dataTopics, "pagelist_topics", "topicTitle", "collection")
                 }
               >
                 <input
@@ -117,13 +119,13 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   placeholder="Add a topic"
                   type="text"
                   value={collectData.topicTitle}
-                  onChange={(e) => handleChange("topicTitle", e.currentTarget.value, setCollectData)}
+                  onChange={(e) => handleChange("topicTitle", e.currentTarget.value, $collectData)}
                   required={true}
                 />
                 <ButtonSelect
                   id="T1"
                   value={collectData.collection}
-                  onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
+                  onChange={(e) => handleChange("collection", e.target.value, $collectData)}
                 >
                   <option value="">-- Choose an collection --</option>
                   {sortCollections.map((parent) => (
@@ -140,7 +142,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
             <div className={css.Form}>
               <form
                 onSubmit={(e) =>
-                  addNewElement(e, collectData, "list", setDataLists, "pagelist_lists", "listTitle", "topic")
+                  addNewElement(e, collectData, "list", $dataLists, "pagelist_lists", "listTitle", "topic")
                 }
               >
                 <input
@@ -150,13 +152,13 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   placeholder="Add a list"
                   type="text"
                   value={collectData.listTitle}
-                  onChange={(e) => handleChange("listTitle", e.currentTarget.value, setCollectData)}
+                  onChange={(e) => handleChange("listTitle", e.currentTarget.value, $collectData)}
                   required={true}
                 />
                 <ButtonSelect
                   id={"L1"}
                   value={collectData.collection}
-                  onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
+                  onChange={(e) => handleChange("collection", e.target.value, $collectData)}
                 >
                   <option value="">-- Choose an collection --</option>
                   {sortCollections.map((parent) => (
@@ -168,7 +170,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 <ButtonSelect
                   id={"L2"}
                   value={collectData.topic}
-                  onChange={(e) => handleChange("topic", e.target.value, setCollectData)}
+                  onChange={(e) => handleChange("topic", e.target.value, $collectData)}
                 >
                   <option value="">-- Choose an topic --</option>
                   {sortTopics.map((parent) => {
@@ -193,7 +195,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                     e,
                     collectData,
                     "bookmark",
-                    setDataBookmarks,
+                    $dataBookmarks,
                     "pagelist_bookmarks",
                     "bookmarkTitle",
                     "list"
@@ -208,7 +210,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   placeholder="Add a bookmark"
                   type="text"
                   value={collectData.bookmarkTitle}
-                  onChange={(e) => handleChange("bookmarkTitle", e.currentTarget.value, setCollectData)}
+                  onChange={(e) => handleChange("bookmarkTitle", e.currentTarget.value, $collectData)}
                   required={true}
                 />
                 <input
@@ -217,13 +219,13 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                   placeholder="Add an URL"
                   type="text"
                   value={collectData.bookmarkUrl}
-                  onChange={(e) => handleChange("bookmarkUrl", e.currentTarget.value, setCollectData)}
+                  onChange={(e) => handleChange("bookmarkUrl", e.currentTarget.value, $collectData)}
                   required={true}
                 />
                 <ButtonSelect
                   id={"B1"}
                   value={collectData.collection}
-                  onChange={(e) => handleChange("collection", e.target.value, setCollectData)}
+                  onChange={(e) => handleChange("collection", e.target.value, $collectData)}
                 >
                   {pinData === true ? (
                     <option value={selectedItem.collectionId}>-- {selectedItem.collectionTitle} --</option>
@@ -239,7 +241,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 <ButtonSelect
                   id={"B2"}
                   value={collectData.topic}
-                  onChange={(e) => handleChange("topic", e.target.value, setCollectData)}
+                  onChange={(e) => handleChange("topic", e.target.value, $collectData)}
                 >
                   {pinData === true ? (
                     <option value={selectedItem.topicId}>-- {selectedItem.topicTitle} --</option>
@@ -259,7 +261,7 @@ export const ModalAddBookmarks = ({ isOpen, handleClick }) => {
                 <ButtonSelect
                   id={"B3"}
                   value={collectData.list}
-                  onChange={(e) => handleChange("list", e.target.value, setCollectData)}
+                  onChange={(e) => handleChange("list", e.target.value, $collectData)}
                 >
                   {pinData == true ? (
                     <option value={selectedItem.listId}>-- {selectedItem.listTitle} --</option>

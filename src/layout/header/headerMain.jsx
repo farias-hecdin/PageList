@@ -1,6 +1,6 @@
 import css from "./headerMain.module.css";
 import { ButtonBase, WrapBase } from "../../components/index.jsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext, StateContext } from "../../context/index.jsx";
 
 /**
@@ -10,9 +10,8 @@ import { DataContext, StateContext } from "../../context/index.jsx";
  * @returns {HTMLElement}
  */
 export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
-  const { setDataBookmarks, setDataCollections, setDataLists, setDataTopics, setSelectedItem } =
-    useContext(DataContext);
-  const { setShowPopup } = useContext(StateContext);
+  const { $dataBookmarks, $dataCollections, $dataLists, $dataTopics, $selectedItem } = useContext(DataContext);
+  const { $showPopup } = useContext(StateContext);
 
   /**
    * Mostrar la pagina selecionada
@@ -22,13 +21,21 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
     updatePage(pSelectedPage);
   };
 
+  /** Cargar la ultima seccion al cargar el componente */
+  useEffect(() => {
+    setTimeout(() => {
+      checkLatestSection()
+    }, 1 * 1000)
+  }, [])
+
+  /** Resturar la ultima seccion */
   const checkLatestSection = () => {
     let message = "";
     let storage = [
-      { data: localStorage.getItem("pagelist_collections"), set: setDataCollections },
-      { data: localStorage.getItem("pagelist_topics"), set: setDataTopics },
-      { data: localStorage.getItem("pagelist_lists"), set: setDataLists },
-      { data: localStorage.getItem("pagelist_bookmarks"), set: setDataBookmarks },
+      { data: localStorage.getItem("pagelist_collections"), set: $dataCollections },
+      { data: localStorage.getItem("pagelist_topics"), set: $dataTopics },
+      { data: localStorage.getItem("pagelist_lists"), set: $dataLists },
+      { data: localStorage.getItem("pagelist_bookmarks"), set: $dataBookmarks },
     ];
     for (let i = 0; i < storage.length; i++) {
       let data = storage[i].data;
@@ -42,8 +49,8 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
       }
     }
 
-    setSelectedItem((prev) => ({ ...prev, collectionId: "0" }));
-    setShowPopup((prev) => ({ ...prev, show: true, message: "Load section" }));
+    $selectedItem((prev) => ({ ...prev, collectionId: "0" }));
+    $showPopup((prev) => ({ ...prev, show: true, message: "Load section" }));
   };
 
   return (
@@ -53,11 +60,6 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
         <span className={css.Logo_title}>Pagelist</span>
       </div>
       <nav className={css.Navbar}>
-        {/* { notif == true ? ( */}
-        {/*   <p className={css.Navbar_message}> */}
-        {/*     <IconifyWarningOutline" /> */}
-        {/*   </p>) : "" */}
-        {/* } */}
         <WrapBase>
           <ButtonBase
             styled={`HeaderMain_UlICn ${pageName === "Home" ? "--active" : "--ghost"}`}
@@ -73,8 +75,7 @@ export const HeaderMain = ({ updatePage, pageName, changeTheme }) => {
           />
         </WrapBase>
         <div className={css.Navbar_box}>
-          <ButtonBase text="Load" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="--outline" />
-          <ButtonBase text="Config" icon={<IconifySettingsOutline />} handleClick={changeTheme} styled="--outline" />
+          <ButtonBase text="Restore session" icon={<IconifyUpdate />} handleClick={checkLatestSection} styled="--outline" />
         </div>
       </nav>
     </header>

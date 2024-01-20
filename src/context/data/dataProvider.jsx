@@ -9,13 +9,13 @@ export const DataContext = createContext(null);
 
 export const DataProvider = ({ children }) => {
   // Set de datos
-  const [dataCollections, setDataCollections] = useState(COLLECTIONS);
-  const [dataTopics, setDataTopics] = useState(TOPICS);
-  const [dataLists, setDataLists] = useState(LISTS);
-  const [dataBookmarks, setDataBookmarks] = useState(BOOKMARKS);
+  const [dataCollections, $dataCollections] = useState(COLLECTIONS);
+  const [dataTopics, $dataTopics] = useState(TOPICS);
+  const [dataLists, $dataLists] = useState(LISTS);
+  const [dataBookmarks, $dataBookmarks] = useState(BOOKMARKS);
 
   // Referencias obtenidas al seleccionar un elemento
-  const [selectedItem, setSelectedItem] = useState({
+  const [selectedItem, $selectedItem] = useState({
     collectionId: "0",
     collectionTitle: "None",
     topicId: "0",
@@ -26,47 +26,39 @@ export const DataProvider = ({ children }) => {
     bookmarkTitle: "None",
     type: null,
   });
-  const [targetItem, setTargetItem] = useState({
+  const [targetItem, $targetItem] = useState({
     id: "",
     title: "",
     type: "",
     url: "",
   });
-  // const [didChange, setDidChange] = useState({
-  //   collection: 0,
-  //   topic: 0,
-  //   list: 0,
-  //   bookmarks: 0,
-  // })
 
   // Pin data
-  const [pinData, setPinData] = useState(false);
+  const [pinData, $pinData] = useState(false);
 
   // localstorage
-  const [savedData, setSavedData] = useState();
+  const [savedData, $savedData] = useState();
 
-  const datas = {
+  const data = {
     dataCollections,
-    setDataCollections,
+    $dataCollections,
     dataTopics,
-    setDataTopics,
+    $dataTopics,
     dataLists,
-    setDataLists,
+    $dataLists,
     dataBookmarks,
-    setDataBookmarks,
+    $dataBookmarks,
   };
   const references = {
     selectedItem,
-    setSelectedItem,
+    $selectedItem,
     savedData,
-    setSavedData,
+    $savedData,
     targetItem,
-    // didChange,
-    // setDidChange,
-    setTargetItem,
+    $targetItem,
     pinData,
-    setPinData,
+    $pinData,
   };
 
-  return <DataContext.Provider value={{ ...datas, ...references }}>{children}</DataContext.Provider>;
+  return <DataContext.Provider value={{ ...data, ...references }}>{children}</DataContext.Provider>;
 };

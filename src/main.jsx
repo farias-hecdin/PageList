@@ -12,15 +12,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </AppProvider>
   </React.StrictMode>
 );
-
-/* !feat:
- * #01: Notificar que se han producidos cambios en los datos a traves de una notificacion.
- * #03: Captura el atributo title de una pagina al ingresar la URL en el campo de
- * crear un nuevo marcador.
- * #05: Corregir la UI.
- * #06: Crear un componente 'badge' que notificque que una accion determinada se ha
- * realizado con exito.
- * #07: Carga una lista determinada de marcadores para mejorar el redimiento del App
- * al tener cientos de marcadores.
- * #08: Añadir un contador de visita frecuente de un marcador.
- */

@@ -10,7 +10,7 @@ import { useContext } from "react";
 
 export const HomePage = () => {
   const { selectedItem } = useContext(DataContext);
-  const { setShowModal } = useContext(StateContext);
+  const { $showModal } = useContext(StateContext);
 
   return (
     <>
@@ -22,14 +22,14 @@ export const HomePage = () => {
               <ButtonBase
                 text="New"
                 icon={<IconifyAdd />}
-                handleClick={() => setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }))}
+                handleClick={() => $showModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }))}
               />
               <ButtonBase text="Search" styled="--outline" icon={<IconifySearch />} handleClick={onClickMissing} />
             </div>
             <WrapBase styled="HomePage_JhI8l">
               <ButtonBase
                 icon={<IconifyInventory2Outline />}
-                handleClick={() => setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
+                handleClick={() => $showModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
               />
               <p className={css.Navbar_text}>{selectedItem.collectionTitle}</p>
             </WrapBase>

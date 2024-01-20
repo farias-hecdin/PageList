@@ -6,14 +6,14 @@ import { ModalAddBookmarks } from "./modalAddBookmarks";
 import { ModalEditMode } from "./modalEditMode";
 
 export const ModalWrapper = () => {
-  const { showModal, setShowModal, showPopup, setShowPopup } = useContext(StateContext);
-  const { setPinData } = useContext(DataContext);
+  const { showModal, $showModal, showPopup, $showPopup } = useContext(StateContext);
+  const { $pinData } = useContext(DataContext);
 
   // Esconder mensaje de notificacion al ser activado
   useEffect(() => {
     if (showPopup.show === true) {
       setTimeout(() => {
-        setShowPopup((prev) => ({ ...prev, show: false, message: "" }));
+        $showPopup((prev) => ({ ...prev, show: false, message: "" }));
       }, 3000);
     }
   }, [showPopup]);
@@ -22,18 +22,18 @@ export const ModalWrapper = () => {
     <>
       <CollectionsModal
         isOpen={showModal.collectionsPane}
-        handleClick={() => setShowModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
+        handleClick={() => $showModal((prev) => ({ ...prev, collectionsPane: !prev.collectionsPane }))}
       />
       <ModalAddBookmarks
         isOpen={showModal.addBookmarks}
         handleClick={() => {
-          setShowModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
-          setPinData(false);
+          $showModal((prev) => ({ ...prev, addBookmarks: !prev.addBookmarks }));
+          $pinData(false);
         }}
       />
       <ModalEditMode
         isOpen={showModal.editMode}
-        handleClick={() => setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }))}
+        handleClick={() => $showModal((prev) => ({ ...prev, editMode: !prev.editMode }))}
       />
       {showPopup.show === true && <MessageFloat text={showPopup.message} />}
     </>

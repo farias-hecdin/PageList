@@ -6,12 +6,12 @@ import { currentNumberElements } from "../../../utils/common";
 import { Fragment } from "react";
 
 export const TopicsPane = () => {
-  const { dataLists, dataTopics, dataBookmarks, setSelectedItem, selectedItem, setTargetItem } =
+  const { dataLists, dataTopics, dataBookmarks, $selectedItem, selectedItem, $targetItem } =
     useContext(DataContext);
-  const { counterItem, setCounterItem, setShowModal } = useContext(StateContext);
+  const { counterItem, $counterItem, $showModal } = useContext(StateContext);
 
   /** Mostrar una lista */
-  const [toggleList, setToggleList] = useState();
+  const [toggleList, $toggleList] = useState();
 
   /**
    * Actualizar el estado de acuerdo a la lista selecionada
@@ -24,8 +24,8 @@ export const TopicsPane = () => {
     let listTitle = pList?.title || "None";
     let type = pType;
     // Actualizar el estado
-    setSelectedItem((prevState) => ({
-      ...prevState,
+    $selectedItem((prev) => ({
+      ...prev,
       topicId: topicId,
       topicTitle: topicTitle,
       listId: listId,
@@ -38,26 +38,26 @@ export const TopicsPane = () => {
   // Actualizar el contador de `bookmarks`
   useEffect(() => {
     if (selectedItem.type === "list") {
-      currentNumberElements(selectedItem.listId, dataBookmarks, "bookmarks", setCounterItem);
+      currentNumberElements(selectedItem.listId, dataBookmarks, "bookmarks", $counterItem);
     } else {
       let data = dataLists.filter((list) => list.parent === selectedItem.listId);
       let data2 = data.flatMap((list) => dataBookmarks.filter((bookmark) => bookmark.parent === list.id));
       let num = data2.length;
-      setCounterItem((prev) => ({ ...prev, bookmarks: num }));
+      $counterItem((prev) => ({ ...prev, bookmarks: num }));
     }
   }, [dataBookmarks, selectedItem]);
 
   // Components ---------------------------------------------------------------
 
   const TreeHeader = ({ data }) => (
-    <div className={css.Tree_header} onClick={() => setToggleList((prev) => (prev === data.id ? "" : data.id))}>
+    <div className={css.Tree_header} onClick={() => $toggleList((prev) => (prev === data.id ? "" : data.id))}>
       <p className={css.Tree_title}>{data.title}</p>
       <ButtonBase
         icon={<IconifyMoreVert />}
         styled="--ghost TopicsPane_WQkiS"
         handleClick={() => {
-          setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
-          setTargetItem((prev) => ({
+          $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+          $targetItem((prev) => ({
             ...prev,
             id: data.id,
             title: data.title,
@@ -80,8 +80,8 @@ export const TopicsPane = () => {
         icon={<IconifyMoreVert />}
         styled={`--ghost TopicsPane_WQkiS`}
         handleClick={() => {
-          setShowModal((prev) => ({ ...prev, editMode: !prev.editMode }));
-          setTargetItem((prev) => ({
+          $showModal((prev) => ({ ...prev, editMode: !prev.editMode }));
+          $targetItem((prev) => ({
             ...prev,
             id: data.id,
             title: data.title,

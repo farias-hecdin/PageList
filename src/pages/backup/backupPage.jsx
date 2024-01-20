@@ -16,20 +16,20 @@ import {
 export const BackupPage = () => {
   const {
     dataCollections,
-    setDataCollections,
+    $dataCollections,
     dataTopics,
-    setDataTopics,
+    $dataTopics,
     dataLists,
-    setDataLists,
+    $dataLists,
     dataBookmarks,
-    setDataBookmarks,
-    setSelectedItem,
+    $dataBookmarks,
+    $selectedItem,
   } = useContext(DataContext);
 
   /** Limpiar el contenido de un HTML textarea */
   const cleanTextarea = () => {
-    let $node = document.querySelector("#textarea_xucOeryf8lU");
-    $node.value = "";
+    let node = document.querySelector("#textarea_xucOeryf8lU");
+    node.value = "";
   };
 
   /**
@@ -38,12 +38,12 @@ export const BackupPage = () => {
    */
   const clickButtonExport = (isDowloader) => {
     try {
-      let $node = document.querySelector("#textarea_xucOeryf8lU");
+      let node = document.querySelector("#textarea_xucOeryf8lU");
       let mappedData = assignDataToCollections(dataCollections, dataTopics, dataLists, dataBookmarks);
       let currentDate = getFormattedCurrentDate();
       let fileName = `Pagelist_${currentDate}`;
       let dataInString = JSON.stringify(mappedData, null, 2);
-      $node.value = dataInString;
+      node.value = dataInString;
 
       if (isDowloader === true) {
         createHtmlNodeAndFile(fileName, dataInString);
@@ -55,15 +55,15 @@ export const BackupPage = () => {
 
   /** Funcion que importa datos adentro de la app */
   const uploadFile = async (event) => {
-    const $node = document.querySelector("#textarea_xucOeryf8lU");
+    const node = document.querySelector("#textarea_xucOeryf8lU");
     const data = await getJsonFileContent(event);
-    $node.value = data;
+    node.value = data;
   };
 
   const clickButtonImport = () => {
     try {
-      const $node = document.querySelector("#textarea_xucOeryf8lU");
-      let data = $node.value;
+      const node = document.querySelector("#textarea_xucOeryf8lU");
+      let data = node.value;
 
       data = importDataAndValidate(data);
       data = decomposeDataIntoCategories(data);
@@ -73,13 +73,13 @@ export const BackupPage = () => {
         manageLocalStorageData("add", [data.collections, data.topics, data.lists, data.bookmarks]);
       }
       // Actualizar datos
-      setDataCollections(data.collections);
-      setDataTopics(data.topics);
-      setDataLists(data.lists);
-      setDataBookmarks(data.bookmarks);
+      $dataCollections(data.collections);
+      $dataTopics(data.topics);
+      $dataLists(data.lists);
+      $dataBookmarks(data.bookmarks);
       // Reiniciar las referencias de `collection`
-      setSelectedItem((prevState) => ({
-        ...prevState,
+      $selectedItem((prev) => ({
+        ...prev,
         collectionId: "0",
         collectionName: "None",
       }));
