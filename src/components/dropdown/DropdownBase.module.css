@@ -1,0 +1,25 @@
+.Dropdown {
+  position: relative;
+  & > ul {
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    opacity: 0;
+  }
+  &:hover > ul {
+    position: absolute;
+    z-index: 9;
+    opacity: 1;
+    pointer-events:initial;
+  }
+  &_list {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    background-color: var(--co-color-B);
+    border-radius: .5rem;
+    padding: 0.25rem;
+    border: 1px solid #000000;
+  }
+}

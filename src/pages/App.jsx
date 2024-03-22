@@ -1,8 +1,7 @@
 import css from "./App.module.css";
-import { BackupPage } from "./backup/BackupPage";
-import { HomePage } from "./home/HomePage";
 import { useState } from "react";
 import * as F from "$src/features/index.jsx";
+import * as P from "$src/pages/index";
 
 export const App = () => {
   /** Mostrar la pagina activa */
@@ -13,8 +12,8 @@ export const App = () => {
       <F.PgHeaderMain pageName={activePage} updatePage={$activePage} />
       {/* <C.ModalGroup /> */}
       <main className={css.Container_box}>
-        {activePage === "Home" && <HomePage />}
-        {activePage === "Backup" && <BackupPage />}
+        {activePage === "Home" && <P.HomePage />}
+        {activePage === "Backup" && <P.BackupPage />}
       </main>
       <F.PgFooterMain />
     </div>

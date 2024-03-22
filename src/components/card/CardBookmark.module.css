@@ -6,6 +6,7 @@
   border: 0.0625rem solid transparent;
   border-radius: 0.4rem;
   background-color: var(--co-color-3);
+  background-color: lch(26% 9 266);
   color: var(--co-color-0);
   &_box {
     display: grid;

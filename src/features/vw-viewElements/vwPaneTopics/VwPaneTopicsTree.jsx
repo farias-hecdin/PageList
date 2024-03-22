@@ -1,8 +1,8 @@
-import css from "./paneTopics.module.css";
-import { CardElement } from "../card/cardElement";
-import { DataContext, StateContext } from "../../../context/index";
-import { currentNumberElements } from "../../../utils/common";
+import css from "./VwPaneTopics.module.css";
+import * as C from "$src/components";
+import { DataContext, StateContext } from "$src/context";
 import { useContext } from "react";
+import { currentNumberElements } from "$src/utils/common";
 
 export const PaneTopicsTree = ({ pTopic, pToggleList }) => {
   const { $openSection, $targetItem, selectedItem } = useContext(StateContext);
@@ -57,7 +57,7 @@ export const PaneTopicsTree = ({ pTopic, pToggleList }) => {
 
 const TreeHeader = ({ pSelectedItem, pToggleList, pTopic, pFunc }) => {
   return (
-    <CardElement
+    <C.CardListing
       text={pTopic.title}
       styled={pSelectedItem.collection.id === "" && "--active"}
       handleClick={() => pToggleList((prev) => (prev === pTopic.id ? "" : pTopic.id))}
@@ -71,7 +71,7 @@ const TreeHeader = ({ pSelectedItem, pToggleList, pTopic, pFunc }) => {
 
 const TreeItems = ({ pData, pFunc, pList, pSelectedItem }) => {
   return (
-    <CardElement
+    <C.CardListing
       counter={currentNumberElements(pList.id, pData)}
       icon={<IconifyFolderOutline />}
       text={pList.title}

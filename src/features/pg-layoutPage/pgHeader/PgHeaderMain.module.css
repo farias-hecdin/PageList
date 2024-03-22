@@ -1,16 +1,25 @@
 .Container {
+  position: relative;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 2rem;
   width: 100%;
-  padding: 0.8rem 0;
-}
-
-.Navbar {
-  display: flex;
-  gap: 0.8rem;
-  &_box {
+  padding: 1.25rem 0;
+  & > nav {
     display: flex;
     align-items: center;
+    gap: 0.8rem;
   }
+}
+
+.Sections {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.Toolbar {
+  display: flex;
+  gap: 0.5rem;
 }

@@ -1,8 +1,7 @@
 import css from "./modalEdit.module.css";
-import { ButtonBase, ButtonSelect, DetailsBase, ModalBase } from "../../../components/index.jsx";
 import { useContext, useEffect, useState } from "react";
-import { DataContext, StateContext } from "../../../context/index.jsx";
-import * as M from "./modalEdit.script.js";
+import { DataContext, StateContext } from "$src/context";
+import * as C from "$src/components";
 
 /**
  * @param {object} prop
@@ -10,7 +9,7 @@ import * as M from "./modalEdit.script.js";
  * @param {Function} prop.handleClick
  * @returns {HTMLElement}
  */
-export const mgMoveElements = ({ isOpen, handleClick }) => {
+export const __MgMoveElements = ({ isOpen, handleClick }) => {
   const { dataCollection, dataFolder, $dataCollection, $dataFolder } = useContext(DataContext);
   const { dataBookmark, dataTopic, $dataBookmark, $dataTopic } = useContext(DataContext);
   const { targetItem, $openSection } = useContext(StateContext);
@@ -61,7 +60,7 @@ export const mgMoveElements = ({ isOpen, handleClick }) => {
   const ToFuncUpdate = { ...sharedParams, pKeyword: targetItem.type, pValue: titleValue, pValue2: urlValue };
 
   return (
-    <ModalBase isOpen={isOpen} handleClick={handleClick}>
+    <C.ModalBase isOpen={isOpen} handleClick={handleClick}>
       <header className={css.Header}>
         <p className={css.Header_title}>Edit</p>
         <p className={css.Header_text}>
@@ -74,7 +73,7 @@ export const mgMoveElements = ({ isOpen, handleClick }) => {
         {targetItem.type !== "collection" && <MoveElem nameTag="details_hWkbC7Yfgd" />}
         <UpdateElem nameTag="details_hWkbC7Yfgd" />
       </div>
-    </ModalBase>
+    </C.ModalBase>
   );
 };
 

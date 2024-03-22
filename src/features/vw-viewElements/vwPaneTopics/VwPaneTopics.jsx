@@ -64,9 +64,8 @@ export const VwPaneTopics = () => {
   // !---------------------------------------------------------------------------!:
 
   const filteredElems = (parent, children) => {
-    return children.filter((elem) => elem.parent === parent.id)
-  }
-
+    return children.filter((elem) => elem.parent === parent.id);
+  };
 
   return (
     <F.VwElementsPane
@@ -78,7 +77,7 @@ export const VwPaneTopics = () => {
           <C.ButtonBase icon={<IconifyAdd />} styled="is-outline" />
           <C.ButtonBase
             icon={<IconifyArrowBackIosNew />}
-            handleClick={() => $selectedItem((prev) => ({ ...prev,  id: "", name: ""  }))}
+            handleClick={() => $selectedItem((prev) => ({ ...prev, type: "collection" }))}
             styled="is-outline"
           />
         </>
@@ -103,9 +102,13 @@ export const VwPaneTopics = () => {
             />
           </div>
         </li>
-        {dataFolder.map(folder => folder.parent === selectedItem.id && (
-            folder.title === "" ? (
-              dataTopic.map((topic) => topic.parent === folder.id && (
+        {dataFolder.map(
+          (folder) =>
+            folder.parent === selectedItem.id &&
+            (folder.title === "" ? (
+              dataTopic.map(
+                (topic) =>
+                  topic.parent === folder.id && (
                     <li key={topic.id}>
                       <C.CardListing text={topic.title} icon={<IconifyBookmarksOutline />} counter={0} />
                     </li>
@@ -115,8 +118,8 @@ export const VwPaneTopics = () => {
               <li key={folder.id}>
                 <C.CardListing text={folder.title} />
               </li>
-            )
-            ))}
+            ))
+        )}
       </ul>
     </F.VwElementsPane>
   );

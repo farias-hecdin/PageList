@@ -1,0 +1,8 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem 3rem;
+  border-radius: 0.8rem;
+  background-color: var(--co-color-B1);
+}

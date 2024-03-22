@@ -88,5 +88,5 @@ export const countMatchingChildIds = (childrenData, parentId) => {
 };
 
 export const findId = (child, parentId) => {
-  return child.find(c => c.id === parentId);
-}
+  return child.find((c) => c.id === parentId);
+};

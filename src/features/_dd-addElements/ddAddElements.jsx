@@ -10,7 +10,7 @@ import { handleChange, sortByName } from "../../../utils/common";
  * @param {Function} prop.handleClick
  * @returns {HTMLElement}
  */
-export const ModalAdd = ({ isOpen, handleClick }) => {
+export const _modalAdd = ({ isOpen, handleClick }) => {
   const { $showPopup, pinData, selectedItem } = useContext(StateContext);
   const { dataCollection, $dataCollection, dataFolder, $dataFolder, dataTopic, $dataTopic, $dataBookmark } =
     useContext(DataContext);

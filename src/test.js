@@ -4,7 +4,7 @@ class Bookmark {
   constructor(title, url) {
     this.title = title;
     this.url = url;
-    this.view = 0
+    this.view = 0;
   }
 }
 
@@ -15,14 +15,14 @@ class Folder {
   }
 
   findBookmark(bookmark) {
-    return this.bookmarks.find(b => b.title === bookmark)
+    return this.bookmarks.find((b) => b.title === bookmark);
   }
   addBookmark(bookmark) {
     this.bookmarks.push(bookmark);
   }
 
   removeBookmark(bookmark) {
-    this.bookmarks = this.bookmarks.filter(b => b.url !== bookmark.url);
+    this.bookmarks = this.bookmarks.filter((b) => b.url !== bookmark.url);
   }
 }
 
@@ -33,7 +33,7 @@ class Collection {
   }
 
   getFolderCount() {
-    return this.folders.length
+    return this.folders.length;
   }
 
   addFolder(folder) {
@@ -41,7 +41,7 @@ class Collection {
   }
 
   findBookmarkToFolder(folderName, bookmark) {
-    const folder = this.folders.find(folder => folder.name === folderName);
+    const folder = this.folders.find((folder) => folder.name === folderName);
     if (folder) {
       return folder.findBookmark(bookmark);
     } else {
@@ -49,13 +49,12 @@ class Collection {
     }
   }
 
-
   removeFolder(folder) {
-    this.folders = this.folders.filter(f => f.name !== folder.name);
+    this.folders = this.folders.filter((f) => f.name !== folder.name);
   }
 
   addBookmarkToFolder(folderName, bookmark) {
-    const folder = this.folders.find(folder => folder.name === folderName);
+    const folder = this.folders.find((folder) => folder.name === folderName);
     if (folder) {
       folder.addBookmark(bookmark);
     } else {
@@ -64,7 +63,7 @@ class Collection {
   }
 
   removeBookmarkFromFolder(folderName, bookmark) {
-    const folder = this.folders.find(folder => folder.name === folderName);
+    const folder = this.folders.find((folder) => folder.name === folderName);
     if (folder) {
       folder.removeBookmark(bookmark);
     } else {
@@ -74,16 +73,16 @@ class Collection {
 }
 
 // Crear una colección
-const collection = new Collection('Mis marcadores');
+const collection = new Collection("Mis marcadores");
 
 // Crear carpetas
-const folder1 = new Folder('Programacion');
-const folder2 = new Folder('Diseno');
+const folder1 = new Folder("Programacion");
+const folder2 = new Folder("Diseno");
 
 // Crear marcadores
-const bookmark1 = new Bookmark('MDN Web Docs', 'https://developer.mozilla.org/en-US/');
-const bookmark2 = new Bookmark('Canva', 'https://www.canva.com/');
-const bookmark3 = new Bookmark('JavaScript.info', 'https://javascript.info/');
+const bookmark1 = new Bookmark("MDN Web Docs", "https://developer.mozilla.org/en-US/");
+const bookmark2 = new Bookmark("Canva", "https://www.canva.com/");
+const bookmark3 = new Bookmark("JavaScript.info", "https://javascript.info/");
 
 // Agregar marcadores a las carpetas
 folder1.addBookmark(bookmark1);
@@ -95,17 +94,16 @@ collection.addFolder(folder1);
 collection.addFolder(folder2);
 
 // Remover un marcador de una carpeta específica
-collection.removeBookmarkFromFolder('Programacion', bookmark3);
+collection.removeBookmarkFromFolder("Programacion", bookmark3);
 
 // Acceder a las carpetas y marcadores de la colección
 
-console.log(collection.findBookmarkToFolder('Programacion', 'MDN Web Docs').view += 1)
+console.log((collection.findBookmarkToFolder("Programacion", "MDN Web Docs").view += 1));
 
-console.log(collection.findBookmarkToFolder('Programacion', 'MDN Web Docs').view += 1)
+console.log((collection.findBookmarkToFolder("Programacion", "MDN Web Docs").view += 1));
 // Remover una carpeta de la colección
 /* collection.removeFolder(folder1); */
 
 // Remover una colección
 // No es necesario crear un método para esto, ya que se puede hacer simplemente asignando `null` o `undefined` a la variable que hace referencia a la colección
 /* collection = null; */
-

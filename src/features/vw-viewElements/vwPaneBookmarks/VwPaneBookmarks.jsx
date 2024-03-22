@@ -6,7 +6,7 @@ import * as F from "../VwElementsPane";
 
 export const VwPaneBookmarks = () => {
   const { selectedItem, $selectedItem, $openSection, $targetItem, $pinData } = useContext(StateContext);
-  const { theBookmark } = useContext(DataContext);
+  const { theBookmark, dataBookmark} = useContext(DataContext);
 
   return (
     <F.VwElementsPane
@@ -32,7 +32,7 @@ export const VwPaneBookmarks = () => {
       }
     >
       <ul className={css.Container_list}>
-        {theBookmark.map((elem) => (
+        {dataBookmark.map((elem) => (
           <li className={css.List_item} key={elem.id}>
             <C.CardBookmark name={elem.title} url={elem.url}>
               <C.ButtonBase

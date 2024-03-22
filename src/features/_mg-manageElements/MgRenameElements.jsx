@@ -10,7 +10,7 @@ import * as M from "./modalEdit.script.js";
  * @param {Function} prop.handleClick
  * @returns {HTMLElement}
  */
-export const mgRenameElements = ({ isOpen, handleClick }) => {
+export const __mgRenameElements = ({ isOpen, handleClick }) => {
   const { dataCollection, dataFolder, $dataCollection, $dataFolder } = useContext(DataContext);
   const { dataBookmark, dataTopic, $dataBookmark, $dataTopic } = useContext(DataContext);
   const { targetItem, $openSection } = useContext(StateContext);

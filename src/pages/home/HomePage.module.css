@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0rem 2rem;
+  padding: 1rem 3rem;
   border-radius: 0.8rem;
-  background-color: var(--co-color-B);
+  background-color: var(--co-color-B1);
   &_box {
     display: grid;
     gap: 2rem;
@@ -36,27 +36,4 @@
 .Pinned {
   display: flex;
   gap: 1rem;
-  & > ul {
-    gap: 1rem;
-    display: flex;
-  }
-  &_item {
-    white-space: nowrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.3rem 0.8rem;
-    min-height: 2rem;
-    border: 1px solid transparent;
-    border-radius: 0.5rem;
-    background-color: var(--co-color-3);
-    color: var(--co-color-2);
-    & > button {
-      opacity: 0;
-    }
-    &:hover > button {
-      opacity: 1;
-    }
-  }
 }

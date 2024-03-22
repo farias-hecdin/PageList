@@ -78,7 +78,7 @@ export const BackupPage = () => {
   };
 
   return (
-    <section className={css.Container}>
+    <F.PgLayout>
       <F.PgHeaderSecondary title="Backup" text="Export and import your bookmark sections" />
       <div className={css.Container_box}>
         <nav className={css.Toolbar}>
@@ -111,6 +111,6 @@ export const BackupPage = () => {
           />
         </footer>
       </div>
-    </section>
+    </F.PgLayout>
   );
 };

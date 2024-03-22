@@ -4,7 +4,7 @@
   width: 100%;
   padding: 0rem 2rem;
   border-radius: 0.8rem;
-  background-color: var(--co-color-B);
+  background-color: var(--co-color-B1);
   &_box {
     display: flex;
     flex-direction: column;
